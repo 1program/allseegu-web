@@ -1,0 +1,12 @@
+// opacity로 사용자에게 반응.
+@mixin touchable {
+  transition: opacity 0.15s ease;
+
+  &:not(:disabled):hover {
+    opacity: 0.9;
+  }
+
+  &:not(:disabled):active {
+    opacity: 0.2;
+  }
+}

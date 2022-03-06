@@ -9,3 +9,9 @@
 - [ ] Node.js version 명시
 - [ ] alias 설정
 - [ ] Volar for vscode (to support typescript)
+
+- [ ] 체크 - 소셜로그인 버튼
+- [ ] 체크 - 이용약관
+- [ ] 브라우저
+
+- [ ] validation

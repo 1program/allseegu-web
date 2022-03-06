@@ -21,11 +21,20 @@ html {
     // 360px 이하 지원
     font-size: 4.4vw;
   }
+
+  /* 
+    body scroll lock iOS에서 아래 공간 뜨는 이슈 Fix
+    이슈: https://github.com/willmcpo/body-scroll-lock/pull/242
+    */
+  height: 100vh;
 }
 
 body {
   font-family: $font-sans;
   line-height: 1.5;
+
+  /* iOS Safari에서 body scroll lock의 문제 해결 */
+  width: 100%;
 }
 
 a {
@@ -35,8 +44,29 @@ a {
 }
 
 button {
+  background-color: transparent;
+  color: inherit;
+  border: 0;
   font: inherit;
   letter-spacing: inherit;
+  padding: 0;
+}
+
+input {
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+.gap-vertical {
+  & > * + * {
+    margin-top: 0.5rem;
+  }
+}
+
+.gap-horizontal {
+  & > * + * {
+    margin-left: 0.5rem;
+  }
 }
 
 .container {
@@ -45,6 +75,59 @@ button {
   margin: 0 auto;
 }
 
+.text-small {
+  font-size: 0.8125rem;
+}
+
+.text-gray {
+  color: #777777;
+}
+
+.text-divider {
+  vertical-align: middle;
+  display: inline-block;
+  margin: 0 0.9rem;
+  height: 1em;
+  opacity: 0.25;
+  border-left: 1px solid currentColor;
+}
+
+.link {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.page-wrapper {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-main {
+  padding: $padding-x;
+}
+
 .page-content {
+  flex: 1 1 auto;
   padding: $padding;
+}
+
+.page-footer {
+  padding: $padding-x;
+}
+
+.page-header {
+  margin-bottom: ((55 - 20)/2/16) * 1rem;
+}
+
+.page-title {
+  font-size: (52/2/16) * 1rem;
+  line-height: (72/52);
+  margin-bottom: (20/2/16) * 1rem;
+}
+
+.page-subtitle {
+  font-size: (30/2/16) * 1rem;
+  margin-bottom: (20/2/16) * 1rem;
 }

@@ -1,29 +1,25 @@
-# olssigu-web
+# allseegu-web
 
-## Project setup
+## 프로젝트 설치
 
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 개발
 
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 빌드
 
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### 린트
 
 ```
 npm run lint
 ```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).

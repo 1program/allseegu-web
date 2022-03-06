@@ -1,14 +1,16 @@
 <template>
   <div class="app">
-    <router-view />
+    <sliding-router-view />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import SlidingRouterView from "./components/common/SlidingRouterView.vue";
 
 export default defineComponent({
   name: "App",
+  components: { SlidingRouterView },
 });
 </script>
 

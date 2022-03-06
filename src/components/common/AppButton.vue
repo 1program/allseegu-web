@@ -7,7 +7,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
 
-export type AppButtonPalettes = "blue" | "white" | "outlined-white";
+export type AppButtonPalettes = "blue" | "white" | "outlined-white" | "outlined-blue";
 
 export default defineComponent({
   name: "AppButton",
@@ -89,6 +89,11 @@ export default defineComponent({
   &.outlined-white {
     border: 1px solid $color-white;
     color: $color-white;
+  }
+
+  &.outlined-blue {
+    border: 1px solid $color-blue;
+    color: $color-blue;
   }
 }
 </style>

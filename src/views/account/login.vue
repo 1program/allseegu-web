@@ -1,34 +1,40 @@
 <template>
-  <scaffold title="로그인">
+  <app-scaffold title="로그인">
     <div class="container page-content content">
-      <form-text-field label="이메일" placeholder="abc@allseegu.com" />
-      <form-text-field
+      <form-group label="이메일" placeholder="abc@allseegu.com" />
+      <form-group
         type="password"
         label="비밀번호"
         :error-text="'등록되지 않은 이메일이거나\n비밀번호가 일치하지 않습니다.'"
       />
     </div>
     <div class="container page-content footer">
-      <div class="footer-links">아이디 찾기 | 비밀번호 찾기 | 회원가입</div>
+      <div class="quick-links">
+        <router-link class="link" to="/account/find-id">아이디 찾기</router-link>
+        <span class="text-divider" />
+        <router-link class="link" to="/account/find-password">비밀번호 찾기</router-link>
+        <span class="text-divider" />
+        <router-link class="link" to="/account/signup">회원가입</router-link>
+      </div>
       <div class="auto-login">
         자동 로그인
         <app-toggle class="auto-login-toggle" v-model:checked="autoLogin" />
       </div>
       <app-button full>로그인</app-button>
     </div>
-  </scaffold>
+  </app-scaffold>
 </template>
 
 <script lang="ts">
 import AppButton from "@/components/common/AppButton.vue";
 import AppToggle from "@/components/common/AppToggle.vue";
-import FormTextField from "@/components/common/FormTextField.vue";
-import Scaffold from "@/components/common/Scaffold.vue";
+import FormGroup from "@/components/common/FormGroup.vue";
+import AppScaffold from "@/components/common/AppScaffold.vue";
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "AccountLoginPage",
-  components: { Scaffold, AppButton, FormTextField, AppToggle },
+  components: { AppScaffold, AppButton, FormGroup, AppToggle },
   setup() {
     const autoLogin = ref(false);
 
@@ -54,7 +60,7 @@ export default defineComponent({
   align-items: center;
 }
 
-.footer-links {
+.quick-links {
   margin-bottom: 1rem;
   font-size: 0.8125rem;
 }

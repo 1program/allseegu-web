@@ -11,6 +11,98 @@ const routes: Array<RouteRecordRaw> = [
     name: "AccountLogin",
     component: () => import("@/views/account/login.vue"),
   },
+  {
+    path: "/account/signup",
+    name: "AccountSignup",
+    component: () => import("@/views/account/signup/index.vue"),
+    children: [
+      {
+        path: "terms",
+        name: "AccountSignupTerms",
+        meta: {
+          step: 1,
+        },
+        component: () => import("@/views/account/signup/terms/index.vue"),
+        children: [
+          {
+            path: ":id",
+            name: "AccountSignupTermsDetail",
+            component: () => import("@/views/account/signup/terms/detail.vue"),
+          },
+        ],
+      },
+      {
+        path: "email",
+        name: "AccountSignupEmail",
+        meta: { step: 2 },
+        component: () => import("@/views/account/signup/email.vue"),
+      },
+      {
+        path: "password",
+        name: "AccountSignupPassword",
+        meta: { step: 3 },
+        component: () => import("@/views/account/signup/password.vue"),
+      },
+      {
+        path: "nickname",
+        name: "AccountSignupNickname",
+        meta: { step: 4 },
+        component: () => import("@/views/account/signup/nickname.vue"),
+      },
+      {
+        path: "done",
+        name: "AccountSignupDone",
+        meta: { step: 5 },
+        component: () => import("@/views/account/signup/done.vue"),
+      },
+      {
+        path: "",
+        redirect: { path: "/account/signup/terms" },
+      },
+    ],
+  },
+  {
+    path: "/account/find-id",
+    name: "AccountFindId",
+    component: () => import("@/views/account/find-id/index.vue"),
+    children: [
+      {
+        path: "cert",
+        name: "AccountFindIdCert",
+        component: () => import("@/views/account/find-id/cert.vue"),
+      },
+      {
+        path: "no-result",
+        name: "AccountFindIdNoResult",
+        component: () => import("@/views/account/find-id/no-result.vue"),
+      },
+      {
+        path: "result",
+        name: "AccountFindIdResult",
+        component: () => import("@/views/account/find-id/result.vue"),
+      },
+      { path: "", redirect: { path: "/account/find-id/cert" } },
+    ],
+  },
+  {
+    path: "/account/find-password",
+    name: "AccountFindPassword",
+    component: () => import("@/views/account/find-password/index.vue"),
+    children: [
+      {
+        path: "cert",
+        name: "AccountFindPasswordCert",
+        component: () => import("@/views/account/find-password/cert.vue"),
+      },
+      {
+        path: "result",
+        name: "AccountFindPasswordResult",
+        component: () => import("@/views/account/find-password/result.vue"),
+      },
+      { path: "", redirect: { path: "/account/find-password/cert" } },
+    ],
+  },
+  { path: "", redirect: { path: "/account" } },
 ];
 
 const router = createRouter({

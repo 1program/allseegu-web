@@ -1,6 +1,6 @@
 <template>
-  <div class="scaffold">
-    <app-bar class="app-bar" :title="title" />
+  <div class="app-scaffold">
+    <app-bar class="app-bar" :title="title" :progress="progress" />
     <slot />
   </div>
 </template>
@@ -10,7 +10,7 @@ import AppBar from "@/components/common/AppBar.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "AppLayout",
+  name: "AppScaffold",
   components: { AppBar },
   props: {
     title: {
@@ -18,12 +18,17 @@ export default defineComponent({
       default: "",
       description: "앱 스캐폴드의 제목",
     },
+    progress: {
+      type: Number,
+      default: 0,
+      description: "스캐폴드의 진척도",
+    },
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.scaffold {
+.app-scaffold {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -34,5 +39,8 @@ export default defineComponent({
 .app-bar {
   position: sticky;
   top: 0;
+
+  // z-index guide: https://mui.com/customization/z-index/
+  z-index: 1100;
 }
 </style>

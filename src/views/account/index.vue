@@ -1,8 +1,14 @@
 <template>
-  <div class="account-index-page">
+  <div class="account-page">
     <div class="container page-content content">
       <app-button full palette="white" to="/account/login">이메일 로그인</app-button>
-      <div class="quick-links">아이디 찾기 | 비밀번호 찾기 | 회원가입</div>
+      <div class="quick-links">
+        <router-link class="link" to="/account/find-id">아이디 찾기</router-link>
+        <span class="text-divider" />
+        <router-link class="link" to="/account/find-password">비밀번호 찾기</router-link>
+        <span class="text-divider" />
+        <router-link class="link" to="/account/signup">회원가입</router-link>
+      </div>
       <div class="social-button-group">
         <app-button full palette="outlined-white">네이버 로그인</app-button>
         <app-button full palette="outlined-white" class="kakao-button">카카오 로그인</app-button>
@@ -25,7 +31,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "@/styles/variables.scss";
 
-.account-index-page {
+.account-page {
   flex: 1 1 auto; // 부모의 100%를 차지한다.
 
   background-color: $color-blue;
@@ -45,7 +51,7 @@ export default defineComponent({
 }
 
 .quick-links {
-  margin-top: 1.25rem;
+  margin-top: 1.375rem;
   font-size: 0.8125rem;
 }
 
