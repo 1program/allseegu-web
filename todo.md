@@ -3,15 +3,10 @@
 ## 프로젝트 초기화
 
 - [ ] prettier plugin sort-imports
-- [ ] NotoSansKR 설정
+- [x] NotoSansKR 설정
 - [ ] normalize.css 설정
 - [ ] scss 컬러값 변수화
-- [ ] Node.js version 명시
-- [ ] alias 설정
+- [x] Node.js version 명시
+- [x] alias 설정
 - [ ] Volar for vscode (to support typescript)
-
-- [ ] 체크 - 소셜로그인 버튼
-- [ ] 체크 - 이용약관
-- [ ] 브라우저
-
-- [ ] validation
+- [x] Find validation library
