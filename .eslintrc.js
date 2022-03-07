@@ -27,5 +27,6 @@ module.exports = {
         allowChildren: false,
       },
     ],
+    camelcase: "off",
   },
 };

@@ -13,7 +13,10 @@
           </form-group>
         </field>
       </div>
-      <div class="container page-content footer">
+      <div class="container page-footer footer">
+        <form-error-message
+          :message="'등록되지 않은 이메일이거나\n비밀번호가 일치하지 않습니다.'"
+        />
         <div class="quick-links">
           <router-link class="link" to="/account/find-id">아이디 찾기</router-link>
           <span class="text-divider" />
@@ -42,10 +45,11 @@ import FormInput from "@/components/common/FormInput.vue";
 import * as yup from "yup";
 import { useRouter } from "vue-router";
 import { PASSWORD_REGEXP } from "@/utils/regexp";
+import FormErrorMessage from "@/components/common/FormErrorMessage.vue";
 
 export default defineComponent({
   name: "AccountLoginPage",
-  components: { AppScaffold, AppButton, FormGroup, AppToggle, FormInput, Field },
+  components: { AppScaffold, AppButton, FormGroup, AppToggle, FormInput, Field, FormErrorMessage },
   setup() {
     const router = useRouter();
     const autoLogin = ref(false);

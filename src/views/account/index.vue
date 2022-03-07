@@ -15,16 +15,16 @@
         <span class="text-divider" />
         <router-link class="link" to="/account/signup">회원가입</router-link>
       </div>
-      <div class="social-button-group">
-        <app-button full palette="outlined-white" @click="prepare">
+      <div class="social-button-group gap-vertical">
+        <app-button class="social-button" full palette="naver" @click="prepare">
           <template v-slot:icon>
-            <img src="@/images/icons/sns-naver_circle.svg" alt="네이버 로고" />
+            <img class="social-icon" src="@/images/icons/sns-naver.svg" alt="네이버 로고" />
           </template>
           <template v-slot>네이버 로그인</template>
         </app-button>
-        <app-button full palette="outlined-white" class="kakao-button" @click="prepare">
+        <app-button class="social-button" full palette="kakao" @click="prepare">
           <template v-slot:icon>
-            <img src="@/images/icons/sns-kakao_circle.svg" alt="카카오 로고" />
+            <img class="social-icon" src="@/images/icons/sns-kakao.svg" alt="카카오 로고" />
           </template>
           <template v-slot>카카오 로그인</template>
         </app-button>
@@ -42,6 +42,7 @@ export default defineComponent({
   name: "AccountPage",
   components: { AppButton },
   setup() {
+    // eslint-disable-next-line
     const prepare = () => alert("해당 기능은 준비중입니다.");
 
     return { prepare };
@@ -77,22 +78,22 @@ export default defineComponent({
 }
 
 .quick-links {
-  margin-top: 1.375rem;
-  font-size: 0.8125rem;
+  margin-top: (38/2/16) * 1rem;
+  font-size: (26/2/16) * 1rem;
 }
 
 .social-button-group {
   width: 100%;
-  margin-top: 3.4375rem;
-}
-
-.kakao-button {
-  margin-top: 0.4375rem;
+  margin-top: (110/2/16) * 1rem;
 }
 
 .explore-link {
-  margin-top: 1.25rem;
-  font-size: 0.8125rem;
+  margin-top: (40/2/16) * 1rem;
+  font-size: (26/2/16) * 1rem;
   text-decoration: underline;
+}
+
+.social-button img {
+  width: (32/2/16) * 1rem;
 }
 </style>

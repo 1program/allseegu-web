@@ -8,8 +8,6 @@
       <next-link to="terms/service">부동산 서비스 이용약관</next-link>
       <next-link to="terms/privacy">부동산 서비스 개인정보수집 이용동의</next-link>
       <next-link to="terms/location">부동산 서비스 위치기반서비스 이용동의</next-link>
-      <next-link to="terms/stock-service">주식 서비스 이용약관</next-link>
-      <next-link to="terms/stock-privacy">주식 서비스 개인정보수집 이용동의</next-link>
     </form-check-field>
     <form-check-field label="마케팅 정보 수신 동의 (선택)" v-model:checked="terms.marketing">
       <div class="text-small">

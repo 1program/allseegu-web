@@ -10,7 +10,13 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
 
-export type AppButtonPalettes = "blue" | "white" | "outlined-white" | "outlined-blue";
+export type AppButtonPalettes =
+  | "blue"
+  | "white"
+  | "outlined-white"
+  | "outlined-blue"
+  | "naver"
+  | "kakao";
 
 export default defineComponent({
   name: "AppButton",
@@ -97,6 +103,16 @@ export default defineComponent({
   &.outlined-blue {
     border: 1px solid $color-blue;
     color: $color-blue;
+  }
+
+  &.naver {
+    background-color: #01c73c;
+    color: white;
+  }
+
+  &.kakao {
+    background-color: #fae100;
+    color: #2c1618;
   }
 }
 
