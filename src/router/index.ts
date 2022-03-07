@@ -27,6 +27,7 @@ const routes: Array<RouteRecordRaw> = [
           {
             path: ":id",
             name: "AccountSignupTermsDetail",
+            meta: { scrollToTop: false },
             component: () => import("@/views/account/signup/terms/detail.vue"),
           },
         ],
@@ -105,9 +106,17 @@ const routes: Array<RouteRecordRaw> = [
   { path: "", redirect: { path: "/account" } },
 ];
 
+// https://dev.to/uwutrinket/fix-scroll-jump---vue-router-45ja
+if ("scrollRestoration" in window.history) {
+  window.history.scrollRestoration = "manual";
+}
+
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+  scrollBehavior: (to, from, savedPosition) => {
+    return savedPosition ?? (to.meta.scrollToTop ? { top: 0, left: 0 } : undefined);
+  },
 });
 
 export default router;

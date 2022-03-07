@@ -1,7 +1,9 @@
 <template>
   <div class="app-bar">
     <!-- 뒤로 가기 -->
-    <button class="back-button" @click="handleBack"><chevron-left-icon /></button>
+    <button class="back-button" @click="handleBack">
+      <chevron-left-icon />
+    </button>
     {{ title }}
     <div class="progress" :style="{ transform: `scaleX(${progress})` }" />
   </div>
@@ -76,6 +78,6 @@ export default defineComponent({
   bottom: -1px;
   border-bottom: 1px solid $color-blue;
   transform-origin: left bottom;
-  transition: transform 0.15s ease-out;
+  transition: transform 0.15s linear;
 }
 </style>

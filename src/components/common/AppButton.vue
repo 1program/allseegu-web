@@ -1,6 +1,9 @@
 <template>
   <component :is="is" class="app-button" :class="[full && 'full', palette]" :to="to">
-    <slot />
+    <div class="icon" v-if="$slots.icon != null">
+      <slot name="icon" />
+    </div>
+    <slot name="default" />
   </component>
 </template>
 
@@ -94,6 +97,17 @@ export default defineComponent({
   &.outlined-blue {
     border: 1px solid $color-blue;
     color: $color-blue;
+  }
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: (34/2/16) * 1rem;
+  transform: translateY(-50%);
+
+  ::v-deep img {
+    width: (55/2/16) * 1rem;
   }
 }
 </style>

@@ -1,18 +1,20 @@
 <template>
   <div tabindex="0" ref="element" class="app-drawer" @click="close" @keyup.esc="handleEsc">
     <div ref="backdropElement" class="backdrop" />
-    <div ref="paperElement" class="paper" @click.stop>
-      <div
-        class="header"
-        @touchstart="swipeStart"
-        @touchmove="swipe"
-        @touchend="swipeEnd"
-        @touchcancel="swipeEnd"
-      >
+    <div
+      ref="paperElement"
+      class="paper"
+      @click.stop
+      @touchmove="swipe"
+      @touchstart="swipeStart"
+      @touchend="swipeEnd"
+      @touchcancel="swipeEnd"
+    >
+      <div class="header">
         {{ title }}
         <button class="close" @click="close"><close-icon /></button>
       </div>
-      <div ref="mainElement" class="main">
+      <div ref="mainElement" class="main" @touchmove="scroll">
         <slot />
       </div>
     </div>
@@ -49,13 +51,19 @@ export default defineComponent({
     };
 
     let startY: number | null = null;
+    let initialScrollTop: number | null = null;
     let dY: number | null = null;
+
     const swipeStart = (event: TouchEvent) => {
       startY = event.touches[0].clientY;
+
+      if (mainElement.value != null) {
+        initialScrollTop = mainElement.value.scrollTop;
+      }
     };
 
     const swipe = (event: TouchEvent) => {
-      dY = event.touches[0].clientY - (startY ?? 0);
+      dY = event.touches[0].clientY - (startY ?? 0) - (initialScrollTop ?? 0);
 
       if (paperElement.value != null && backdropElement.value != null) {
         if (dY > 0) {
@@ -70,6 +78,8 @@ export default defineComponent({
     };
 
     const swipeEnd = () => {
+      startY = null;
+
       if (element.value != null && paperElement.value != null && backdropElement.value != null) {
         paperElement.value.style.transition = "";
         backdropElement.value.style.transition = "";
@@ -101,6 +111,14 @@ export default defineComponent({
       }
     });
 
+    const scroll = (e: TouchEvent) => {
+      if (mainElement.value != null) {
+        if (mainElement.value.scrollTop > 0) {
+          e.stopPropagation();
+        }
+      }
+    };
+
     return {
       element,
       paperElement,
@@ -108,9 +126,10 @@ export default defineComponent({
       mainElement,
       close,
       handleEsc,
-      swipeStart,
       swipe,
+      swipeStart,
       swipeEnd,
+      scroll,
     };
   },
 });
@@ -207,5 +226,6 @@ export default defineComponent({
 .main {
   flex: 1 1 auto;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 </style>

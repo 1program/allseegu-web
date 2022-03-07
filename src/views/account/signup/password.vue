@@ -32,6 +32,7 @@ import { Field, useForm } from "vee-validate";
 import { useRouter } from "vue-router";
 import FormInput from "@/components/common/FormInput.vue";
 import * as yup from "yup";
+import { PASSWORD_REGEXP } from "@/utils/regexp";
 
 export default defineComponent({
   components: { AppButton, FormGroup, FormInput, Field },
@@ -43,11 +44,8 @@ export default defineComponent({
       validationSchema: yup.object({
         password: yup
           .string()
-          .matches(
-            /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9])[^\s]{8,16}$/g,
-            "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."
-          )
-          .required("비밀번호를 입력해 주세요."),
+          .required("비밀번호를 입력해 주세요.")
+          .matches(PASSWORD_REGEXP, "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."),
         confirmPassword: yup
           .string()
           .required("비밀번호를 확인해 주세요.")

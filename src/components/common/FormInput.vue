@@ -18,7 +18,7 @@ export default defineComponent({
   font-size: 1.3125rem;
   width: 100%;
   padding: 1rem 0;
-  line-height: 1;
+  line-height: 0.9;
   border: 0;
   border-bottom: 1px solid #dddddd;
   outline: none;

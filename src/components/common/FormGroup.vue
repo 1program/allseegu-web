@@ -35,7 +35,6 @@ export default defineComponent({
 
 .label {
   font-size: 0.9375rem;
-  margin-bottom: 0.5rem;
 }
 
 .error-text {

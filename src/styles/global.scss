@@ -69,9 +69,10 @@ input {
   }
 }
 
+// 태블릿 이상에서 레이아웃이 과도히 늘어나는 것을 방지하기 위함이다.
 .container {
   width: 100%;
-  max-width: 40rem;
+  max-width: 35rem;
   margin: 0 auto;
 }
 

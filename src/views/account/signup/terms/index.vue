@@ -54,6 +54,7 @@ export default defineComponent({
     const submit = () => {
       if (!checkedRequired.value) {
         // TODO: toast로 변경
+        // eslint-disable-next-line
         alert("필수 약관에 동의해 주세요.");
       } else {
         router.push("email");

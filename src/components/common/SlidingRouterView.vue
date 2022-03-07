@@ -58,6 +58,7 @@ export default defineComponent({
      * - 다른 컴포넌트가 마운트 된다면, transition이 일어나도록 한다.
      */
     const createComponentKey = (Component: VNode) =>
+      // eslint-disable-next-line
       typeof Component?.type === "object" ? (Component.type as any).name : "";
 
     return {
@@ -86,7 +87,8 @@ export default defineComponent({
 
 .slide-next-leave-active,
 .slide-prev-leave-active {
-  transition: all 0.15s cubic-bezier(1, 0.5, 0.8, 1);
+  // transition: all 0.15s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-next-enter-from,

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 960 560" version="1.1" xml:space="preserve" viewBox="272.22 448.76 60 60">
+<style type="text/css">
+	.circle{fill:#01C73C}
+	.logo{fill:#FFFFFF}
+</style>
+<g>
+	<path fill-rule="evenodd" clip-rule="evenodd" class="circle" d="M302.22,448.761c16.568,0,30,13.432,30,30s-13.432,30-30,30
+		s-29.999-13.432-29.999-30S285.651,448.761,302.22,448.761z"/>
+	<polygon fill-rule="evenodd" clip-rule="evenodd" class="logo" points="306.588,466.521 306.588,478.475 297.992,466.521
+		297.855,466.521 288.984,466.521 288.846,466.521 288.846,491.001 297.855,491.001 297.855,478.857 306.588,491.001
+		315.596,491.001 315.596,466.521">
+	</polygon>
+</g>
+</svg>
