@@ -94,7 +94,7 @@ export default defineComponent({
 
 .quick-links {
   margin-bottom: 1rem;
-  font-size: 0.8125rem;
+  font-size: (26/2/16) * 1rem;
 }
 
 .auto-login {
@@ -102,10 +102,10 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  font-size: 0.8125rem;
+  font-size: (26/2/16) * 1rem;
 }
 
 .auto-login-toggle {
-  margin-left: 0.625rem;
+  margin-left: (20/2/16) * 1rem;
 }
 </style>

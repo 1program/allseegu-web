@@ -16,17 +16,19 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/variables";
+
 .form-error-message {
   width: 100%;
   white-space: pre-wrap;
   margin-bottom: (43/2/16) * 1rem;
-  background-color: rgba(#ff005a, 0.15);
-  color: #ff005a;
+  background-color: rgba($color-red, 0.15);
+  color: $color-red;
   padding: (25/2/16) * 1rem;
   text-align: center;
   font-size: (30/2/16) * 1rem;
   border-radius: (10/2/16) * 1rem;
-  border: 1px solid #ff005a;
+  border: 1px solid $color-red;
   line-height: (47/30);
 }
 </style>

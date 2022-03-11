@@ -32,11 +32,15 @@ export default defineComponent({
   width: 3.125rem;
   height: 1.75rem;
   border-radius: 0.875rem;
-  background-color: #deeded;
+  background-color: $color-lighter;
   border: 0;
   outline: none;
   transition: background-color 0.15 ease;
   padding: 0.1875rem;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 
   &.checked {
     background-color: $color-blue;

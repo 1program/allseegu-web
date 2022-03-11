@@ -20,11 +20,11 @@ export default defineComponent({
   padding: 1rem 0;
   line-height: 0.9;
   border: 0;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid $color-light;
   outline: none;
 
   &::placeholder {
-    color: #dddddd;
+    color: $color-light;
   }
 }
 </style>

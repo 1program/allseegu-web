@@ -6,24 +6,16 @@
     </div>
   </div>
   <div class="container page-footer">
-    <app-button full @click="ok">확인</app-button>
+    <app-button full to="/account">확인</app-button>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import AppButton from "@/components/common/AppButton.vue";
-import { useRouter } from "vue-router";
 
 export default defineComponent({
   components: { AppButton },
   name: "AccountFindIdNoResult",
-  setup() {
-    const router = useRouter();
-
-    return {
-      ok: () => router.push("/account"),
-    };
-  },
 });
 </script>

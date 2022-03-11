@@ -8,6 +8,7 @@
     </div>
     <div class="container page-footer gap-vertical">
       <app-button full to="result">휴대폰 인증</app-button>
+      <app-button full to="no-result">휴대폰 인증 (결과없음)</app-button>
     </div>
   </form>
 </template>
@@ -18,6 +19,7 @@ import AppButton from "@/components/common/AppButton.vue";
 import { useForm } from "vee-validate";
 import * as yup from "yup";
 import { useRouter } from "vue-router";
+import { emailSchema } from "@/utils/schema";
 
 export default defineComponent({
   components: { AppButton },
@@ -27,10 +29,7 @@ export default defineComponent({
 
     const { handleSubmit } = useForm({
       validationSchema: yup.object({
-        email: yup
-          .string()
-          .required("이메일을 입력해 주세요.")
-          .email("올바르지 않은 이메일 주소입니다."),
+        email: emailSchema,
       }),
     });
 

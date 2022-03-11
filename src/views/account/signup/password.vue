@@ -5,13 +5,17 @@
         <div class="page-title">비밀번호를<br />입력해 주세요</div>
       </div>
 
-      <field name="password" v-slot="{ field, errorMessage }">
+      <field name="password" v-slot="{ field, errorMessage }" v-model="signupValues.password">
         <form-group :error-text="errorMessage">
           <form-input type="password" placeholder="비밀번호" v-bind="field" />
         </form-group>
       </field>
 
-      <field name="confirmPassword" v-slot="{ field, errorMessage }">
+      <field
+        name="confirmPassword"
+        v-slot="{ field, errorMessage }"
+        v-model="signupValues.confirmPassword"
+      >
         <form-group :error-text="errorMessage">
           <form-input type="password" placeholder="비밀번호 확인" v-bind="field" />
         </form-group>
@@ -32,7 +36,8 @@ import { Field, useForm } from "vee-validate";
 import { useRouter } from "vue-router";
 import FormInput from "@/components/common/FormInput.vue";
 import * as yup from "yup";
-import { PASSWORD_REGEXP } from "@/utils/regexp";
+import { confirmPasswordSchema, passwordSchema } from "@/utils/schema";
+import { useSignupValues } from "./index.vue";
 
 export default defineComponent({
   components: { AppButton, FormGroup, FormInput, Field },
@@ -40,16 +45,12 @@ export default defineComponent({
   setup() {
     const router = useRouter();
 
+    const signupValues = useSignupValues();
+
     const { handleSubmit } = useForm({
       validationSchema: yup.object({
-        password: yup
-          .string()
-          .required("비밀번호를 입력해 주세요.")
-          .matches(PASSWORD_REGEXP, "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."),
-        confirmPassword: yup
-          .string()
-          .required("비밀번호를 확인해 주세요.")
-          .oneOf([yup.ref("password"), null], "비밀번호가 일치하지 않습니다."),
+        password: passwordSchema,
+        confirmPassword: confirmPasswordSchema("password"),
       }),
     });
 
@@ -58,6 +59,7 @@ export default defineComponent({
     });
 
     return {
+      signupValues,
       submit,
     };
   },

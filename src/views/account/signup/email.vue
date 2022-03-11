@@ -5,7 +5,7 @@
         <div class="page-subtitle">홍길동님 안녕하세요</div>
         <div class="page-title">이메일을<br />입력해주세요</div>
       </div>
-      <field name="email" v-slot="{ field, errorMessage }">
+      <field name="email" v-slot="{ field, errorMessage }" v-model="signupValues.email">
         <form-group :error-text="errorMessage">
           <form-input v-bind="field" placeholder="example@example.com" />
         </form-group>
@@ -20,11 +20,13 @@
 <script lang="ts">
 import AppButton from "@/components/common/AppButton.vue";
 import FormGroup from "@/components/common/FormGroup.vue";
-import { useForm, Field } from "vee-validate";
+import { Field, useForm } from "vee-validate";
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
-import * as yup from "yup";
 import FormInput from "@/components/common/FormInput.vue";
+import * as yup from "yup";
+import { emailSchema } from "@/utils/schema";
+import { useSignupValues } from "./index.vue";
 
 export default defineComponent({
   components: { AppButton, FormGroup, Field, FormInput },
@@ -32,18 +34,20 @@ export default defineComponent({
   setup() {
     const router = useRouter();
 
+    const signupValues = useSignupValues();
+
     const { handleSubmit } = useForm({
       validationSchema: yup.object({
-        email: yup
-          .string()
-          .required("이메일을 입력해 주세요.")
-          .email("올바르지 않은 이메일 주소입니다."),
+        email: emailSchema,
       }),
     });
 
-    const submit = handleSubmit(() => router.push("password"));
+    const submit = handleSubmit(() => {
+      router.push("password");
+    });
 
     return {
+      signupValues,
       submit,
     };
   },

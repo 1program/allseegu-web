@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios";
+import { errorLogger, requestLogger, responseLogger } from "axios-logger";
 import ApiError from "./ApiError";
 import ApiRequestOptions from "./ApiRequestOptions";
 
@@ -7,7 +8,7 @@ export interface BaseApiOptions {
    *
    */
   baseURL: string;
-  accessToken: string;
+  accessToken?: string;
 }
 
 /**
@@ -22,10 +23,16 @@ export default class BaseApi {
     const headers: Record<string, string> = {};
 
     if (options.accessToken) {
-      headers.Authorization = options.accessToken;
+      headers.Authorization = `Bearer ${options.accessToken}`;
     }
 
-    this.axios = axios.create({ baseURL: options.baseURL });
+    this.axios = axios.create({ baseURL: options.baseURL, headers });
+
+    // 로깅 (개발 환경, 테스트 환경에서만)
+    if (["development", "test"].includes(process.env.NODE_ENV)) {
+      this.axios.interceptors.request.use(requestLogger, errorLogger);
+      this.axios.interceptors.response.use(responseLogger, errorLogger);
+    }
   }
 
   /**

@@ -96,6 +96,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/account/find-password/cert.vue"),
       },
       {
+        path: "no-result",
+        name: "AccountFindPasswordNoResult",
+        component: () => import("@/views/account/find-password/no-result.vue"),
+      },
+      {
         path: "result",
         name: "AccountFindPasswordResult",
         component: () => import("@/views/account/find-password/result.vue"),
@@ -103,7 +108,48 @@ const routes: Array<RouteRecordRaw> = [
       { path: "", redirect: { path: "/account/find-password/cert" } },
     ],
   },
-  { path: "", redirect: { path: "/account" } },
+  { path: "/my", name: "My", component: () => import("@/views/my/index.vue") },
+  {
+    path: "/my/setting",
+    name: "MySetting",
+    component: () => import("@/views/my/setting/index.vue"),
+  },
+  {
+    path: "/my/setting/email",
+    name: "MySettingEmail",
+    component: () => import("@/views/my/setting/email.vue"),
+  },
+  {
+    path: "/my/setting/mobile",
+    name: "MySettingMobile",
+    component: () => import("@/views/my/setting/mobile.vue"),
+  },
+  {
+    path: "/my/setting/nickname",
+    name: "MySettingNickname",
+    component: () => import("@/views/my/setting/nickname.vue"),
+  },
+  {
+    path: "/my/setting/password",
+    name: "MySettingPassword",
+    component: () => import("@/views/my/setting/password.vue"),
+  },
+  {
+    path: "/my/setting/push",
+    name: "MySettingPush",
+    component: () => import("@/views/my/setting/push.vue"),
+  },
+  {
+    path: "/my/customer/request-community",
+    name: "MyCustomerRequestCommunity",
+    component: () => import("@/views/my/customer/request-community.vue"),
+  },
+  {
+    path: "/my/likes",
+    name: "MyLikes",
+    component: () => import("@/views/my/likes.vue"),
+  },
+  { path: "", redirect: { path: "/my" } },
 ];
 
 // https://dev.to/uwutrinket/fix-scroll-jump---vue-router-45ja

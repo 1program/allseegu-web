@@ -2,7 +2,9 @@
   <div class="form-group">
     <label class="button">
       <input type="checkbox" :checked="checked" @change="handleCheck" :aria-label="label" />
-      <div class="knob"><check-icon /></div>
+      <div class="knob">
+        <img src="@/images/icons/check.svg" alt="체크" />
+      </div>
       <div v-if="label != null" class="label">{{ label }}</div>
     </label>
     <div class="content"><slot /></div>
@@ -11,10 +13,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import CheckIcon from "../icons/CheckIcon.vue";
 
 export default defineComponent({
-  components: { CheckIcon },
   name: "FormCheckField",
   props: {
     checked: {
@@ -54,19 +54,23 @@ export default defineComponent({
   width: 1.625rem;
   height: 1.625rem;
   border-radius: 1.625rem;
-  border: 1px solid #dddddd;
+  border: 1px solid $color-light;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: transparent;
   font-size: 1.25em;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  background-color: $color-white;
+  transition: background-color 0.15s ease;
+
+  img {
+    user-select: none;
+    width: (28/2/16) * 1rem;
+  }
 }
 
 input:checked + .knob {
   background-color: $color-blue;
   border-color: transparent;
-  color: $color-white;
 }
 
 input {
@@ -84,6 +88,6 @@ input {
   padding-left: 2.2rem;
   margin-top: 0.5rem;
   line-height: 1.5;
-  color: #777777;
+  color: $color-gray;
 }
 </style>

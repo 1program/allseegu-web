@@ -1,4 +1,5 @@
-export const PASSWORD_REGEXP = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9])[^\s]{8,16}$/g;
+// https://latte-is-horse.tistory.com/286
+export const PASSWORD_REGEXP = /^[0-9a-zA-Z!@#$%^+\-=]*$/g;
 
 // TEMPORARY! to disable lint.
 export const _ = 0;

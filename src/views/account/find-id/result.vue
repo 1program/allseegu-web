@@ -14,18 +14,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import AppButton from "@/components/common/AppButton.vue";
-import { useRouter } from "vue-router";
 import InfoBox from "@/components/common/InfoBox.vue";
 
 export default defineComponent({
   components: { AppButton, InfoBox },
   name: "AccountFindIdResult",
-  setup() {
-    const router = useRouter();
-
-    return {
-      ok: () => router.push("/account"),
-    };
-  },
 });
 </script>

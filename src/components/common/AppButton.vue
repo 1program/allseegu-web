@@ -106,11 +106,13 @@ export default defineComponent({
   }
 
   &.naver {
+    // 자주 사용되는 컬러값이 아님으로, 지역적으로 선언한다.
     background-color: #01c73c;
     color: white;
   }
 
   &.kakao {
+    // 자주 사용되는 컬러값이 아님으로, 지역적으로 선언한다.
     background-color: #fae100;
     color: #2c1618;
   }

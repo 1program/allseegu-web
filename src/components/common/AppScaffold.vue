@@ -1,7 +1,14 @@
 <template>
   <div class="app-scaffold">
-    <app-bar class="app-bar" :title="title" :progress="progress" />
-    <slot />
+    <app-bar class="app-bar" :title="title" :progress="progress">
+      <!-- AppBar의 actions slot -->
+      <template v-slot:actions>
+        <slot name="actions" />
+      </template>
+    </app-bar>
+
+    <!-- 기본 slot -->
+    <slot name="default" />
   </div>
 </template>
 

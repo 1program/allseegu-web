@@ -3,7 +3,7 @@
     <div class="label">
       <slot />
     </div>
-    <chevron-right-icon class="icon" />
+    <img class="icon" src="@/images/icons/arrow-right-blue.svg" alt="더 보기" />
   </component>
 </template>
 
@@ -45,5 +45,6 @@ export default defineComponent({
 .icon {
   margin-left: 1rem;
   color: $color-blue;
+  width: (12/2/16) * 1rem;
 }
 </style>

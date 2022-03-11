@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 *,
 *:before,
@@ -81,7 +82,11 @@ input {
 }
 
 .text-gray {
-  color: #777777;
+  color: $color-gray;
+}
+
+.text-light {
+  color: $color-light;
 }
 
 .text-divider {
@@ -131,4 +136,35 @@ input {
 .page-subtitle {
   font-size: (30/2/16) * 1rem;
   margin-bottom: (20/2/16) * 1rem;
+}
+
+.list-divider {
+  height: 1px;
+  background-color: $color-lightest;
+}
+
+.list-divider-thick {
+  height: (16/2/16) * 1rem;
+  background-color: $color-lightest;
+}
+
+.list-group {
+  padding: (40/2/16) * 1rem;
+}
+
+.list-title {
+  padding: (20/2/16) * 1rem 0;
+  font-size: (26/2/16) * 1rem;
+  color: $color-gray;
+  line-height: 1.1;
+}
+
+.list-button {
+  padding: (20/2/16) * 1rem 0;
+  font-size: (30/2/16) * 1rem;
+  width: 100%;
+  text-align: left;
+  line-height: 1.1;
+
+  @include touchable;
 }

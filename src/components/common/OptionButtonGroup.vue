@@ -1,0 +1,29 @@
+<template>
+  <div class="option-button-group">
+    <slot />
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "OptionButtonGroup",
+});
+</script>
+
+<style lang="scss" scoped>
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.option-button-group {
+  border: 1px solid $color-light;
+  border-right: 0;
+  border-bottom: 0;
+  background-color: $color-lightest;
+  margin: (43/2/16) * 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+}
+</style>

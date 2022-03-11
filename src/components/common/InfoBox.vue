@@ -17,8 +17,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/variables";
+
 .info-box {
-  background-color: #f2f2f2;
+  background-color: $color-lightest;
   padding: (40/2/16) * 1rem;
   margin-bottom: (43/2/16) * 1rem;
   line-height: 1.2;

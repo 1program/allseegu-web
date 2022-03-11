@@ -36,6 +36,7 @@
 
 <script lang="ts">
 import AppButton from "@/components/common/AppButton.vue";
+import { PREPARING } from "@/utils/messages";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -43,7 +44,7 @@ export default defineComponent({
   components: { AppButton },
   setup() {
     // eslint-disable-next-line
-    const prepare = () => alert("해당 기능은 준비중입니다.");
+    const prepare = () => alert(PREPARING);
 
     return { prepare };
   },

@@ -1,5 +1,5 @@
 <template>
-  <div tabindex="0" ref="element" class="app-drawer" @click="close" @keyup.esc="handleEsc">
+  <div tabindex="0" ref="element" class="app-drawer" @click="close" @keyup.esc="close">
     <div ref="backdropElement" class="backdrop" />
     <div
       ref="paperElement"
@@ -12,7 +12,9 @@
     >
       <div class="header">
         {{ title }}
-        <button class="close" @click="close"><close-icon /></button>
+        <button class="close" @click="close">
+          <img src="@/images/icons/close.svg" alt="닫기" />
+        </button>
       </div>
       <div ref="mainElement" class="main" @touchmove="scroll">
         <slot />
@@ -24,11 +26,9 @@
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, onMounted, ref } from "vue";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import CloseIcon from "../icons/CloseIcon.vue";
 
 export default defineComponent({
   name: "AppDrawer",
-  components: { CloseIcon },
   props: {
     title: {
       type: String,
@@ -43,10 +43,6 @@ export default defineComponent({
     const mainElement = ref<HTMLDivElement | null>(null);
 
     const close = () => {
-      context.emit("close");
-    };
-
-    const handleEsc = () => {
       context.emit("close");
     };
 
@@ -125,7 +121,6 @@ export default defineComponent({
       backdropElement,
       mainElement,
       close,
-      handleEsc,
       swipe,
       swipeStart,
       swipeEnd,
@@ -136,6 +131,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/variables";
 @import "@/styles/mixins";
 
 .app-drawer {
@@ -205,7 +201,7 @@ export default defineComponent({
   position: relative;
   padding: 1rem;
   padding-top: 1.6825rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $color-light;
   text-align: center;
   font-size: 1.3125rem;
   line-height: 1;
@@ -215,12 +211,15 @@ export default defineComponent({
   position: absolute;
   top: 0;
   right: 0;
-  width: (95/2/16) * 1rem;
-  height: (95/2/16) * 1rem;
+  padding: (32/2/16) * 1rem;
   text-align: center;
   font-size: (40/2/16) * 1rem;
 
   @include touchable;
+
+  img {
+    width: (37/2/16) * 1rem;
+  }
 }
 
 .main {

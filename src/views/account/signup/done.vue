@@ -1,6 +1,7 @@
 <template>
   <div class="container page-content content">
     <div class="page-header">
+      <img class="logo" src="@/images/icons/bi-extand.svg" alt="올씨구 로고" />
       <div class="page-title">회원가입 완료</div>
       <div class="page-subtitle">
         돈 불려주는 똑똑한 AI서비스<br />부동산은 올씨구에서 시작하세요
@@ -15,24 +16,25 @@
 <script lang="ts">
 import AppButton from "@/components/common/AppButton.vue";
 import { defineComponent } from "vue";
-import { useRouter } from "vue-router";
+import { useSignupValues } from "./index.vue";
 
 export default defineComponent({
   components: { AppButton },
   name: "AccountSignupDone",
   setup() {
-    const router = useRouter();
+    const values = useSignupValues();
 
-    const next = () => router.push("/");
+    console.log({ values });
 
-    return {
-      next,
-    };
+    return {};
   },
 });
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
 .content {
   display: flex;
   flex-direction: column;
@@ -42,9 +44,15 @@ export default defineComponent({
 
 .page-header {
   text-align: center;
+  margin-bottom: 0;
 }
 
 .page-subtitle {
-  color: #777777;
+  color: $color-gray;
+}
+
+.logo {
+  width: (200/2/16) * 1rem;
+  margin-bottom: (62/2/16) * 1rem;
 }
 </style>

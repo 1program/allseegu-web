@@ -33,6 +33,7 @@ import * as yup from "yup";
 import { useForm, Field } from "vee-validate";
 import FormGroup from "@/components/common/FormGroup.vue";
 import FormInput from "@/components/common/FormInput.vue";
+import { confirmPasswordSchema, passwordSchema } from "@/utils/schema";
 
 export default defineComponent({
   components: { AppButton, InfoBox, Field, FormGroup, FormInput },
@@ -42,17 +43,8 @@ export default defineComponent({
 
     const { handleSubmit } = useForm({
       validationSchema: yup.object({
-        password: yup
-          .string()
-          .matches(
-            /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9])[^\s]{8,16}$/g,
-            "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."
-          )
-          .required("비밀번호를 입력해 주세요."),
-        confirmPassword: yup
-          .string()
-          .required("비밀번호를 확인해 주세요.")
-          .oneOf([yup.ref("password"), null], "비밀번호가 일치하지 않습니다."),
+        password: passwordSchema,
+        confirmPassword: confirmPasswordSchema("password"),
       }),
     });
 

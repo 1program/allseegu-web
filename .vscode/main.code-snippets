@@ -1,0 +1,28 @@
+{
+  "Vue Component": {
+    "prefix": "vc",
+    "scope": "vue",
+    "body": [
+      "<template>",
+      "  <div class=\"$2\" />",
+      "</template>",
+      "",
+      "<script lang=\"ts\">",
+      "import { defineComponent } from \"vue\";",
+      "",
+      "export default defineComponent({",
+      "  name: '$1'",
+      "});",
+      "</script>",
+      "",
+      "<style lang=\"scss\" scoped>",
+      "@import \"@/styles/variables\";",
+      "@import \"@/styles/mixins\";",
+      "",
+      ".$2 {",
+      "  $3",
+      "}",
+      "</style>"
+    ]
+  }
+}

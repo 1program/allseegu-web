@@ -34,12 +34,13 @@ export default defineComponent({
 }
 
 .label {
-  font-size: 0.9375rem;
+  font-size: (30/2/16) * 1rem;
+  color: $color-gray;
 }
 
 .error-text {
   margin-top: (28/2/16) * 1rem;
-  color: #ff005a;
+  color: $color-red;
   white-space: pre-wrap;
   font-size: (30/2/16) * 1rem;
 }
