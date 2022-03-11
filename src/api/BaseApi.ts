@@ -40,13 +40,13 @@ export default class BaseApi {
    * 성공시 T generic에 따라 결과를 리턴한다.
    * 실패시 ApiException을 던진다.
    */
-  request<T>({ url, method, body, params }: ApiRequestOptions) {
+  request<T>({ url, method, data, params }: ApiRequestOptions) {
     return this.axios
       .request<T>({
         url,
         method,
         params,
-        data: body,
+        data,
       })
       .then((response) => response.data)
       .catch((error) => {
