@@ -24,7 +24,7 @@ import { Field, useForm } from "vee-validate";
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
 import FormInput from "@/components/common/FormInput.vue";
-import { nicknameSchema } from "@/utils/schema";
+import { nicknameSchema } from "@/lib/schema";
 import * as yup from "yup";
 import { useSignup } from "@/composables/signup";
 

@@ -34,7 +34,7 @@ import { Field, useForm } from "vee-validate";
 import { defineComponent } from "vue";
 import FormInput from "@/components/common/FormInput.vue";
 import * as yup from "yup";
-import { emailSchema, confirmEmailSchema } from "@/utils/schema";
+import { emailSchema, confirmEmailSchema } from "@/lib/schema";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import { useAlert } from "@/composables/alert";
 import { useRouter } from "vue-router";

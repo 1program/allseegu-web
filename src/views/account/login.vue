@@ -44,7 +44,7 @@ import { Field, useForm } from "vee-validate";
 import FormInput from "@/components/common/FormInput.vue";
 import * as yup from "yup";
 import { useRouter } from "vue-router";
-import { PASSWORD_REGEXP } from "@/utils/regexp";
+import { PASSWORD_REGEXP } from "@/lib/regexp";
 import FormErrorMessage from "@/components/common/FormErrorMessage.vue";
 
 export default defineComponent({

@@ -30,7 +30,7 @@ import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
 import FormInput from "@/components/common/FormInput.vue";
 import * as yup from "yup";
-import { confirmEmailSchema, emailSchema } from "@/utils/schema";
+import { confirmEmailSchema, emailSchema } from "@/lib/schema";
 import { useSignup } from "@/composables/signup";
 
 export default defineComponent({

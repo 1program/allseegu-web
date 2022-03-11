@@ -19,7 +19,7 @@ import AppButton from "@/components/common/AppButton.vue";
 import { useForm } from "vee-validate";
 import * as yup from "yup";
 import { useRouter } from "vue-router";
-import { emailSchema } from "@/utils/schema";
+import { emailSchema } from "@/lib/schema";
 
 export default defineComponent({
   components: { AppButton },

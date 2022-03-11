@@ -33,7 +33,7 @@ import * as yup from "yup";
 import { useForm, Field } from "vee-validate";
 import FormGroup from "@/components/common/FormGroup.vue";
 import FormInput from "@/components/common/FormInput.vue";
-import { confirmPasswordSchema, passwordSchema } from "@/utils/schema";
+import { confirmPasswordSchema, passwordSchema } from "@/lib/schema";
 
 export default defineComponent({
   components: { AppButton, InfoBox, Field, FormGroup, FormInput },

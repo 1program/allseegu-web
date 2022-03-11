@@ -33,7 +33,7 @@ import { Field, useForm } from "vee-validate";
 import { defineComponent } from "vue";
 import FormInput from "@/components/common/FormInput.vue";
 import * as yup from "yup";
-import { confirmPasswordSchema, passwordSchema } from "@/utils/schema";
+import { confirmPasswordSchema, passwordSchema } from "@/lib/schema";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import { useAlert } from "@/composables/alert";
 import { useRouter } from "vue-router";

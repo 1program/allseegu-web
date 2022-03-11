@@ -1,6 +1,6 @@
 import AuthApi from "@/api/AuthApi";
 import RedevApi from "@/api/RedevApi";
-import { DEV_API_URL } from "@/config";
+import { DEV_API_URL } from "@/lib/config";
 
 describe("RedevApi", () => {
   const authApi = new AuthApi({

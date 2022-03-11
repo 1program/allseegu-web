@@ -36,7 +36,7 @@ import { Field, useForm } from "vee-validate";
 import { useRouter } from "vue-router";
 import FormInput from "@/components/common/FormInput.vue";
 import * as yup from "yup";
-import { confirmPasswordSchema, passwordSchema } from "@/utils/schema";
+import { confirmPasswordSchema, passwordSchema } from "@/lib/schema";
 import { useSignup } from "@/composables/signup";
 
 export default defineComponent({

@@ -1,7 +1,7 @@
 import AuthApi from "@/api/AuthApi";
 import RedevApi from "@/api/RedevApi";
 import SubscribeApi from "@/api/SubscribeApi";
-import { DEV_API_URL } from "@/config";
+import { DEV_API_URL } from "@/lib/config";
 
 describe("SubscribeApi", () => {
   const authApi = new AuthApi({
