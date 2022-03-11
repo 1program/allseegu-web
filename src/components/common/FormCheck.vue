@@ -1,5 +1,5 @@
 <template>
-  <div class="form-group">
+  <div class="form-check">
     <label class="button">
       <input type="checkbox" :checked="checked" @change="handleCheck" :aria-label="label" />
       <div class="knob">
@@ -15,7 +15,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "FormCheckField",
+  name: "FormCheck",
   props: {
     checked: {
       type: Boolean,
@@ -38,8 +38,9 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "@/styles/variables";
+@import "@/styles/mixins";
 
-.form-group {
+.form-check {
   margin-bottom: 1.5rem;
 }
 

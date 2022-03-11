@@ -5,8 +5,13 @@
         <div class="page-subtitle">홍길동님 안녕하세요</div>
         <div class="page-title">이메일을<br />입력해주세요</div>
       </div>
-      <field name="email" v-slot="{ field, errorMessage }" v-model="signupValues.email">
-        <form-group :error-text="errorMessage">
+      <field name="email" v-slot="{ field, errorMessage }" v-model="values.email">
+        <form-group label="이메일" :error-text="errorMessage">
+          <form-input v-bind="field" placeholder="example@example.com" />
+        </form-group>
+      </field>
+      <field name="confirmEmail" v-slot="{ field, errorMessage }" v-model="values.confirmEmail">
+        <form-group label="이메일 확인" :error-text="errorMessage">
           <form-input v-bind="field" placeholder="example@example.com" />
         </form-group>
       </field>
@@ -25,8 +30,8 @@ import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
 import FormInput from "@/components/common/FormInput.vue";
 import * as yup from "yup";
-import { emailSchema } from "@/utils/schema";
-import { useSignupValues } from "./index.vue";
+import { confirmEmailSchema, emailSchema } from "@/utils/schema";
+import { useSignup } from "@/composables/signup";
 
 export default defineComponent({
   components: { AppButton, FormGroup, Field, FormInput },
@@ -34,11 +39,14 @@ export default defineComponent({
   setup() {
     const router = useRouter();
 
-    const signupValues = useSignupValues();
+    const { values } = useSignup();
 
     const { handleSubmit } = useForm({
+      /// 뒤로가기 눌러서 뒤로 왔을 경우
+      validateOnMount: router.options?.history.state.forward != null,
       validationSchema: yup.object({
         email: emailSchema,
+        confirmEmail: confirmEmailSchema("email"),
       }),
     });
 
@@ -47,7 +55,7 @@ export default defineComponent({
     });
 
     return {
-      signupValues,
+      values,
       submit,
     };
   },

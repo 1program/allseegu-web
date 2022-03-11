@@ -5,7 +5,7 @@
         <div class="page-title">비밀번호를<br />입력해 주세요</div>
       </div>
 
-      <field name="password" v-slot="{ field, errorMessage }" v-model="signupValues.password">
+      <field name="password" v-slot="{ field, errorMessage }" v-model="values.password">
         <form-group :error-text="errorMessage">
           <form-input type="password" placeholder="비밀번호" v-bind="field" />
         </form-group>
@@ -14,7 +14,7 @@
       <field
         name="confirmPassword"
         v-slot="{ field, errorMessage }"
-        v-model="signupValues.confirmPassword"
+        v-model="values.confirmPassword"
       >
         <form-group :error-text="errorMessage">
           <form-input type="password" placeholder="비밀번호 확인" v-bind="field" />
@@ -37,7 +37,7 @@ import { useRouter } from "vue-router";
 import FormInput from "@/components/common/FormInput.vue";
 import * as yup from "yup";
 import { confirmPasswordSchema, passwordSchema } from "@/utils/schema";
-import { useSignupValues } from "./index.vue";
+import { useSignup } from "@/composables/signup";
 
 export default defineComponent({
   components: { AppButton, FormGroup, FormInput, Field },
@@ -45,9 +45,11 @@ export default defineComponent({
   setup() {
     const router = useRouter();
 
-    const signupValues = useSignupValues();
+    const { values } = useSignup();
 
     const { handleSubmit } = useForm({
+      /// 뒤로가기 눌러서 뒤로 왔을 경우
+      validateOnMount: router.options?.history.state.forward != null,
       validationSchema: yup.object({
         password: passwordSchema,
         confirmPassword: confirmPasswordSchema("password"),
@@ -59,7 +61,7 @@ export default defineComponent({
     });
 
     return {
-      signupValues,
+      values,
       submit,
     };
   },

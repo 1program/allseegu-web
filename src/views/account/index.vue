@@ -36,15 +36,17 @@
 
 <script lang="ts">
 import AppButton from "@/components/common/AppButton.vue";
-import { PREPARING } from "@/utils/messages";
+import { useAlert } from "@/composables/alert";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "AccountPage",
   components: { AppButton },
   setup() {
+    const alert = useAlert();
+
     // eslint-disable-next-line
-    const prepare = () => alert(PREPARING);
+    const prepare = () => alert("해당 기능은 준비중입니다.");
 
     return { prepare };
   },
