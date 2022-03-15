@@ -149,7 +149,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "MyLikes",
     component: () => import("@/views/my/likes.vue"),
   },
-  { path: "", redirect: { path: "/my" } },
+  { path: "", name: "Index", component: () => import("@/views/index.vue") },
 ];
 
 // https://dev.to/uwutrinket/fix-scroll-jump---vue-router-45ja

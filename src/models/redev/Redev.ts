@@ -14,9 +14,9 @@ export interface Redev {
 
   district: "at"; // TODO: 확인 필요
 
-  map_points: { x: number; y: number }[];
+  geometry_points: { x: number; y: number }[];
 
-  map_shape: "polyline";
+  geometry_shape: "polyline";
 
   condition1: string;
 
@@ -31,6 +31,8 @@ export interface Redev {
   outline_desc: string;
 
   outline_visible: number;
+
+  is_issue: 0 | 1;
 
   is_newtown: 0 | 1;
 

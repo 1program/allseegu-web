@@ -3,8 +3,13 @@
 환경에 따라 바뀔 필요가 없는 값들은 고정값으로 선언한다.
 */
 
-export const DEV_API_URL = "https://allssigu-staging.v3host.net/api";
+export const API_URL = process.env.VUE_APP_API_URL;
 
-export const KAKAO_REST_API_KEY = "d7a1b44f6ea0a598b6ead3fac7c613e0";
+export const KAKAO_REST_API_KEY = process.env.VUE_APP_KAKAO_REST_API_KEY;
 
-export const KAKAO_JAVASCRIPT_KEY = "cc46b3d1a74130fa1b61b21a45853a87";
+export const KAKAO_JAVASCRIPT_KEY = process.env.VUE_APP_KAKAO_JAVASCRIPT_KEY;
+
+export const TEST_ACCOUNT = {
+  email: "admin@demo.com",
+  password: "abcd1234",
+};

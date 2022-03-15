@@ -1,5 +1,5 @@
 <template>
-  <button class="app-toggle" :class="{ checked }" @click="handleToggle">
+  <button type="button" class="app-toggle" :class="{ checked }" @click="handleToggle">
     <span class="knob" />
   </button>
 </template>

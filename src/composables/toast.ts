@@ -9,6 +9,37 @@ export interface ToastMessage {
 export interface ToastContext {
   toasts: Ref<ToastMessage[]>;
   close: (id: string) => void;
+  open: (message: string) => void;
+}
+
+export function provideToasts() {
+  const toasts = ref<ToastMessage[]>([]);
+
+  const close = (id: string) => {
+    toasts.value = toasts.value.filter((toast) => toast.id !== id);
+  };
+
+  const open = (message: string) => {
+    const newToast = {
+      id: shortid(),
+      message,
+    };
+
+    toasts.value.push(newToast);
+
+    /// 3초 후 close
+    setTimeout(() => close(newToast.id), 3000);
+  };
+
+  const context = {
+    toasts,
+    close,
+    open,
+  };
+
+  provide("TOASTS", context);
+
+  return context;
 }
 
 export function useToasts() {
@@ -21,31 +52,8 @@ export function useToasts() {
   return alerts;
 }
 
-export function provideToasts() {
-  const toasts = ref<ToastMessage[]>([]);
-
-  const close = (id: string) => {
-    toasts.value = toasts.value.filter((toast) => toast.id !== id);
-  };
-
-  provide("TOASTS", {
-    toasts,
-    close,
-  });
-}
-
 export function useToast() {
-  const { toasts, close } = useToasts();
+  const { open } = useToasts();
 
-  return function toast(message: string) {
-    const newToast = {
-      id: shortid(),
-      message,
-    };
-
-    toasts.value.push(newToast);
-
-    /// 3초 후 close
-    setTimeout(() => close(newToast.id), 3000);
-  };
+  return open;
 }

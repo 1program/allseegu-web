@@ -82,6 +82,9 @@ export default defineComponent({
   max-width: (670/2/16) * 1rem;
   margin: 0 auto;
   user-select: none;
+
+  // https://mui.com/customization/z-index/
+  z-index: 1300;
 }
 
 /* we will explain what these classes do next! */

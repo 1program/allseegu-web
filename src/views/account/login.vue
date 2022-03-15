@@ -9,14 +9,12 @@
         </field>
         <field name="password" v-slot="{ field, errorMessage }">
           <form-group type="password" label="비밀번호" :error-text="errorMessage">
-            <form-input v-bind="field" />
+            <form-input type="password" v-bind="field" />
           </form-group>
         </field>
       </div>
       <div class="container page-footer footer">
-        <form-error-message
-          :message="'등록되지 않은 이메일이거나\n비밀번호가 일치하지 않습니다.'"
-        />
+        <form-error-message v-if="errorMessage" :message="errorMessage" />
         <div class="quick-links">
           <router-link class="link" to="/account/find-id">아이디 찾기</router-link>
           <span class="text-divider" />
@@ -46,15 +44,26 @@ import * as yup from "yup";
 import { useRouter } from "vue-router";
 import { PASSWORD_REGEXP } from "@/lib/regexp";
 import FormErrorMessage from "@/components/common/FormErrorMessage.vue";
+import { useApi } from "@/composables/api";
+import { useToast } from "@/composables/toast";
+import { TEST_ACCOUNT } from "@/lib/config";
+import { getErrorMessage } from "@/lib/functions";
+import { useAuth } from "@/composables/auth";
 
 export default defineComponent({
   name: "AccountLoginPage",
   components: { AppScaffold, AppButton, FormGroup, AppToggle, FormInput, Field, FormErrorMessage },
   setup() {
     const router = useRouter();
+    const toast = useToast();
     const autoLogin = ref(false);
+    const api = useApi();
+    const auth = useAuth();
+
+    const errorMessage = ref<string | null>(null);
 
     const { handleSubmit } = useForm({
+      initialValues: process.env.NODE_ENV === "development" ? TEST_ACCOUNT : undefined,
       validationSchema: yup.object({
         email: yup
           .string()
@@ -67,10 +76,30 @@ export default defineComponent({
       }),
     });
 
-    const submit = handleSubmit(() => router.push("/"));
+    const submit = handleSubmit(async (values) => {
+      errorMessage.value = null;
+
+      try {
+        const result = await api.auth.login({
+          data: {
+            email: values.email ?? "",
+            password: values.password ?? "",
+          },
+        });
+
+        auth.login(result.data.api_token, autoLogin.value);
+
+        toast(result.message);
+
+        router.push("/");
+      } catch (error) {
+        errorMessage.value = getErrorMessage(error);
+      }
+    });
 
     return {
       autoLogin,
+      errorMessage,
       submit,
     };
   },

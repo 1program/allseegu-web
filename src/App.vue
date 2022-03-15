@@ -13,13 +13,27 @@ import { provideAlerts } from "./composables/alert";
 import { provideToasts } from "./composables/toast";
 import AlertRenderer from "./components/common/AlertRenderer.vue";
 import ToastRenderer from "./components/common/ToastRenderer.vue";
+import { provideApi } from "./composables/api";
+import { provideUi } from "./composables/ui";
+import { provideAuth } from "./composables/auth";
 
 export default defineComponent({
   name: "App",
   components: { SlidingRouterView, AlertRenderer, ToastRenderer },
   setup() {
     provideAlerts();
-    provideToasts();
+
+    const toasts = provideToasts();
+
+    provideUi({
+      onMessage: toasts.open,
+    });
+
+    const auth = provideAuth();
+
+    provideApi({
+      accessToken: auth.accessToken,
+    });
   },
 });
 </script>

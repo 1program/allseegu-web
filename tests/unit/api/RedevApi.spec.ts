@@ -1,5 +1,5 @@
 import RedevApi from "@/api/RedevApi";
-import { DEV_API_URL } from "@/lib/config";
+import { API_URL } from "@/lib/config";
 import { loginTestAccount } from "./helpers";
 
 describe("RedevApi", () => {
@@ -7,18 +7,18 @@ describe("RedevApi", () => {
     const log = await loginTestAccount();
 
     const redevApi = new RedevApi({
-      baseURL: DEV_API_URL,
+      baseURL: API_URL,
       accessToken: log.data.api_token,
     });
 
-    await redevApi.redevList();
+    await redevApi.redevList({});
   });
 
   it("search", async () => {
     const log = await loginTestAccount();
 
     const redevApi = new RedevApi({
-      baseURL: DEV_API_URL,
+      baseURL: API_URL,
       accessToken: log.data.api_token,
     });
 

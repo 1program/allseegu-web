@@ -8,7 +8,7 @@ export interface BaseApiOptions {
    *
    */
   baseURL: string;
-  accessToken?: string;
+  accessToken?: string | null;
 }
 
 /**

@@ -17,7 +17,7 @@ export type SignupContext = {
 };
 
 /**
- * 자식 트리에 회원가입 values 저장소를 공급한다.
+ * 하위 트리에 회원가입 values 저장소를 공급한다.
  */
 export function provideSignup() {
   const context = reactive<SignupContext>({
@@ -25,6 +25,8 @@ export function provideSignup() {
   });
 
   provide("SIGNUP_CONTEXT", context);
+
+  return context;
 }
 
 export function useSignup() {

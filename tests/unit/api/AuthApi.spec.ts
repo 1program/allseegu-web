@@ -1,11 +1,11 @@
 import AuthApi from "@/api/AuthApi";
-import { DEV_API_URL } from "@/lib/config";
-import { loginTestAccount, TEST_ACCOUNT } from "./helpers";
+import { API_URL, TEST_ACCOUNT } from "@/lib/config";
+import { loginTestAccount } from "./helpers";
 
 describe("AuthApi", () => {
   it("login", async () => {
     const authApi = new AuthApi({
-      baseURL: DEV_API_URL,
+      baseURL: API_URL,
     });
 
     const result = await authApi.login({
@@ -19,7 +19,7 @@ describe("AuthApi", () => {
     const log = await loginTestAccount();
 
     const authApi = new AuthApi({
-      baseURL: DEV_API_URL,
+      baseURL: API_URL,
       accessToken: log.data.api_token,
     });
 
