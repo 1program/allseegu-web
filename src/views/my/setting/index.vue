@@ -7,7 +7,7 @@
         <menu-button to="setting/mobile">휴대전화번호 변경</menu-button>
         <menu-button to="setting/password">비밀번호 변경</menu-button>
         <menu-button to="setting/push">알림 설정</menu-button>
-        <menu-button>로그아웃</menu-button>
+        <menu-button @click="logout">로그아웃</menu-button>
       </div>
       <div class="list-divider-thick" />
       <div class="list-group">
@@ -27,14 +27,36 @@ import AppScaffold from "@/components/common/AppScaffold.vue";
 import { defineComponent, ref } from "vue";
 import UserLeaveModal from "@/modals/user/UserLeaveModal.vue";
 import MenuButton from "@/components/common/MenuButton.vue";
+import { useAuth } from "@/composables/auth";
+import { useToast } from "@/composables/toast";
+import { useApi } from "@/composables/api";
+import { useUi } from "@/composables/ui";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "MySetting",
   components: { AppScaffold, UserLeaveModal, MenuButton },
   setup() {
+    const router = useRouter();
+    const api = useApi();
+    const auth = useAuth();
+    const toast = useToast();
+    const ui = useUi();
+
     const showingLeaveAlert = ref(false);
 
-    return { showingLeaveAlert };
+    const logout = async () => {
+      try {
+        const result = await api.auth.logout();
+        auth.logout();
+        toast(result.message);
+        router.push("/");
+      } catch (error) {
+        ui.handleError(error);
+      }
+    };
+
+    return { showingLeaveAlert, logout };
   },
 });
 </script>

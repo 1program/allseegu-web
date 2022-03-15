@@ -6,6 +6,7 @@
 import { useApi } from "@/composables/api";
 import { defineComponent, onMounted, ref, watch } from "vue";
 import { useAsyncInfiniteList } from "@/composables/async-infinite-list";
+import { boundsFromLatLngs, centerFromBounds } from "@/lib/kakao-map-helpers";
 
 export const REDEV_MAP_BLUE = "#2170fe";
 
@@ -43,12 +44,17 @@ export default defineComponent({
       () => ({ map: kakaoMap.value, list: redevList.list }),
       ({ map, list }) => {
         if (map != null && list.length > 0) {
-          const bounds = new window.kakao.maps.LatLngBounds();
+          /// 목록 전체 바운더리
+          const totalBounds = new window.kakao.maps.LatLngBounds();
 
           list.forEach((redev) => {
             const points = redev.geometry_points.map(
               (point) => new window.kakao.maps.LatLng(point.y, point.x)
             );
+
+            const bounds = boundsFromLatLngs(points);
+
+            const center = centerFromBounds(bounds);
 
             const polygonColor = redev.is_issue ? REDEV_MAP_BLUE : REDEV_MAP_GREEN;
 
@@ -60,7 +66,7 @@ export default defineComponent({
               strokeWeight: 1,
             });
 
-            points.forEach((point) => bounds.extend(point));
+            points.forEach((point) => totalBounds.extend(point));
 
             const overlay = new window.kakao.maps.CustomOverlay({
               content: `<div class="redev-map-text">
@@ -69,14 +75,14 @@ export default defineComponent({
               </div>`,
               xAnchor: 0.5,
               yAnchor: 0.5,
-              position: points[0],
+              position: center,
               map,
             });
 
             poly.setMap(map);
           });
 
-          map.setBounds(bounds);
+          map.setBounds(totalBounds);
         }
       }
     );

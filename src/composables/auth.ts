@@ -2,7 +2,7 @@
 인증 관련 기능 제공
 */
 
-import { inject, provide, ref, Ref } from "vue";
+import { computed, ComputedRef, inject, provide, ref, Ref } from "vue";
 
 export const AUTH_CONTEXT_SYMBOL = Symbol("AUTH_CONTEXT_SYMBOL");
 
@@ -16,8 +16,9 @@ export interface AuthState {
 
 export interface AuthContext {
   accessToken: Ref<string | null>;
+  isLogged: ComputedRef<boolean>;
   login: (accessToken: string, persist: boolean) => void;
-  logout: (accessToken: string) => void;
+  logout: () => void;
 }
 
 export function provideAuth() {
@@ -43,10 +44,14 @@ export function provideAuth() {
     window.sessionStorage.removeItem("_API_TOKEN");
   };
 
+  // 로그인 되었는가?
+  const isLogged = computed(() => accessToken.value != null);
+
   const context = {
     accessToken,
     login,
     logout,
+    isLogged,
   };
 
   provide(AUTH_CONTEXT_SYMBOL, context);

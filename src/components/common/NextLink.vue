@@ -9,11 +9,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import ChevronRightIcon from "../icons/ChevronRightIcon.vue";
 
 export default defineComponent({
   name: "NextLink",
-  components: { ChevronRightIcon },
   props: {
     to: {
       type: String,

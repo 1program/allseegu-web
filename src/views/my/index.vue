@@ -19,11 +19,15 @@
       <div class="list-divider-thick" />
       <div class="list-group">
         <div class="list-title">고객센터</div>
-        <menu-button to="/my/customer/notice" alarm>공지사항</menu-button>
-        <menu-button to="/my/customer/faq">FAQ</menu-button>
-        <menu-button to="/my/customer/inquiry" alarm>1:1 문의</menu-button>
+        <menu-button to="/my/customer/notice" alarm @click="ui.notImplemented">
+          공지사항
+        </menu-button>
+        <menu-button to="/my/customer/faq" @click="ui.notImplemented">FAQ</menu-button>
+        <menu-button to="/my/customer/inquiry" alarm @click="ui.notImplemented">
+          1:1 문의
+        </menu-button>
         <menu-button to="/my/customer/request-community">올려주세요</menu-button>
-        <menu-button to="/my/customer/terms">약관/정책</menu-button>
+        <menu-button to="/my/customer/terms" @click="ui.notImplemented"> 약관/정책 </menu-button>
       </div>
       <div class="list-divider-thick" />
       <div class="list-group">
@@ -42,10 +46,16 @@ import { defineComponent } from "vue";
 import UserInfo from "@/components/user/UserInfo.vue";
 import AppBarAction from "@/components/common/AppBarAction.vue";
 import MenuButton from "@/components/common/MenuButton.vue";
+import { useUi } from "@/composables/ui";
 
 export default defineComponent({
   name: "MyPage",
   components: { AppScaffold, UserInfo, AppBarAction, MenuButton },
+  setup() {
+    const ui = useUi();
+
+    return { ui };
+  },
 });
 </script>
 

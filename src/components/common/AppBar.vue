@@ -54,6 +54,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "@/styles/variables";
+@import "@/styles/mixins";
 
 .app-bar {
   position: relative;
@@ -91,6 +92,8 @@ export default defineComponent({
   svg {
     display: block;
   }
+
+  @include touchable;
 }
 
 .back-icon {

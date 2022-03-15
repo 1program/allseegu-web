@@ -1,3 +1,5 @@
+import { GeometryPoint } from "../common";
+
 /**
  * 재개발 정보
  */
@@ -14,7 +16,7 @@ export interface Redev {
 
   district: "at"; // TODO: 확인 필요
 
-  geometry_points: { x: number; y: number }[];
+  geometry_points: GeometryPoint[];
 
   geometry_shape: "polyline";
 

@@ -9,6 +9,7 @@ export interface UiProviderParams {
 
 export interface UiContext {
   handleError: (error: unknown) => void;
+  notImplemented: () => void;
 }
 
 export function provideUi({ onMessage }: UiProviderParams) {
@@ -20,8 +21,13 @@ export function provideUi({ onMessage }: UiProviderParams) {
     }
   };
 
+  const notImplemented = () => {
+    onMessage("해당 기능은 준비중입니다.");
+  };
+
   const context = {
     handleError,
+    notImplemented,
   };
 
   provide(UI_CONTEXT_SYMBOL, context);
