@@ -56,6 +56,7 @@ export default defineComponent({
 @import "@/styles/config";
 
 .app-bar {
+  cursor: default;
   position: relative;
   display: flex;
   align-items: center;

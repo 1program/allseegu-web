@@ -17,6 +17,9 @@
           class="link"
           url="http://view3.synology.me:5050/d/s/672812605452106783/bzE8Aohz0mThrDs-cYk8IV1JdsyHGgzM-vb5gT7NPVgk_"
         />
+        <div class="gallery">
+          <ImageGallery :images="images" />
+        </div>
         <div class="content">
           조합이 바르게 운영되지 못하고 와해되는 이유는 바로 이것 때문입니다. 조합이 바르게 운영되지
           못하고 와해되는 이유는 바로 이것 때문입니다.<br /><br />
@@ -33,12 +36,16 @@ import AppScaffold from "@/components/common/AppScaffold.vue";
 import PostMeta from "@/components/common/PostMeta.vue";
 import AttachmentTile from "@/components/common/AttachmentTile.vue";
 import LinkTile from "@/components/common/LinkTile.vue";
+import ImageGallery from "@/components/common/ImageGallery.vue";
+
+import redevImage from "@/images/mocks/redev-image.png";
 
 export default defineComponent({
   name: "RedevDetailSubscribeDetail",
-  components: { AppScaffold, PostMeta, AttachmentTile, LinkTile },
+  components: { AppScaffold, PostMeta, AttachmentTile, LinkTile, ImageGallery },
   setup() {
     return {
+      images: [redevImage, redevImage, redevImage],
       date: new Date(),
     };
   },
@@ -59,6 +66,10 @@ export default defineComponent({
 
 .link {
   margin-top: (13/2/16) * 1rem;
+}
+
+.gallery {
+  margin-top: (40/2/16) * 1rem;
 }
 
 .content {

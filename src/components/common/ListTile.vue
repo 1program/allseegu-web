@@ -75,6 +75,7 @@ export default defineComponent({
 
   .title {
     flex: 1 1 auto;
+    font-size: (30/2/16) * 1rem;
 
     @include ellipsis;
   }
