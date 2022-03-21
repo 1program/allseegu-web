@@ -10,6 +10,7 @@
     <!-- 기본 slot -->
     <slot name="default" />
   </div>
+  <button v-if="hasTopButton" class="top-button" @click="goTop">TOP</button>
 </template>
 
 <script lang="ts">
@@ -30,11 +31,27 @@ export default defineComponent({
       default: 0,
       description: "스캐폴드의 진척도",
     },
+    hasTopButton: {
+      type: Boolean,
+      default: false,
+      description: "위로가기 버튼을 노출할지",
+    },
+  },
+  setup() {
+    const goTop = () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    return {
+      goTop,
+    };
   },
 });
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/config";
+
 .app-scaffold {
   min-height: 100vh;
   display: flex;
@@ -49,5 +66,20 @@ export default defineComponent({
 
   // z-index guide: https://mui.com/customization/z-index/
   z-index: 1100;
+}
+
+.top-button {
+  position: fixed;
+  right: (10/2/16) * 1rem;
+  bottom: (10/2/16) * 1rem;
+  width: (80/2/16) * 1rem;
+  height: (80/2/16) * 1rem;
+  background-color: white;
+  border-radius: (10/2/16) * 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  font-size: (30/2/16) * 1rem;
+  font-weight: bold;
+  z-index: 1300;
+  @include touchable;
 }
 </style>

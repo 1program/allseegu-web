@@ -1,7 +1,7 @@
 <template>
   <app-scaffold title="비밀번호 변경">
     <form class="page-wrapper" @submit.prevent="submit">
-      <div class="container page-content">
+      <div class="container page-content-large">
         <div class="page-header">
           <div class="page-title">변경될 비밀번호를<br />입력해주세요</div>
           <div class="page-subtitle">8자 이상 문자와 숫자의 조합으로 만들어주세요</div>

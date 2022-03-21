@@ -1,5 +1,5 @@
 <template>
-  <div class="container page-content">
+  <div class="container page-content-large">
     <div class="page-header">
       <div class="page-title">고객님의 아이디를<br />확인해주세요</div>
     </div>

@@ -8,7 +8,7 @@
           <app-toggle v-model:checked="all" />
         </template>
       </menu-tile>
-      <div class="list-divider" />
+      <div class="divider" />
       <menu-tile class="tile odd">
         커뮤니티
         <template v-slot:trailing>
@@ -47,7 +47,7 @@ import MenuTile from "@/components/common/MenuTile.vue";
 import AppToggle from "@/components/common/AppToggle.vue";
 
 export default defineComponent({
-  name: "LikePushSettigModal",
+  name: "RedevAlimModal",
   components: { AppDialog, AppButton, MenuTile, AppToggle },
   setup() {
     const all = ref(false);
@@ -79,7 +79,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "@/styles/variables";
 
-.list-divider {
+.divider {
   margin: (14/2/16) * 1rem;
 }
 

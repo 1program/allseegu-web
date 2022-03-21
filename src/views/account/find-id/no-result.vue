@@ -1,5 +1,5 @@
 <template>
-  <div class="container page-content">
+  <div class="container page-content-large">
     <div class="page-header">
       <div class="page-title">아이디가 없습니다</div>
       <div class="page-subtitle text-gray">입력하신 정보와 일치하는 아이디가 없습니다.</div>

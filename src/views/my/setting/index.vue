@@ -9,7 +9,7 @@
         <menu-button to="setting/push">알림 설정</menu-button>
         <menu-button @click="logout">로그아웃</menu-button>
       </div>
-      <div class="list-divider-thick" />
+      <div class="divider thick" />
       <div class="list-group">
         <menu-button @click="showingLeaveAlert = true">
           <div class="text-gray">탈퇴하기</div>
@@ -25,7 +25,7 @@
 <script lang="ts">
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import { defineComponent, ref } from "vue";
-import UserLeaveModal from "@/modals/user/UserLeaveModal.vue";
+import UserLeaveModal from "@/components/user/UserLeaveModal.vue";
 import MenuButton from "@/components/common/MenuButton.vue";
 import { useAuth } from "@/composables/auth";
 import { useToast } from "@/composables/toast";

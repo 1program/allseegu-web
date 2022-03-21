@@ -31,13 +31,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/variables";
-@import "@/styles/mixins";
+@import "@/styles/config";
 
 .app-bar-action {
   @include touchable;
 
-  ::v-deep img {
+  :deep(img) {
     display: block;
     width: (44/2/16) * 1rem;
   }

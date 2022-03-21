@@ -1,7 +1,7 @@
 <template>
   <app-scaffold title="이메일 변경">
     <form class="page-wrapper" @submit.prevent="submit">
-      <div class="container page-content">
+      <div class="container page-content-large">
         <div class="page-header">
           <div class="page-title">변경될 이메일을<br />입력해주세요</div>
           <div class="page-subtitle">

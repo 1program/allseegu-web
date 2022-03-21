@@ -1,6 +1,6 @@
 <template>
   <div class="account-page">
-    <div class="container page-content content">
+    <div class="container page-content-large content">
       <img class="logo" src="@/images/icons/bi-extand_white.svg" alt="올씨구 로고" />
       <app-button full palette="white" to="/account/login">
         <template v-slot:icon>

@@ -7,16 +7,16 @@
     </template>
     <div class="container page-wrapper">
       <user-info />
-      <div class="list-divider-thick" />
+      <div class="divider thick" />
       <div class="list-group">
         <div class="list-title">보유 구역</div>
         <button class="list-button">신도림 1구역 재개발</button>
       </div>
-      <div class="list-divider-thick" />
+      <div class="divider thick" />
       <div class="list-group">
         <menu-button to="/my/likes">관심 구역</menu-button>
       </div>
-      <div class="list-divider-thick" />
+      <div class="divider thick" />
       <div class="list-group">
         <div class="list-title">고객센터</div>
         <menu-button to="/my/customer/notice" alarm @click="ui.notImplemented">
@@ -29,7 +29,7 @@
         <menu-button to="/my/customer/request-community">올려주세요</menu-button>
         <menu-button to="/my/customer/terms" @click="ui.notImplemented"> 약관/정책 </menu-button>
       </div>
-      <div class="list-divider-thick" />
+      <div class="divider thick" />
       <div class="list-group">
         <menu-button>
           <div class="text-gray">최신 버전</div>

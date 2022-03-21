@@ -1,7 +1,7 @@
 <template>
   <app-scaffold title="로그인">
     <form class="page-wrapper" @submit.prevent="submit">
-      <div class="container page-content content">
+      <div class="container page-content-large content">
         <field name="email" v-slot="{ field, errorMessage }">
           <form-group label="이메일" :error-text="errorMessage">
             <form-input v-bind="field" placeholder="abc@allseegu.com" />

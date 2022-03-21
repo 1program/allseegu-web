@@ -39,8 +39,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/variables";
-@import "@/styles/mixins";
+@import "@/styles/config";
 
 .menu-button {
   padding: (12/2/16) * 1rem 0;

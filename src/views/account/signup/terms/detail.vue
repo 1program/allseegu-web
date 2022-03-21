@@ -50,18 +50,16 @@ export default defineComponent({
   components: { AppDrawer },
   setup() {
     const router = useRouter();
-    const close = router.back;
 
     return {
-      close,
+      close: router.back,
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/variables";
-@import "@/styles/mixins";
+@import "@/styles/config";
 
 .main {
   h2 {

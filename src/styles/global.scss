@@ -53,7 +53,8 @@ button {
   padding: 0;
 }
 
-input {
+input,
+textarea {
   font: inherit;
   letter-spacing: inherit;
 }
@@ -119,6 +120,11 @@ input {
   padding: $padding;
 }
 
+.page-content-large {
+  flex: 1 1 auto;
+  padding: $padding-large;
+}
+
 .page-footer {
   padding: $padding-x;
 }
@@ -138,14 +144,25 @@ input {
   margin-bottom: (20/2/16) * 1rem;
 }
 
-.list-divider {
+.divider {
   height: 1px;
   background-color: $color-lightest;
-}
 
-.list-divider-thick {
-  height: (16/2/16) * 1rem;
-  background-color: $color-lightest;
+  &.light {
+    background-color: $color-light;
+  }
+
+  &.darker {
+    background-color: #cccccc;
+  }
+
+  &.thick {
+    height: (16/2/16) * 1rem;
+  }
+
+  &.margin {
+    margin: (35/2/16) * 1rem 0;
+  }
 }
 
 .list-group {
@@ -167,4 +184,44 @@ input {
   line-height: 1.1;
 
   @include touchable;
+}
+
+.section {
+  padding: (60/2/16) * 1rem (40/2/16) * 1rem;
+}
+
+.section-title {
+  margin-bottom: (40/2/16) * 1rem;
+  font-size: (26/2/16) * 1rem;
+}
+
+.section-content {
+  font-size: (26/2/16) * 1rem;
+}
+
+.section-footer {
+  font-size: (26/2/16) * 1rem;
+  margin-top: (50/2/16) * 1rem;
+}
+
+.section-divider {
+  background-color: $color-lightest;
+  height: (16/2/16) * 1rem;
+}
+
+.spacer {
+  height: (20/2/16) * 1rem;
+}
+
+.grid-row {
+  display: flex;
+  align-items: flex-start;
+
+  & > * {
+    flex: 1 1 auto;
+
+    &:not(:last-child) {
+      margin-right: (19/2/16) * 1rem;
+    }
+  }
 }

@@ -13,8 +13,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/variables";
-@import "@/styles/mixins";
+@import "@/styles/config";
 
 .option-button-group {
   border: 1px solid $color-light;

@@ -8,12 +8,12 @@
             <img class="star" src="@/images/icons/star.svg" alt="좋아요" />
           </template>
         </menu-tile>
-        <div class="list-divider" />
+        <div class="divider" />
       </template>
     </div>
   </app-scaffold>
   <transition>
-    <like-push-setting-modal
+    <redev-alim-modal
       v-if="currentId != null"
       :key="currentId"
       @close="currentId = null"
@@ -26,12 +26,12 @@
 import { defineComponent, ref } from "vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import MenuTile from "@/components/common/MenuTile.vue";
-import LikePushSettingModal from "@/modals/like/LikePushSettingModal.vue";
 import { useToast } from "@/composables/toast";
+import RedevAlimModal from "@/components/redev/RedevAlimModal.vue";
 
 export default defineComponent({
   name: "MyLikes",
-  components: { AppScaffold, MenuTile, LikePushSettingModal },
+  components: { AppScaffold, MenuTile, RedevAlimModal },
   setup() {
     const toast = useToast();
 

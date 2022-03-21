@@ -1,5 +1,5 @@
 <template>
-  <div class="container page-content content">
+  <div class="container page-content-large content">
     <div class="page-header">
       <img class="logo" src="@/images/icons/bi-extand.svg" alt="올씨구 로고" />
       <div class="page-title">회원가입 완료</div>
@@ -32,8 +32,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/variables";
-@import "@/styles/mixins";
+@import "@/styles/config";
 
 .content {
   display: flex;

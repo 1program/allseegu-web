@@ -88,7 +88,6 @@ export default defineComponent({
 .slide-next-leave-active,
 .slide-prev-leave-active {
   // transition: all 0.15s cubic-bezier(1, 0.5, 0.8, 1);
-  transition: all 0s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-next-enter-from,

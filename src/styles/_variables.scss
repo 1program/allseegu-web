@@ -6,8 +6,11 @@ $color-lighter: #ededed;
 $color-lightest: #f2f2f2;
 $color-red: #ff005a;
 
-$padding-x: 1.25rem;
-$padding-y: 2.34rem;
+$padding-x: (40/2/16) * 1rem;
+$padding-y: (50/2/16) * 1rem;
+$padding-y-large: (66/2/16) * 1rem;
+
 $padding: $padding-y $padding-x; // 20px;
+$padding-large: $padding-y-large $padding-x;
 
 $font-sans: "Noto Sans KR", sans-serif;

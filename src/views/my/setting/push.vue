@@ -15,7 +15,7 @@
           </template>
         </menu-button>
       </div>
-      <div class="list-divider" />
+      <div class="divider" />
       <div class="list-group">
         <menu-button>
           <template v-slot>마케팅 정보 수신 <span class="date">2022. 02. 28</span></template>
@@ -46,7 +46,7 @@
 <script lang="ts">
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import { defineComponent, reactive, ref } from "vue";
-import UserLeaveModal from "@/modals/user/UserLeaveModal.vue";
+import UserLeaveModal from "@/components/user/UserLeaveModal.vue";
 import MenuButton from "@/components/common/MenuButton.vue";
 import AppToggle from "@/components/common/AppToggle.vue";
 

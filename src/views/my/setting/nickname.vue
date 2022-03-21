@@ -1,7 +1,7 @@
 <template>
   <app-scaffold title="별명 변경">
     <form class="page-wrapper" @submit.prevent="submit">
-      <div class="container page-content">
+      <div class="container page-content-large">
         <div class="page-header">
           <div class="page-title">변경될 별명을<br />입력해주세요</div>
         </div>

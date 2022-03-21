@@ -55,13 +55,13 @@ export default defineComponent({
   /* Defaults */
   position: relative;
   display: inline-flex;
-  padding: 1rem;
+  padding: (30/2/16) * 1rem;
   text-align: center;
   border: 1px solid transparent;
   align-items: center;
   justify-content: center;
-  font-size: 0.9375rem;
-  border-radius: 0.3125rem;
+  font-size: (30/2/16) * 1rem;
+  border-radius: (10/2/16) * 1rem;
   background-color: transparent;
   line-height: 1;
   user-select: none;
@@ -124,7 +124,7 @@ export default defineComponent({
   left: (34/2/16) * 1rem;
   transform: translateY(-50%);
 
-  ::v-deep img {
+  :deep(img) {
     width: (55/2/16) * 1rem;
   }
 }

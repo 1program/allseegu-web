@@ -1,0 +1,81 @@
+<template>
+  <AppScaffold :title="title" has-top-button>
+    <div class="container">
+      <div class="page-content">
+        <template v-if="type === NewsType.NEWS">
+          <div class="grid-row">
+            <ListCard
+              :thumbnail="newsThumbnail"
+              title="SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업 SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업"
+            />
+            <ListCard
+              :thumbnail="newsThumbnail"
+              title="SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업 SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업"
+            />
+          </div>
+          <ListDivider />
+          <div class="grid-row">
+            <ListCard
+              :thumbnail="newsThumbnail"
+              title="SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업 SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업"
+            />
+            <ListCard
+              :thumbnail="newsThumbnail"
+              title="SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업 SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업"
+            />
+          </div>
+        </template>
+        <template v-else>
+          <template v-for="index in 5" :key="index">
+            <ListDivider v-if="index > 1" />
+            <NewsTile
+              title="신림뉴타운+3개 경전철...신림동에 주목하라"
+              content="개발 호재가 겹치면서 최근 신림뉴타운 내 부동산 매물을 찾는 투자자의 발걸음도 크게 늘었다는 게 현지 중개업소들의 설명이다. 개발 호재가 겹치면서 최근 신림뉴타운 내 부동산 매물을 찾는 투자자의 발걸음도 크게 늘었다는 게 현지 중개업소들의 설명이다. "
+            />
+          </template>
+        </template>
+      </div>
+    </div>
+  </AppScaffold>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent } from "vue";
+import AppScaffold from "@/components/common/AppScaffold.vue";
+import { useRoute } from "vue-router";
+import ListDivider from "@/components/common/ListDivider.vue";
+import { NewsType, newsTypeNames } from "@/models/news";
+import ListCard from "@/components/common/ListCard.vue";
+import NewsTile from "@/components/news/NewsTile.vue";
+
+import newsThumbnail from "@/images/mocks/news-thumbnail.png";
+
+export default defineComponent({
+  name: "RedevDetailNewsList",
+  components: { AppScaffold, ListDivider, ListCard, NewsTile },
+  setup() {
+    const route = useRoute();
+
+    const type = parseInt(route.params.typeId as string, 10) as NewsType;
+
+    const title = computed(() => newsTypeNames[type] ?? "-");
+
+    return {
+      type,
+      title,
+      NewsType,
+      newsThumbnail,
+    };
+  },
+});
+</script>
+
+<style lang="scss" scoped>
+@import "@/styles/config";
+
+.filter {
+  padding: $padding-x;
+  padding-bottom: 0;
+  text-align: right;
+}
+</style>

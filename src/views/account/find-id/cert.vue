@@ -1,5 +1,5 @@
 <template>
-  <div class="container page-content">
+  <div class="container page-content-large">
     <div class="page-header">
       <div class="page-title">휴대폰 인증</div>
       <div class="page-subtitle text-gray">개인정보 보호를 위하여 본인 인증이 필요합니다.</div>

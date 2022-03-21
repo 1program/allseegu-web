@@ -33,8 +33,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/variables";
-@import "@/styles/mixins";
+@import "@/styles/config";
 
 .menu-tile {
   padding: (12/2/16) * 1rem (40/2/16) * 1rem;

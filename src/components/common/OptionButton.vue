@@ -21,8 +21,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/variables";
-@import "@/styles/mixins";
+@import "@/styles/config";
 
 .option-button {
   padding: (30/2/16) * 1rem;
@@ -41,7 +40,7 @@ export default defineComponent({
   display: block;
   margin-bottom: (16/2/16) * 1rem;
 
-  ::v-deep img {
+  :deep(img) {
     max-width: (68/2/16) * 1rem;
   }
 }

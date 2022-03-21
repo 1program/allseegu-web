@@ -1,5 +1,5 @@
 <template>
-  <div class="container page-content">
+  <div class="container page-content-large">
     <div class="page-header">
       <div class="page-title">올씨구 계정<br />서비스약관에 동의해 주세요</div>
     </div>

@@ -40,52 +40,53 @@ export default defineComponent({
       loader: api.redev.redevList,
     });
 
-    watch(
-      () => ({ map: kakaoMap.value, list: redevList.list }),
-      ({ map, list }) => {
-        if (map != null && list.length > 0) {
-          /// 목록 전체 바운더리
-          const totalBounds = new window.kakao.maps.LatLngBounds();
+    // watch(
+    //   () => ({ map: kakaoMap.value, list: redevList.list }),
+    //   ({ map, list }) => {
+    //     if (map != null && list.length > 0) {
+    //       /// 목록 전체 바운더리
+    //       const totalBounds = new window.kakao.maps.LatLngBounds();
 
-          list.forEach((redev) => {
-            const points = redev.geometry_points.map(
-              (point) => new window.kakao.maps.LatLng(point.y, point.x)
-            );
+    //       list.forEach((redev) => {
+    //         const points = redev.geometry_points.map(
+    //           (point) => new window.kakao.maps.LatLng(point.y, point.x)
+    //         );
 
-            const bounds = boundsFromLatLngs(points);
+    //         const bounds = boundsFromLatLngs(points);
 
-            const center = centerFromBounds(bounds);
+    //         const center = centerFromBounds(bounds);
 
-            const polygonColor = redev.is_issue ? REDEV_MAP_BLUE : REDEV_MAP_GREEN;
+    //         const polygonColor = redev.is_issue ? REDEV_MAP_BLUE : REDEV_MAP_GREEN;
 
-            const poly = new window.kakao.maps.Polygon({
-              path: points,
-              fillColor: polygonColor,
-              fillOpacity: 0.6,
-              strokeColor: polygonColor,
-              strokeWeight: 1,
-            });
+    //         const poly = new window.kakao.maps.Polygon({
+    //           path: points,
+    //           fillColor: polygonColor,
+    //           fillOpacity: 0.6,
+    //           strokeColor: polygonColor,
+    //           strokeWeight: 1,
+    //         });
 
-            points.forEach((point) => totalBounds.extend(point));
+    //         points.forEach((point) => totalBounds.extend(point));
 
-            const overlay = new window.kakao.maps.CustomOverlay({
-              content: `<div class="redev-map-text">
-                <div class="stroke">${redev.district}</div>
-                <div class="text" style="color: ${polygonColor}">${redev.district}</div>
-              </div>`,
-              xAnchor: 0.5,
-              yAnchor: 0.5,
-              position: center,
-              map,
-            });
+    //         // eslint-disable-next-line
+    //         new window.kakao.maps.CustomOverlay({
+    //           content: `<div class="redev-map-text">
+    //             <div class="stroke">${redev.district}</div>
+    //             <div class="text" style="color: ${polygonColor}">${redev.district}</div>
+    //           </div>`,
+    //           xAnchor: 0.5,
+    //           yAnchor: 0.5,
+    //           position: center,
+    //           map,
+    //         });
 
-            poly.setMap(map);
-          });
+    //         poly.setMap(map);
+    //       });
 
-          map.setBounds(totalBounds);
-        }
-      }
-    );
+    //       map.setBounds(totalBounds);
+    //     }
+    //   }
+    // );
 
     return {
       element,
@@ -95,8 +96,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/variables";
-@import "@/styles/mixins";
+@import "@/styles/config";
 
 .redev-map {
   width: 100%;

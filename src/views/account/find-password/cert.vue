@@ -1,6 +1,6 @@
 <template>
   <form class="page-wrapper" @submit.prevent="submit">
-    <div class="container page-content">
+    <div class="container page-content-large">
       <div class="page-header">
         <div class="page-title">휴대폰 인증</div>
         <div class="page-subtitle text-gray">비밀번호를 찾을 아이디의 정보를 입력해 주세요.</div>
