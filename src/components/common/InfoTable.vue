@@ -119,6 +119,8 @@ export default defineComponent({
   justify-content: center;
   padding: (14/2/16) * 1rem;
   white-space: pre-wrap;
+
+  font-size: (30/2/16) * 1rem;
 }
 
 .palette-primary {
