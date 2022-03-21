@@ -2,6 +2,14 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 /**
  * named route는 사용하지 않고, path로 통일하여 사용합니다.
+ *
+ * children을 사용하는 경우
+ * -> 서브레이아웃으로 표현되어야 할 경우.
+ *    부모 페이지에 <router-view />를 삽입해 자식들을 렌더하게 됩니다.
+ *
+ * children을 사용하지 않는 경우
+ * -> 하위 라우트가 맞더라도,
+ *    서브레이아웃이 아닌 별도 페이지로 이동되어야 할 경우
  */
 const routes: Array<RouteRecordRaw> = [
   {
@@ -126,6 +134,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/my/likes",
     component: () => import("@/views/my/likes.vue"),
+  },
+  {
+    path: "/alim",
+    component: () => import("@/views/alim/index.vue"),
   },
   {
     path: "/redev/:revId",
