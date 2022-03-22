@@ -15,6 +15,7 @@
       <div class="divider thick" />
       <div class="list-group">
         <menu-button to="/my/likes">관심 구역</menu-button>
+        <menu-button to="/my/posts">내가 쓴 글 보기</menu-button>
       </div>
       <div class="divider thick" />
       <div class="list-group">

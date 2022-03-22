@@ -1,10 +1,19 @@
 <template>
   <RouterLinkOrButton class="list-tile">
-    <div class="header">
+    <div class="header" v-if="category != null">
+      {{ category }}
+      <div class="tools" v-if="showTools == true">
+        <button @click="edit">수정</button>
+        <div class="tool-divider" />
+        <button @click="remove">삭제</button>
+      </div>
+    </div>
+    <div class="main">
       <div v-if="badge != null" class="badge">{{ badge }}</div>
       <div class="title">{{ title }}</div>
     </div>
-    <div class="footer">
+    <slot />
+    <div class="footer" v-if="showFooter == true">
       <div class="nickname" v-if="nickname != null">{{ nickname }}</div>
       <div class="date" v-if="dateText != null">{{ dateText }}</div>
       <div class="comments" v-if="comments != null">{{ comments }}</div>
@@ -20,6 +29,10 @@ import RouterLinkOrButton from "./RouterLinkOrButton.vue";
 export default defineComponent({
   name: "ListTile",
   props: {
+    category: {
+      type: String,
+      default: null,
+    },
     badge: {
       type: String,
       default: null,
@@ -40,9 +53,21 @@ export default defineComponent({
       type: Number,
       default: null,
     },
+    showFooter: {
+      type: Boolean,
+      default: true,
+    },
+    showTools: {
+      type: Boolean,
+      default: false,
+    },
   },
-  setup(props) {
-    return { dateText: formatDate(props.date) };
+  setup(props, context) {
+    return {
+      dateText: formatDate(props.date),
+      edit: () => context.emit("edit"),
+      remove: () => context.emit("remove"),
+    };
   },
   components: { RouterLinkOrButton },
 });
@@ -69,6 +94,30 @@ export default defineComponent({
 }
 
 .header {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  margin-bottom: (12/2/16) * 1rem;
+
+  color: $color-gray;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  color: $color-blue;
+  margin-left: auto;
+}
+
+.tool-divider {
+  display: inline-block;
+  border-left: 1px solid $color-blue;
+  margin: 0 (32/2/16) * 1em;
+  margin-top: 0.1em;
+  height: 1em;
+}
+
+.main {
   display: flex;
   align-items: center;
   text-align: left;

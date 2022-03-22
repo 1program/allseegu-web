@@ -50,10 +50,12 @@ export default defineComponent({
   border-radius: (10/2/16) * 1rem;
 
   padding: (32/2/16) * 1rem;
+  cursor: pointer;
 
   &.read {
     background-color: transparent;
     border-color: #cccccc;
+    cursor: default;
   }
 }
 

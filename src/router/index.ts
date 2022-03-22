@@ -136,6 +136,10 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/my/likes.vue"),
   },
   {
+    path: "/my/posts",
+    component: () => import("@/views/my/posts.vue"),
+  },
+  {
     path: "/alim",
     component: () => import("@/views/alim/index.vue"),
   },
