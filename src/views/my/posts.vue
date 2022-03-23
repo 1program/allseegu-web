@@ -1,77 +1,73 @@
 <template>
   <AppScaffold title="내가 쓴 글 보기">
-    <div class="page-wrapper container">
-      <div class="section">
-        <TabBar
-          class="tab-bar"
-          :current-tab="typeId"
-          @change-tab="typeId = $event"
-          :tabs="[
-            { id: 1, title: '이야기' },
-            { id: 2, title: '댓글' },
-          ]"
+    <div class="page-wrapper container page-content-medium">
+      <TabBar
+        class="tab-bar"
+        :current-tab="typeId"
+        @change-tab="typeId = $event"
+        :tabs="[
+          { id: 1, title: '이야기' },
+          { id: 2, title: '댓글' },
+        ]"
+      />
+      <!--이야기-->
+      <template v-if="typeId === 1">
+        <ListTile
+          category="신림 1구역 재개발 사업"
+          title="조합이 바르게 운영되지 못하고 와해되는 이유"
+          :show-tools="true"
+          nickname="서쪽바다"
+          :comments="26"
+          @remove="removePost(0)"
         />
-        <div class="section-content">
-          <!--이야기-->
-          <template v-if="typeId === 1">
-            <ListTile
-              category="신림 1구역 재개발 사업"
-              title="조합이 바르게 운영되지 못하고 와해되는 이유"
-              :show-tools="true"
-              nickname="서쪽바다"
-              :comments="26"
-              @remove="removePost(0)"
-            />
-            <ListDivider />
-            <ListTile
-              category="신림 1구역 재개발 사업"
-              title="조합이 바르게 운영되지 못하고 와해되는 이유"
-              :show-tools="true"
-              nickname="서쪽바다"
-              :comments="26"
-              @remove="removePost(1)"
-            />
-          </template>
-          <!--댓글-->
-          <template v-if="typeId === 2">
-            <ListTile
-              category="신림 1구역 재개발 사업"
-              title="조합이 바르게 운영되지 못하고 와해되는 이유"
-              :show-footer="false"
-              :show-tools="false"
-            >
-              <CommentSimpleTile
-                content="새로운 실거래 6.95억은 세끼고 인가요?"
-                @remove="removeComment(0)"
-              />
-            </ListTile>
-            <ListDivider />
-            <ListTile
-              category="광명 7구역 신동아 아파트 리모델링 사업"
-              title="조합이 바르게 운영되지 못하고 와해되는 이유"
-              :show-footer="false"
-              :show-tools="false"
-            >
-              <CommentSimpleTile
-                content="새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요?"
-                @remove="removeComment(1)"
-              />
-            </ListTile>
-            <ListDivider />
-            <ListTile
-              category="세곡 6지구 재건축 사업"
-              title="조합이 바르게 운영되지 못하고 와해되는 이유"
-              :show-footer="false"
-              :show-tools="false"
-            >
-              <CommentSimpleTile
-                content="새로운 실거래 6.95억은 세끼고 인가요?새로운 실거래 6.95억은 세끼고 인가요?새로운 실거래 6.95억은 세끼고 인가요?"
-                @remove="removeComment(2)"
-              />
-            </ListTile>
-          </template>
-        </div>
-      </div>
+        <ListDivider />
+        <ListTile
+          category="신림 1구역 재개발 사업"
+          title="조합이 바르게 운영되지 못하고 와해되는 이유"
+          :show-tools="true"
+          nickname="서쪽바다"
+          :comments="26"
+          @remove="removePost(1)"
+        />
+      </template>
+      <!--댓글-->
+      <template v-if="typeId === 2">
+        <ListTile
+          category="신림 1구역 재개발 사업"
+          title="조합이 바르게 운영되지 못하고 와해되는 이유"
+          :show-footer="false"
+          :show-tools="false"
+        >
+          <CommentSimpleTile
+            content="새로운 실거래 6.95억은 세끼고 인가요?"
+            @remove="removeComment(0)"
+          />
+        </ListTile>
+        <ListDivider />
+        <ListTile
+          category="광명 7구역 신동아 아파트 리모델링 사업"
+          title="조합이 바르게 운영되지 못하고 와해되는 이유"
+          :show-footer="false"
+          :show-tools="false"
+        >
+          <CommentSimpleTile
+            content="새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요?"
+            @remove="removeComment(1)"
+          />
+        </ListTile>
+        <ListDivider />
+        <ListTile
+          category="세곡 6지구 재건축 사업"
+          title="조합이 바르게 운영되지 못하고 와해되는 이유"
+          :show-footer="false"
+          :show-tools="false"
+        >
+          <CommentSimpleTile
+            content="새로운 실거래 6.95억은 세끼고 인가요?새로운 실거래 6.95억은 세끼고 인가요?새로운 실거래 6.95억은 세끼고 인가요?"
+            @remove="removeComment(2)"
+          />
+        </ListTile>
+      </template>
     </div>
   </AppScaffold>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="post-meta">
-    <div class="badge" v-if="badge != null">{{ badge }}</div>
+    <div class="badge" v-if="badge != null" :class="{ badgeActive }">{{ badge }}</div>
     <div class="title">{{ title }}</div>
     <div class="info">{{ dateText ?? "-" }} / 조회수 {{ hits ?? "-" }}</div>
   </div>
@@ -16,6 +16,10 @@ export default defineComponent({
     badge: {
       type: String,
       default: null,
+    },
+    badgeActive: {
+      type: Boolean,
+      default: true,
     },
     title: {
       type: String,
@@ -48,11 +52,15 @@ export default defineComponent({
     display: inline-block;
     margin-bottom: (21/2/16) * 1rem;
     font-size: (26/2/16) * 1rem;
-    background-color: $color-blue;
+    background-color: $color-gray;
     color: $color-white;
     padding: (7/2/16) * 1rem (23/2/16) * 1rem;
     font-weight: bold;
     border-radius: (100/2/16) * 1rem;
+
+    &.badgeActive {
+      background-color: $color-blue;
+    }
   }
 
   .title {

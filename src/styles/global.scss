@@ -120,6 +120,11 @@ textarea {
   padding: $padding;
 }
 
+.page-content-medium {
+  flex: 1 1 auto;
+  padding: $padding-medium;
+}
+
 .page-content-large {
   flex: 1 1 auto;
   padding: $padding-large;

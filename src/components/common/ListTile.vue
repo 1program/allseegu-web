@@ -11,6 +11,7 @@
     <div class="main">
       <div v-if="badge != null" class="badge">{{ badge }}</div>
       <div class="title">{{ title }}</div>
+      <slot name="tile-status" />
     </div>
     <slot />
     <div class="footer" v-if="showFooter == true">

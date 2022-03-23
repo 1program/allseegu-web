@@ -13,6 +13,7 @@ $padding-y-medium: (60/2/16) * 1rem;
 $padding-y-large: (66/2/16) * 1rem;
 
 $padding: $padding-y $padding-x; // 20px;
+$padding-medium: $padding-y-medium $padding-x;
 $padding-large: $padding-y-large $padding-x;
 
 $font-sans: "Noto Sans KR", sans-serif;

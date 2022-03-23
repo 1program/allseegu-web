@@ -128,8 +128,36 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/my/setting/push.vue"),
   },
   {
-    path: "/my/customer/request-community",
-    component: () => import("@/views/my/customer/request-community.vue"),
+    path: "/my/customer/request",
+    component: () => import("@/views/my/customer/request/index.vue"),
+  },
+  {
+    path: "/my/customer/request/write",
+    component: () => import("@/views/my/customer/request/write.vue"),
+  },
+  {
+    path: "/my/customer/notice",
+    component: () => import("@/views/my/customer/notice/index.vue"),
+  },
+  {
+    path: "/my/customer/notice/:noticeId",
+    component: () => import("@/views/my/customer/notice/[noticeId].vue"),
+  },
+  {
+    path: "/my/customer/faq",
+    component: () => import("@/views/my/customer/faq.vue"),
+  },
+  {
+    path: "/my/customer/inquiry",
+    component: () => import("@/views/my/customer/inquiry/index.vue"),
+  },
+  {
+    path: "/my/customer/inquiry/:inquiryId",
+    component: () => import("@/views/my/customer/inquiry/[inquiryId].vue"),
+  },
+  {
+    path: "/my/customer/inquiry/write",
+    component: () => import("@/views/my/customer/inquiry/write.vue"),
   },
   {
     path: "/my/likes",

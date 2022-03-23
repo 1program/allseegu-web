@@ -20,14 +20,10 @@
       <div class="divider thick" />
       <div class="list-group">
         <div class="list-title">고객센터</div>
-        <menu-button to="/my/customer/notice" alarm @click="ui.notImplemented">
-          공지사항
-        </menu-button>
-        <menu-button to="/my/customer/faq" @click="ui.notImplemented">FAQ</menu-button>
-        <menu-button to="/my/customer/inquiry" alarm @click="ui.notImplemented">
-          1:1 문의
-        </menu-button>
-        <menu-button to="/my/customer/request-community">올려주세요</menu-button>
+        <menu-button to="/my/customer/notice" alarm> 공지사항 </menu-button>
+        <menu-button to="/my/customer/faq">FAQ</menu-button>
+        <menu-button to="/my/customer/inquiry" alarm> 1:1 문의 </menu-button>
+        <menu-button to="/my/customer/request">올려주세요</menu-button>
         <menu-button to="/my/customer/terms" @click="ui.notImplemented"> 약관/정책 </menu-button>
       </div>
       <div class="divider thick" />

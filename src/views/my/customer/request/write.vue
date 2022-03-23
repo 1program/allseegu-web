@@ -76,7 +76,7 @@ import OptionButtonGroup from "@/components/common/OptionButtonGroup.vue";
 import OptionButton from "@/components/common/OptionButton.vue";
 
 export default defineComponent({
-  name: "MyCustomerRegisterCommunity",
+  name: "MyCustomerRequestWrite",
   components: {
     AppScaffold,
     Field,
