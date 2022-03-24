@@ -1,6 +1,9 @@
 <template>
   <div class="form-group">
-    <div v-if="label != null" class="label">{{ label }}</div>
+    <div class="form-group-header" v-if="label != null || info != null">
+      <div v-if="label != null" class="label">{{ label }}</div>
+      <div v-if="info != null" class="info">{{ info }}</div>
+    </div>
     <slot />
     <div v-if="!!errorText" class="error-text">{{ errorText }}</div>
   </div>
@@ -16,6 +19,11 @@ export default defineComponent({
       type: String,
       default: null,
       description: "필드의 label",
+    },
+    info: {
+      type: String,
+      default: null,
+      description: "필드의 info",
     },
     errorText: {
       type: String,
@@ -33,9 +41,20 @@ export default defineComponent({
   margin-bottom: (43/2/16) * 1rem;
 }
 
+.form-group-header {
+  display: flex;
+  align-items: center;
+}
+
 .label {
-  font-size: (30/2/16) * 1rem;
   color: $color-gray;
+  font-size: (30/2/16) * 1rem;
+}
+
+.info {
+  color: $color-light;
+  font-size: (26/2/16) * 1rem;
+  margin-left: auto;
 }
 
 .error-text {

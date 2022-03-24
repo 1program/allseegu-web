@@ -17,19 +17,27 @@
       <div class="divider thick" />
       <div class="page-content-medium">
         <ListTile title="함께 만드는 성공" to="/my/customer/inquiry/1">
-          <template v-slot:tile-status><InquiryStatusLabel :is-answered="true" /></template>
+          <template v-slot:status-label>
+            <StatusLabel blue>답변완료</StatusLabel>
+          </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/inquiry/2">
-          <template v-slot:tile-status><InquiryStatusLabel :is-answered="false" /></template>
+          <template v-slot:status-label>
+            <StatusLabel>미답변</StatusLabel>
+          </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/inquiry/1">
-          <template v-slot:tile-status><InquiryStatusLabel :is-answered="true" /></template>
+          <template v-slot:status-label>
+            <StatusLabel blue>답변완료</StatusLabel>
+          </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/inquiry/1">
-          <template v-slot:tile-status><InquiryStatusLabel :is-answered="true" /></template>
+          <template v-slot:status-label>
+            <StatusLabel blue>답변완료</StatusLabel>
+          </template>
         </ListTile>
         <ListDivider />
       </div>
@@ -43,11 +51,11 @@ import AppScaffold from "@/components/common/AppScaffold.vue";
 import AppButton from "@/components/common/AppButton.vue";
 import ListTile from "@/components/common/ListTile.vue";
 import ListDivider from "@/components/common/ListDivider.vue";
-import InquiryStatusLabel from "@/components/inquiry/InquiryStatusLabel.vue";
+import StatusLabel from "@/components/common/StatusLabel.vue";
 
 export default defineComponent({
   name: "MyCustomerInquiryList",
-  components: { AppScaffold, AppButton, ListTile, ListDivider, InquiryStatusLabel },
+  components: { AppScaffold, AppButton, ListTile, ListDivider, StatusLabel },
 });
 </script>
 

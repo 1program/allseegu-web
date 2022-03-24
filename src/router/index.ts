@@ -13,6 +13,10 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
  */
 const routes: Array<RouteRecordRaw> = [
   {
+    path: "/permissions",
+    component: () => import("@/views/permissions.vue"),
+  },
+  {
     path: "/account",
     component: () => import("@/views/account/index.vue"),
   },
@@ -134,6 +138,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/my/customer/request/write",
     component: () => import("@/views/my/customer/request/write.vue"),
+  },
+  {
+    path: "/my/customer/request/:requestId",
+    component: () => import("@/views/my/customer/request/[requestId].vue"),
   },
   {
     path: "/my/customer/notice",

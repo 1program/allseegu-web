@@ -1,25 +1,25 @@
 <template>
   <app-scaffold title="올려주세요">
     <form class="page-wrapper" @submit.prevent="submit">
-      <div class="container page-content-large">
-        <div class="page-header">
-          <div class="page-title">올씨구에<br />우리 소통방을 올려주세요</div>
-          <div class="page-subtitle">
-            올씨구에 아직 등록되지 않은<br />구역관련 소통방 신청해주세요
-          </div>
-        </div>
+      <div class="container page-content-medium">
         <field name="title" v-slot="{ field, errorMessage }">
-          <form-group label="제목" :error-text="errorMessage">
+          <form-group label="제목" :error-text="errorMessage" class="group-margin">
             <form-input v-bind="field" />
           </form-group>
         </field>
-        <form-group label="소통방 URL">
-          <OptionButtonGroup>
+        <form-group label="소통방 URL" class="group-margin">
+          <OptionButtonGroup class="option-button-group">
             <OptionButton :active="communityType === 'KAKAO'" @click="communityType = 'KAKAO'">
               <template v-slot:icon>
                 <img src="@/images/icons/community-kakao-openchat.svg" alt="카카오 오픈챗" />
               </template>
               카톡 오픈채팅
+            </OptionButton>
+            <OptionButton :active="communityType === 'DAUM'" @click="communityType = 'DAUM'">
+              <template v-slot:icon>
+                <img src="@/images/icons/community-daum-cafe.svg" alt="다음 카페" />
+              </template>
+              다음 카페
             </OptionButton>
             <OptionButton :active="communityType === 'NAVER'" @click="communityType = 'NAVER'">
               <template v-slot:icon>
@@ -27,11 +27,14 @@
               </template>
               네이버 카페
             </OptionButton>
-            <OptionButton :active="communityType === 'DAUM'" @click="communityType = 'DAUM'">
+            <OptionButton
+              :active="communityType === 'NAVER_BLOG'"
+              @click="communityType = 'NAVER_BLOG'"
+            >
               <template v-slot:icon>
-                <img src="@/images/icons/community-daum-cafe.svg" alt="다음 카페" />
+                <img src="@/images/icons/community-naver-cafe.svg" alt="네이버 블로그" />
               </template>
-              다음 카페
+              네이버 블로그
             </OptionButton>
           </OptionButtonGroup>
           <field name="url" v-slot="{ field, errorMessage }">
@@ -46,13 +49,18 @@
           </field>
         </form-group>
         <field name="area" v-slot="{ field, errorMessage }">
-          <form-group label="구역" :error-text="errorMessage">
+          <form-group label="구역" :error-text="errorMessage" class="group-margin">
             <form-input v-bind="field" />
           </form-group>
         </field>
         <field name="content" v-slot="{ field, errorMessage }">
-          <form-group label="내용" :error-text="errorMessage">
-            <form-input v-bind="field" />
+          <form-group label="소개 문구" info="0/50" :error-text="errorMessage" class="group-margin">
+            <FormTextarea
+              small
+              v-bind="field"
+              maxLength="50"
+              placeholder="소개 문구를 기재해 주세요."
+            />
           </form-group>
         </field>
       </div>
@@ -74,6 +82,7 @@ import AppButton from "@/components/common/AppButton.vue";
 import { useAlert } from "@/composables/alert";
 import OptionButtonGroup from "@/components/common/OptionButtonGroup.vue";
 import OptionButton from "@/components/common/OptionButton.vue";
+import FormTextarea from "@/components/common/FormTextarea.vue";
 
 export default defineComponent({
   name: "MyCustomerRequestWrite",
@@ -85,6 +94,7 @@ export default defineComponent({
     AppButton,
     OptionButtonGroup,
     OptionButton,
+    FormTextarea,
   },
   setup() {
     const alert = useAlert();
@@ -108,3 +118,15 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+@import "@/styles/config";
+
+.option-button-group {
+  margin: (30/2/16) * 1rem 0;
+}
+
+.group-margin {
+  margin-bottom: (90/2/16) * 1rem;
+}
+</style>

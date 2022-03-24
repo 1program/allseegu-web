@@ -40,7 +40,8 @@ export default defineComponent({
 @import "@/styles/config";
 
 .answer-card {
-  padding: (55/2/16) * 1rem (40/2/16) * 1rem;
+  display: flex;
+  flex-direction: column;
   background-color: #f3f3f3;
 }
 

@@ -29,14 +29,18 @@ import FormGroup from "@/components/common/FormGroup.vue";
 import FormInput from "@/components/common/FormInput.vue";
 import FormTextarea from "@/components/common/FormTextarea.vue";
 import ImagePicker from "@/components/common/ImagePicker.vue";
+import { useAlert } from "@/composables/alert";
 
 export default defineComponent({
   name: "RedevDetailStoryWrite",
   components: { AppScaffold, AppButton, FormGroup, FormInput, FormTextarea, ImagePicker },
   setup() {
+    const alert = useAlert();
+
     return {
       submit() {
         //
+        alert("이야기가 등록 되었습니다.");
       },
     };
   },

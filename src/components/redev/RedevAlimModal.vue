@@ -10,6 +10,18 @@
       </menu-tile>
       <div class="divider" />
       <menu-tile class="tile odd">
+        전문가 의견
+        <template v-slot:trailing>
+          <app-toggle v-model:checked="subscribe" :disabled="all === false" />
+        </template>
+      </menu-tile>
+      <menu-tile class="tile odd">
+        영상
+        <template v-slot:trailing>
+          <app-toggle v-model:checked="video" :disabled="all === false" />
+        </template>
+      </menu-tile>
+      <menu-tile class="tile odd">
         커뮤니티
         <template v-slot:trailing>
           <app-toggle v-model:checked="community" :disabled="all === false" />
@@ -51,6 +63,8 @@ export default defineComponent({
   components: { AppDialog, AppButton, MenuTile, AppToggle },
   setup() {
     const all = ref(false);
+    const subscribe = ref(false);
+    const video = ref(false);
     const community = ref(false);
     const report = ref(false);
     const notice = ref(false);
@@ -59,6 +73,8 @@ export default defineComponent({
       () => all.value,
       (value) => {
         if (value === false) {
+          subscribe.value = false;
+          video.value = false;
           community.value = false;
           report.value = false;
           notice.value = false;
@@ -68,6 +84,8 @@ export default defineComponent({
 
     return {
       all,
+      subscribe,
+      video,
       community,
       report,
       notice,

@@ -1,16 +1,22 @@
 <template>
-  <div class="status-label" :class="{ isAnswered }">{{ isAnswered ? "답변완료" : "미답변" }}</div>
+  <div class="status-label" :class="{ blue, red }">
+    <slot />
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "InquiryStatusLabel",
+  name: "StatusLabel",
   props: {
-    isAnswered: {
+    blue: {
       type: Boolean,
-      default: null,
+      default: false,
+    },
+    red: {
+      type: Boolean,
+      default: false,
     },
   },
 });
@@ -23,8 +29,11 @@ export default defineComponent({
   font-weight: bold;
   color: #777777;
 
-  &.isAnswered {
+  &.blue {
     color: $color-blue;
+  }
+  &.red {
+    color: $color-red;
   }
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div class="post-meta">
-    <div class="badge" v-if="badge != null" :class="{ badgeActive }">{{ badge }}</div>
+    <slot />
     <div class="title">{{ title }}</div>
-    <div class="info">{{ dateText ?? "-" }} / 조회수 {{ hits ?? "-" }}</div>
+    <div class="info">{{ dateText ?? "-" }} {{ hits && "/ 조회수" + hits }}</div>
   </div>
 </template>
 
@@ -13,14 +13,6 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "PostMeta",
   props: {
-    badge: {
-      type: String,
-      default: null,
-    },
-    badgeActive: {
-      type: Boolean,
-      default: true,
-    },
     title: {
       type: String,
       default: null,
@@ -47,21 +39,6 @@ export default defineComponent({
 
 .post-meta {
   text-align: center;
-
-  .badge {
-    display: inline-block;
-    margin-bottom: (21/2/16) * 1rem;
-    font-size: (26/2/16) * 1rem;
-    background-color: $color-gray;
-    color: $color-white;
-    padding: (7/2/16) * 1rem (23/2/16) * 1rem;
-    font-weight: bold;
-    border-radius: (100/2/16) * 1rem;
-
-    &.badgeActive {
-      background-color: $color-blue;
-    }
-  }
 
   .title {
     font-size: (34/2/16) * 1rem;

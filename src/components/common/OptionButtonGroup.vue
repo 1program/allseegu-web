@@ -20,9 +20,8 @@ export default defineComponent({
   border-right: 0;
   border-bottom: 0;
   background-color: $color-lightest;
-  margin: (43/2/16) * 1rem 0;
   display: flex;
   align-items: center;
-  justify-content: stretch;
+  flex-wrap: wrap;
 }
 </style>

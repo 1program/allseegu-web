@@ -1,6 +1,6 @@
 <template>
   <!-- eslint-disable-next-line -->
-  <textarea class="form-textarea" />
+  <textarea class="form-textarea" :class="{ small }" />
 </template>
 
 <script lang="ts">
@@ -8,6 +8,12 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "FormTextarea",
+  props: {
+    small: {
+      type: Boolean,
+      default: false,
+    },
+  },
 });
 </script>
 
@@ -27,6 +33,10 @@ export default defineComponent({
 
   &::placeholder {
     color: #dddddd;
+  }
+
+  &.small {
+    min-height: (200/2/16) * 1rem;
   }
 }
 </style>

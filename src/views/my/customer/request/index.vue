@@ -10,6 +10,74 @@
         <app-button class="header-button" full to="/my/customer/request/write">신청하기</app-button>
       </div>
       <div class="divider thick" />
+      <div class="page-content-medium">
+        <ListTile title="함께 만드는 성공" to="/my/customer/request/1">
+          <template v-slot:status-label>
+            <StatusLabel>미승인</StatusLabel>
+          </template>
+        </ListTile>
+        <ListDivider />
+        <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
+          <template v-slot:status-label>
+            <StatusLabel red>반려</StatusLabel>
+          </template>
+        </ListTile>
+        <ListDivider />
+        <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
+          <template v-slot:status-label>
+            <StatusLabel red>반려</StatusLabel>
+          </template>
+        </ListTile>
+        <ListDivider />
+        <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
+          <template v-slot:status-label>
+            <StatusLabel red>반려</StatusLabel>
+          </template>
+        </ListTile>
+        <ListDivider />
+        <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
+          <template v-slot:status-label>
+            <StatusLabel red>반려</StatusLabel>
+          </template>
+        </ListTile>
+        <ListDivider />
+        <ListTile title="함께 만드는 성공" to="/my/customer/request/2">
+          <template v-slot:status-label>
+            <StatusLabel blue>승인</StatusLabel>
+          </template>
+        </ListTile>
+        <ListDivider />
+        <ListTile title="함께 만드는 성공" to="/my/customer/request/2">
+          <template v-slot:status-label>
+            <StatusLabel blue>승인</StatusLabel>
+          </template>
+        </ListTile>
+        <ListDivider />
+        <ListTile title="함께 만드는 성공" to="/my/customer/request/1">
+          <template v-slot:status-label>
+            <StatusLabel>미승인</StatusLabel>
+          </template>
+        </ListTile>
+        <ListDivider />
+        <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
+          <template v-slot:status-label>
+            <StatusLabel red>반려</StatusLabel>
+          </template>
+        </ListTile>
+        <ListDivider />
+        <ListTile title="함께 만드는 성공" to="/my/customer/request/2">
+          <template v-slot:status-label>
+            <StatusLabel blue>승인</StatusLabel>
+          </template>
+        </ListTile>
+        <ListDivider />
+        <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
+          <template v-slot:status-label>
+            <StatusLabel red>반려</StatusLabel>
+          </template>
+        </ListTile>
+        <ListDivider />
+      </div>
     </div>
   </AppScaffold>
 </template>
@@ -18,10 +86,13 @@
 import { defineComponent } from "vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import AppButton from "@/components/common/AppButton.vue";
+import ListTile from "@/components/common/ListTile.vue";
+import StatusLabel from "@/components/common/StatusLabel.vue";
+import ListDivider from "@/components/common/ListDivider.vue";
 
 export default defineComponent({
   name: "MyCustomerRequestList",
-  components: { AppScaffold, AppButton },
+  components: { AppScaffold, AppButton, ListTile, StatusLabel, ListDivider },
 });
 </script>
 

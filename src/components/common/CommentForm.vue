@@ -49,6 +49,7 @@ export default defineComponent({
   padding: (38/2/16) * 1rem (19/2/16) * 1rem;
   border: 1px solid #cccccc;
   font-size: (26/2/16) * 1rem;
+  background-color: #ffffff;
 }
 
 .header {

@@ -4,9 +4,9 @@
       <div class="nickname">{{ nickname }}</div>
       <div class="date">{{ dateText }}</div>
       <div class="tools" v-if="mine">
-        <a class="tool">수정</a>
+        <button class="tool">수정</button>
         <span class="tool-divider">|</span>
-        <a class="tool">삭제</a>
+        <button class="tool" @click="remove">삭제</button>
       </div>
     </div>
     <div class="gallery">
@@ -14,15 +14,17 @@
     </div>
     <div class="content">{{ content }}</div>
     <div class="footer">
-      <button class="reply">답글{{ commentCount > 0 ? ` ${commentCount}` : "" }}</button>
+      <button class="reply" :class="{ active: showReply }" @click="showReply = !showReply">
+        답글{{ commentCount > 0 ? ` ${commentCount}` : "" }}
+      </button>
     </div>
-    <div class="children" v-if="$slots.default != null"><slot /></div>
+    <div class="children" v-if="$slots.default != null && showReply"><slot /></div>
   </div>
 </template>
 
 <script lang="ts">
 import { formatDate } from "@/lib/formatters";
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, ref } from "vue";
 import ImageGallery from "./ImageGallery.vue";
 
 export default defineComponent({
@@ -58,9 +60,13 @@ export default defineComponent({
       default: 0,
     },
   },
-  setup(props) {
+  setup(props, context) {
+    const showReply = ref(false);
+
     return {
       dateText: formatDate(props.date),
+      remove: () => context.emit("remove"),
+      showReply,
     };
   },
   components: { ImageGallery },

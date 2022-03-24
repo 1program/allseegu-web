@@ -18,16 +18,16 @@
         />
       </div>
       <div class="divider light" />
-      <QnaTile class="qna-tile" />
-      <div class="divider light" />
-      <QnaTile class="qna-tile" />
-      <div class="divider light" />
-      <QnaTile class="qna-tile" />
-      <div class="divider light" />
-      <QnaTile class="qna-tile" />
-      <div class="divider light" />
-      <QnaTile class="qna-tile" />
-      <div class="divider light" />
+      <template v-for="faq of faqList" :key="faq.id">
+        <QnaTile
+          class="qna-tile"
+          @click="activeTile = faq.id"
+          :active="activeTile === faq.id"
+          :question="faq.question"
+          :answer="faq.answer"
+        />
+        <div class="divider light" />
+      </template>
     </div>
   </AppScaffold>
 </template>
@@ -45,7 +45,42 @@ export default defineComponent({
   setup() {
     const typeId = ref(1);
 
-    return { typeId };
+    const activeTile = ref(1);
+
+    const faqList = [
+      {
+        id: 1,
+        question: "어플리케이션 업데이트 하는 방법",
+        answer: "벡스넷 네비게이션 우측에 위치한 마이페이지를 클릭하시어 업데이트가 가능합니다.",
+      },
+      {
+        id: 2,
+        question: "어플리케이션 업데이트 하는 방법",
+        answer: "벡스넷 네비게이션 우측에 위치한 마이페이지를 클릭하시어 업데이트가 가능합니다.",
+      },
+      {
+        id: 3,
+        question: "어플리케이션 업데이트 하는 방법",
+        answer: "벡스넷 네비게이션 우측에 위치한 마이페이지를 클릭하시어 업데이트가 가능합니다.",
+      },
+      {
+        id: 4,
+        question: "어플리케이션 업데이트 하는 방법",
+        answer: "벡스넷 네비게이션 우측에 위치한 마이페이지를 클릭하시어 업데이트가 가능합니다.",
+      },
+      {
+        id: 5,
+        question: "어플리케이션 업데이트 하는 방법",
+        answer: "벡스넷 네비게이션 우측에 위치한 마이페이지를 클릭하시어 업데이트가 가능합니다.",
+      },
+      {
+        id: 6,
+        question: "어플리케이션 업데이트 하는 방법",
+        answer: "벡스넷 네비게이션 우측에 위치한 마이페이지를 클릭하시어 업데이트가 가능합니다.",
+      },
+    ];
+
+    return { typeId, activeTile, faqList };
   },
 });
 </script>

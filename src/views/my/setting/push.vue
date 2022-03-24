@@ -14,6 +14,12 @@
             <app-toggle v-model:checked="settings.inquiry" />
           </template>
         </menu-button>
+        <menu-button>
+          <template v-slot>올려주세요</template>
+          <template v-slot:trailing>
+            <app-toggle v-model:checked="settings.request" />
+          </template>
+        </menu-button>
       </div>
       <div class="divider" />
       <div class="list-group">
@@ -59,6 +65,7 @@ export default defineComponent({
     const settings = reactive({
       notice: true,
       inquiry: true,
+      request: true,
       marketing: false,
       email: false,
       sms: false,
