@@ -1,6 +1,6 @@
 <template>
   <div class="status-label" :class="{ blue, red }">
-    <slot />
+    {{ label ?? "-" }}
   </div>
 </template>
 
@@ -10,6 +10,10 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "StatusLabel",
   props: {
+    label: {
+      type: String,
+      default: null,
+    },
     blue: {
       type: Boolean,
       default: false,

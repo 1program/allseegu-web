@@ -1,7 +1,7 @@
 <template>
   <div class="alim-group">
     <div class="alim-header">
-      <div class="category" :class="{ blue: category == '올씨구' }">{{ category }}</div>
+      <div class="category" :class="{ blue }">{{ category }}</div>
       <div class="date" v-if="date">{{ date }}</div>
     </div>
     <div class="alim-list">
@@ -20,6 +20,11 @@ export default defineComponent({
       type: String,
       default: null,
       description: "알림 종류 명",
+    },
+    blue: {
+      type: Boolean,
+      default: false,
+      description: "알림 종류 명 색",
     },
     date: {
       type: String,
@@ -49,11 +54,11 @@ export default defineComponent({
   font-size: (30/2/16) * 1rem;
   color: $color-black;
 
-  @include ellipsis;
-
   &.blue {
     color: $color-blue;
   }
+
+  @include ellipsis;
 }
 
 .date {

@@ -13,67 +13,67 @@
       <div class="page-content-medium">
         <ListTile title="함께 만드는 성공" to="/my/customer/request/1">
           <template v-slot:status-label>
-            <StatusLabel>미승인</StatusLabel>
+            <StatusLabel label="미승인" />
           </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
           <template v-slot:status-label>
-            <StatusLabel red>반려</StatusLabel>
+            <StatusLabel label="반려" red />
           </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
           <template v-slot:status-label>
-            <StatusLabel red>반려</StatusLabel>
+            <StatusLabel label="반려" red />
           </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
           <template v-slot:status-label>
-            <StatusLabel red>반려</StatusLabel>
+            <StatusLabel label="반려" red />
           </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
           <template v-slot:status-label>
-            <StatusLabel red>반려</StatusLabel>
+            <StatusLabel label="반려" red />
           </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/request/2">
           <template v-slot:status-label>
-            <StatusLabel blue>승인</StatusLabel>
+            <StatusLabel label="승인" blue />
           </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/request/2">
           <template v-slot:status-label>
-            <StatusLabel blue>승인</StatusLabel>
+            <StatusLabel label="승인" blue />
           </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/request/1">
           <template v-slot:status-label>
-            <StatusLabel>미승인</StatusLabel>
+            <StatusLabel label="미승인" />
           </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
           <template v-slot:status-label>
-            <StatusLabel red>반려</StatusLabel>
+            <StatusLabel label="반려" red />
           </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/request/2">
           <template v-slot:status-label>
-            <StatusLabel blue>승인</StatusLabel>
+            <StatusLabel label="승인" blue />
           </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
           <template v-slot:status-label>
-            <StatusLabel red>반려</StatusLabel>
+            <StatusLabel label="반려" red />
           </template>
         </ListTile>
         <ListDivider />

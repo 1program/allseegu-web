@@ -17,7 +17,7 @@
           </div>
         </div>
         <template v-if="alimCategory == 'all' || alimCategory == 'all_see_gu'">
-          <AlimGroup category="올씨구" date="2022.03.17" class="section">
+          <AlimGroup category="올씨구" date="2022.03.17" class="section" blue>
             <div class="gap-vertical">
               <AlimTile
                 :read="false"

@@ -18,25 +18,25 @@
       <div class="page-content-medium">
         <ListTile title="함께 만드는 성공" to="/my/customer/inquiry/1">
           <template v-slot:status-label>
-            <StatusLabel blue>답변완료</StatusLabel>
+            <StatusLabel label="답변완료" blue />
           </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/inquiry/2">
           <template v-slot:status-label>
-            <StatusLabel>미답변</StatusLabel>
+            <StatusLabel label="미답변" />
           </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/inquiry/1">
           <template v-slot:status-label>
-            <StatusLabel blue>답변완료</StatusLabel>
+            <StatusLabel label="답변완료" blue />
           </template>
         </ListTile>
         <ListDivider />
         <ListTile title="함께 만드는 성공" to="/my/customer/inquiry/1">
           <template v-slot:status-label>
-            <StatusLabel blue>답변완료</StatusLabel>
+            <StatusLabel label="답변완료" blue />
           </template>
         </ListTile>
         <ListDivider />
