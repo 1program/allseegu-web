@@ -2,7 +2,11 @@
   <AppScaffold title="FAQ" has-top-button>
     <div class="container">
       <div class="faq-header">
-        <InputGroup place-holder="찾으시는 내용을 검색해 보세요" />
+        <InputGroup place-holder="찾으시는 내용을 검색해 보세요">
+          <button class="search-button">
+            <img src="@/images/icons/search.svg" alt="검색" />
+          </button>
+        </InputGroup>
         <TabBar
           class="tab-bar"
           :current-tab="typeId"
@@ -98,5 +102,18 @@ export default defineComponent({
 
 .qna-tile {
   padding: (40/2/16) * 1rem;
+}
+
+.search-button {
+  display: flex;
+
+  &:active {
+    opacity: 0.5;
+  }
+
+  > img {
+    width: (44/2/16) * 1rem;
+    height: (44/2/16) * 1rem;
+  }
 }
 </style>

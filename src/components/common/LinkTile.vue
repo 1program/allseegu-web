@@ -1,7 +1,7 @@
 <template>
   <a class="link-tile" :href="url" target="_blank">
     <div class="header">
-      <div class="title">링크</div>
+      <div class="title">링크<img src="@/images/icons/link.svg" alt="링크" /></div>
     </div>
     <div class="url">
       {{ url }}
@@ -43,6 +43,13 @@ export default defineComponent({
   .title {
     flex: 1 1 auto;
     color: #777;
+    display: inline-flex;
+    align-items: center;
+
+    > img {
+      margin-left: auto;
+      width: (28/2/16) * 1rem;
+    }
   }
 }
 

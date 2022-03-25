@@ -1,6 +1,7 @@
 <template>
   <div class="input-wrap">
     <input class="input" :placeholder="placeHolder ?? '내용을 입력해 주세요.'" />
+    <slot />
   </div>
 </template>
 
@@ -36,6 +37,7 @@ export default defineComponent({
   outline: none;
   padding: 0;
   flex: 1 1 auto;
+  min-width: 0;
 
   font-size: (34/2/16) * 1rem;
 }

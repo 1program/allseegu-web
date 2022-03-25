@@ -9,7 +9,9 @@
         {{ answer }}
       </div>
     </div>
-    <div class="append"></div>
+    <div class="append">
+      <img src="@/images/icons/arrow-top-black.svg" alt="토글" :class="{ active }" />
+    </div>
   </button>
 </template>
 
@@ -60,6 +62,21 @@ export default defineComponent({
   font-size: (30/2/16) * 1rem;
 
   min-width: 0;
+}
+
+.append {
+  flex-shrink: 0;
+  margin-left: (10/2/16) * 1rem;
+
+  > img {
+    width: (22/2/16) * 1rem;
+    height: (12/2/16) * 1rem;
+    margin-bottom: (10/2/16) * 1rem;
+
+    &:not(.active) {
+      transform: rotate(180deg);
+    }
+  }
 }
 
 .question {

@@ -53,8 +53,6 @@
             있게 됩니다.
           </div>
         </FormGroup>
-      </div>
-      <div class="container page-footer">
         <AppButton full>문의하기</AppButton>
       </div>
     </form>

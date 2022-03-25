@@ -21,7 +21,10 @@
               </template>
               다음 카페
             </OptionButton>
-            <OptionButton :active="communityType === 'NAVER'" @click="communityType = 'NAVER'">
+            <OptionButton
+              :active="communityType === 'NAVER_CAFE'"
+              @click="communityType = 'NAVER_CAFE'"
+            >
               <template v-slot:icon>
                 <img src="@/images/icons/community-naver-cafe.svg" alt="네이버 카페" />
               </template>
@@ -32,7 +35,7 @@
               @click="communityType = 'NAVER_BLOG'"
             >
               <template v-slot:icon>
-                <img src="@/images/icons/community-naver-cafe.svg" alt="네이버 블로그" />
+                <img src="@/images/icons/community-naver-blog.svg" alt="네이버 블로그" />
               </template>
               네이버 블로그
             </OptionButton>
@@ -63,8 +66,6 @@
             />
           </form-group>
         </field>
-      </div>
-      <div class="container page-footer">
         <app-button full>신청</app-button>
       </div>
     </form>

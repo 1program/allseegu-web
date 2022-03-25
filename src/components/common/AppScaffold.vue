@@ -10,7 +10,10 @@
     <!-- 기본 slot -->
     <slot name="default" />
   </div>
-  <button v-if="hasTopButton" class="top-button" @click="goTop">TOP</button>
+  <button v-if="hasTopButton" class="top-button" @click="goTop">
+    <img src="@/images/icons/arrow-top-black.svg" alt="위로가기" />
+    TOP
+  </button>
 </template>
 
 <script lang="ts">
@@ -70,16 +73,29 @@ export default defineComponent({
 
 .top-button {
   position: fixed;
-  right: (10/2/16) * 1rem;
-  bottom: (10/2/16) * 1rem;
+  right: (12/2/16) * 1rem;
+  bottom: (12/2/16) * 1rem;
   width: (80/2/16) * 1rem;
   height: (80/2/16) * 1rem;
+
   background-color: white;
   border-radius: (10/2/16) * 1rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
-  font-size: (30/2/16) * 1rem;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+  font-size: (26/2/16) * 1rem;
   font-weight: bold;
-  z-index: 1300;
+  z-index: 1050;
+  line-height: 1;
+
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   @include touchable;
+
+  > img {
+    width: (23/2/16) * 1rem;
+    margin-bottom: (8/2/16) * 1rem;
+  }
 }
 </style>

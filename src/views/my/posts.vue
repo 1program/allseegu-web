@@ -19,6 +19,7 @@
           nickname="서쪽바다"
           :comments="26"
           @remove="removePost(0)"
+          to="/redev/1/story/1"
         />
         <ListDivider />
         <ListTile
@@ -28,6 +29,7 @@
           nickname="서쪽바다"
           :comments="26"
           @remove="removePost(1)"
+          to="/redev/1/story/1"
         />
       </template>
       <!--댓글-->
@@ -37,6 +39,7 @@
           title="조합이 바르게 운영되지 못하고 와해되는 이유"
           :show-footer="false"
           :show-tools="false"
+          to="/redev/1/story/1"
         >
           <CommentSimpleTile
             content="새로운 실거래 6.95억은 세끼고 인가요?"
@@ -49,6 +52,7 @@
           title="조합이 바르게 운영되지 못하고 와해되는 이유"
           :show-footer="false"
           :show-tools="false"
+          to="/redev/1/story/1"
         >
           <CommentSimpleTile
             content="새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요?"
@@ -61,6 +65,7 @@
           title="조합이 바르게 운영되지 못하고 와해되는 이유"
           :show-footer="false"
           :show-tools="false"
+          to="/redev/1/story/1"
         >
           <CommentSimpleTile
             content="새로운 실거래 6.95억은 세끼고 인가요?새로운 실거래 6.95억은 세끼고 인가요?새로운 실거래 6.95억은 세끼고 인가요?"

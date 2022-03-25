@@ -7,7 +7,9 @@
           title="조합이 바르게 운영되지 못하고 와해되는 이유는 바로 이것 때문입니다."
           :date="date"
           :hits="256"
-        />
+        >
+          <Badge label="공지" blue class="badge" />
+        </PostMeta>
       </div>
       <div class="divider light" />
       <div class="page-content-medium">
@@ -39,10 +41,11 @@ import LinkTile from "@/components/common/LinkTile.vue";
 import ImageGallery from "@/components/common/ImageGallery.vue";
 
 import redevImage from "@/images/mocks/redev-image.png";
+import Badge from "@/components/common/Badge.vue";
 
 export default defineComponent({
   name: "MyCustomerNoticeDetail",
-  components: { AppScaffold, PostMeta, AttachmentTile, LinkTile, ImageGallery },
+  components: { AppScaffold, PostMeta, AttachmentTile, LinkTile, ImageGallery, Badge },
   setup() {
     return {
       images: [redevImage, redevImage, redevImage],
@@ -60,6 +63,9 @@ export default defineComponent({
   padding-bottom: (30/2/16) * 1rem;
 }
 
+.badge {
+  margin-bottom: (20/2/16) * 1rem;
+}
 .attachment {
   margin-bottom: (8/2/16) * 1rem;
 }

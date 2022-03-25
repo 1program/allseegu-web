@@ -17,7 +17,10 @@
     <div class="footer" v-if="showFooter == true">
       <div class="nickname" v-if="nickname != null">{{ nickname }}</div>
       <div class="date" v-if="dateText != null">{{ dateText }}</div>
-      <div class="comments" v-if="comments != null">{{ comments }}</div>
+      <div class="comments" v-if="comments != null">
+        <img src="@/images/icons/comment.svg" alt="댓글" />
+        {{ comments }}
+      </div>
     </div>
   </RouterLinkOrButton>
 </template>
@@ -92,6 +95,8 @@ export default defineComponent({
   padding: 0 (20/2/16) * 1rem;
   font-weight: bold;
   margin-right: (20/2/16) * 1rem;
+
+  flex-shrink: 0;
 }
 
 .header {
@@ -151,6 +156,15 @@ export default defineComponent({
   .comments {
     color: #777;
     margin-left: 0.5rem;
+
+    display: inline-flex;
+    align-items: center;
+
+    > img {
+      width: (28/2/16) * 1rem;
+      margin-right: (10/2/16) * 1rem;
+      margin-top: 1px;
+    }
   }
 }
 </style>
