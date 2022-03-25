@@ -1,5 +1,10 @@
 <template>
   <AppScaffold title="알림" has-top-button>
+    <template v-slot:actions>
+      <app-bar-action to="/my">
+        <img src="@/images/icons/my-icon-black.svg" width="22" alt="마이" />
+      </app-bar-action>
+    </template>
     <div class="page-wrapper main">
       <div class="container">
         <div class="alim-header-wrap">
@@ -95,13 +100,21 @@
 import { computed, defineComponent, ref } from "vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import AlimGroup from "@/components/alim/AlimGroup.vue";
+import AppBarAction from "@/components/common/AppBarAction.vue";
 import AlimDivider from "@/components/alim/AlimDivider.vue";
 import AlimTile from "@/components/alim/AlimTile.vue";
 import AlimCategorySelectDrawer from "@/components/alim/AlimCategorySelectDrawer.vue";
 
 export default defineComponent({
   name: "AlimList",
-  components: { AppScaffold, AlimGroup, AlimDivider, AlimTile, AlimCategorySelectDrawer },
+  components: {
+    AppScaffold,
+    AlimGroup,
+    AlimDivider,
+    AlimTile,
+    AppBarAction,
+    AlimCategorySelectDrawer,
+  },
   setup() {
     const selectingCategory = ref(false);
 
