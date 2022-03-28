@@ -25,8 +25,8 @@
       <template v-for="faq of faqList" :key="faq.id">
         <QnaTile
           class="qna-tile"
-          @click="activeTile = faq.id"
-          :active="activeTile === faq.id"
+          @click="changeIndex(faq.id)"
+          :active="activeIndex === faq.id"
           :question="faq.question"
           :answer="faq.answer"
         />
@@ -49,7 +49,7 @@ export default defineComponent({
   setup() {
     const typeId = ref(1);
 
-    const activeTile = ref(1);
+    const activeIndex = ref(1);
 
     const faqList = [
       {
@@ -84,7 +84,11 @@ export default defineComponent({
       },
     ];
 
-    return { typeId, activeTile, faqList };
+    const changeIndex = (id: number) => {
+      activeIndex.value = id;
+    };
+
+    return { typeId, activeIndex, faqList, changeIndex };
   },
 });
 </script>

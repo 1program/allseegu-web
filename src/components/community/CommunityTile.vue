@@ -1,12 +1,22 @@
 <template>
   <div class="community-tile">
-    <ContactTile :name="title" :description="description" :color="color" />
+    <ContactTile :name="title" :description="description" :color="color">
+      <template v-slot:button>
+        <img class="icon" :src="icon" alt="아이콘" />
+      </template>
+    </ContactTile>
     <div class="content">{{ content }}</div>
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
+
+import kakaoIcon from "@/images/icons/community-kakao-openchat.svg";
+import naverCafeIcon from "@/images/icons/community-naver-cafe.svg";
+import daumCafeIcon from "@/images/icons/community-daum-cafe.svg";
+import naverBlogIcon from "@/images/icons/community-naver-blog.svg";
+
 import ContactTile from "../common/ContactTile.vue";
 
 export default defineComponent({
@@ -46,7 +56,22 @@ export default defineComponent({
       }
     });
 
-    return { color };
+    const icon = computed(() => {
+      switch (props.type) {
+        case "kakao":
+          return kakaoIcon;
+        case "naver_cafe":
+          return naverCafeIcon;
+        case "daum_cafe":
+          return daumCafeIcon;
+        case "naver_blog":
+          return naverBlogIcon;
+        default:
+          return "";
+      }
+    });
+
+    return { color, icon };
   },
 });
 </script>
@@ -59,5 +84,9 @@ export default defineComponent({
   color: (26/2/16) * 1rem;
   color: #777;
   font-size: (26/2/16) * 1rem;
+}
+
+.icon {
+  width: 100%;
 }
 </style>

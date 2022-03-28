@@ -1,5 +1,10 @@
 <template>
   <AppScaffold title="신림 1구역 도시 정비 사업" has-top-button>
+    <template v-slot:actions>
+      <AppBarAction to="/my">
+        <img src="@/images/icons/my-icon-black.svg" width="22" alt="마이" />
+      </AppBarAction>
+    </template>
     <div class="redev-detail-page">
       <RedevSwiper />
       <div class="container">
@@ -42,6 +47,7 @@
 import { defineComponent } from "vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import RedevSwiper from "@/components/redev/RedevSwiper.vue";
+import AppBarAction from "@/components/common/AppBarAction.vue";
 
 import NewsSection from "./sections/NewsSection.vue";
 import AgentSection from "./sections/AgentSection.vue";
@@ -69,6 +75,7 @@ export default defineComponent({
     SummarySection,
     AdSection,
     CommunitySection,
+    AppBarAction,
   },
 });
 </script>

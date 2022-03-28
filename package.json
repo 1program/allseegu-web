@@ -15,6 +15,7 @@
     "core-js": "^3.8.3",
     "date-fns": "^2.28.0",
     "normalize.css": "^8.0.1",
+    "rxjs": "^7.5.5",
     "shortid": "^2.2.16",
     "swiper": "^8.0.7",
     "vee-validate": "^4.5.9",

@@ -1,17 +1,17 @@
 <template>
   <button class="qna-tile">
-    <div class="prepend">Q.</div>
-    <div class="main">
-      <div class="question">
-        {{ question }}
-      </div>
-      <div class="answer" v-if="active == true">
-        {{ answer }}
+    <div class="header">
+      <div class="prepend">Q.</div>
+      <div class="title">{{ question }}</div>
+      <div class="append">
+        <img src="@/images/icons/arrow-top-black.svg" alt="토글" :class="{ active }" />
       </div>
     </div>
-    <div class="append">
-      <img src="@/images/icons/arrow-top-black.svg" alt="토글" :class="{ active }" />
-    </div>
+    <transition>
+      <div class="folder" v-if="active === true">
+        <div class="content">{{ answer }}</div>
+      </div>
+    </transition>
   </button>
 </template>
 
@@ -41,17 +41,41 @@ export default defineComponent({
 @import "@/styles/config";
 
 .qna-tile {
-  display: flex;
-  align-items: flex-start;
   width: 100%;
   text-align: left;
 }
 
-.prepend {
-  font-size: (30/2/16) * 1rem;
-  font-weight: bold;
-  width: (40/2/16) * 1rem;
-  flex-shrink: 0;
+.header {
+  display: flex;
+  align-items: flex-start;
+
+  .prepend {
+    font-size: (30/2/16) * 1rem;
+    font-weight: bold;
+    width: (40/2/16) * 1rem;
+    flex-shrink: 0;
+  }
+
+  .title {
+    min-width: 0;
+    flex: 1 1 auto;
+    @include ellipsis;
+  }
+
+  .append {
+    flex-shrink: 0;
+    margin-left: (10/2/16) * 1rem;
+
+    > img {
+      width: (22/2/16) * 1rem;
+      height: (12/2/16) * 1rem;
+      margin-bottom: (10/2/16) * 1rem;
+
+      &:not(.active) {
+        transform: rotate(180deg);
+      }
+    }
+  }
 }
 
 .main {
@@ -64,28 +88,24 @@ export default defineComponent({
   min-width: 0;
 }
 
-.append {
-  flex-shrink: 0;
-  margin-left: (10/2/16) * 1rem;
+.folder {
+  max-height: 400px;
 
-  > img {
-    width: (22/2/16) * 1rem;
-    height: (12/2/16) * 1rem;
-    margin-bottom: (10/2/16) * 1rem;
+  &.v-enter-active,
+  &.v-leave-active {
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
 
-    &:not(.active) {
-      transform: rotate(180deg);
-    }
+  &.v-enter-from,
+  &.v-leave-to {
+    opacity: 0;
+    max-height: 0;
   }
 }
-
-.question {
-  min-width: 0;
-  @include ellipsis;
-}
-
-.answer {
+.content {
   color: $color-gray;
   margin-top: (32/2/16) * 1rem;
+  margin-left: (42/2/16) * 1rem;
+  margin-right: (25/2/16) * 1rem;
 }
 </style>

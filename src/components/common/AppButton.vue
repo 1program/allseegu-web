@@ -15,6 +15,7 @@ export type AppButtonPalettes =
   | "white"
   | "outlined-white"
   | "outlined-blue"
+  | "gray-blue"
   | "naver"
   | "kakao";
 
@@ -102,6 +103,11 @@ export default defineComponent({
 
   &.outlined-blue {
     border: 1px solid $color-blue;
+    color: $color-blue;
+  }
+
+  &.gray-blue {
+    background-color: #f8f8f8;
     color: $color-blue;
   }
 

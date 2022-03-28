@@ -1,5 +1,8 @@
 <template>
-  <RouterLinkOrButton class="more-button"><slot /></RouterLinkOrButton>
+  <RouterLinkOrButton class="more-button">
+    <slot />
+    <img class="more-icon" src="@/images/icons/more-gray.svg" alt="더보기 아이콘" />
+  </RouterLinkOrButton>
 </template>
 
 <script lang="ts">
@@ -26,5 +29,10 @@ export default defineComponent({
   text-align: center;
 
   @include touchable;
+}
+
+.more-icon {
+  width: (11/2/16) * 1rem;
+  margin-left: (31/2/2/16) * 1rem;
 }
 </style>

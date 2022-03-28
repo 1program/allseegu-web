@@ -4,9 +4,9 @@
       <div class="nickname">{{ nickname }}</div>
       <div class="date">{{ dateText }}</div>
       <div class="tools" v-if="mine">
-        <button class="tool">수정</button>
+        <button class="tool" @click.prevent="edit">수정</button>
         <span class="tool-divider">|</span>
-        <button class="tool" @click="remove">삭제</button>
+        <button class="tool" @click.prevent="remove">삭제</button>
       </div>
     </div>
     <div class="gallery">
@@ -14,7 +14,12 @@
     </div>
     <div class="content">{{ content }}</div>
     <div class="footer">
-      <button class="reply" :class="{ active: showReply }" @click="showReply = !showReply">
+      <button
+        class="reply"
+        :disabled="commentCount < 1"
+        :class="{ active: showReply }"
+        @click="showReply = !showReply"
+      >
         답글{{ commentCount > 0 ? ` ${commentCount}` : "" }}
       </button>
     </div>
@@ -65,6 +70,7 @@ export default defineComponent({
 
     return {
       dateText: formatDate(props.date),
+      edit: () => context.emit("edit"),
       remove: () => context.emit("remove"),
       showReply,
     };

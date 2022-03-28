@@ -1,7 +1,10 @@
 <template>
   <div class="alim-group">
     <div class="alim-header">
-      <div class="category" :class="{ blue }">{{ category }}</div>
+      <div class="category" :class="{ all }">
+        <img v-if="all" class="logo" src="@/images/icons/bi-logo.svg" alt="로고" />
+        {{ category }}
+      </div>
       <div class="date" v-if="date">{{ date }}</div>
     </div>
     <div class="alim-list">
@@ -21,10 +24,10 @@ export default defineComponent({
       default: null,
       description: "알림 종류 명",
     },
-    blue: {
+    all: {
       type: Boolean,
       default: false,
-      description: "알림 종류 명 색",
+      description: "주요 알림 그룹 (푸른색)",
     },
     date: {
       type: String,
@@ -54,7 +57,12 @@ export default defineComponent({
   font-size: (30/2/16) * 1rem;
   color: $color-black;
 
-  &.blue {
+  .logo {
+    width: (40/2/16) * 1rem;
+    margin-right: (19/2/16) * 1rem;
+  }
+
+  &.all {
     color: $color-blue;
   }
 

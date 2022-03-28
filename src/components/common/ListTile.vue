@@ -3,9 +3,9 @@
     <div class="header" v-if="category != null">
       {{ category }}
       <div class="tools" v-if="showTools == true">
-        <button @click="edit">수정</button>
+        <button @click.prevent="edit">수정</button>
         <div class="tool-divider" />
-        <button @click="remove">삭제</button>
+        <button @click.prevent="remove">삭제</button>
       </div>
     </div>
     <div class="main">

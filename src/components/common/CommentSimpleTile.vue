@@ -4,9 +4,9 @@
     <div class="footer">
       <div class="date" v-if="dateText != null">{{ dateText }}</div>
       <div class="tools">
-        <button @click="edit">수정</button>
+        <button @click.prevent="edit">수정</button>
         <div class="tool-divider" />
-        <button @click="remove">삭제</button>
+        <button @click.prevent="remove">삭제</button>
       </div>
     </div>
   </div>

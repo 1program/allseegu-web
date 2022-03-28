@@ -45,7 +45,7 @@
               <form-input v-bind="field" placeholder="URL을 기재해 주세요." />
             </form-group>
           </field>
-          <field name="url" v-slot="{ field, errorMessage }">
+          <field name="password" v-slot="{ field, errorMessage }">
             <form-group :error-text="errorMessage">
               <form-input v-bind="field" placeholder="입장 비밀번호를 기재해 주세요." />
             </form-group>
@@ -74,6 +74,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { useRouter } from "vue-router";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import * as yup from "yup";
 import { Field, useForm } from "vee-validate";
@@ -98,11 +99,14 @@ export default defineComponent({
     FormTextarea,
   },
   setup() {
+    const router = useRouter();
     const alert = useAlert();
 
     const { handleSubmit } = useForm({
       validationSchema: yup.object({
         title: yup.string().required("제목을 입력해 주세요."),
+        url: yup.string().required("URL을 기재해 주세요."),
+        password: yup.string(),
         area: yup.string().required("구역을 입력해 주세요."),
         content: yup.string().required("내용을 입력해 주세요."),
       }),
@@ -110,7 +114,10 @@ export default defineComponent({
 
     const communityType = ref("KAKAO");
 
-    const submit = handleSubmit(() => alert("신청되었습니다."));
+    const submit = handleSubmit(() => {
+      router.back();
+      alert("신청되었습니다.");
+    });
 
     return {
       communityType,

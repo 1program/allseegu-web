@@ -1,6 +1,6 @@
 <template>
   <AppScaffold title="올려주세요">
-    <div class="container">
+    <div class="page-wrapper container">
       <div class="meta">
         <PostMeta
           title="올려주세요 타이틀 제목입니다.올려주세요 타이틀 제목입니다.올려주세요 타이틀 제목입니다."
@@ -15,7 +15,7 @@
         </PostMeta>
       </div>
       <div class="divider light" />
-      <div class="page-content-medium">
+      <div class="page-content-medium content">
         <div class="field-group">
           <div class="field">
             <div class="label">소통방 URL</div>
@@ -36,7 +36,7 @@
         문구입니다.
       </div>
       <AnswerCard
-        class="page-content"
+        class="page-content answer"
         v-if="isAccepted || isDenied"
         :label="isAccepted ? '승인' : '반려사유'"
         :date="date"
@@ -112,6 +112,14 @@ export default defineComponent({
 }
 
 .info {
+  flex: 1 1 auto;
+}
+
+.content {
+  flex: 0 0 auto;
+}
+
+.answer {
   flex: 1 1 auto;
 }
 </style>

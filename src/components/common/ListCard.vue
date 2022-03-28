@@ -1,8 +1,10 @@
 <template>
   <RouterLinkOrButton class="list-card">
     <div class="thumbnail">
-      <img v-if="thumbnail != null" :src="thumbnail" alt="썸네일" />
-      <div v-if="isVideo" class="video-cover" />
+      <img v-if="thumbnail != null" class="thumbnail-image" :src="thumbnail" alt="썸네일" />
+      <div v-if="isVideo" class="video-cover">
+        <img class="play-icon" src="@/images/icons/play.svg" alt="재생 아이콘" />
+      </div>
     </div>
     <div class="title">{{ title }}</div>
   </RouterLinkOrButton>
@@ -45,7 +47,7 @@ export default defineComponent({
     aspect-ratio: (324 / 184);
     background-color: #eee;
 
-    img {
+    .thumbnail-image {
       display: block;
       width: 100%;
       height: 100%;
@@ -60,6 +62,14 @@ export default defineComponent({
       left: 0;
       right: 0;
       background-color: rgba(black, 0.3);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .play-icon {
+        width: (32/2/16) * 1rem;
+      }
     }
   }
 

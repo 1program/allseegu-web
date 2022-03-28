@@ -1,8 +1,12 @@
 <template>
   <div class="image-picker">
-    <button class="add">+</button>
+    <button class="add">
+      <img class="plus-icon" src="@/images/icons/plus.svg" alt="추가하기" />
+    </button>
     <div class="item" v-for="index in 6" :key="index">
-      <button class="close" />
+      <button class="close">
+        <img class="close-icon" src="@/images/icons/remove-icon.svg" alt="삭제" />
+      </button>
     </div>
   </div>
 </template>
@@ -42,6 +46,15 @@ export default defineComponent({
     background-color: white;
 
     @include touchable;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .close-icon {
+    display: flex;
+    width: (16/2/16) * 1rem;
   }
 }
 
@@ -56,5 +69,10 @@ export default defineComponent({
   font-size: (40/2/16) * 1rem;
 
   @include touchable;
+
+  .plus-icon {
+    width: (40/2/16) * 1rem;
+    height: (40/2/16) * 1rem;
+  }
 }
 </style>

@@ -4,9 +4,8 @@
 
 <script lang="ts">
 import { useApi } from "@/composables/api";
-import { defineComponent, onMounted, ref, watch } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import { useAsyncInfiniteList } from "@/composables/async-infinite-list";
-import { boundsFromLatLngs, centerFromBounds } from "@/lib/kakao-map-helpers";
 
 export const REDEV_MAP_BLUE = "#2170fe";
 

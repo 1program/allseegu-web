@@ -85,6 +85,7 @@ import ListTile from "@/components/common/ListTile.vue";
 import ListDivider from "@/components/common/ListDivider.vue";
 import CommentSimpleTile from "@/components/common/CommentSimpleTile.vue";
 import { useConfirm } from "@/composables/confirm";
+import { useUi } from "@/composables/ui";
 
 export default defineComponent({
   name: "MyPosts",
@@ -94,15 +95,17 @@ export default defineComponent({
 
     const typeId = ref(1);
 
+    const { notImplemented } = useUi();
+
     const removePost = async (id: number) => {
-      if (await confirm("정말 삭제하시겠습니까?", "삭제")) {
-        console.log(id);
+      if (await confirm("정말 삭제하시겠습니까?", { okLabel: "삭제" })) {
+        notImplemented();
       }
     };
 
     const removeComment = async (id: number) => {
-      if (await confirm("정말 삭제하시겠습니까?", "삭제")) {
-        console.log(id);
+      if (await confirm("정말 삭제하시겠습니까?", { okLabel: "삭제" })) {
+        notImplemented();
       }
     };
 

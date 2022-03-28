@@ -123,7 +123,7 @@ export default defineComponent({
     const isAnswered = parseInt(route.params.inquiryId as string, 10) === 1;
 
     const removeComment = async (id: number) => {
-      if (await confirm("정말 삭제하시겠습니까?", "삭제")) {
+      if (await confirm("정말 삭제하시겠습니까?", { okLabel: "삭제" })) {
         console.log(id);
       }
     };

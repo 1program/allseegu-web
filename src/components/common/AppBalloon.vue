@@ -1,12 +1,14 @@
 <template>
   <div class="app-balloon">
     <slot />
-    <div v-if="message != null" class="overlay">
-      <div class="balloon">
-        <div class="tail" />
-        <div class="message">{{ message }}</div>
+    <transition>
+      <div v-if="message != null" class="overlay">
+        <div class="balloon">
+          <div class="tail" />
+          <div class="message">{{ message }}</div>
+        </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -37,6 +39,21 @@ export default defineComponent({
   left: 0;
   right: 0;
   text-align: center;
+
+  &.v-enter-active,
+  &.v-leave-active {
+    transition: opacity 0.2s, transform 0.15s ease;
+    transform-origin: center top;
+  }
+
+  &.v-enter-from,
+  &.v-leave-to {
+    opacity: 0;
+  }
+
+  &.v-enter-from {
+    transform: scale(0.5);
+  }
 }
 
 .balloon {

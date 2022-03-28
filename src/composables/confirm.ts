@@ -4,8 +4,8 @@ import shortid from "shortid";
 export interface ConfirmMessage {
   id: string;
   message: string;
-  okMessage?: string;
-  cancelMessage?: string;
+  okLabel?: string;
+  cancelLabel?: string;
   resolve: (value: boolean) => void;
 }
 
@@ -13,6 +13,11 @@ export interface ConfirmContext {
   confirms: Ref<ConfirmMessage[]>;
   ok: (id: string) => void;
   cancel: (id: string) => void;
+}
+
+export interface ConfirmOptions {
+  okLabel?: string;
+  cancelLabel?: string;
 }
 
 export function provideConfirm() {
@@ -58,13 +63,13 @@ export function useConfirms() {
 export function useConfirm() {
   const { confirms } = useConfirms();
 
-  return function confirm(message: string, okMessage?: string, cancelMessage?: string) {
+  return function confirm(message: string, options?: ConfirmOptions) {
     return new Promise<boolean>((resolve) => {
       confirms.value.push({
         id: shortid(),
         message,
-        okMessage,
-        cancelMessage,
+        okLabel: options?.okLabel,
+        cancelLabel: options?.cancelLabel,
         resolve,
       });
     });

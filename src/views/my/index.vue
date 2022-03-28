@@ -10,7 +10,7 @@
       <div class="divider thick" />
       <div class="list-group">
         <div class="list-title">보유 구역</div>
-        <button class="list-button">신도림 1구역 재개발</button>
+        <router-link class="list-button" to="/redev/1">신도림 1구역 재개발</router-link>
       </div>
       <div class="divider thick" />
       <div class="list-group">
