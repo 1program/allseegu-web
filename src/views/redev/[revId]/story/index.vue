@@ -2,7 +2,8 @@
   <AppScaffold title="우리 구역 이야기">
     <div class="container page-content">
       <AppButton class="button" palette="outlined-blue" full to="story/write">
-        + 이야기 등록하기
+        <img class="plus-icon" src="@/images/icons/plus-thick.svg" alt="등록하기" />
+        이야기 등록하기
       </AppButton>
       <template v-for="index in 10" :key="index">
         <ListTile
@@ -35,5 +36,11 @@ export default defineComponent({
 
 .button {
   margin-bottom: (50/2/16) * 1rem;
+}
+
+.plus-icon {
+  display: block;
+  width: (20/2/16) * 1rem;
+  margin-right: (20/2/16) * 1rem;
 }
 </style>

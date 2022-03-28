@@ -5,7 +5,7 @@
         <img :src="image" alt="우리 구역 이야기 이미지" />
         <button class="magnify" v-if="index < 2" @click="activeIndex = index"></button>
         <button class="more" v-else @click="activeIndex = index">
-          +<br />
+          <img class="plus-icon" src="@/images/icons/plus-thick-white.svg" alt="더보기" />
           더보기
         </button>
       </div>
@@ -95,12 +95,19 @@ export default defineComponent({
     background-color: rgba(black, 0.6);
     color: white;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: (26/2/16) * 1rem;
     text-align: center;
 
     @include touchable;
+
+    .plus-icon {
+      width: (32/2/16) * 1rem;
+      height: (32/2/16) * 1rem;
+      margin-bottom: (10/2/16) * 1rem;
+    }
   }
 }
 </style>

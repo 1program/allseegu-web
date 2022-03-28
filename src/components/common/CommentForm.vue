@@ -8,10 +8,12 @@
     <textarea class="textarea" placeholder="댓글을 남겨보세요" />
     <ImagePicker />
     <div class="gap-horizontal button-group">
-      <AppButton class="plus" palette="outlined-blue">+</AppButton>
-      <AppButton class="grow" palette="outlined-blue" v-if="showCancel">{{
-        cancelLabel
-      }}</AppButton>
+      <AppButton class="plus" palette="outlined-blue">
+        <img class="plus-icon" src="@/images/icons/plus.svg" alt="이미지 추가" />
+      </AppButton>
+      <AppButton class="grow" palette="outlined-blue" v-if="showCancel">
+        {{ cancelLabel }}
+      </AppButton>
       <AppButton class="grow">{{ okLabel }}</AppButton>
     </div>
   </div>
@@ -96,6 +98,10 @@ export default defineComponent({
 
   .plus {
     width: (98/2/16) * 1rem;
+  }
+
+  .plus-icon {
+    width: (40/2/16) * 1rem;
   }
 
   .grow {
