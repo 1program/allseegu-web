@@ -6,7 +6,7 @@
       </app-bar-action>
     </template>
     <div class="container page-wrapper">
-      <user-info />
+      <user-info :user="me.data" />
       <div class="divider thick" />
       <div class="list-group">
         <div class="list-title">보유 구역</div>
@@ -43,7 +43,8 @@ import { defineComponent } from "vue";
 import UserInfo from "@/components/user/UserInfo.vue";
 import AppBarAction from "@/components/common/AppBarAction.vue";
 import MenuButton from "@/components/common/MenuButton.vue";
-import { useUi } from "@/composables/ui";
+import { useUi } from "@/composables/common/useUi";
+import { useMe } from "@/composables/user/useMe";
 
 export default defineComponent({
   name: "MyPage",
@@ -51,7 +52,9 @@ export default defineComponent({
   setup() {
     const ui = useUi();
 
-    return { ui };
+    const me = useMe();
+
+    return { ui, me };
   },
 });
 </script>

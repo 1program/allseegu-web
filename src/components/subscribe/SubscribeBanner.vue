@@ -2,17 +2,25 @@
   <div class="subscribe-banner">
     <div class="title">Premium 혜택</div>
     <div class="subtitle">각 분야의 전문가가 구역별 투자의견을 드립니다.</div>
-    <AppButton class="button">구독하기</AppButton>
+    <AppButton class="button" @click="notImplemented">구독하기</AppButton>
   </div>
 </template>
 
 <script lang="ts">
+import { useUi } from "@/composables/common/useUi";
 import { defineComponent } from "vue";
 import AppButton from "../common/AppButton.vue";
 
 export default defineComponent({
   name: "SubscribeBanner",
   components: { AppButton },
+  setup() {
+    const { notImplemented } = useUi();
+
+    return {
+      notImplemented,
+    };
+  },
 });
 </script>
 

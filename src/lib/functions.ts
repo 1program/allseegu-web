@@ -7,5 +7,3 @@ export function getErrorMessage(error: unknown) {
 
   return "다시 시도해 주세요.";
 }
-
-export default 1;

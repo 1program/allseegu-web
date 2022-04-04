@@ -21,8 +21,18 @@
         </div>
         <ImageGallery :images="images" />
         <div class="attachment-group">
-          <AttachmentTile class="attachment">문의 관련 파일.hwp</AttachmentTile>
-          <AttachmentTile class="attachment">문의 관련 파일.hwp</AttachmentTile>
+          <AttachmentTile
+            class="attachment"
+            url="http://view3.synology.me:5050/d/s/672812605452106783/bzE8Aohz0mThrDs-cYk8IV1JdsyHGgzM-vb5gT7NPVgk_"
+          >
+            첨부 파일.hwp
+          </AttachmentTile>
+          <AttachmentTile
+            class="attachment"
+            url="http://view3.synology.me:5050/d/s/672812605452106783/bzE8Aohz0mThrDs-cYk8IV1JdsyHGgzM-vb5gT7NPVgk_"
+          >
+            첨부 파일.hwp
+          </AttachmentTile>
         </div>
         <div class="content">
           문의 내용입니다. 문의 내용입니다. 문의 내용입니다. 문의 내용입니다. 문의 내용입니다. 문의
@@ -101,7 +111,7 @@ import ImageGallery from "@/components/common/ImageGallery.vue";
 import Badge from "@/components/common/Badge.vue";
 import CommentTile from "@/components/common/CommentTile.vue";
 import CommentForm from "@/components/common/CommentForm.vue";
-import { useConfirm } from "@/composables/confirm";
+import { useConfirm } from "@/composables/common/useConfirm";
 import SubItem from "@/components/common/SubItem.vue";
 
 export default defineComponent({

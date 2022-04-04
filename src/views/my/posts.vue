@@ -84,8 +84,8 @@ import TabBar from "@/components/common/TabBar.vue";
 import ListTile from "@/components/common/ListTile.vue";
 import ListDivider from "@/components/common/ListDivider.vue";
 import CommentSimpleTile from "@/components/common/CommentSimpleTile.vue";
-import { useConfirm } from "@/composables/confirm";
-import { useUi } from "@/composables/ui";
+import { useConfirm } from "@/composables/common/useConfirm";
+import { useUi } from "@/composables/common/useUi";
 
 export default defineComponent({
   name: "MyPosts",

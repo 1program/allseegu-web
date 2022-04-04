@@ -2,8 +2,10 @@
   <div class="image-gallery" v-if="images.length > 0">
     <template v-for="(image, index) in topImages" :key="image">
       <div class="item">
-        <img :src="image" alt="우리 구역 이야기 이미지" />
-        <button class="magnify" v-if="index < 2" @click="activeIndex = index"></button>
+        <img class="image" :src="image" alt="이미지" />
+        <button class="expand" v-if="index < 2" @click="activeIndex = index">
+          <img class="expand-icon" src="@/images/icons/expand-white.svg" alt="크게 보기" />
+        </button>
         <button class="more" v-else @click="activeIndex = index">
           <img class="plus-icon" src="@/images/icons/plus-thick-white.svg" alt="더보기" />
           더보기
@@ -67,14 +69,7 @@ export default defineComponent({
   border-bottom: 1px solid #ddd;
   background-color: #333;
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-  }
-
-  .magnify {
+  .expand {
     position: absolute;
     bottom: (19/2/16) * 1rem;
     right: (19/2/16) * 1rem;
@@ -82,6 +77,9 @@ export default defineComponent({
     height: (56/2/16) * 1rem;
     background-color: rgba(black, 0.6);
     border-radius: (10/2/16) * 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
     @include touchable;
   }
@@ -92,6 +90,8 @@ export default defineComponent({
     bottom: 0;
     left: 0;
     right: 0;
+    width: 100%;
+    height: 100%;
     background-color: rgba(black, 0.6);
     color: white;
     display: flex;
@@ -102,12 +102,26 @@ export default defineComponent({
     text-align: center;
 
     @include touchable;
-
-    .plus-icon {
-      width: (32/2/16) * 1rem;
-      height: (32/2/16) * 1rem;
-      margin-bottom: (10/2/16) * 1rem;
-    }
   }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.expand-icon {
+  display: block;
+  width: (24/2/16) * 1rem;
+  height: (24/2/16) * 1rem;
+}
+
+.plus-icon {
+  display: block;
+  width: (32/2/16) * 1rem;
+  height: (32/2/16) * 1rem;
+  margin-bottom: (10/2/16) * 1rem;
 }
 </style>

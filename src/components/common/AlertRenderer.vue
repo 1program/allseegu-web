@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { useAlerts } from "@/composables/alert";
+import { useAlerts } from "@/composables/common/useAlert";
 import { defineComponent } from "vue";
 import AppDialog from "./AppDialog.vue";
 import AppButton from "./AppButton.vue";

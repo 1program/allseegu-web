@@ -1,12 +1,12 @@
 <template>
-  <div class="community-tile">
-    <ContactTile :name="title" :description="description" :color="color">
+  <RouterLinkOrButton class="community-tile">
+    <ContactTile :name="title" :description="description">
       <template v-slot:button>
-        <img class="icon" :src="icon" alt="아이콘" />
+        <ContactButton :color="color"><img class="icon" :src="icon" alt="아이콘" /></ContactButton>
       </template>
     </ContactTile>
     <div class="content">{{ content }}</div>
-  </div>
+  </RouterLinkOrButton>
 </template>
 
 <script lang="ts">
@@ -18,10 +18,12 @@ import daumCafeIcon from "@/images/icons/community-daum-cafe.svg";
 import naverBlogIcon from "@/images/icons/community-naver-blog.svg";
 
 import ContactTile from "../common/ContactTile.vue";
+import ContactButton from "../common/ContactButton.vue";
+import RouterLinkOrButton from "../common/RouterLinkOrButton.vue";
 
 export default defineComponent({
   name: "CommunityTile",
-  components: { ContactTile },
+  components: { ContactTile, ContactButton, RouterLinkOrButton },
   props: {
     type: {
       type: String as PropType<"kakao" | "naver_cafe" | "naver_blog" | "daum_cafe">,
@@ -78,6 +80,11 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "@/styles/config";
+
+.community-tile {
+  width: 100%;
+  text-align: left;
+}
 
 .content {
   margin-top: (20/2/16) * 1rem;

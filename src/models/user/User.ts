@@ -1,13 +1,13 @@
 export interface User {
   id: number;
   uuid: string;
-  group_id: number | null;
   user_id: number | null;
+  group_id: number | null;
   email: string;
   name: string;
   nickname: string;
   mobile: string;
-  date_of_birth: number; // 19920101;
+  birth: number; // 19920101;
   gender: "male" | "female" | "private"; // "private";
   status: "active" | "inactive";
   email_verified_at: string | null;

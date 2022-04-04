@@ -17,3 +17,5 @@ $padding-medium: $padding-y-medium $padding-x;
 $padding-large: $padding-y-large $padding-x;
 
 $font-sans: "Noto Sans KR", sans-serif;
+
+$vh-100: calc(var(--vh, 1vh) * 100);

@@ -11,8 +11,18 @@
       </div>
       <div class="divider light" />
       <div class="page-content">
-        <AttachmentTile class="attachment">문의 관련 파일.hwp</AttachmentTile>
-        <AttachmentTile class="attachment">문의 관련 파일.hwp</AttachmentTile>
+        <AttachmentTile
+          class="attachment"
+          url="http://view3.synology.me:5050/d/s/672812605452106783/bzE8Aohz0mThrDs-cYk8IV1JdsyHGgzM-vb5gT7NPVgk_"
+        >
+          첨부 파일.hwp
+        </AttachmentTile>
+        <AttachmentTile
+          class="attachment"
+          url="http://view3.synology.me:5050/d/s/672812605452106783/bzE8Aohz0mThrDs-cYk8IV1JdsyHGgzM-vb5gT7NPVgk_"
+        >
+          첨부 파일.hwp
+        </AttachmentTile>
         <LinkTile
           class="link"
           url="http://view3.synology.me:5050/d/s/672812605452106783/bzE8Aohz0mThrDs-cYk8IV1JdsyHGgzM-vb5gT7NPVgk_"

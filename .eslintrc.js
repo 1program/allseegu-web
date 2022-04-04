@@ -38,6 +38,8 @@ module.exports = {
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],
     "prettier/prettier": ["error", { endOfLine: "auto" }],
+    "import/prefer-default-export": "off",
+    "no-undef": "off",
   },
 
   overrides: [

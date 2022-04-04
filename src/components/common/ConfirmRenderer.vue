@@ -7,9 +7,9 @@
       <template v-slot:footer>
         <div class="gap-horizontal button-group">
           <app-button full @click="cancel(confirm.id)" palette="outlined-blue">{{
-            confirm.cancelMessage ?? "취소"
+            confirm.cancelLabel ?? "취소"
           }}</app-button>
-          <app-button full @click="ok(confirm.id)">{{ confirm.okMessage ?? "확인" }}</app-button>
+          <app-button full @click="ok(confirm.id)">{{ confirm.okLabel ?? "확인" }}</app-button>
         </div>
       </template>
     </app-dialog>
@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { useConfirms } from "@/composables/confirm";
+import { useConfirms } from "@/composables/common/useConfirm";
 import { defineComponent } from "vue";
 import AppDialog from "./AppDialog.vue";
 import AppButton from "./AppButton.vue";

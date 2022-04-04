@@ -45,8 +45,18 @@
         <FormGroup label="첨부 파일">
           <ImagePicker class="image-picker" />
           <div class="attachment-group">
-            <AttachmentTile class="attachment">문의 관련 파일.hwp</AttachmentTile>
-            <AttachmentTile class="attachment">문의 관련 파일.hwp</AttachmentTile>
+            <AttachmentTile
+              class="attachment"
+              url="http://view3.synology.me:5050/d/s/672812605452106783/bzE8Aohz0mThrDs-cYk8IV1JdsyHGgzM-vb5gT7NPVgk_"
+            >
+              첨부 파일.hwp
+            </AttachmentTile>
+            <AttachmentTile
+              class="attachment"
+              url="http://view3.synology.me:5050/d/s/672812605452106783/bzE8Aohz0mThrDs-cYk8IV1JdsyHGgzM-vb5gT7NPVgk_"
+            >
+              첨부 파일.hwp
+            </AttachmentTile>
           </div>
           <div class="description">
             문제를 발견했거나 참고가 될만한 자료를 첨부하시면 더 정확하고 빠른 답변을 받아 보실 수
@@ -69,7 +79,7 @@ import FormTextarea from "@/components/common/FormTextarea.vue";
 import AttachmentTile from "@/components/common/AttachmentTile.vue";
 import ImagePicker from "@/components/common/ImagePicker.vue";
 import AppButton from "@/components/common/AppButton.vue";
-import { useAlert } from "@/composables/alert";
+import { useAlert } from "@/composables/common/useAlert";
 import { Field, useForm } from "vee-validate";
 import * as yup from "yup";
 

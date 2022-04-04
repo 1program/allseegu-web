@@ -1,9 +1,9 @@
 <template>
-  <component :is="is" :to="to"><slot /></component>
+  <component :is="is" :to="to" :href="href" :target="target"><slot /></component>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 
 /**
  * `to` 프로퍼티를 제공하면, <router-link />로 렌더되며,
@@ -16,10 +16,30 @@ export default defineComponent({
       type: String,
       default: null,
     },
+    href: {
+      type: String,
+      default: null,
+    },
+    target: {
+      type: String,
+      default: null,
+    },
   },
   setup(props) {
+    const is = computed(() => {
+      if (props.href != null) {
+        return "a";
+      }
+
+      if (props.to != null) {
+        return "router-link";
+      }
+
+      return "button";
+    });
+
     return {
-      is: props.to != null ? "router-link" : "button",
+      is,
     };
   },
 });

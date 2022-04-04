@@ -2,7 +2,7 @@
   <AppScaffold title="우리 구역 이야기">
     <form class="page-wrapper" @submit.prevent="submit">
       <div class="container page-content">
-        <FormGroup label="제목">
+        <FormGroup class="form-group" label="제목">
           <FormInput />
         </FormGroup>
         <FormGroup label="내용">
@@ -29,7 +29,7 @@ import FormGroup from "@/components/common/FormGroup.vue";
 import FormInput from "@/components/common/FormInput.vue";
 import FormTextarea from "@/components/common/FormTextarea.vue";
 import ImagePicker from "@/components/common/ImagePicker.vue";
-import { useAlert } from "@/composables/alert";
+import { useAlert } from "@/composables/common/useAlert";
 
 export default defineComponent({
   name: "RedevDetailStoryWrite",
@@ -52,5 +52,9 @@ export default defineComponent({
 
 .picker {
   margin-top: 1rem;
+}
+
+.form-group {
+  margin-bottom: (100/2/16) * 1rem;
 }
 </style>

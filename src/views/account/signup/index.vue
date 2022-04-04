@@ -9,7 +9,7 @@ import AppScaffold from "@/components/common/AppScaffold.vue";
 import { computed, defineComponent } from "vue";
 import { useRoute } from "vue-router";
 import SlidingRouterView from "@/components/common/SlidingRouterView.vue";
-import { provideSignup } from "@/composables/signup";
+import { provideSignup } from "@/composables/common/useSignup";
 
 export default defineComponent({
   name: "AccountSignup",

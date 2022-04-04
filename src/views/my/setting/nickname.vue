@@ -27,7 +27,7 @@ import FormInput from "@/components/common/FormInput.vue";
 import * as yup from "yup";
 import { nicknameSchema } from "@/lib/schema";
 import AppScaffold from "@/components/common/AppScaffold.vue";
-import { useAlert } from "@/composables/alert";
+import { useAlert } from "@/composables/common/useAlert";
 import { useRouter } from "vue-router";
 
 export default defineComponent({

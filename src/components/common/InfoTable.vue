@@ -27,7 +27,7 @@
 import { defineComponent, PropType, computed, ref } from "vue";
 import moreGray from "@/images/icons/more-gray.svg";
 import moreWhite from "@/images/icons/more-white.svg";
-import useScrollReached from "@/composables/scroll-reached";
+import useScrollReached from "@/composables/common/useScrollReached";
 
 export default defineComponent({
   name: "InfoTable",
@@ -94,12 +94,10 @@ export default defineComponent({
 
 .mask-start {
   left: 0;
-  background-image: linear-gradient(to right, white 0%, transparent 100%);
 }
 
 .mask-end {
   right: 0;
-  background-image: linear-gradient(to left, white 0%, transparent 100%);
 }
 
 .more {
@@ -169,6 +167,16 @@ export default defineComponent({
   white-space: pre-wrap;
 
   font-size: (30/2/16) * 1rem;
+}
+
+.palette-default {
+  .mask-start {
+    background-image: linear-gradient(to right, white 0%, transparent 100%);
+  }
+
+  .mask-end {
+    background-image: linear-gradient(to left, white 0%, transparent 100%);
+  }
 }
 
 .palette-primary {

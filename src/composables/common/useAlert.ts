@@ -9,6 +9,7 @@ export interface AlertMessage {
 export interface AlertsContext {
   alerts: Ref<AlertMessage[]>;
   close: (id: string) => void;
+  open: (message: string) => void;
 }
 
 export function provideAlerts() {
@@ -18,7 +19,14 @@ export function provideAlerts() {
     alerts.value = alerts.value.filter((alert) => alert.id !== id);
   };
 
-  const context = { alerts, close };
+  const open = (message: string) => {
+    alerts.value.push({
+      id: shortid(),
+      message,
+    });
+  };
+
+  const context = { alerts, close, open };
 
   provide("ALERTS", context);
 
@@ -36,12 +44,7 @@ export function useAlerts() {
 }
 
 export function useAlert() {
-  const { alerts } = useAlerts();
+  const { alerts, open } = useAlerts();
 
-  return function alert(message: string) {
-    alerts.value.push({
-      id: shortid(),
-      message,
-    });
-  };
+  return open;
 }

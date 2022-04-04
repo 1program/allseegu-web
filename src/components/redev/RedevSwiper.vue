@@ -17,15 +17,14 @@
 import { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { defineComponent } from "vue";
+import mockImage from "@/images/mocks/redev-thumbnail.png";
+
 // eslint-disable-next-line
 import "swiper/css";
 // eslint-disable-next-line
 import "swiper/css/pagination";
 
-const images = [
-  "https://img.freepik.com/free-photo/day-city-view_1417-1777.jpg?t=st=1647683215~exp=1647683815~hmac=dc29ce39703a4a6837442078dc8164f33d4dc93fa7c84bca1b4fb0fa192ada9b&w=740",
-  "https://img.freepik.com/free-photo/skyscraper_1112-1088.jpg?t=st=1647683215~exp=1647683815~hmac=050c508702959b2c3e11842e81b17a76bb092ffb4d90dff9432f43111f98cc5f&w=740",
-];
+const images = [mockImage, mockImage];
 
 export default defineComponent({
   name: "RedevSwiper",

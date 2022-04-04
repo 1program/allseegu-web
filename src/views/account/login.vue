@@ -44,11 +44,11 @@ import * as yup from "yup";
 import { useRouter } from "vue-router";
 import { PASSWORD_REGEXP } from "@/lib/regexp";
 import FormErrorMessage from "@/components/common/FormErrorMessage.vue";
-import { useApi } from "@/composables/api";
-import { useToast } from "@/composables/toast";
+import { useApi } from "@/composables/common/useApi";
+import { useToast } from "@/composables/common/useToast";
 import { TEST_ACCOUNT } from "@/lib/config";
 import { getErrorMessage } from "@/lib/functions";
-import { useAuth } from "@/composables/auth";
+import { useAuth } from "@/composables/auth/useAuth";
 
 export default defineComponent({
   name: "AccountLoginPage",

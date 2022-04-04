@@ -28,8 +28,8 @@ export default class BaseApi {
 
     this.axios = axios.create({ baseURL: options.baseURL, headers });
 
-    // 로깅 (개발 환경, 테스트 환경에서만)
-    if (["development", "test"].includes(process.env.NODE_ENV)) {
+    // 로깅 (테스트 환경에서만)
+    if (["test"].includes(process.env.NODE_ENV)) {
       this.axios.interceptors.request.use(requestLogger, errorLogger);
       this.axios.interceptors.response.use(responseLogger, errorLogger);
     }

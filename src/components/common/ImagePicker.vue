@@ -1,21 +1,34 @@
 <template>
   <div class="image-picker">
-    <button class="add">
+    <button type="button" class="add" @click="pick">
       <img class="plus-icon" src="@/images/icons/plus.svg" alt="추가하기" />
     </button>
-    <div class="item" v-for="index in 6" :key="index">
-      <button class="close">
-        <img class="close-icon" src="@/images/icons/remove-icon.svg" alt="삭제" />
+    <div class="item" v-for="file in files" :key="file.id">
+      <img class="thumbnail" :src="file.thumbnail" alt="선택 이미지" />
+      <button type="button" class="close" @click="remove(file.id)">
+        <img class="close-icon" src="@/images/icons/close.svg" alt="삭제" />
       </button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import { useFilePicker } from "@/composables/common/useFilePicker";
 
 export default defineComponent({
   name: "ImagePicker",
+  setup() {
+    const { files, pick, remove } = useFilePicker({
+      accept: ref("image/*"),
+    });
+
+    return {
+      files,
+      pick,
+      remove,
+    };
+  },
 });
 </script>
 
@@ -58,10 +71,19 @@ export default defineComponent({
   }
 }
 
+.thumbnail {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
 .add {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  aspect-ratio: 1;
 
   color: $color-blue;
   border: 1px solid $color-blue;

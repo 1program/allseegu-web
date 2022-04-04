@@ -27,10 +27,10 @@ import AppScaffold from "@/components/common/AppScaffold.vue";
 import { defineComponent, ref } from "vue";
 import UserLeaveModal from "@/components/user/UserLeaveModal.vue";
 import MenuButton from "@/components/common/MenuButton.vue";
-import { useAuth } from "@/composables/auth";
-import { useToast } from "@/composables/toast";
-import { useApi } from "@/composables/api";
-import { useUi } from "@/composables/ui";
+import { useAuth } from "@/composables/auth/useAuth";
+import { useToast } from "@/composables/common/useToast";
+import { useApi } from "@/composables/common/useApi";
+import { useUi } from "@/composables/common/useUi";
 import { useRouter } from "vue-router";
 
 export default defineComponent({

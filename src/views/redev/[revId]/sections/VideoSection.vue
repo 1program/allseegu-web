@@ -7,11 +7,15 @@
           is-video
           :thumbnail="videoThumbnail"
           title="SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업 SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업"
+          href="https://www.youtube.com/watch?v=vn_gqYsZbuo"
+          target="_blank"
         />
         <ListCard
           is-video
           :thumbnail="videoThumbnail"
           title="SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업 SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업"
+          href="https://www.youtube.com/watch?v=vn_gqYsZbuo"
+          target="_blank"
         />
       </div>
       <ListDivider />
@@ -20,11 +24,15 @@
           is-video
           :thumbnail="videoThumbnail"
           title="SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업 SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업"
+          href="https://www.youtube.com/watch?v=vn_gqYsZbuo"
+          target="_blank"
         />
         <ListCard
           is-video
           :thumbnail="videoThumbnail"
           title="SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업 SBS 뉴스에 소개된 봉천동 재개발 신림뉴타운 사업"
+          href="https://www.youtube.com/watch?v=vn_gqYsZbuo"
+          target="_blank"
         />
       </div>
     </div>

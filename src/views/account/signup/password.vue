@@ -37,7 +37,7 @@ import { useRouter } from "vue-router";
 import FormInput from "@/components/common/FormInput.vue";
 import * as yup from "yup";
 import { confirmPasswordSchema, passwordSchema } from "@/lib/schema";
-import { useSignup } from "@/composables/signup";
+import { useSignup } from "@/composables/common/useSignup";
 
 export default defineComponent({
   components: { AppButton, FormGroup, FormInput, Field },

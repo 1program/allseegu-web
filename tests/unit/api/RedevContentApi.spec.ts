@@ -11,6 +11,6 @@ describe("RedevApi", () => {
       accessToken: log.data.api_token,
     });
 
-    await redevContentApi.redevList({});
+    await redevContentApi.list({});
   });
 });

@@ -17,7 +17,7 @@ describe("SubscribeApi", () => {
       accessToken: log.data.api_token,
     });
 
-    const revId = (await revApi.redevList({})).data.data[0]?.id;
+    const revId = (await revApi.list({})).data.data[0]?.id;
 
     await subscribeApi.subscribeList({ revId });
   });

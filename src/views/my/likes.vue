@@ -26,7 +26,7 @@
 import { defineComponent, ref } from "vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import MenuTile from "@/components/common/MenuTile.vue";
-import { useToast } from "@/composables/toast";
+import { useToast } from "@/composables/common/useToast";
 import RedevAlimModal from "@/components/redev/RedevAlimModal.vue";
 
 export default defineComponent({

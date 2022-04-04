@@ -1,15 +1,25 @@
 <template>
   <div class="user-info">
-    <h2>홍길동</h2>
-    <p>honggd@naver.com<span class="divider">/</span>서쪽바다</p>
+    <h2>{{ user?.name ?? "-" }}</h2>
+    <p>{{ user?.email ?? "-" }}<span class="divider">/</span>{{ user?.nickname ?? "-" }}</p>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { User } from "@/models/user";
+import { defineComponent, PropType } from "vue";
 
+/**
+ * 제공된 회원 정보를 포현한다.
+ */
 export default defineComponent({
   name: "UserInfo",
+  props: {
+    user: {
+      type: Object as PropType<User>,
+      default: null,
+    },
+  },
 });
 </script>
 

@@ -30,10 +30,10 @@
 import AppButton from "@/components/common/AppButton.vue";
 import FormCheck from "@/components/common/FormCheck.vue";
 import NextLink from "@/components/common/NextLink.vue";
-import { useAlert } from "@/composables/alert";
+import { useAlert } from "@/composables/common/useAlert";
 import { computed, defineComponent } from "vue";
 import { useRouter } from "vue-router";
-import { useSignup } from "@/composables/signup";
+import { useSignup } from "@/composables/common/useSignup";
 
 export default defineComponent({
   components: { FormCheck, NextLink, AppButton },

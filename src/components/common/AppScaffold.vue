@@ -57,6 +57,7 @@ export default defineComponent({
 
 .app-scaffold {
   min-height: 100vh;
+  min-height: $vh-100;
   display: flex;
   flex-direction: column;
   align-items: stretch;

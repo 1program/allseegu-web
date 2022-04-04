@@ -4,9 +4,9 @@
       <div class="name">{{ name }}</div>
       <div class="address" v-if="description != null">{{ description }}</div>
     </div>
-    <button class="phone-button" :style="{ backgroundColor: color }">
+    <div class="button">
       <slot name="button" />
-    </button>
+    </div>
   </div>
 </template>
 
@@ -21,10 +21,6 @@ export default defineComponent({
       default: null,
     },
     description: {
-      type: String,
-      default: null,
-    },
-    color: {
       type: String,
       default: null,
     },
@@ -63,17 +59,9 @@ export default defineComponent({
     }
   }
 
-  .phone-button {
+  .button {
     flex: 0 0 auto;
-
     margin-left: (15/2/16) * 1rem;
-    width: (68/2/16) * 1rem;
-    height: (68/2/16) * 1rem;
-    border-radius: (15/2/16) * 1rem;
-    background-color: $color-blue;
-    color: $color-white;
-
-    @include touchable;
   }
 }
 </style>

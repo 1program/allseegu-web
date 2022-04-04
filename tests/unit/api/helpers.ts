@@ -17,5 +17,3 @@ export function loginTestAccount() {
     data: TEST_ACCOUNT,
   });
 }
-
-export default 1;

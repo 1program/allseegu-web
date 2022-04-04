@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import AppButton from "@/components/common/AppButton.vue";
-import { useAlert } from "@/composables/alert";
+import { useAlert } from "@/composables/common/useAlert";
 import { defineComponent } from "vue";
 
 export default defineComponent({

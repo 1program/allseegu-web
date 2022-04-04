@@ -3,91 +3,61 @@
 </template>
 
 <script lang="ts">
-import { useApi } from "@/composables/api";
-import { defineComponent, onMounted, ref } from "vue";
-import { useAsyncInfiniteList } from "@/composables/async-infinite-list";
-
-export const REDEV_MAP_BLUE = "#2170fe";
-
-export const REDEV_MAP_GREEN = "#00d23c";
+import { defineComponent, ref, computed, PropType, watch } from "vue";
+import { useRedevGeoSearch } from "@/composables/redev/useRedevGeoSearch";
+import { useRedevKakaoMap } from "@/composables/redev/useRedevKakaoMap";
+import { useRouter } from "vue-router";
+import { useRedevGeoSearchOptions } from "@/composables/redev/useRedevGeoSearchOptions";
 
 export default defineComponent({
   name: "RedevMap",
-  setup() {
-    const api = useApi();
+  props: {
+    relayoutKey: {
+      type: String,
+      description: "해당 키 기반으로 카카오 지도를 업데이트한다.",
+    },
+    position: {
+      type: Object as PropType<GeolocationPosition | null>,
+      default: null,
+      description: "사용자 현재 위치. 해당 값이 변경되면 지도의 초점이 맞추어진다.",
+    },
+  },
+  setup(props) {
+    const router = useRouter();
 
+    // 카카오맵이 올라갈 엘리먼트
     const element = ref<HTMLDivElement>();
 
-    // eslint-disable-next-line
-    const kakaoMap = ref<kakao.maps.Map>();
+    // 요청시 사용할 경계선이다.
+    const requestBounds = ref<kakao.maps.LatLngBounds>();
 
-    onMounted(() => {
-      if (element.value != null) {
-        kakaoMap.value = new window.kakao.maps.Map(element.value, {
-          center: new window.kakao.maps.LatLng(37.54625801910263, 127.04814858320067),
-          level: 12,
-        });
+    // 구역목록 요청시 사용할 옵션값.
+    const options = useRedevGeoSearchOptions({
+      bounds: requestBounds,
+    });
+
+    // 구역목록. options가 바뀌면 자동으로 재요청 된다.
+    const redevList = useRedevGeoSearch(options);
+
+    // 구역 카카오맵 사용
+    const { bounds } = useRedevKakaoMap({
+      element,
+      redevList: computed(() => redevList.data ?? []),
+      relayoutKey: computed(() => props.relayoutKey),
+      position: computed(() => props.position),
+      onClickRedev: (redev) => router.push(`/redev/${redev.id}`),
+    });
+
+    // 지도의 바운드를 요청바운드에 할당한다.
+    watch(
+      () => bounds.value,
+      (newBound) => {
+        requestBounds.value = newBound;
       }
-    });
-
-    const redevList = useAsyncInfiniteList({
-      using: ref(true),
-      params: ref({
-        page: 0,
-        take: 10,
-      }),
-      loader: api.redev.redevList,
-    });
-
-    // watch(
-    //   () => ({ map: kakaoMap.value, list: redevList.list }),
-    //   ({ map, list }) => {
-    //     if (map != null && list.length > 0) {
-    //       /// 목록 전체 바운더리
-    //       const totalBounds = new window.kakao.maps.LatLngBounds();
-
-    //       list.forEach((redev) => {
-    //         const points = redev.geometry_points.map(
-    //           (point) => new window.kakao.maps.LatLng(point.y, point.x)
-    //         );
-
-    //         const bounds = boundsFromLatLngs(points);
-
-    //         const center = centerFromBounds(bounds);
-
-    //         const polygonColor = redev.is_issue ? REDEV_MAP_BLUE : REDEV_MAP_GREEN;
-
-    //         const poly = new window.kakao.maps.Polygon({
-    //           path: points,
-    //           fillColor: polygonColor,
-    //           fillOpacity: 0.6,
-    //           strokeColor: polygonColor,
-    //           strokeWeight: 1,
-    //         });
-
-    //         points.forEach((point) => totalBounds.extend(point));
-
-    //         // eslint-disable-next-line
-    //         new window.kakao.maps.CustomOverlay({
-    //           content: `<div class="redev-map-text">
-    //             <div class="stroke">${redev.district}</div>
-    //             <div class="text" style="color: ${polygonColor}">${redev.district}</div>
-    //           </div>`,
-    //           xAnchor: 0.5,
-    //           yAnchor: 0.5,
-    //           position: center,
-    //           map,
-    //         });
-
-    //         poly.setMap(map);
-    //       });
-
-    //       map.setBounds(totalBounds);
-    //     }
-    //   }
-    // );
+    );
 
     return {
+      // 렌더시 카카오맵이 마운트될 div를 얻기 위해 ref를 노출한다.
       element,
     };
   },
@@ -100,24 +70,6 @@ export default defineComponent({
 .redev-map {
   width: 100%;
   height: 100%;
-}
-</style>
-
-<style lang="scss">
-.redev-map-text {
-  position: relative;
-  font-size: 13px;
-
-  .stroke {
-    -webkit-text-stroke: 3px white;
-  }
-
-  .text {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
+  background-color: #9dbad1;
 }
 </style>

@@ -15,18 +15,22 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/permissions",
     component: () => import("@/views/permissions.vue"),
+    meta: { public: true },
   },
   {
     path: "/account",
     component: () => import("@/views/account/index.vue"),
+    meta: { public: true },
   },
   {
     path: "/account/login",
     component: () => import("@/views/account/login.vue"),
+    meta: { public: true },
   },
   {
     path: "/account/signup",
     component: () => import("@/views/account/signup/index.vue"),
+    meta: { public: true },
     children: [
       {
         path: "terms",
@@ -71,6 +75,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/account/find-id",
     component: () => import("@/views/account/find-id/index.vue"),
+    meta: { public: true },
     children: [
       {
         path: "cert",
@@ -90,6 +95,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/account/find-password",
     component: () => import("@/views/account/find-password/index.vue"),
+    meta: { public: true },
     children: [
       {
         path: "cert",
@@ -192,6 +198,14 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/redev/[revId]/subscribe/[subscribeId].vue"),
   },
   {
+    path: "/redev/:revId/notice",
+    component: () => import("@/views/redev/[revId]/notice/index.vue"),
+  },
+  {
+    path: "/redev/:revId/notice/:noticeId",
+    component: () => import("@/views/redev/[revId]/notice/[noticeId].vue"),
+  },
+  {
     path: "/redev/:revId/video",
     component: () => import("@/views/redev/[revId]/video/index.vue"),
   },
@@ -215,7 +229,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/redev/:revId/story/:storyId",
     component: () => import("@/views/redev/[revId]/story/[storyId].vue"),
   },
-  { path: "", component: () => import("@/views/index.vue") },
+  { path: "", meta: { public: true }, component: () => import("@/views/index.vue") },
 ];
 
 // https://dev.to/uwutrinket/fix-scroll-jump---vue-router-45ja

@@ -16,7 +16,7 @@
 <script lang="ts">
 import AppButton from "@/components/common/AppButton.vue";
 import { defineComponent } from "vue";
-import { useSignup } from "@/composables/signup";
+import { useSignup } from "@/composables/common/useSignup";
 
 export default defineComponent({
   components: { AppButton },

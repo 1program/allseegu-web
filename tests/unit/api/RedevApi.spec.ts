@@ -11,7 +11,7 @@ describe("RedevApi", () => {
       accessToken: log.data.api_token,
     });
 
-    await redevApi.redevList({});
+    await redevApi.list({});
   });
 
   it("search", async () => {
@@ -22,6 +22,6 @@ describe("RedevApi", () => {
       accessToken: log.data.api_token,
     });
 
-    await redevApi.searchRedev({ query: "ex" });
+    await redevApi.search({ query: "ex" });
   });
 });

@@ -7,5 +7,3 @@ export function formatDate(date?: Date | number | null) {
 
   return null;
 }
-
-export default 1;
