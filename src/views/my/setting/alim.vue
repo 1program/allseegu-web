@@ -21,7 +21,7 @@
           </template>
         </menu-button>
       </div>
-      <div class="divider" />
+      <!-- <div class="divider" />
       <div class="list-group">
         <menu-button>
           <template v-slot>마케팅 정보 수신 <span class="date">2022. 02. 28</span></template>
@@ -41,7 +41,7 @@
             <app-toggle v-model:checked="settings.sms" />
           </template>
         </menu-button>
-      </div>
+      </div> -->
     </div>
   </app-scaffold>
   <transition>
@@ -57,7 +57,7 @@ import MenuButton from "@/components/common/MenuButton.vue";
 import AppToggle from "@/components/common/AppToggle.vue";
 
 export default defineComponent({
-  name: "MySettingPush",
+  name: "MySettingAlim",
   components: { AppScaffold, UserLeaveModal, MenuButton, AppToggle },
   setup() {
     const showingLeaveAlert = ref(false);

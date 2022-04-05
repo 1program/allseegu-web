@@ -134,8 +134,8 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/my/setting/password.vue"),
   },
   {
-    path: "/my/setting/push",
-    component: () => import("@/views/my/setting/push.vue"),
+    path: "/my/setting/alim",
+    component: () => import("@/views/my/setting/alim.vue"),
   },
   {
     path: "/my/customer/request",
@@ -233,7 +233,8 @@ const routes: Array<RouteRecordRaw> = [
     path: "/redev/:revId/story/:storyId",
     component: () => import("@/views/redev/[revId]/story/[storyId].vue"),
   },
-  { path: "", meta: { public: true }, component: () => import("@/views/index.vue") },
+  { path: "/redev", meta: { public: true }, component: () => import("@/views/redev/index.vue") },
+  { path: "", redirect: { path: "/permissions" } },
 ];
 
 // https://dev.to/uwutrinket/fix-scroll-jump---vue-router-45ja

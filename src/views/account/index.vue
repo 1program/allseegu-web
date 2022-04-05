@@ -29,7 +29,7 @@
           <template v-slot>카카오 로그인</template>
         </app-button>
       </div>
-      <router-link to="/" class="explore-link">로그인하지 않고 둘러보기</router-link>
+      <router-link to="/redev" class="explore-link">로그인하지 않고 둘러보기</router-link>
     </div>
   </div>
 </template>

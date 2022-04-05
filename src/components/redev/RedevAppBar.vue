@@ -17,7 +17,6 @@
         placeholder="원하시는 지역을 입력해 주세요"
       />
     </div>
-
     <div class="buttons" v-if="searching">
       <button type="submit" class="button">
         <img src="@/images/icons/redev-list-search.svg" alt="검색" />
@@ -27,9 +26,6 @@
       </button>
     </div>
     <div class="buttons" v-else>
-      <button type="button" class="button" @click="open(true)">
-        <img src="@/images/icons/redev-list-search.svg" alt="검색" />
-      </button>
       <router-link class="button" :class="{ 'has-notice': true }" to="/alim">
         <img src="@/images/icons/redev-list-alim.svg" alt="알림" />
       </router-link>

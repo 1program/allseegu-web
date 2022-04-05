@@ -1,6 +1,6 @@
 <template>
   <div class="app-scaffold">
-    <app-bar class="app-bar" :title="title" :progress="progress">
+    <app-bar class="app-bar" :title="title" :progress="progress" :theme="theme">
       <!-- AppBar의 actions slot -->
       <template v-slot:actions>
         <slot name="actions" />
@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import AppBar from "@/components/common/AppBar.vue";
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "AppScaffold",
@@ -39,6 +39,10 @@ export default defineComponent({
       default: false,
       description: "위로가기 버튼을 노출할지",
     },
+    theme: {
+      type: String as PropType<"default" | "primary">,
+      default: "default",
+    },
   },
   setup() {
     const goTop = () => {
@@ -56,8 +60,7 @@ export default defineComponent({
 @import "@/styles/config";
 
 .app-scaffold {
-  min-height: 100vh;
-  min-height: $vh-100;
+  @include min-height-100vh;
   display: flex;
   flex-direction: column;
   align-items: stretch;

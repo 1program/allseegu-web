@@ -1,8 +1,8 @@
 <template>
-  <AppScaffold title="신림 1구역 도시 정비 사업" has-top-button>
+  <AppScaffold title="신림 1구역 도시 정비 사업" has-top-button theme="primary">
     <template v-slot:actions>
       <AppBarAction to="/my">
-        <img src="@/images/icons/my-icon-black.svg" width="22" alt="마이" />
+        <img src="@/images/icons/my-icon-white.svg" width="22" alt="마이" />
       </AppBarAction>
     </template>
     <div class="redev-detail-page">

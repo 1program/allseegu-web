@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="container page-footer gap-vertical">
-    <app-button full to="/">올씨구 시작하기</app-button>
+    <app-button full to="/redev">올씨구 시작하기</app-button>
   </div>
 </template>
 

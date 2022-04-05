@@ -10,8 +10,6 @@
         </div>
         <div class="last-spacer" />
       </div>
-      <div class="mask mask-start" />
-      <div class="mask mask-end" />
       <img
         class="more more-start"
         :class="{ active: !reached.left }"
@@ -85,21 +83,6 @@ export default defineComponent({
   overflow-y: auto;
 }
 
-.mask {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: (40/2/16) * 1rem;
-}
-
-.mask-start {
-  left: 0;
-}
-
-.mask-end {
-  right: 0;
-}
-
 .more {
   position: absolute;
   top: (27/2/16) * 1rem;
@@ -167,16 +150,6 @@ export default defineComponent({
   white-space: pre-wrap;
 
   font-size: (30/2/16) * 1rem;
-}
-
-.palette-default {
-  .mask-start {
-    background-image: linear-gradient(to right, white 0%, transparent 100%);
-  }
-
-  .mask-end {
-    background-image: linear-gradient(to left, white 0%, transparent 100%);
-  }
 }
 
 .palette-primary {

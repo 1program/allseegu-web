@@ -1,8 +1,8 @@
 <template>
-  <div class="app-bar">
+  <div class="app-bar" :class="[theme]">
     <!-- 뒤로 가기 -->
     <button class="back-button" @click="handleBack">
-      <img class="back-icon" src="@/images/icons/nav-arrow_left.svg" alt="뒤로가기" />
+      <img class="back-icon" :src="icon" alt="뒤로가기" />
     </button>
     <div class="title">
       {{ title }}
@@ -15,8 +15,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType, computed } from "vue";
 import { useRouter } from "vue-router";
+
+import whiteIcon from "@/images/icons/nav-arrow-left-white.svg";
+import blackIcon from "@/images/icons/nav-arrow-left-black.svg";
+
+const icons = {
+  default: blackIcon,
+  primary: whiteIcon,
+};
 
 export default defineComponent({
   name: "AppBar",
@@ -31,9 +39,15 @@ export default defineComponent({
       default: 0,
       description: "AppBar의 진척도, 0 ~ 1",
     },
+    theme: {
+      type: String as PropType<"default" | "primary">,
+      default: "default",
+    },
   },
-  setup() {
+  setup(props) {
     const router = useRouter();
+
+    const icon = computed(() => icons[props.theme]);
 
     const goBack = () => {
       if (router.options?.history.state?.back == null) {
@@ -46,6 +60,7 @@ export default defineComponent({
     };
 
     return {
+      icon,
       handleBack: goBack,
     };
   },
@@ -67,6 +82,12 @@ export default defineComponent({
   text-align: center;
   border-bottom: 1px solid $color-light;
   background-color: $color-white;
+
+  &.primary {
+    background-color: $color-blue;
+    color: $color-white;
+    border-color: transparent;
+  }
 }
 
 .actions {

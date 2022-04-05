@@ -91,7 +91,7 @@ export default defineComponent({
 
         toast(result.message);
 
-        router.push("/permissions");
+        router.push("/redev");
       } catch (error) {
         errorMessage.value = getErrorMessage(error);
       }

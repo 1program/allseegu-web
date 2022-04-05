@@ -83,8 +83,7 @@ export default defineComponent({
   flex-direction: column;
 
   &.has-map {
-    height: 100vh;
-    height: $vh-100;
+    @include height-100vh;
   }
 }
 

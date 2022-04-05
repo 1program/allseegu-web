@@ -6,7 +6,7 @@
         <menu-button to="setting/nickname">별명 변경</menu-button>
         <menu-button to="setting/mobile">휴대전화번호 변경</menu-button>
         <menu-button to="setting/password">비밀번호 변경</menu-button>
-        <menu-button to="setting/push">알림 설정</menu-button>
+        <menu-button to="setting/alim">알림 설정</menu-button>
         <menu-button @click="logout">로그아웃</menu-button>
       </div>
       <div class="divider thick" />
@@ -50,7 +50,7 @@ export default defineComponent({
         const result = await api.auth.logout();
         auth.logout();
         toast(result.message);
-        router.push("/");
+        router.push("/redev");
       } catch (error) {
         ui.handleError(error);
       }

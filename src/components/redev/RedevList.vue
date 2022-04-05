@@ -50,6 +50,7 @@ export default defineComponent({
   components: { LoadingFallback, RedevTile },
   setup(props) {
     const loading = ref(false);
+
     /// 임시 로딩 처리
     watch(
       () => props.keyword,
@@ -63,20 +64,23 @@ export default defineComponent({
         };
       }
     );
+
     const results = Array.from({ length: 20 }).map((_, index) => ({
       id: index + 1,
       title: `신림 1구역 재개발 사업 ${index + 1}`,
     }));
+
     const issues = [
       {
         id: 1,
         title: "신림 1구역 재개발 사업",
       },
-      ...Array.from({ length: 100 }).map((_, index) => ({
+      ...Array.from({ length: 9 }).map((_, index) => ({
         id: index + 2,
         title: "광명 7구역 신동아 아파트 리모델링 사업",
       })),
     ];
+
     return { results, issues, loading };
   },
 });

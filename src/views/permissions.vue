@@ -6,7 +6,7 @@
           <div class="header">필수적 접근 권한</div>
           <div class="tile">
             <div class="icon-wrap">
-              <img src="@/images/icons/gps.svg" alt="GPS" />
+              <img src="@/images/icons/permissions-storage.svg" alt="저장공간" />
             </div>
             <div class="tile-main">
               <div class="label">저장공간</div>
@@ -28,7 +28,7 @@
           </div>
           <div class="tile">
             <div class="icon-wrap">
-              <img src="@/images/icons/gps.svg" alt="GPS" />
+              <img src="@/images/icons/permissions-camera.svg" alt="카메라" />
             </div>
             <div class="tile-main">
               <div class="label">사진/카메라/파일</div>
@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="container page-footer">
-      <AppButton full to="/">확인</AppButton>
+      <AppButton full to="/redev">확인</AppButton>
     </div>
   </AppScaffold>
 </template>

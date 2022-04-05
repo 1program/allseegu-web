@@ -62,7 +62,6 @@ export default defineComponent({
 .app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; // 언제나 최소 화면 높이의 100%를 보장하기 위함이다.
-  min-height: $vh-100;
+  @include min-height-100vh;
 }
 </style>
