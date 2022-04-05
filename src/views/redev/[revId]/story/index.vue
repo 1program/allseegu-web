@@ -11,6 +11,7 @@
           nickname="라이언"
           :comments="26"
           to="story/1"
+          :mine="index == 4"
         />
         <ListDivider />
       </template>

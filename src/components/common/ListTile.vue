@@ -1,5 +1,5 @@
 <template>
-  <RouterLinkOrButton class="list-tile">
+  <RouterLinkOrButton class="list-tile" :class="{ mine }">
     <div class="header" v-if="category != null">
       {{ category }}
       <div class="tools" v-if="showTools == true">
@@ -52,6 +52,10 @@ export default defineComponent({
     nickname: {
       type: String,
       default: null,
+    },
+    mine: {
+      type: Boolean,
+      default: false,
     },
     comments: {
       type: Number,
@@ -166,5 +170,9 @@ export default defineComponent({
       margin-top: 1px;
     }
   }
+}
+
+.mine .nickname {
+  color: $color-blue;
 }
 </style>
