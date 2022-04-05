@@ -16,7 +16,8 @@
         <div class="section-divider" />
         <!-- 전문가 의견 섹션 -->
         <SubscribeSection />
-        <div class="ad">광고 위치<br />협의예정</div>
+        <AdSwiper />
+        <!-- <div class="ad">광고 위치<br />협의예정</div> -->
         <div class="section-divider" />
         <!-- 영상 섹션 -->
         <VideoSection />
@@ -48,6 +49,7 @@ import { defineComponent } from "vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import RedevSwiper from "@/components/redev/RedevSwiper.vue";
 import AppBarAction from "@/components/common/AppBarAction.vue";
+import AdSwiper from "@/components/ad/AdSwiper.vue";
 
 import NewsSection from "./sections/NewsSection.vue";
 import AgentSection from "./sections/AgentSection.vue";
@@ -76,6 +78,7 @@ export default defineComponent({
     AdSection,
     CommunitySection,
     AppBarAction,
+    AdSwiper,
   },
 });
 </script>

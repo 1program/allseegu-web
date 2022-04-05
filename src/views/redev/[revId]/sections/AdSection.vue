@@ -7,9 +7,9 @@
         :modules="modules"
         :pagination="{ el: paginationEl, clickable: true }"
       >
-        <SwiperSlide v-for="index in 3" :key="index">
+        <SwiperSlide v-for="image in images" :key="image">
           <div class="ad">
-            <img :src="adImage" alt="광고 이미지" />
+            <img :src="image" alt="광고 이미지" />
           </div>
         </SwiperSlide>
       </Swiper>
@@ -25,7 +25,10 @@ import { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { defineComponent, ref } from "vue";
 
-import adImage from "@/images/mocks/ad.png";
+import ad1 from "@/images/mocks/ad1.jpg";
+import ad2 from "@/images/mocks/ad2.jpg";
+
+const images = [ad1, ad2];
 
 export default defineComponent({
   name: "AdSection",
@@ -36,7 +39,8 @@ export default defineComponent({
     return {
       modules: [Pagination],
       paginationEl,
-      adImage,
+
+      images,
     };
   },
 });

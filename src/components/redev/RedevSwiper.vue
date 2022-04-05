@@ -17,14 +17,15 @@
 import { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { defineComponent } from "vue";
-import mockImage from "@/images/mocks/redev-thumbnail.png";
+import redev1 from "@/images/mocks/redev1.jpg";
+import redev2 from "@/images/mocks/redev2.jpg";
 
 // eslint-disable-next-line
 import "swiper/css";
 // eslint-disable-next-line
 import "swiper/css/pagination";
 
-const images = [mockImage, mockImage];
+const images = [redev1, redev2];
 
 export default defineComponent({
   name: "RedevSwiper",
