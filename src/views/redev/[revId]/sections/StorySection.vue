@@ -16,7 +16,12 @@
         to="1/story/1"
       />
       <ListDivider />
-      <ListTile title="새로운 실거래 6.95억은 세끼고 인가요?" nickname="부동산왕" :comments="26" />
+      <ListTile
+        title="새로운 실거래 6.95억은 세끼고 인가요?"
+        nickname="부동산왕"
+        :comments="26"
+        to="1/story/1"
+      />
     </div>
   </div>
   <MoreButton to="1/story">우리 구역 이야기 더보기</MoreButton>
