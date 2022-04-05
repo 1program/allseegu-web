@@ -162,6 +162,10 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/my/customer/faq.vue"),
   },
   {
+    path: "/my/customer/terms/:termId?",
+    component: () => import("@/views/my/customer/terms/index.vue"),
+  },
+  {
     path: "/my/customer/inquiry",
     component: () => import("@/views/my/customer/inquiry/index.vue"),
   },

@@ -2,25 +2,39 @@
   <div class="tab-bar">
     <template v-for="(tab, index) in tabs" :key="tab.id">
       <div class="divider" v-if="index != 0" />
-      <button class="tab" :class="{ active: tab.id == currentTab }" @click="changeTab(tab.id)">
+      <RouterLinkOrButton
+        class="tab"
+        :class="{ active: tab.id == currentTab }"
+        active-class="active"
+        @click="changeTab(tab.id)"
+        :to="tab.to"
+      >
         {{ tab.title }}
-      </button>
+      </RouterLinkOrButton>
     </template>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+import RouterLinkOrButton from "./RouterLinkOrButton.vue";
 
 export default defineComponent({
   name: "TabBar",
+  components: { RouterLinkOrButton },
   props: {
     currentTab: {
       type: [String, Number],
       default: null,
     },
     tabs: {
-      type: Array as PropType<{ id: string | number; title: string }[]>,
+      type: Array as PropType<
+        {
+          id: string | number;
+          title: string;
+          to?: string;
+        }[]
+      >,
       default: () => [
         {
           id: 0,
@@ -51,7 +65,7 @@ export default defineComponent({
     display: inline-block;
     vertical-align: middle;
     font-size: (26/2/16) * 1rem;
-    margin-bottom: (16/2/16) * 1rem;
+    // margin-bottom: (16/2/16) * 1rem;
 
     @include touchable;
 
@@ -85,7 +99,7 @@ export default defineComponent({
     vertical-align: middle;
     margin: 0 (31/2/16) * 1rem;
     margin-top: 0.1em;
-    margin-bottom: (17/2/16) * 1rem;
+    // margin-bottom: (17/2/16) * 1rem;
     border-left: 1px solid #dddddd;
     height: 1em;
   }
