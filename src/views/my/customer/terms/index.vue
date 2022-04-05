@@ -38,7 +38,6 @@
         </div>
       </template>
       <template v-else-if="termId == 'privacy'">
-        <div class="divider light" />
         <div class="section">
           <div class="version">버전 {{ version }}</div>
           <h1>개인정보 처리방침</h1>
@@ -67,7 +66,6 @@
         </div>
       </template>
       <template v-else-if="termId == 'location'">
-        <div class="divider light" />
         <div class="section">
           <div class="version">버전 {{ version }}</div>
           <h1>위치기반서비스 이용약관</h1>
@@ -112,7 +110,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import TabBar from "@/components/common/TabBar.vue";
@@ -150,6 +148,16 @@ export default defineComponent({
     const changeTab = (value: string) => {
       router.push(`${value}`);
     };
+
+    watch(
+      () => termId.value,
+      (current) => {
+        if (current === "") {
+          router.replace(`terms/usage`);
+        }
+      },
+      { immediate: true }
+    );
 
     return {
       tabs,
