@@ -43,21 +43,12 @@
           </FormGroup>
         </field>
         <FormGroup label="첨부 파일">
-          <ImagePicker class="image-picker" />
-          <div class="attachment-group">
-            <AttachmentTile
-              class="attachment"
-              url="http://view3.synology.me:5050/d/s/672812605452106783/bzE8Aohz0mThrDs-cYk8IV1JdsyHGgzM-vb5gT7NPVgk_"
-            >
-              첨부 파일.hwp
-            </AttachmentTile>
-            <AttachmentTile
-              class="attachment"
-              url="http://view3.synology.me:5050/d/s/672812605452106783/bzE8Aohz0mThrDs-cYk8IV1JdsyHGgzM-vb5gT7NPVgk_"
-            >
-              첨부 파일.hwp
-            </AttachmentTile>
-          </div>
+          <FilePicker
+            class="image-picker"
+            accept="*"
+            :files="files"
+            @change-files="files = $event"
+          />
           <div class="description">
             문제를 발견했거나 참고가 될만한 자료를 첨부하시면 더 정확하고 빠른 답변을 받아 보실 수
             있게 됩니다.
@@ -77,7 +68,7 @@ import OptionButtonGroup from "@/components/common/OptionButtonGroup.vue";
 import OptionButton from "@/components/common/OptionButton.vue";
 import FormTextarea from "@/components/common/FormTextarea.vue";
 import AttachmentTile from "@/components/common/AttachmentTile.vue";
-import ImagePicker from "@/components/common/ImagePicker.vue";
+import FilePicker from "@/components/common/FilePicker.vue";
 import AppButton from "@/components/common/AppButton.vue";
 import { useAlert } from "@/composables/common/useAlert";
 import { Field, useForm } from "vee-validate";
@@ -91,8 +82,7 @@ export default defineComponent({
     OptionButtonGroup,
     OptionButton,
     FormTextarea,
-    AttachmentTile,
-    ImagePicker,
+    FilePicker,
     Field,
     AppButton,
   },
@@ -109,7 +99,9 @@ export default defineComponent({
 
     const submit = handleSubmit(() => alert("문의가 등록 되었습니다."));
 
-    return { inquiryType, submit };
+    const files = ref([]);
+
+    return { inquiryType, submit, files };
   },
 });
 </script>
@@ -125,21 +117,13 @@ export default defineComponent({
   margin-bottom: (95/2/16) * 1rem;
 }
 
-.attachment-group {
-  margin-top: (20/2/16) * 1rem;
-}
-
 .image-picker {
   margin-top: (20/2/16) * 1rem;
-}
-
-.attachment {
-  margin-bottom: (8/2/16) * 1rem;
 }
 
 .description {
   color: $color-gray;
   font-size: (26/2/16) * 1rem;
-  margin-top: (20/2/16) * 1rem;
+  margin-top: (26/2/16) * 1rem;
 }
 </style>

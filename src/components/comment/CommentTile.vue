@@ -1,6 +1,6 @@
 <template>
-  <div class="comment-tile" :class="{ sub, mine }">
-    <div class="header">
+  <div class="comment-tile" :class="{ sub }">
+    <div class="header" :class="{ mine }">
       <div class="nickname">{{ nickname }}</div>
       <div class="date">{{ dateText }}</div>
       <div class="tools" v-if="mine">
@@ -13,27 +13,28 @@
       <ImageGallery :images="images" />
     </div>
     <div class="content">{{ content }}</div>
-    <div class="footer">
+    <div class="footer" v-if="!sub">
       <button
         class="reply"
         :disabled="commentCount < 1"
-        :class="{ active: showReply }"
-        @click="showReply = !showReply"
+        :class="{ active: expanded }"
+        @click="expand"
       >
         답글{{ commentCount > 0 ? ` ${commentCount}` : "" }}
       </button>
     </div>
-    <div class="children" v-if="$slots.default != null && showReply"><slot /></div>
+    <div class="children" v-if="$slots.default != null && expanded"><slot /></div>
   </div>
 </template>
 
 <script lang="ts">
 import { formatDate } from "@/lib/formatters";
-import { defineComponent, PropType, ref } from "vue";
-import ImageGallery from "./ImageGallery.vue";
+import { defineComponent, PropType } from "vue";
+import ImageGallery from "../common/ImageGallery.vue";
 
 export default defineComponent({
   name: "CommentTile",
+  components: { ImageGallery },
   props: {
     sub: {
       type: Boolean,
@@ -64,18 +65,19 @@ export default defineComponent({
       type: Number,
       default: 0,
     },
+    expanded: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props, context) {
-    const showReply = ref(false);
-
     return {
       dateText: formatDate(props.date),
       edit: () => context.emit("edit"),
       remove: () => context.emit("remove"),
-      showReply,
+      expand: () => context.emit("expand", !props.expanded),
     };
   },
-  components: { ImageGallery },
 });
 </script>
 
@@ -152,7 +154,7 @@ export default defineComponent({
     margin-top: (22/2/16) * 1rem;
   }
 
-  &.mine .nickname {
+  .mine .nickname {
     color: $color-blue;
   }
 }

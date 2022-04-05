@@ -1,5 +1,5 @@
 <template>
-  <AppScaffold title="우리 구역 이야기">
+  <AppScaffold title="우리 구역 이야기" has-top-button>
     <div class="container">
       <div class="meta">
         <PostMeta
@@ -10,7 +10,7 @@
       </div>
       <div class="divider" />
       <div class="page-content">
-        <ImageGallery :images="threeImages" />
+        <ImageGallery :images="[redevImage, redevImage, redevImage]" />
         <div class="content">
           조합이 바르게 운영되지 못하고 와해되는 이유는 바로 이것 때문입니다. 조합이 바르게 운영되지
           못하고 와해되는 이유는 바로 이것 때문입니다.<br /><br />
@@ -22,76 +22,42 @@
           <div class="comments-count">댓글 9</div>
           <CommentForm class="comments-top-form" />
         </div>
-        <div class="divider light" />
-        <CommentTile
-          class="comments-item"
-          nickname="서쪽바다"
-          :date="date"
-          mine
-          :images="twoImages"
-          content="새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요?"
-          :comment-count="0"
-        />
-        <div class="divider light" />
-        <div class="comments-item">
-          <CommentForm show-cancel ok-label="수정" />
-        </div>
-        <div class="divider light" />
-        <CommentTile
-          class="comments-item"
-          nickname="서쪽바다"
-          :date="date"
-          mine
-          :images="threeImages"
-          content="새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요?"
-          :comment-count="2"
-        >
-          <SubItem>
-            <CommentTile
-              nickname="서쪽바다"
-              :date="date"
-              :images="threeImages"
-              content="새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요?"
-              :comment-count="2"
-            />
-          </SubItem>
-          <div class="divider light darker margin" />
-          <SubItem>
-            <CommentTile
-              nickname="서쪽바다"
-              :date="date"
-              mine
-              :images="threeImages"
-              content="새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요?"
-              :comment-count="2"
-          /></SubItem>
-          <div class="divider light darker margin" />
-          <SubItem><CommentForm /></SubItem>
-        </CommentTile>
+        <template v-for="comment in comments" :key="comment.id">
+          <div class="divider light" />
+          <CommentItem class="comments-item" :comment="comment" />
+        </template>
       </div>
     </div>
   </AppScaffold>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import PostMeta from "@/components/common/PostMeta.vue";
 import ImageGallery from "@/components/common/ImageGallery.vue";
 
 import redevImage from "@/images/mocks/redev-image.png";
-import CommentForm from "@/components/common/CommentForm.vue";
-import CommentTile from "@/components/common/CommentTile.vue";
-import SubItem from "../../../../components/common/SubItem.vue";
+import CommentForm from "@/components/comment/CommentForm.vue";
+import { tempComment1, tempComment2 } from "@/models/comment";
+import CommentItem from "@/components/comment/CommentItem.vue";
 
 export default defineComponent({
   name: "RedevDetailStoryDetail",
-  components: { AppScaffold, PostMeta, ImageGallery, CommentForm, CommentTile, SubItem },
+  components: {
+    AppScaffold,
+    PostMeta,
+    ImageGallery,
+    CommentForm,
+    CommentItem,
+  },
   setup() {
+    const comments = ref([tempComment1, tempComment2]);
+
     return {
       date: new Date(),
-      twoImages: [redevImage, redevImage],
-      threeImages: [redevImage, redevImage, redevImage],
+      comments,
+      redevImage,
     };
   },
 });

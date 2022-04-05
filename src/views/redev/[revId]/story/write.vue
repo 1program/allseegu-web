@@ -1,5 +1,5 @@
 <template>
-  <AppScaffold title="우리 구역 이야기">
+  <AppScaffold title="우리 구역 이야기" has-top-button>
     <form class="page-wrapper" @submit.prevent="submit">
       <div class="container page-content">
         <FormGroup class="form-group" label="제목">
@@ -11,7 +11,7 @@
           />
         </FormGroup>
         <FormGroup label="첨부 파일">
-          <ImagePicker class="picker" />
+          <FilePicker class="picker" :files="files" @change-files="files = $event" />
         </FormGroup>
       </div>
       <div class="container page-footer">
@@ -22,22 +22,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import AppButton from "@/components/common/AppButton.vue";
 import FormGroup from "@/components/common/FormGroup.vue";
 import FormInput from "@/components/common/FormInput.vue";
 import FormTextarea from "@/components/common/FormTextarea.vue";
-import ImagePicker from "@/components/common/ImagePicker.vue";
+import FilePicker from "@/components/common/FilePicker.vue";
 import { useAlert } from "@/composables/common/useAlert";
+import { FileInfo } from "@/utils/file/pickFileInfo";
 
 export default defineComponent({
   name: "RedevDetailStoryWrite",
-  components: { AppScaffold, AppButton, FormGroup, FormInput, FormTextarea, ImagePicker },
+  components: { AppScaffold, AppButton, FormGroup, FormInput, FormTextarea, FilePicker },
   setup() {
     const alert = useAlert();
 
+    const files = ref<FileInfo[]>([]);
+
     return {
+      files,
       submit() {
         //
         alert("이야기가 등록 되었습니다.");

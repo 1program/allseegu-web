@@ -1,5 +1,5 @@
 <template>
-  <AppScaffold title="1:1문의">
+  <AppScaffold title="1:1문의" has-top-button>
     <div class="container">
       <div class="page-content-medium">
         <div class="page-title">무엇을 도와드릴까요?</div>

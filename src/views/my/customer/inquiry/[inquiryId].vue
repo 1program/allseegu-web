@@ -1,5 +1,5 @@
 <template>
-  <AppScaffold title="1:1문의">
+  <AppScaffold title="1:1문의" has-top-button>
     <div class="container">
       <div class="meta">
         <PostMeta
@@ -45,62 +45,17 @@
           <div class="comments-count">댓글 9</div>
           <CommentForm class="comments-top-form" />
         </div>
-        <div class="divider light" />
-        <CommentTile
-          class="comments-item"
-          nickname="서쪽바다"
-          :date="date"
-          mine
-          @remove="removeComment(0)"
-          :images="twoImages"
-          content="새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요?"
-          :comment-count="0"
-        />
-        <div class="divider light" />
-        <div class="comments-item">
-          <CommentForm show-cancel ok-label="수정" />
-        </div>
-        <div class="divider light" />
-        <CommentTile
-          class="comments-item"
-          nickname="서쪽바다"
-          :date="date"
-          mine
-          @remove="removeComment(0)"
-          :images="threeImages"
-          content="새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요?"
-          :comment-count="2"
-        >
-          <SubItem>
-            <CommentTile
-              nickname="서쪽바다"
-              :date="date"
-              :images="threeImages"
-              content="새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요?"
-              :comment-count="2"
-            />
-          </SubItem>
-          <div class="divider light darker margin" />
-          <SubItem>
-            <CommentTile
-              nickname="서쪽바다"
-              :date="date"
-              mine
-              @remove="removeComment(0)"
-              :images="threeImages"
-              content="새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요?"
-              :comment-count="2"
-          /></SubItem>
-          <div class="divider light darker margin" />
-          <SubItem><CommentForm /></SubItem>
-        </CommentTile>
+        <template v-for="comment in comments" :key="comment.id">
+          <div class="divider light" />
+          <CommentItem class="comments-item" :comment="comment" />
+        </template>
       </div>
     </div>
   </AppScaffold>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import { useRoute } from "vue-router";
 import PostMeta from "@/components/common/PostMeta.vue";
@@ -109,10 +64,10 @@ import redevImage from "@/images/mocks/redev-image.png";
 import AttachmentTile from "@/components/common/AttachmentTile.vue";
 import ImageGallery from "@/components/common/ImageGallery.vue";
 import Badge from "@/components/common/Badge.vue";
-import CommentTile from "@/components/common/CommentTile.vue";
-import CommentForm from "@/components/common/CommentForm.vue";
+import CommentForm from "@/components/comment/CommentForm.vue";
 import { useConfirm } from "@/composables/common/useConfirm";
-import SubItem from "@/components/common/SubItem.vue";
+import { tempComment1, tempComment2 } from "@/models/comment";
+import CommentItem from "@/components/comment/CommentItem.vue";
 
 export default defineComponent({
   name: "MyCustomerInquiryDetail",
@@ -122,9 +77,8 @@ export default defineComponent({
     AttachmentTile,
     ImageGallery,
     Badge,
-    CommentTile,
     CommentForm,
-    SubItem,
+    CommentItem,
   },
   setup() {
     const route = useRoute();
@@ -138,6 +92,8 @@ export default defineComponent({
       }
     };
 
+    const comments = ref([tempComment1, tempComment2]);
+
     return {
       isAnswered,
       images: [redevImage, redevImage, redevImage],
@@ -145,6 +101,7 @@ export default defineComponent({
       twoImages: [redevImage, redevImage],
       threeImages: [redevImage, redevImage, redevImage],
       removeComment,
+      comments,
     };
   },
 });

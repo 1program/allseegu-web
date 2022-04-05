@@ -5,29 +5,40 @@
       <div class="count">1/3000</div>
     </div>
     <!-- eslint-disable-next-line -->
-    <textarea class="textarea" placeholder="댓글을 남겨보세요" />
-    <ImagePicker />
+    <textarea class="textarea" placeholder="댓글을 남겨보세요" v-model="content" />
+    <FilePicker
+      :files="files"
+      @change-files="files = $event"
+      accept="image/*"
+      :add-button="false"
+    />
     <div class="gap-horizontal button-group">
-      <AppButton class="plus" palette="outlined-blue">
+      <AppButton class="plus" palette="outlined-blue" @click="pick">
         <img class="plus-icon" src="@/images/icons/plus.svg" alt="이미지 추가" />
       </AppButton>
-      <AppButton class="grow" palette="outlined-blue" v-if="showCancel">
+      <AppButton class="grow" palette="outlined-blue" v-if="showCancel" @click="cancel">
         {{ cancelLabel }}
       </AppButton>
-      <AppButton class="grow">{{ okLabel }}</AppButton>
+      <AppButton class="grow" @click="ok">{{ okLabel }}</AppButton>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import AppButton from "./AppButton.vue";
-import ImagePicker from "./ImagePicker.vue";
+import { useUi } from "@/composables/common/useUi";
+import { TempChildComment, TempComment } from "@/models/comment";
+import { FileInfo, pickFileInfo } from "@/utils/file/pickFileInfo";
+import { defineComponent, PropType, ref } from "vue";
+import AppButton from "../common/AppButton.vue";
+import FilePicker from "../common/FilePicker.vue";
 
 export default defineComponent({
   name: "CommentForm",
-  components: { AppButton, ImagePicker },
+  components: { AppButton, FilePicker },
   props: {
+    comment: {
+      type: Object as PropType<TempComment | TempChildComment>,
+    },
     showCancel: {
       type: Boolean,
       default: false,
@@ -40,6 +51,34 @@ export default defineComponent({
       type: String,
       default: "등록",
     },
+  },
+  setup(props, context) {
+    const { notImplemented } = useUi();
+
+    const files = ref<FileInfo[]>([]);
+
+    const pick = async () => {
+      const file = await pickFileInfo("image/*");
+      files.value.push(file);
+    };
+
+    const ok = () => {
+      notImplemented();
+    };
+
+    const cancel = () => {
+      context.emit("cancel");
+    };
+
+    const content = ref(props.comment?.content ?? "");
+
+    return {
+      files,
+      pick,
+      ok,
+      cancel,
+      content,
+    };
   },
 });
 </script>

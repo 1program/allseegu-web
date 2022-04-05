@@ -1,5 +1,5 @@
 <template>
-  <AppScaffold title="우리 구역 이야기">
+  <AppScaffold title="우리 구역 이야기" has-top-button>
     <div class="container page-content">
       <AppButton class="button" palette="outlined-blue" full to="story/write">
         <img class="plus-icon" src="@/images/icons/plus-thick.svg" alt="등록하기" />

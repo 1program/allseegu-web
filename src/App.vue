@@ -32,10 +32,10 @@ export default defineComponent({
 
     provideConfirm();
 
-    const toasts = provideToasts();
+    provideToasts();
 
     provideUi({
-      onMessage: toasts.open,
+      onMessage: alerts.open,
     });
 
     const auth = provideAuth();

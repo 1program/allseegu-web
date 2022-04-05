@@ -1,6 +1,11 @@
 <template>
   <a class="attachment-tile" :href="url" target="_blank">
-    <slot />
+    <div class="main">
+      <slot />
+    </div>
+    <button v-if="removable" class="close" @click.prevent="$emit('remove')">
+      <img src="@/images/icons/close.svg" alt="삭제" />
+    </button>
   </a>
 </template>
 
@@ -14,6 +19,10 @@ export default defineComponent({
       type: String,
       default: null,
     },
+    removable: {
+      type: Boolean,
+      default: false,
+    },
   },
 });
 </script>
@@ -22,12 +31,25 @@ export default defineComponent({
 @import "@/styles/config";
 
 .attachment-tile {
-  display: block;
-  font-size: (26/2/16) * 1rem;
+  display: flex;
+  align-items: center;
   padding: (20/2/16) * 1rem (32/2/16) * 1rem;
   background-color: #f8f8f8;
   border: 1px solid #dddddd;
 
   @include touchable;
+
+  .main {
+    flex: 1 1 auto;
+    font-size: (26/2/16) * 1rem;
+    @include ellipsis;
+  }
+
+  .close {
+    img {
+      display: block;
+      width: (17/2/16) * 1rem;
+    }
+  }
 }
 </style>
