@@ -1,5 +1,5 @@
 <template>
-  <AppScaffold title="올씨구 접근 권한 안내">
+  <AppScaffold title="올씨구 접근 권한 안내" :has-back-button="false">
     <div class="container page-wrapper">
       <div class="page-content-medium">
         <div class="tile-group">

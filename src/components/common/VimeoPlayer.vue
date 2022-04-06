@@ -1,17 +1,11 @@
 <template>
   <div class="vimeo-player">
-    <iframe
-      ref="iframe"
-      :src="`https://player.vimeo.com/video/${id}`"
-      title="Player"
-      allow="autoplay"
-      frameborder="0"
-    />
+    <iframe ref="element" :src="src" title="Player" allow="autoplay" frameborder="0" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 import Vimeo from "@vimeo/player";
 
 export default defineComponent({
@@ -27,15 +21,23 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const iframe = ref<HTMLIFrameElement>();
+    const element = ref<HTMLIFrameElement>();
 
     let player: Vimeo | undefined;
 
+    const options = new URLSearchParams({
+      loop: "1",
+      autopause: "0",
+      background: "1",
+    });
+
+    const src = computed(() => `https://player.vimeo.com/video/${props.id}?${options}`);
+
     watch(
-      () => ({ iframe: iframe.value, id: props.id }),
+      () => ({ element: element.value, id: props.id }),
       (current) => {
-        if (current.iframe) {
-          player = new Vimeo(current.iframe, {
+        if (current.element) {
+          player = new Vimeo(current.element, {
             id: current.id,
             loop: true,
             autopause: false,
@@ -62,9 +64,7 @@ export default defineComponent({
       { immediate: true }
     );
 
-    return {
-      iframe,
-    };
+    return { src, element };
   },
 });
 </script>
