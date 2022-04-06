@@ -7,12 +7,14 @@
     :space-between="0"
     autoplay
   >
-    <swiper-slide v-for="image in images" :key="image">
-      <img :src="image" :alt="image" />
-    </swiper-slide>
-    <swiper-slide v-slot="{ isActive }">
-      <!-- 슬라이드 초점이 맞추어졌을 때에만 재생한다. -->
-      <vimeo-player class="player" :id="576985879" :playing="isActive" />
+    <swiper-slide v-for="slide in slides" :key="slide.id" v-slot="{ isActive }">
+      <img v-if="slide.type === 'image'" :src="slide.value" alt="이미지" />
+      <vimeo-player
+        v-else-if="slide.type === 'vimeo'"
+        class="player"
+        :id="slide.value"
+        :playing="isActive"
+      />
     </swiper-slide>
   </swiper>
 </template>
@@ -31,15 +33,23 @@ import "swiper/css";
 import "swiper/css/pagination";
 import VimeoPlayer from "../common/VimeoPlayer.vue";
 
-const images = [redev1, redev2];
+type Slide =
+  | { id: number; type: "image"; value: string }
+  | { id: number; type: "vimeo"; value: number };
 
 export default defineComponent({
   name: "RedevSwiper",
   components: { Swiper, SwiperSlide, VimeoPlayer },
   setup() {
+    const slides: Slide[] = [
+      { id: 0, type: "image", value: redev1 },
+      { id: 1, type: "vimeo", value: 576985879 },
+      { id: 2, type: "image", value: redev2 },
+    ];
+
     return {
       modules: [Pagination],
-      images,
+      slides,
     };
   },
 });

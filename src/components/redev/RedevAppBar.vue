@@ -13,7 +13,6 @@
         class="input"
         v-model="innerKeyword"
         :class="{ show: searching }"
-        autofocus
         placeholder="원하시는 지역을 입력해 주세요"
       />
     </div>

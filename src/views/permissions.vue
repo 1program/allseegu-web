@@ -1,5 +1,5 @@
 <template>
-  <AppScaffold title="을씨구 접근 권한 안내">
+  <AppScaffold title="올씨구 접근 권한 안내">
     <div class="container page-wrapper">
       <div class="page-content-medium">
         <div class="tile-group">
@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="container page-footer">
-      <AppButton full to="/redev">확인</AppButton>
+      <AppButton full to="/account">확인</AppButton>
     </div>
   </AppScaffold>
 </template>

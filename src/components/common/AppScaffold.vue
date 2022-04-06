@@ -1,6 +1,12 @@
 <template>
   <div class="app-scaffold">
-    <app-bar class="app-bar" :title="title" :progress="progress" :theme="theme">
+    <app-bar
+      class="app-bar"
+      :title="title"
+      :progress="progress"
+      :theme="theme"
+      :has-back-button="hasBackButton"
+    >
       <!-- AppBar의 actions slot -->
       <template v-slot:actions>
         <slot name="actions" />
@@ -33,6 +39,11 @@ export default defineComponent({
       type: Number,
       default: 0,
       description: "스캐폴드의 진척도",
+    },
+    hasBackButton: {
+      type: Boolean,
+      default: true,
+      description: "뒤로가기 버튼을 노출할지",
     },
     hasTopButton: {
       type: Boolean,

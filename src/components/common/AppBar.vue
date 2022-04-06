@@ -1,7 +1,7 @@
 <template>
   <div class="app-bar" :class="[theme]">
     <!-- 뒤로 가기 -->
-    <button class="back-button" @click="handleBack">
+    <button v-if="hasBackButton" class="back-button" @click="handleBack">
       <img class="back-icon" :src="icon" alt="뒤로가기" />
     </button>
     <div class="title">
@@ -42,6 +42,11 @@ export default defineComponent({
     theme: {
       type: String as PropType<"default" | "primary">,
       default: "default",
+    },
+    hasBackButton: {
+      type: Boolean,
+      default: true,
+      description: "뒤로가기 버튼을 노출할지",
     },
   },
   setup(props) {

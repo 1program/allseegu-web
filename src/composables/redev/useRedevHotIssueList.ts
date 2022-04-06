@@ -6,12 +6,16 @@ export function useRedevHotIssueList() {
   const api = useApi();
 
   return reactive(
-    useQuery(["redevHotIssues"], () => api.redev.hotIssueList().then((result) => result.data), {
-      retry: 0,
-      retryDelay: 10,
-      retryOnMount: true,
-      keepPreviousData: true,
-      initialData: [],
-    })
+    useQuery(
+      ["redevHotIssues"],
+      () => api.redev.hotIssueList().then((result) => result.data.slice(0, 10)),
+      {
+        retry: 0,
+        retryDelay: 10,
+        retryOnMount: true,
+        keepPreviousData: true,
+        initialData: [],
+      }
+    )
   );
 }

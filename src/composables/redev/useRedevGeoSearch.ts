@@ -24,7 +24,8 @@ export function useRedevGeoSearch(options: Ref<RedevGeoSearchOptions | null>) {
           : api.redev.geoSearch(options.value).then((result) => result.data),
       retry: 0,
       retryDelay: 10,
-      retryOnMount: true,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
       keepPreviousData: true,
       enabled: computed(() => options.value != null),
     })
