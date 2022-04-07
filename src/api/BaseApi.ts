@@ -5,14 +5,18 @@ import ApiRequestOptions from "./ApiRequestOptions";
 
 export interface BaseApiOptions {
   /**
-   *
+   * API baseURL
    */
   baseURL: string;
+
+  /**
+   * Access token
+   */
   accessToken?: string | null;
 }
 
 /**
- * Axios가 아닌 다른 클라이언트를 사용할 경우가 생길 수 있음으로,
+ * Axios가 아닌 다른 http 클라이언트를 사용할 경우가 생길 수 있음으로,
  * 설정값 및 Exception을 통일하여 관리한다.
  * BaseApi 클래스를 상속받아 API Client를 구현하도록 한다.
  */
@@ -29,6 +33,9 @@ export default class BaseApi {
     }
   }
 
+  /**
+   * 제공된 options로 http request header를 반환한다.
+   */
   public get headers() {
     const headers: Record<string, string> = {};
 
@@ -53,15 +60,17 @@ export default class BaseApi {
         data,
       })
       .then((response) => response.data)
-      .catch((error) => {
-        if (axios.isAxiosError(error)) {
-          throw new ApiError(
-            error.response?.status ?? 500,
-            error.response?.data.message ?? "에러가 발생했습니다."
-          );
-        } else {
-          throw error;
-        }
-      });
+      .catch(BaseApi.handleError);
+  }
+
+  private static handleError(error: unknown) {
+    if (axios.isAxiosError(error)) {
+      throw new ApiError(
+        error.response?.status ?? 500,
+        error.response?.data.message ?? "에러가 발생했습니다."
+      );
+    } else {
+      throw error;
+    }
   }
 }
