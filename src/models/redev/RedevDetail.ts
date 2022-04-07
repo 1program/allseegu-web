@@ -1,57 +1,9 @@
-import { GeometryPoint } from "../common";
+import { RedevContent } from "./RedevContent";
 
 /**
  * 재개발 상세
  */
 export interface RedevDetail {
-  id: number;
-
-  uuid: string;
-
-  user_id: number | null;
-
   title: string;
-
-  enconet_uuid: number | null;
-
-  district: "at"; // TODO: 확인 필요
-
-  geometry_points: GeometryPoint[];
-
-  geometry_shape: "polyline";
-
-  condition1: string;
-
-  condition2: string;
-
-  condition3: string;
-
-  condition4: string;
-
-  condition_visible: number;
-
-  outline_desc: string;
-
-  outline_visible: number;
-
-  is_issue: 0 | 1;
-
-  is_newtown: 0 | 1;
-
-  is_visible: 0 | 1;
-
-  /**
-   * 조회수
-   */
-  hits: number;
-
-  /**
-   * 등록일
-   */
-  created_at: string;
-
-  /**
-   * 수정일
-   */
-  updated_at: string;
+  contents: RedevContent[];
 }

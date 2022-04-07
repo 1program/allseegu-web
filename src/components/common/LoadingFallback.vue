@@ -23,6 +23,7 @@ export default defineComponent({
   justify-content: center;
 
   padding: (60/2/16) * 1rem (40/2/16) * 1rem;
+  min-height: 10rem;
 }
 
 .dots {

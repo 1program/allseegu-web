@@ -1,19 +1,19 @@
-import { RedevShape } from "@/models/redev";
+import { RedevGeometry } from "@/models/redev";
 import { getClustererStyle } from "@/utils/common/getClustererStyle";
 import { getRedevOverlay } from "@/utils/redev/getRedevOverlay";
 import { getRedevPolygon } from "@/utils/redev/getRedevPolygon";
 import { computed, onMounted, ref, Ref, watch } from "vue";
 
-export interface UseRedevShapeMapOptions {
+export interface UseRedevKakaoMapOptions {
   /**
    * 카카오맵을 마운트할 DOM Element
    */
   element: Ref<HTMLDivElement | undefined>;
 
   /**
-   * RedevShape 목록 반응형 객체
+   * RedevGeometry 목록 반응형 객체
    */
-  redevList: Ref<RedevShape[]>;
+  redevList: Ref<RedevGeometry[]>;
 
   /**
    * relayoutKey가 바뀌면 kakao map이 relayout 된다.
@@ -22,18 +22,18 @@ export interface UseRedevShapeMapOptions {
 
   position: Ref<GeolocationPosition | null>;
 
-  onClickRedev: (redev: RedevShape) => void;
+  onClickRedev: (redev: RedevGeometry) => void;
 }
 
 /**
- * 'RedevShape' 객체들을 카카오맵에 표현한다.
+ * 'RedevGeometry' 객체들을 카카오맵에 표현한다.
  *
  * https://devtalk.kakao.com/t/vue-js-api/121269
  *
  * Vue3의 reactive API와 Kakao Maps를 함께 사용하면..
  * 오류가 난다.
- *
- * kakao Maps 의 객체들은 Mutable하게 사용한다.
+ * https://github.com/vuejs/core/pull/1060
+ * 해결법 => mutable(ex. let map = ...) OR shallowRef
  */
 export function useRedevKakaoMap({
   element,
@@ -41,7 +41,7 @@ export function useRedevKakaoMap({
   relayoutKey,
   position,
   onClickRedev,
-}: UseRedevShapeMapOptions) {
+}: UseRedevKakaoMapOptions) {
   let map: kakao.maps.Map;
 
   let clusterer: kakao.maps.MarkerClusterer;

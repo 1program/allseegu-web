@@ -17,16 +17,10 @@ export interface BaseApiOptions {
  * BaseApi 클래스를 상속받아 API Client를 구현하도록 한다.
  */
 export default class BaseApi {
-  axios: AxiosInstance;
+  private axios: AxiosInstance;
 
-  constructor(options: BaseApiOptions) {
-    const headers: Record<string, string> = {};
-
-    if (options.accessToken) {
-      headers.Authorization = `Bearer ${options.accessToken}`;
-    }
-
-    this.axios = axios.create({ baseURL: options.baseURL, headers });
+  constructor(public readonly options: BaseApiOptions) {
+    this.axios = axios.create({ baseURL: this.options.baseURL, headers: this.headers });
 
     // 로깅 (테스트 환경에서만)
     if (["test"].includes(process.env.NODE_ENV)) {
@@ -35,12 +29,22 @@ export default class BaseApi {
     }
   }
 
+  public get headers() {
+    const headers: Record<string, string> = {};
+
+    if (this.options.accessToken) {
+      headers.Authorization = `Bearer ${this.options.accessToken}`;
+    }
+
+    return headers;
+  }
+
   /**
    * 기본 request 메서드이다.
    * 성공시 T generic에 따라 결과를 리턴한다.
    * 실패시 ApiException을 던진다.
    */
-  request<T>({ url, method, data, params }: ApiRequestOptions) {
+  public request<T>({ url, method, data, params }: ApiRequestOptions) {
     return this.axios
       .request<T>({
         url,

@@ -28,7 +28,9 @@
 
 <script lang="ts">
 import { defineComponent, computed, PropType } from "vue";
-import { pickFileInfo, FileInfo } from "@/utils/file/pickFileInfo";
+import { pickFileInfo } from "@/utils/file/pickFileInfo";
+import { FileInfo } from "@/models/file/FileInfo";
+
 import AttachmentTile from "./AttachmentTile.vue";
 
 export default defineComponent({

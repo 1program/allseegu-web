@@ -1,4 +1,4 @@
-import { RedevShape } from "@/models/redev";
+import { RedevGeometry } from "@/models/redev";
 import { css } from "@emotion/css";
 import h from "hyperscript";
 import { redevMapColors } from "./redevMapColors";
@@ -22,7 +22,7 @@ const textCss = css({
   right: 0,
 });
 
-export function getRedevOverlay(redev: RedevShape, map: kakao.maps.Map, onClick: () => void) {
+export function getRedevOverlay(redev: RedevGeometry, map: kakao.maps.Map, onClick: () => void) {
   const center = new window.kakao.maps.LatLng(
     parseFloat(redev.center_y),
     parseFloat(redev.center_x)

@@ -30,7 +30,7 @@ import FormInput from "@/components/common/FormInput.vue";
 import FormTextarea from "@/components/common/FormTextarea.vue";
 import FilePicker from "@/components/common/FilePicker.vue";
 import { useAlert } from "@/composables/common/useAlert";
-import { FileInfo } from "@/utils/file/pickFileInfo";
+import { FileInfo } from "@/models/file/FileInfo";
 
 export default defineComponent({
   name: "RedevDetailStoryWrite",

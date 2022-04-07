@@ -1,7 +1,7 @@
-import { RedevShape } from "@/models/redev";
+import { RedevGeometry } from "@/models/redev";
 import { redevMapColors } from "./redevMapColors";
 
-export function getRedevPolygon(redev: RedevShape, map: kakao.maps.Map, onClick: () => void) {
+export function getRedevPolygon(redev: RedevGeometry, map: kakao.maps.Map, onClick: () => void) {
   const points = redev.geometry_points.map(
     (point) => new window.kakao.maps.LatLng(point.y, point.x)
   );

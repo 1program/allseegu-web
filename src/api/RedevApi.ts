@@ -1,5 +1,5 @@
 import { ApiResponse, PagedList } from "@/models/common";
-import { Redev, RedevDetail, RedevShape } from "@/models/redev";
+import { Redev, RedevGeometry } from "@/models/redev";
 import BaseApi from "./BaseApi";
 
 export interface RedevListOptions {
@@ -7,8 +7,10 @@ export interface RedevListOptions {
   take?: number;
 }
 
-export interface SearchRedevOptions {
+export interface RedevSearchOptions {
   query?: string;
+  page?: number;
+  take?: number;
 }
 
 export interface RedevGeoSearchOptions {
@@ -26,7 +28,7 @@ export default class RedevApi extends BaseApi {
    * 위치 기반 검색
    */
   geoSearch = (options: RedevGeoSearchOptions) =>
-    this.request<ApiResponse<RedevShape[]>>({
+    this.request<ApiResponse<RedevGeometry[]>>({
       url: "/redev/geo-search",
       method: "POST",
       params: options,
@@ -35,11 +37,11 @@ export default class RedevApi extends BaseApi {
   /**
    * 사업 검색
    */
-  search = ({ query }: SearchRedevOptions) =>
+  search = ({ query, page, take = 5 }: RedevSearchOptions) =>
     this.request<ApiResponse<PagedList<Redev>>>({
       url: "/redev/search",
       method: "POST",
-      params: { query },
+      params: { query, page, take },
     });
 
   /**

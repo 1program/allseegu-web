@@ -27,7 +27,8 @@
 <script lang="ts">
 import { useUi } from "@/composables/common/useUi";
 import { TempChildComment, TempComment } from "@/models/comment";
-import { FileInfo, pickFileInfo } from "@/utils/file/pickFileInfo";
+import { FileInfo } from "@/models/file/FileInfo";
+import { pickFileInfo } from "@/utils/file/pickFileInfo";
 import { defineComponent, PropType, ref } from "vue";
 import AppButton from "../common/AppButton.vue";
 import FilePicker from "../common/FilePicker.vue";

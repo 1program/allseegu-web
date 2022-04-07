@@ -1,7 +1,7 @@
 <template>
   <RouterLinkOrButton class="redev-tile" :class="{ issue }">
     <div class="count" v-if="number != null">{{ number }}</div>
-    {{ title }}
+    <div class="title">{{ title }}</div>
   </RouterLinkOrButton>
 </template>
 
@@ -45,6 +45,10 @@ export default defineComponent({
 
   &.issue {
     color: $color-blue;
+  }
+
+  .title {
+    @include ellipsis;
   }
 }
 </style>

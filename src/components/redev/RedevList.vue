@@ -1,30 +1,43 @@
 <template>
   <div class="redev-list">
     <div class="container">
+      <!-- 검색결과: 키워드 입력 시에만 보인다. -->
       <template v-if="!!keyword">
-        <LoadingFallback class="loading-fallback" v-if="loading" />
+        <ErrorFallback v-if="searchList.error != null" :error="searchList.error" />
+        <LoadingFallback v-else-if="searchList.data == null" class="loading-fallback" />
         <div class="section" v-else>
           <div class="header">
             검색결과
-            <div class="count">{{ results.length }}</div>
+            <div class="count">{{ searchList.totalCount ?? 0 }}</div>
           </div>
-          <template v-for="(result, index) in results" :key="result.id">
-            <div class="divider light" v-if="index !== 0" />
-            <RedevTile :to="`/redev/${result.id}`" :title="result.title" />
+          <!-- 결과 페이지별로 반복문 돌린다. -->
+          <template v-for="(page, i) in searchList.data.pages" :key="page.current_page">
+            <!-- 결과 항목들 별로 반복문 돌린다. -->
+            <template v-for="(redev, j) in page.data" :key="redev.id">
+              <div class="divider light" v-if="i !== 0 && j !== 0" />
+              <RedevTile :to="`/redev/${redev.id}`" :title="redev.title" />
+            </template>
           </template>
+          <!-- 다음페이지가 있는가? 화면에 들어오는 순간 데이터를 불러온다. -->
+          <InView v-if="searchList.hasNextPage" @in-view="searchList.fetchNextPage">
+            <LoadingFallback />
+          </InView>
         </div>
         <div class="section-divider" />
       </template>
-      <div class="section">
+
+      <!-- 핫이슈 목록 -->
+      <LoadingFallback v-if="hotList.data == null" />
+      <div class="section" v-else>
         <div class="header">
           핫이슈
-          <div class="count">{{ issues.length }}</div>
+          <div class="count">{{ hotList.data.length ?? 0 }}</div>
         </div>
-        <template v-for="(issue, index) in issues" :key="issue.id">
-          <div class="divider light" v-if="index !== 0" />
+        <template v-for="(hot, index) in hotList.data" :key="hot.id">
+          <div class="divider light" v-if="index != 0" />
           <RedevTile
-            :to="`/redev/${issue.id}`"
-            :title="issue.title"
+            :to="`/redev/${hot.id}`"
+            :title="hot.title"
             :issue="true"
             :number="index + 1"
           />
@@ -35,9 +48,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref, watch, computed } from "vue";
+
+import { useRedevHotIssueList } from "@/composables/redev/useRedevHotIssueList";
+import { useRedevSearch } from "@/composables/redev/useRedevSearch";
+
 import LoadingFallback from "../common/LoadingFallback.vue";
 import RedevTile from "./RedevTile.vue";
+import ErrorFallback from "../common/ErrorFallback.vue";
+import InView from "../common/InView.vue";
 
 export default defineComponent({
   name: "RedevList",
@@ -47,7 +66,7 @@ export default defineComponent({
       default: "",
     },
   },
-  components: { LoadingFallback, RedevTile },
+  components: { LoadingFallback, RedevTile, ErrorFallback, InView },
   setup(props) {
     const loading = ref(false);
 
@@ -65,23 +84,11 @@ export default defineComponent({
       }
     );
 
-    const results = Array.from({ length: 20 }).map((_, index) => ({
-      id: index + 1,
-      title: `신림 1구역 재개발 사업 ${index + 1}`,
-    }));
+    const searchList = useRedevSearch(computed(() => ({ query: props.keyword, take: 10 })));
 
-    const issues = [
-      {
-        id: 1,
-        title: "신림 1구역 재개발 사업",
-      },
-      ...Array.from({ length: 9 }).map((_, index) => ({
-        id: index + 2,
-        title: "광명 7구역 신동아 아파트 리모델링 사업",
-      })),
-    ];
+    const hotList = useRedevHotIssueList();
 
-    return { results, issues, loading };
+    return { loading, searchList, hotList };
   },
 });
 </script>
@@ -108,9 +115,5 @@ export default defineComponent({
     font-size: (26/2/16) * 1rem;
     margin-left: (18/2/16) * 1rem;
   }
-}
-
-.loading-fallback {
-  min-height: 10rem;
 }
 </style>

@@ -90,6 +90,8 @@ export default defineComponent({
 .app-bar {
   position: sticky;
   top: 0;
+  // https://mui.com/customization/z-index/
+  z-index: 1100;
 }
 
 .map {

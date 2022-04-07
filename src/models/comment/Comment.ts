@@ -1,7 +1,9 @@
-export interface Comment {
+import { Auditable, ContentType } from "../common";
+
+export interface Comment extends Auditable {
   comment_id: number | null;
 
-  content_type: "plain" | "markdown" | "html";
+  content_type: ContentType;
 
   content: string;
 
@@ -12,10 +14,6 @@ export interface Comment {
   commentable_id: number;
 
   commentable_type: string;
-
-  updated_at: string;
-
-  created_at: string;
 
   id: number;
 }

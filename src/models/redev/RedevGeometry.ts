@@ -1,4 +1,4 @@
-export interface RedevShape {
+export interface RedevGeometry {
   id: number;
   title: string;
   district: string;

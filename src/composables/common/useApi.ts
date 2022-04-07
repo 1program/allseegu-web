@@ -1,4 +1,5 @@
 import AuthApi from "@/api/AuthApi";
+import FileApi from "@/api/FileApi";
 import RedevApi from "@/api/RedevApi";
 import UserApi from "@/api/UserApi";
 import { API_URL } from "@/lib/config";
@@ -14,13 +15,14 @@ export interface ApiContext {
   auth: AuthApi;
   redev: RedevApi;
   user: UserApi;
+  file: FileApi;
 }
 
-export interface ApiProviderParams {
+export interface ApiProviderOptions {
   accessToken: Ref<string | null>;
 }
 
-export function provideApi({ accessToken }: ApiProviderParams) {
+export function provideApi({ accessToken }: ApiProviderOptions) {
   const options = computed(() => ({
     baseURL: API_URL,
     accessToken: accessToken.value,
@@ -30,6 +32,7 @@ export function provideApi({ accessToken }: ApiProviderParams) {
     auth: computed(() => new AuthApi(options.value)),
     redev: computed(() => new RedevApi(options.value)),
     user: computed(() => new UserApi(options.value)),
+    file: computed(() => new FileApi(options.value)),
   });
 
   provide(API_CONTEXT_SYMBOL, context);

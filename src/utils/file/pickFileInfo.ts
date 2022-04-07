@@ -1,13 +1,8 @@
+import { FileInfo } from "@/models/file/FileInfo";
 import shortid from "shortid";
 import { pickFile } from "./pickFile";
 
-export interface FileInfo {
-  id: string;
-  file?: File;
-  url?: string;
-}
-
-export const pickFileInfo = async (accept: string) => {
+export const pickFileInfo = async (accept: string): Promise<FileInfo> => {
   const file = await pickFile(accept);
 
   return {
