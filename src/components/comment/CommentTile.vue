@@ -29,9 +29,11 @@
 
 <script lang="ts">
 import { formatDate } from "@/lib/formatters";
+import { FileInfo } from "@/models/file";
 import { defineComponent, PropType } from "vue";
 import ImageGallery from "../common/ImageGallery.vue";
 
+// TODO: 바인딩 완료 후 prop 축약
 export default defineComponent({
   name: "CommentTile",
   components: { ImageGallery },
@@ -58,7 +60,7 @@ export default defineComponent({
       default: null,
     },
     images: {
-      type: Array as PropType<string[]>,
+      type: Array as PropType<FileInfo[]>,
       default: () => [],
     },
     commentCount: {

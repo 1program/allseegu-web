@@ -1,28 +1,32 @@
 <template>
   <AppScaffold title="우리 구역 이야기" has-top-button>
-    <div class="container">
+    <ErrorFallback v-if="detail.error" :error="detail.error" />
+    <LoadingFallback v-else-if="detail.data == null" />
+    <div v-else class="container main">
       <div class="meta">
         <PostMeta
-          title="조합이 바르게 운영되지 못하고 와해되는 이유는 바로 이것 때문입니다."
-          :date="date"
-          :hits="256"
+          :title="detail.data.title"
+          :date="new Date(detail.data.created_at)"
+          :hits="detail.data.hits"
         />
       </div>
       <div class="divider" />
       <div class="page-content">
-        <ImageGallery :images="[redevImage, redevImage, redevImage]" />
+        <div class="gallery" v-if="detail.data.files.images.length > 0">
+          <ImageGallery :images="detail.data.files.images" />
+        </div>
         <div class="content">
-          조합이 바르게 운영되지 못하고 와해되는 이유는 바로 이것 때문입니다. 조합이 바르게 운영되지
-          못하고 와해되는 이유는 바로 이것 때문입니다.<br /><br />
-          조합이 바르게 운영되지 못하고 와해되는 이유는 바로 이것 때문입니다.
+          <!-- TODO: Implement content parser by content_type -->
+          {{ detail.data.content }}
         </div>
       </div>
       <div class="comments">
         <div class="comments-top">
-          <div class="comments-count">댓글 9</div>
-          <CommentForm class="comments-top-form" />
+          <div class="comments-count">댓글 {{ detail.data.comments_count ?? 0 }}</div>
+          <CommentForm class="comments-top-form" :parent_uuid="detail.data.uuid" model="story" />
         </div>
-        <template v-for="comment in comments" :key="comment.id">
+        <!-- TODO: 배열 SORT 성능 개선 -->
+        <template v-for="comment in [...detail.data.comments].reverse()" :key="comment.id">
           <div class="divider light" />
           <CommentItem class="comments-item" :comment="comment" />
         </template>
@@ -32,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import PostMeta from "@/components/common/PostMeta.vue";
 import ImageGallery from "@/components/common/ImageGallery.vue";
@@ -41,6 +45,10 @@ import redevImage from "@/images/mocks/redev-image.png";
 import CommentForm from "@/components/comment/CommentForm.vue";
 import { tempComment1, tempComment2 } from "@/models/comment";
 import CommentItem from "@/components/comment/CommentItem.vue";
+import { useRoute } from "vue-router";
+import { useStoryDetail } from "@/composables/story/useStoryDetail";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
 
 export default defineComponent({
   name: "RedevDetailStoryDetail",
@@ -50,14 +58,26 @@ export default defineComponent({
     ImageGallery,
     CommentForm,
     CommentItem,
+    LoadingFallback,
+    ErrorFallback,
   },
   setup() {
+    const route = useRoute();
+
     const comments = ref([tempComment1, tempComment2]);
+
+    const options = computed(() => ({
+      redev_id: parseInt(route.params.revId as string, 10),
+      story_id: parseInt(route.params.storyId as string, 10),
+    }));
+
+    const detail = useStoryDetail(options);
 
     return {
       date: new Date(),
       comments,
       redevImage,
+      detail,
     };
   },
 });
@@ -71,12 +91,27 @@ export default defineComponent({
   padding-bottom: (30/2/16) * 1rem;
 }
 
+.gallery {
+  margin-bottom: (51/2/16) * 1rem;
+}
+
+.page-content {
+  // TODO: 공통 클래스 flex 1 되는 것 수정
+  flex: 0 0 auto;
+}
+
+.main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
 .content {
-  margin-top: (51/2/16) * 1rem;
   font-size: (30/2/16) * 1rem;
 }
 
 .comments {
+  flex: 1 1 auto;
   background-color: #f3f3f3;
 }
 

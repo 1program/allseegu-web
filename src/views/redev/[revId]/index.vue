@@ -35,7 +35,7 @@
         <NoticeSection />
         <div class="section-divider" />
         <!-- 우리 구역 이야기 섹션 -->
-        <StorySection />
+        <StorySection :redev_id="redev_id" />
         <div class="section-divider" />
         <!-- 광고 섹션 -->
         <AdSection />
@@ -46,6 +46,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useRoute } from "vue-router";
+
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import RedevSwiper from "@/components/redev/RedevSwiper.vue";
 import AppBarAction from "@/components/common/AppBarAction.vue";
@@ -77,6 +79,13 @@ export default defineComponent({
     AdSection,
     CommunitySection,
     AppBarAction,
+  },
+  setup() {
+    const route = useRoute();
+
+    const redev_id = parseInt(route.params.revId as string, 10);
+
+    return { redev_id };
   },
 });
 </script>

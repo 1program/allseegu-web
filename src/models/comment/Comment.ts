@@ -1,26 +1,52 @@
-import { Auditable, ContentType } from "../common";
+import { Auditable, ContentType, Entity } from "../common";
+import { Files } from "../file";
 
-export interface Comment extends Auditable {
+export interface Comment extends Entity, Auditable {
+  /**
+   * 부모 댓글 id
+   */
   comment_id: number | null;
 
+  /**
+   * 내용 format
+   */
   content_type: ContentType;
 
+  /**
+   * 내용
+   */
   content: string;
 
-  uuid: string;
-
+  /**
+   * 게시글 uuid
+   */
   parent_uuid: string;
 
+  /**
+   * 게시글 id
+   */
   commentable_id: number;
 
+  /**
+   * 게시글 type
+   * ex. App\\Models\\Story
+   */
   commentable_type: string;
 
-  id: number;
+  /**
+   * 대댓글
+   */
+  child?: Comment[];
+
+  /**
+   * 파일
+   */
+  files?: Files;
 }
 
-export const mockComment = {
+export const mockComment: Comment = {
   comment_id: null,
-  content_type: "plain",
+  content_type: ContentType.PLAIN,
   content: "내용입니다.",
   uuid: "da414a1d-9085-49e3-be9b-596f696eb5e1",
   user_id: 11,
@@ -31,3 +57,9 @@ export const mockComment = {
   created_at: "2022-03-22T17:55:13.000000Z",
   id: 14,
 };
+
+export function parseCommentableType(type: string) {
+  const last = type.split("\\").reverse()[0].toLowerCase();
+
+  return last as "story";
+}

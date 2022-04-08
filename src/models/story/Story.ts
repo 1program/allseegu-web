@@ -11,4 +11,5 @@ export interface Story extends Entity, Auditable {
   comments_count: number;
   model: "story";
   redev_title: string | null;
+  nickname: string;
 }

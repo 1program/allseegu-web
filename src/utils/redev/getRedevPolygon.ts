@@ -1,7 +1,13 @@
 import { RedevGeometry } from "@/models/redev";
 import { redevMapColors } from "./redevMapColors";
 
-export function getRedevPolygon(redev: RedevGeometry, map: kakao.maps.Map, onClick: () => void) {
+export interface RedevPolygonOptions {
+  redev: RedevGeometry;
+  map?: kakao.maps.Map;
+  onClick: () => void;
+}
+
+export function getRedevPolygon({ redev, map, onClick }: RedevPolygonOptions) {
   const points = redev.geometry_points.map(
     (point) => new window.kakao.maps.LatLng(point.y, point.x)
   );
@@ -19,7 +25,7 @@ export function getRedevPolygon(redev: RedevGeometry, map: kakao.maps.Map, onCli
 
   kakao.maps.event.addListener(polygon, "click", onClick);
 
-  polygon.setMap(map);
+  polygon.setMap(map ?? null);
 
   return polygon;
 }

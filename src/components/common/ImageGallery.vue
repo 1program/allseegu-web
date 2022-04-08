@@ -2,7 +2,7 @@
   <div class="image-gallery" v-if="images.length > 0">
     <template v-for="(image, index) in topImages" :key="image">
       <div class="item">
-        <img class="image" :src="image" alt="이미지" />
+        <img class="image" :src="image.url" alt="이미지" />
         <button class="expand" v-if="index < 2" @click="activeIndex = index">
           <img class="expand-icon" src="@/images/icons/expand-white.svg" alt="크게 보기" />
         </button>
@@ -23,18 +23,20 @@
 </template>
 
 <script lang="ts">
+import { FileInfo } from "@/models/file";
 import { defineComponent, PropType, ref } from "vue";
 import ImageDetailOverlay from "./ImageDetailOverlay.vue";
 
 export default defineComponent({
   name: "ImageGallery",
+  components: { ImageDetailOverlay },
   props: {
     class: {
       type: String,
       default: null,
     },
     images: {
-      type: Array as PropType<string[]>,
+      type: Array as PropType<FileInfo[]>,
       default: () => [],
     },
   },
@@ -48,7 +50,6 @@ export default defineComponent({
       activeIndex,
     };
   },
-  components: { ImageDetailOverlay },
 });
 </script>
 
@@ -68,6 +69,7 @@ export default defineComponent({
   border-right: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   background-color: #333;
+  width: 100%;
 
   .expand {
     position: absolute;

@@ -34,6 +34,9 @@ export default defineComponent({
 @import "@/styles/config";
 
 .error-fallback {
+  // 평소 세로로 꽉 채우도록
+  flex: 1 1 auto;
+
   display: flex;
   align-items: center;
   justify-content: center;

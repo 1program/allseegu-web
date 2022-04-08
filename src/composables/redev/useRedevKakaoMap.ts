@@ -2,7 +2,8 @@ import { RedevGeometry } from "@/models/redev";
 import { getClustererStyle } from "@/utils/common/getClustererStyle";
 import { getRedevOverlay } from "@/utils/redev/getRedevOverlay";
 import { getRedevPolygon } from "@/utils/redev/getRedevPolygon";
-import { computed, onMounted, ref, Ref, watch } from "vue";
+import { computed, ref, Ref, shallowRef, watch, watchEffect } from "vue";
+import { watchLog } from "../common/watchLog";
 
 export interface UseRedevKakaoMapOptions {
   /**
@@ -42,9 +43,9 @@ export function useRedevKakaoMap({
   position,
   onClickRedev,
 }: UseRedevKakaoMapOptions) {
-  let map: kakao.maps.Map;
+  const map = shallowRef<kakao.maps.Map>();
 
-  let clusterer: kakao.maps.MarkerClusterer;
+  const clusterer = shallowRef<kakao.maps.MarkerClusterer>();
 
   const level = ref<number>();
 
@@ -54,19 +55,17 @@ export function useRedevKakaoMap({
 
   const bounds = ref<kakao.maps.LatLngBounds>();
 
-  onMounted(() => {
+  watchEffect((onCleanup) => {
     if (window.kakao != null && element.value != null) {
-      const newMap = new window.kakao.maps.Map(element.value, {
+      map.value = new window.kakao.maps.Map(element.value, {
         center: new window.kakao.maps.LatLng(37.484282426045304, 126.9297012649466),
         level: 8,
       });
 
-      newMap.setMaxLevel(12);
+      map.value.setMaxLevel(12);
 
-      map = newMap;
-
-      const newClusterer = new window.kakao.maps.MarkerClusterer({
-        map: newMap,
+      clusterer.value = new window.kakao.maps.MarkerClusterer({
+        map: map.value,
         gridSize: 160,
         minLevel: 5,
         minClusterSize: 1,
@@ -74,30 +73,28 @@ export function useRedevKakaoMap({
         styles: [getClustererStyle(50), getClustererStyle(100), getClustererStyle(150)],
       });
 
-      clusterer = newClusterer;
-
       const handleIdle = () => {
-        center.value = newMap.getCenter();
-        bounds.value = newMap.getBounds();
+        center.value = map.value?.getCenter();
+        bounds.value = map.value?.getBounds();
       };
 
       const handleZoom = () => {
-        level.value = newMap.getLevel();
+        level.value = map.value?.getLevel();
       };
 
-      kakao.maps.event.addListener(newMap, "idle", handleIdle);
-      kakao.maps.event.addListener(newMap, "zoom_changed", handleZoom);
+      kakao.maps.event.addListener(map.value, "idle", handleIdle);
+      kakao.maps.event.addListener(map.value, "zoom_changed", handleZoom);
 
       handleIdle();
       handleZoom();
 
-      return () => {
-        kakao.maps.event.removeListener(newMap, "idle", handleIdle);
-        kakao.maps.event.removeListener(newMap, "zoom_changed", handleZoom);
-      };
+      onCleanup(() => {
+        if (map.value) {
+          kakao.maps.event.removeListener(map.value, "idle", handleIdle);
+          kakao.maps.event.removeListener(map.value, "zoom_changed", handleZoom);
+        }
+      });
     }
-
-    return undefined;
   });
 
   /*
@@ -107,7 +104,7 @@ export function useRedevKakaoMap({
   watch(
     () => relayoutKey?.value,
     () => {
-      setTimeout(() => map?.relayout(), 1);
+      setTimeout(() => map.value?.relayout(), 1);
     }
   );
 
@@ -115,40 +112,46 @@ export function useRedevKakaoMap({
   사용자의 현재 위치가 변경되면 지도를 업데이트 한다.
   */
   watch(
-    () => position.value,
-    (newPosition) => {
-      const kakaoMap = map;
-      if (kakaoMap && newPosition) {
-        kakaoMap.setCenter(
-          new kakao.maps.LatLng(newPosition.coords.latitude, newPosition.coords.longitude)
+    () => [position.value, map.value],
+    () => {
+      if (map.value && position.value) {
+        map.value.setCenter(
+          new kakao.maps.LatLng(position.value.coords.latitude, position.value.coords.longitude)
         );
-        kakaoMap.setLevel(3);
+
+        map.value.setLevel(3);
       }
     }
   );
 
-  let overlays: kakao.maps.CustomOverlay[] = [];
-  let polygons: kakao.maps.Polygon[] = [];
+  const overlays = shallowRef<kakao.maps.CustomOverlay[]>([]);
+
+  const polygons = shallowRef<kakao.maps.Polygon[]>([]);
 
   watch(
-    () => [redevList.value, levelUnder5.value],
+    () => [map.value, clusterer.value, redevList.value, levelUnder5.value],
     () => {
-      if (map && clusterer) {
-        if ((clusterer as any).getMarkers().length > 0) {
-          clusterer.clear();
-          polygons.forEach((polygon) => polygon.setMap(null));
-        }
+      if (map.value && clusterer.value) {
+        polygons.value.forEach((polygon) => polygon.setMap(null));
 
-        overlays = redevList.value.map((redev) =>
-          getRedevOverlay(redev, map, () => onClickRedev(redev))
+        clusterer.value.clear();
+
+        overlays.value = redevList.value.map((redev) =>
+          getRedevOverlay({
+            redev,
+            map: map.value,
+            onClick: () => onClickRedev(redev),
+          })
         );
 
-        clusterer.addMarkers(overlays as any);
+        // CustomOverlay도 clusterer에 추가될 수 있다.
+        // 타입 정의 부재로 any 사용.
+        clusterer.value.addMarkers(overlays.value as any);
 
         if (levelUnder5.value) {
           /// 줌 5 이하일 때에만
-          polygons = redevList.value.map((redev) =>
-            getRedevPolygon(redev, map, () => onClickRedev(redev))
+          polygons.value = redevList.value.map((redev) =>
+            getRedevPolygon({ redev, map: map.value, onClick: () => onClickRedev(redev) })
           );
         }
       }

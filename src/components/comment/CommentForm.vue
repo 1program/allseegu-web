@@ -1,14 +1,15 @@
 <template>
   <div class="comment-form">
     <div class="header">
-      <div class="title">서쪽바다</div>
-      <div class="count">1/3000</div>
+      <div class="title">{{ me.data?.nickname ?? "-" }}</div>
+      <div class="count">{{ content.length }}/3000</div>
     </div>
     <!-- eslint-disable-next-line -->
     <textarea class="textarea" placeholder="댓글을 남겨보세요" v-model="content" />
     <FilePicker
-      :files="files"
-      @change-files="files = $event"
+      :new-files="files"
+      @add-file="files.push($event)"
+      @remove-file="files.splice(files.indexOf($event))"
       accept="image/*"
       :add-button="false"
     />
@@ -25,10 +26,12 @@
 </template>
 
 <script lang="ts">
-import { useUi } from "@/composables/common/useUi";
-import { TempChildComment, TempComment } from "@/models/comment";
-import { FileInfo } from "@/models/file/FileInfo";
-import { pickFileInfo } from "@/utils/file/pickFileInfo";
+import { useCommentCreate } from "@/composables/comment/useCommentCreate";
+import { useCommentUpdate } from "@/composables/comment/useCommentUpdate";
+import { useMe } from "@/composables/user/useMe";
+import { Comment } from "@/models/comment";
+import { ContentType } from "@/models/common";
+import { pickFile } from "@/utils/file/pickFile";
 import { defineComponent, PropType, ref } from "vue";
 import AppButton from "../common/AppButton.vue";
 import FilePicker from "../common/FilePicker.vue";
@@ -37,9 +40,38 @@ export default defineComponent({
   name: "CommentForm",
   components: { AppButton, FilePicker },
   props: {
-    comment: {
-      type: Object as PropType<TempComment | TempChildComment>,
+    /**
+     * 글 uuid
+     */
+    parent_uuid: {
+      type: String,
+      required: true,
     },
+
+    /**
+     * 모델
+     */
+    model: {
+      type: String as PropType<"story">,
+      required: true,
+    },
+
+    /**
+     * 부모 댓글 id
+     */
+    comment_id: {
+      type: Number,
+      default: null,
+    },
+
+    /**
+     * 기존 댓글
+     */
+    comment: {
+      type: Object as PropType<Comment>,
+      default: null,
+    },
+
     showCancel: {
       type: Boolean,
       default: false,
@@ -54,24 +86,75 @@ export default defineComponent({
     },
   },
   setup(props, context) {
-    const { notImplemented } = useUi();
+    const me = useMe();
 
-    const files = ref<FileInfo[]>([]);
+    const content = ref(props.comment?.content ?? "");
+
+    const files = ref<File[]>([]);
+
+    const deleteFiles = ref<number[]>([]);
 
     const pick = async () => {
-      const file = await pickFileInfo("image/*");
+      const file = await pickFile("image/*");
       files.value.push(file);
     };
 
+    const create = useCommentCreate();
+
+    const update = useCommentUpdate();
+
+    const reset = () => {
+      content.value = props.comment?.content ?? "";
+      files.value = [];
+      context.emit("ok");
+    };
+
+    // TODO: 직관적으로 축약하기
+    // TODO: SERVER: 생성 직후 담아 보낸 파일도 와야 할 듯
     const ok = () => {
-      notImplemented();
+      if (props.comment == null) {
+        // 생성
+        create.mutate(
+          {
+            comment_id: props.comment_id,
+            parent_uuid: props.parent_uuid,
+            model: props.model,
+            data: {
+              content_type: ContentType.PLAIN,
+              content: content.value,
+              uploadFiles: files.value,
+              deleteFiles: [],
+            },
+          },
+          {
+            onSuccess: reset,
+          }
+        );
+      } else {
+        // 수정
+        update.mutate(
+          {
+            id: props.comment.id,
+            comment_id: props.comment_id,
+            parent_uuid: props.parent_uuid,
+            model: props.model,
+            data: {
+              content_type: ContentType.PLAIN,
+              content: content.value,
+              uploadFiles: files.value,
+              deleteFiles: deleteFiles.value,
+            },
+          },
+          {
+            onSuccess: reset,
+          }
+        );
+      }
     };
 
     const cancel = () => {
       context.emit("cancel");
     };
-
-    const content = ref(props.comment?.content ?? "");
 
     return {
       files,
@@ -79,6 +162,7 @@ export default defineComponent({
       ok,
       cancel,
       content,
+      me,
     };
   },
 });

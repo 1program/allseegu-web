@@ -7,13 +7,14 @@
       </button>
     </div>
     <div class="container content">
-      <img class="image" alt="상세 이미지" :src="image" />
+      <img class="image" alt="상세 이미지" :src="image.url" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from "vue";
+import { FileInfo } from "@/models/file";
 
 export default defineComponent({
   name: "ImageDetailOverlay",
@@ -22,7 +23,7 @@ export default defineComponent({
       type: Number,
     },
     images: {
-      type: Array as PropType<string[]>,
+      type: Array as PropType<FileInfo[]>,
       default: () => [],
     },
   },

@@ -1,5 +1,5 @@
 export enum ContentType {
-  plain,
-  markdown,
-  html,
+  PLAIN = "plain",
+  MARKDOWN = "markdown",
+  HTML = "html",
 }

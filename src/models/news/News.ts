@@ -1,4 +1,5 @@
 import { Auditable, ContentType, Entity } from "../common";
+import { Files } from "../file";
 
 export interface News extends Entity, Auditable {
   redev_id: number;
@@ -10,9 +11,5 @@ export interface News extends Entity, Auditable {
   video: string | null;
   is_visible: 1 | 0;
   hits: number;
-  // TODO: Check
-  files: {
-    images: [];
-    docs: [];
-  };
+  files: Files;
 }

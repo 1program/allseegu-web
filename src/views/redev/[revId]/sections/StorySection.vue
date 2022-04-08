@@ -24,7 +24,7 @@
       />
     </div>
   </div>
-  <MoreButton to="1/story">우리 구역 이야기 더보기</MoreButton>
+  <MoreButton :to="`${redev_id}/story`">우리 구역 이야기 더보기</MoreButton>
 </template>
 
 <script lang="ts">
@@ -36,6 +36,12 @@ import MoreButton from "@/components/common/MoreButton.vue";
 export default defineComponent({
   name: "StorySection",
   components: { ListDivider, ListTile, MoreButton },
+  props: {
+    redev_id: {
+      type: Number,
+      required: true,
+    },
+  },
 });
 </script>
 

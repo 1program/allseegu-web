@@ -1,6 +1,8 @@
 import AuthApi from "@/api/AuthApi";
+import CommentApi from "@/api/CommentApi";
 import FileApi from "@/api/FileApi";
 import RedevApi from "@/api/RedevApi";
+import StoryApi from "@/api/StoryApi";
 import UserApi from "@/api/UserApi";
 import { API_URL } from "@/lib/config";
 import { computed, inject, provide, reactive, Ref } from "vue";
@@ -16,6 +18,8 @@ export interface ApiContext {
   redev: RedevApi;
   user: UserApi;
   file: FileApi;
+  story: StoryApi;
+  comment: CommentApi;
 }
 
 export interface ApiProviderOptions {
@@ -28,11 +32,25 @@ export function provideApi({ accessToken }: ApiProviderOptions) {
     accessToken: accessToken.value,
   }));
 
+  const auth = computed(() => new AuthApi(options.value));
+
+  const redev = computed(() => new RedevApi(options.value));
+
+  const user = computed(() => new UserApi(options.value));
+
+  const file = computed(() => new FileApi(options.value));
+
+  const story = computed(() => new StoryApi(options.value, file.value));
+
+  const comment = computed(() => new CommentApi(options.value, file.value));
+
   const context = reactive({
-    auth: computed(() => new AuthApi(options.value)),
-    redev: computed(() => new RedevApi(options.value)),
-    user: computed(() => new UserApi(options.value)),
-    file: computed(() => new FileApi(options.value)),
+    auth,
+    redev,
+    user,
+    file,
+    story,
+    comment,
   });
 
   provide(API_CONTEXT_SYMBOL, context);

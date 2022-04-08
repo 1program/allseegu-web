@@ -63,7 +63,7 @@ export default class BaseApi {
       .catch(BaseApi.handleError);
   }
 
-  private static handleError(error: unknown) {
+  private static handleError(error: unknown): never {
     if (axios.isAxiosError(error)) {
       throw new ApiError(
         error.response?.status ?? 500,

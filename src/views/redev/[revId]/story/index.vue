@@ -5,30 +5,66 @@
         <img class="plus-icon" src="@/images/icons/plus-thick.svg" alt="등록하기" />
         이야기 등록하기
       </AppButton>
-      <template v-for="index in 10" :key="index">
-        <ListTile
-          title="신림동 재개발 의원회 회의 결과를 공유합니다..."
-          nickname="라이언"
-          :comments="26"
-          to="story/1"
-          :mine="index == 4"
-        />
-        <ListDivider />
+      <ErrorFallback v-if="storyList.error != null" :error="storyList.error" />
+      <LoadingFallback v-else-if="storyList.data == null" />
+      <template v-else v-for="page in storyList.data.pages" :key="page.current_page">
+        <template v-for="story in page.data" :key="story.id">
+          <ListTile
+            :title="story.title"
+            :nickname="story.nickname"
+            :comments="story.comments_count"
+            :to="`story/${story.id}`"
+            :mine="me.data?.id == story.user_id"
+          />
+          <ListDivider />
+        </template>
       </template>
+      <!-- 다음 페이지 불러오기 -->
+      <InView v-if="storyList.hasNextPage" @in-view="storyList.fetchNextPage()">
+        <LoadingFallback />
+      </InView>
     </div>
   </AppScaffold>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import ListTile from "@/components/common/ListTile.vue";
 import ListDivider from "@/components/common/ListDivider.vue";
 import AppButton from "@/components/common/AppButton.vue";
+import { useRoute } from "vue-router";
+import { useStoryList } from "@/composables/story/useStoryList";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
+import { useMe } from "@/composables/user/useMe";
+import InView from "@/components/common/InView.vue";
 
 export default defineComponent({
   name: "RedevDetailStoryList",
-  components: { AppScaffold, ListTile, ListDivider, AppButton },
+  components: {
+    AppScaffold,
+    ListTile,
+    ListDivider,
+    AppButton,
+    ErrorFallback,
+    LoadingFallback,
+    InView,
+  },
+  setup() {
+    const route = useRoute();
+
+    const me = useMe();
+
+    const redev_id = computed(() => parseInt(route.params.revId as string, 10));
+
+    const storyList = useStoryList(computed(() => ({ redev_id: redev_id.value })));
+
+    return {
+      storyList,
+      me,
+    };
+  },
 });
 </script>
 

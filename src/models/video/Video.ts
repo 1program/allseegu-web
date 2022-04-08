@@ -1,4 +1,5 @@
 import { Auditable, ContentType, Entity } from "../common";
+import { Files } from "../file";
 
 export interface Video extends Entity, Auditable {
   redev_id: number;
@@ -8,8 +9,5 @@ export interface Video extends Entity, Auditable {
   link: string | null;
   is_visible: 1 | 0;
   hits: number;
-  files: {
-    images: []; // TODO: Check
-    docs: []; // TODO: Check
-  };
+  files: Files;
 }

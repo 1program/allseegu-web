@@ -22,7 +22,13 @@ const textCss = css({
   right: 0,
 });
 
-export function getRedevOverlay(redev: RedevGeometry, map: kakao.maps.Map, onClick: () => void) {
+export interface RedevOverlayOptions {
+  redev: RedevGeometry;
+  map?: kakao.maps.Map;
+  onClick?: () => void;
+}
+
+export function getRedevOverlay({ redev, map, onClick }: RedevOverlayOptions) {
   const center = new window.kakao.maps.LatLng(
     parseFloat(redev.center_y),
     parseFloat(redev.center_x)

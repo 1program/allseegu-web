@@ -2,16 +2,26 @@
   <AppScaffold title="우리 구역 이야기" has-top-button>
     <form class="page-wrapper" @submit.prevent="submit">
       <div class="container page-content">
-        <FormGroup class="form-group" label="제목">
-          <FormInput />
-        </FormGroup>
-        <FormGroup label="내용">
-          <FormTextarea
-            placeholder="다른 사람을 비방하거나, 타인에게 불쾌감을 유발하는 부적절한 표현, 영리 목적의 광고는 삼가해주세요!"
-          />
-        </FormGroup>
+        <Field name="title" v-slot="{ field, errorMessage }">
+          <FormGroup class="form-group" label="제목" :error-text="errorMessage">
+            <FormInput v-bind="field" />
+          </FormGroup>
+        </Field>
+        <Field name="content" v-slot="{ field, errorMessage }">
+          <FormGroup label="내용" :error-text="errorMessage">
+            <FormTextarea
+              v-bind="field"
+              placeholder="다른 사람을 비방하거나, 타인에게 불쾌감을 유발하는 부적절한 표현, 영리 목적의 광고는 삼가해주세요!"
+            />
+          </FormGroup>
+        </Field>
         <FormGroup label="첨부 파일">
-          <FilePicker class="picker" :files="files" @change-files="files = $event" />
+          <FilePicker
+            class="picker"
+            :new-files="uploadFiles"
+            @add-file="uploadFiles.push($event)"
+            @remove-file="uploadFiles.splice(uploadFiles.indexOf($event))"
+          />
         </FormGroup>
       </div>
       <div class="container page-footer">
@@ -23,29 +33,59 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { Field, useForm } from "vee-validate";
+import * as yup from "yup";
+
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import AppButton from "@/components/common/AppButton.vue";
 import FormGroup from "@/components/common/FormGroup.vue";
 import FormInput from "@/components/common/FormInput.vue";
 import FormTextarea from "@/components/common/FormTextarea.vue";
 import FilePicker from "@/components/common/FilePicker.vue";
-import { useAlert } from "@/composables/common/useAlert";
-import { FileInfo } from "@/models/file/FileInfo";
+import { useStoryCreate } from "@/composables/story/useStoryCreate";
+import { useRoute, useRouter } from "vue-router";
 
 export default defineComponent({
   name: "RedevDetailStoryWrite",
-  components: { AppScaffold, AppButton, FormGroup, FormInput, FormTextarea, FilePicker },
+  components: { Field, AppScaffold, AppButton, FormGroup, FormInput, FormTextarea, FilePicker },
   setup() {
-    const alert = useAlert();
+    const router = useRouter();
 
-    const files = ref<FileInfo[]>([]);
+    const route = useRoute();
+
+    const uploadFiles = ref<File[]>([]);
+
+    const { handleSubmit } = useForm({
+      validateOnMount: false,
+      validationSchema: yup.object({
+        title: yup.string().required("제목을 입력해 주세요.").default(""),
+        content: yup.string().required("내용을 입력해 주세요.").default(""),
+      }),
+    });
+
+    const storyCreate = useStoryCreate();
+
+    const submit = handleSubmit((values) => {
+      storyCreate.mutate(
+        {
+          redev_id: parseInt(route.params.revId as string, 10),
+          data: {
+            ...values,
+            uploadFiles: uploadFiles.value,
+            deleteFiles: [],
+          },
+        },
+        {
+          onSuccess: () => {
+            router.back();
+          },
+        }
+      );
+    });
 
     return {
-      files,
-      submit() {
-        //
-        alert("이야기가 등록 되었습니다.");
-      },
+      uploadFiles,
+      submit,
     };
   },
 });

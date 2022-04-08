@@ -1,10 +1,9 @@
+import { Comment } from "../comment";
+import { Files } from "../file";
 import { Story } from "./Story";
 
 export interface StoryDetail extends Story {
-  files: {
-    images: [];
-    docs: [];
-  };
-  comments: unknown[]; // TODO: Check
+  files: Files;
+  comments: Comment[];
   nickname: string;
 }
