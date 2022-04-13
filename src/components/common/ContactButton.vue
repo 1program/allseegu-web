@@ -24,6 +24,7 @@ export default defineComponent({
 @import "@/styles/config";
 
 .contact-button {
+  display: inline-flex;
   width: (68/2/16) * 1rem;
   height: (68/2/16) * 1rem;
   border-radius: (15/2/16) * 1rem;

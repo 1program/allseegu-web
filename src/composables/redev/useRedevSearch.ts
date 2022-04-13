@@ -9,21 +9,17 @@ export function useRedevSearch(options: Ref<RedevSearchOptions>) {
   const api = useApi();
 
   const query = useInfiniteQuery<PagedList<Redev>>({
-    queryKey: computed(() => ["redevSearch", options.value]),
+    queryKey: computed(() => ["REDEV_SEARCH", options.value]),
     queryFn: (context) =>
       api.redev
         .search({
+          take: 20,
           ...options.value,
           page: context.pageParam,
-          take: 20,
         })
         .then((result) => result.data),
-    getNextPageParam: (lastPage) =>
-      lastPage.next_page_url != null ? lastPage.current_page + 1 : undefined,
-    getPreviousPageParam: (firstPage) =>
-      firstPage.prev_page_url != null ? firstPage.current_page - 1 : undefined,
-    retry: 0,
-    retryDelay: 10,
+    getNextPageParam: (lastPage) => lastPage.next_page,
+    getPreviousPageParam: (firstPage) => firstPage.prev_page,
     enabled: computed(() => options.value.query != null),
   });
 

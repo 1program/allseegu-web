@@ -127,6 +127,13 @@ export default defineComponent({
   width: (20/2/16) * 1rem;
 }
 
+.title {
+  padding-left: 3rem;
+  padding-right: 3rem;
+
+  @include ellipsis;
+}
+
 .progress {
   width: 100%;
   position: absolute;

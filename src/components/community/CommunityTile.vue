@@ -1,6 +1,7 @@
 <template>
   <RouterLinkOrButton class="community-tile">
-    <ContactTile :name="title" :description="description">
+    <!-- TODO: undefined, null 타입 정리 -->
+    <ContactTile :name="title" :description="description ?? undefined">
       <template v-slot:button>
         <ContactButton :color="color"><img class="icon" :src="icon" alt="아이콘" /></ContactButton>
       </template>
@@ -11,6 +12,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
+
+import { CommunityCafeType, CommunityType } from "@/models/community";
 
 import kakaoIcon from "@/images/icons/community-kakao-openchat.svg";
 import naverCafeIcon from "@/images/icons/community-naver-cafe.svg";
@@ -26,15 +29,19 @@ export default defineComponent({
   components: { ContactTile, ContactButton, RouterLinkOrButton },
   props: {
     type: {
-      type: String as PropType<"kakao" | "naver_cafe" | "naver_blog" | "daum_cafe">,
-      default: "kakao",
+      type: Object as PropType<CommunityType>,
+      default: CommunityType.KAKAO,
+    },
+    cafe_type: {
+      type: Object as PropType<CommunityCafeType | null>,
+      default: null,
     },
     title: {
       type: String,
       default: null,
     },
     description: {
-      type: String,
+      type: String as PropType<string | null>,
       default: null,
     },
     content: {
@@ -45,14 +52,19 @@ export default defineComponent({
   setup(props) {
     const color = computed(() => {
       switch (props.type) {
-        case "kakao":
+        case CommunityType.KAKAO:
           return "#feeb00";
-        case "naver_cafe":
-          return "#02c135";
-        case "daum_cafe":
-          return "#eb3640";
-        case "naver_blog":
+        case CommunityType.BLOG:
           return "#00c035";
+        case CommunityType.CAFE:
+          switch (props.cafe_type) {
+            case CommunityCafeType.DAUM:
+              return "#eb3640";
+            case CommunityCafeType.NAVER:
+              return "#02c135";
+            default:
+              return "";
+          }
         default:
           return "";
       }
@@ -60,14 +72,19 @@ export default defineComponent({
 
     const icon = computed(() => {
       switch (props.type) {
-        case "kakao":
+        case CommunityType.KAKAO:
           return kakaoIcon;
-        case "naver_cafe":
-          return naverCafeIcon;
-        case "daum_cafe":
-          return daumCafeIcon;
-        case "naver_blog":
+        case CommunityType.BLOG:
           return naverBlogIcon;
+        case CommunityType.CAFE:
+          switch (props.cafe_type) {
+            case CommunityCafeType.DAUM:
+              return daumCafeIcon;
+            case CommunityCafeType.NAVER:
+              return naverCafeIcon;
+            default:
+              return "";
+          }
         default:
           return "";
       }

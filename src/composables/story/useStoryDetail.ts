@@ -11,7 +11,6 @@ export function useStoryDetail(options: Ref<StoryDetailOptions>) {
     useQuery({
       queryKey: computed(() => ["STORY_DETAIL", options.value.story_id]),
       queryFn: () => api.story.detail(options.value).then((result) => result.data),
-      retry: 0,
     })
   );
 }

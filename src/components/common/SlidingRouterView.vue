@@ -1,10 +1,8 @@
 <template>
   <router-view v-slot="{ Component }">
-    <transition :name="transition" mode="out-in">
-      <div class="content" :key="createComponentKey(Component)">
-        <component :is="Component" />
-      </div>
-    </transition>
+    <div class="content" :class="[transition]" :key="createComponentKey(Component)">
+      <component :is="Component" />
+    </div>
   </router-view>
 </template>
 
@@ -44,9 +42,9 @@ export default defineComponent({
       () => index.value,
       (next, prev) => {
         if (next > prev) {
-          transition.value = "slide-next";
+          transition.value = "next";
         } else {
-          transition.value = "slide-prev";
+          transition.value = "previous";
         }
       }
     );
@@ -74,36 +72,35 @@ export default defineComponent({
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
 }
 
-/*
-  Enter and leave animations can use different
-  durations and timing functions.
-*/
-.slide-next-enter-active,
-.slide-prev-enter-active {
-  transition: all 0.3s ease-out;
+.previous {
+  animation-name: previous;
 }
 
-.slide-next-leave-active,
-.slide-prev-leave-active {
-  // transition: all 0.15s cubic-bezier(1, 0.5, 0.8, 1);
+.next {
+  animation-name: next;
 }
 
-.slide-next-enter-from,
-.slide-next-leave-to,
-.slide-prev-enter-from,
-.slide-prev-leave-to {
-  opacity: 0;
+@keyframes previous {
+  from {
+    transform: translateX(-20px);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
-.slide-next-enter-from,
-.slide-prev-leave-to {
-  transform: translateX(20px);
-}
-
-.slide-next-leave-to,
-.slide-prev-enter-from {
-  transform: translateX(-20px);
+@keyframes next {
+  from {
+    transform: translateX(20px);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 </style>

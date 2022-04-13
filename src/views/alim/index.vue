@@ -29,7 +29,7 @@
                 :read="false"
                 label="1:1문의"
                 content="문의 답변이 등록되었습니다."
-                to="/my/customer/inquiry/1"
+                to="/my/customer/qna/1"
               />
             </div>
           </AlimGroup>

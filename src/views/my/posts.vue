@@ -3,15 +3,15 @@
     <div class="page-wrapper container page-content-medium">
       <TabBar
         class="tab-bar"
-        :current-tab="typeId"
-        @change-tab="typeId = $event"
+        :current-tab="type_id"
+        @change-tab="type_id = $event"
         :tabs="[
           { id: 1, title: '이야기' },
           { id: 2, title: '댓글' },
         ]"
       />
       <!--이야기-->
-      <template v-if="typeId === 1">
+      <template v-if="type_id === 1">
         <ListTile
           category="신림 1구역 재개발 사업"
           title="조합이 바르게 운영되지 못하고 와해되는 이유"
@@ -33,7 +33,7 @@
         />
       </template>
       <!--댓글-->
-      <template v-if="typeId === 2">
+      <template v-if="type_id === 2">
         <ListTile
           category="신림 1구역 재개발 사업"
           title="조합이 바르게 운영되지 못하고 와해되는 이유"
@@ -93,7 +93,7 @@ export default defineComponent({
   setup() {
     const confirm = useConfirm();
 
-    const typeId = ref(1);
+    const type_id = ref(1);
 
     const { notImplemented } = useUi();
 
@@ -109,7 +109,7 @@ export default defineComponent({
       }
     };
 
-    return { typeId, removePost, removeComment };
+    return { type_id, removePost, removeComment };
   },
 });
 </script>

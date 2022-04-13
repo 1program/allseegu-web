@@ -22,7 +22,7 @@
         <div class="list-title">고객센터</div>
         <menu-button to="/my/customer/notice" alarm> 공지사항 </menu-button>
         <menu-button to="/my/customer/faq">FAQ</menu-button>
-        <menu-button to="/my/customer/inquiry" alarm> 1:1 문의 </menu-button>
+        <menu-button to="/my/customer/qna" alarm> 1:1 문의 </menu-button>
         <menu-button to="/my/customer/request">올려주세요</menu-button>
         <menu-button to="/my/customer/terms">약관/정책</menu-button>
       </div>

@@ -19,17 +19,3 @@ export const newsTypeNames = {
   [NewsType.LOCAL]: "지역",
   [NewsType.ETC]: "기타",
 };
-
-/**
- * 보도자료 하위 타입 옵션값 목록
- */
-export const newsTypeOptions = [
-  NewsType.NEWS,
-  NewsType.BLOG,
-  NewsType.BAND,
-  NewsType.LOCAL,
-  NewsType.ETC,
-].map((type) => ({
-  label: newsTypeNames[type],
-  value: type,
-}));

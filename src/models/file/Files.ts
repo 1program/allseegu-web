@@ -1,4 +1,6 @@
+import { FileInfo } from "./FileInfo";
+
 export interface Files {
-  images: [];
-  docs: [];
+  images: FileInfo[];
+  docs: FileInfo[];
 }

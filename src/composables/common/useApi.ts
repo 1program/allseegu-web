@@ -1,9 +1,14 @@
 import AuthApi from "@/api/AuthApi";
 import CommentApi from "@/api/CommentApi";
+import { CommunityApi } from "@/api/CommunityApi";
 import FileApi from "@/api/FileApi";
+import { NewsApi } from "@/api/NewsApi";
+import NoticeApi from "@/api/NoticeApi";
 import RedevApi from "@/api/RedevApi";
 import StoryApi from "@/api/StoryApi";
+import SubscribeApi from "@/api/SubscribeApi";
 import UserApi from "@/api/UserApi";
+import VideoApi from "@/api/VideoApi";
 import { API_URL } from "@/lib/config";
 import { computed, inject, provide, reactive, Ref } from "vue";
 
@@ -20,6 +25,11 @@ export interface ApiContext {
   file: FileApi;
   story: StoryApi;
   comment: CommentApi;
+  subscribe: SubscribeApi;
+  notice: NoticeApi;
+  video: VideoApi;
+  community: CommunityApi;
+  news: NewsApi;
 }
 
 export interface ApiProviderOptions {
@@ -44,6 +54,16 @@ export function provideApi({ accessToken }: ApiProviderOptions) {
 
   const comment = computed(() => new CommentApi(options.value, file.value));
 
+  const subscribe = computed(() => new SubscribeApi(options.value));
+
+  const notice = computed(() => new NoticeApi(options.value));
+
+  const video = computed(() => new VideoApi(options.value));
+
+  const community = computed(() => new CommunityApi(options.value));
+
+  const news = computed(() => new NewsApi(options.value));
+
   const context = reactive({
     auth,
     redev,
@@ -51,6 +71,11 @@ export function provideApi({ accessToken }: ApiProviderOptions) {
     file,
     story,
     comment,
+    subscribe,
+    notice,
+    video,
+    community,
+    news,
   });
 
   provide(API_CONTEXT_SYMBOL, context);

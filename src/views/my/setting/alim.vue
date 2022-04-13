@@ -11,7 +11,7 @@
         <menu-button>
           <template v-slot>1:1 문의</template>
           <template v-slot:trailing>
-            <app-toggle v-model:checked="settings.inquiry" />
+            <app-toggle v-model:checked="settings.qna" />
           </template>
         </menu-button>
         <menu-button>
@@ -64,7 +64,7 @@ export default defineComponent({
 
     const settings = reactive({
       notice: true,
-      inquiry: true,
+      qna: true,
       request: true,
       marketing: false,
       email: false,

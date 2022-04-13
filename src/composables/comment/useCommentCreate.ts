@@ -23,10 +23,11 @@ export function useCommentCreate() {
         if (options.model === "story") {
           queryClient.setQueryData<Partial<StoryDetail>>(
             ["STORY_DETAIL", data.data.commentable_id],
-            (previous) => ({ ...previous, comments: [...(previous?.comments ?? []), data.data] })
+            (previous) => ({ ...previous, comments: [data.data, ...(previous?.comments ?? [])] })
           );
         }
       },
+      // TODO: any 타입 개선
       onError: (error: any) => alert(error.message),
     })
   );

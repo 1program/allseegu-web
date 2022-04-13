@@ -18,6 +18,11 @@ export interface Comment extends Entity, Auditable {
   content: string;
 
   /**
+   * 닉네임
+   */
+  nickname: string;
+
+  /**
    * 게시글 uuid
    */
   parent_uuid: string;
@@ -48,6 +53,7 @@ export const mockComment: Comment = {
   comment_id: null,
   content_type: ContentType.PLAIN,
   content: "내용입니다.",
+  nickname: "관리자",
   uuid: "da414a1d-9085-49e3-be9b-596f696eb5e1",
   user_id: 11,
   parent_uuid: "fbd23180-c017-34a6-822d-026fdeda032e",

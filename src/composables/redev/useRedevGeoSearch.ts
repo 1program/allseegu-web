@@ -17,16 +17,11 @@ export function useRedevGeoSearch(options: Ref<RedevGeoSearchOptions | null>) {
   // `reactive`를 사용해 이를 평면화 시켜준다.
   return reactive(
     useQuery({
-      queryKey: ["redevGeoSearch", options],
+      queryKey: ["REDEV_GEO_SEARCH", options],
       queryFn: () =>
         options.value == null
           ? []
           : api.redev.geoSearch(options.value).then((result) => result.data),
-      retry: 0,
-      retryDelay: 10,
-      retryOnMount: false,
-      refetchOnWindowFocus: false,
-      keepPreviousData: true,
       enabled: computed(() => options.value != null),
     })
   );

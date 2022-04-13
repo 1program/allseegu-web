@@ -9,8 +9,8 @@
         </InputGroup>
         <TabBar
           class="tab-bar"
-          :current-tab="typeId"
-          @change-tab="typeId = $event"
+          :current-tab="type_id"
+          @change-tab="type_id = $event"
           :tabs="[
             { id: 1, title: '이용법' },
             { id: 2, title: '부동산' },
@@ -47,7 +47,7 @@ export default defineComponent({
   name: "MyCustomerFaq",
   components: { AppScaffold, TabBar, InputGroup, QnaTile },
   setup() {
-    const typeId = ref(1);
+    const type_id = ref(1);
 
     const activeIndex = ref(1);
 
@@ -88,7 +88,7 @@ export default defineComponent({
       activeIndex.value = id;
     };
 
-    return { typeId, activeIndex, faqList, changeIndex };
+    return { type_id, activeIndex, faqList, changeIndex };
   },
 });
 </script>

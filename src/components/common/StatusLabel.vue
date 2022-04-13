@@ -1,11 +1,11 @@
 <template>
-  <div class="status-label" :class="{ blue, red }">
+  <div class="status-label" :class="[palette]">
     {{ label ?? "-" }}
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "StatusLabel",
@@ -14,13 +14,9 @@ export default defineComponent({
       type: String,
       default: null,
     },
-    blue: {
-      type: Boolean,
-      default: false,
-    },
-    red: {
-      type: Boolean,
-      default: false,
+    palette: {
+      type: String as PropType<"default" | "primary" | "danger">,
+      default: "default",
     },
   },
 });
@@ -33,10 +29,10 @@ export default defineComponent({
   font-weight: bold;
   color: #777777;
 
-  &.blue {
+  &.primary {
     color: $color-blue;
   }
-  &.red {
+  &.danger {
     color: $color-red;
   }
 }

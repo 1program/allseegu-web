@@ -1,10 +1,14 @@
 import { ApiResponse, PagedList } from "@/models/common";
-import { Redev, RedevGeometry } from "@/models/redev";
+import { Redev, RedevDetail, RedevGeometry } from "@/models/redev";
 import BaseApi from "./BaseApi";
 
 export interface RedevListOptions {
   page?: number;
   take?: number;
+}
+
+export interface RedevDetailOptions {
+  redev_id: number;
 }
 
 export interface RedevSearchOptions {
@@ -61,5 +65,14 @@ export default class RedevApi extends BaseApi {
       url: "/redev",
       method: "GET",
       params: { page, take },
+    });
+
+  /**
+   * 사업 상세
+   */
+  detail = ({ redev_id }: RedevDetailOptions) =>
+    this.request<ApiResponse<RedevDetail>>({
+      url: `/redev/${redev_id}`,
+      method: "GET",
     });
 }

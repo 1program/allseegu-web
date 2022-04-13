@@ -3,7 +3,6 @@ import { getClustererStyle } from "@/utils/common/getClustererStyle";
 import { getRedevOverlay } from "@/utils/redev/getRedevOverlay";
 import { getRedevPolygon } from "@/utils/redev/getRedevPolygon";
 import { computed, ref, Ref, shallowRef, watch, watchEffect } from "vue";
-import { watchLog } from "../common/watchLog";
 
 export interface UseRedevKakaoMapOptions {
   /**

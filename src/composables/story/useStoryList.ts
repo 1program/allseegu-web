@@ -10,23 +10,17 @@ export function useStoryList(options: Ref<StoryListOptions>) {
 
   return reactive(
     useInfiniteQuery<PagedList<Story>>({
-      queryKey: computed(() => ["storyList", options.value.redev_id]),
+      queryKey: computed(() => ["STORY_LIST", options.value.redev_id]),
       queryFn: (context) =>
         api.story
           .list({
+            take: 20,
             ...options.value,
             page: context.pageParam,
-            take: 20,
           })
           .then((result) => result.data),
-      // TODO: 간소화
-      getNextPageParam: (lastPage) =>
-        lastPage.next_page_url != null ? lastPage.current_page + 1 : undefined,
-      // TODO: 간소화
-      getPreviousPageParam: (firstPage) =>
-        firstPage.prev_page_url != null ? firstPage.current_page - 1 : undefined,
-      retry: 0,
-      retryDelay: 0,
+      getNextPageParam: (lastPage) => lastPage.next_page,
+      getPreviousPageParam: (firstPage) => firstPage.prev_page,
     })
   );
 }

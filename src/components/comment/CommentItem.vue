@@ -13,7 +13,7 @@
     <!-- TODO: 닉네임 필요 -->
     <CommentTile
       v-else
-      :nickname="'테스트'"
+      :nickname="comment.nickname"
       :date="new Date(comment.created_at)"
       :images="comment.files?.images ?? []"
       :content="comment.content"
@@ -40,6 +40,7 @@ import { Comment, parseCommentableType } from "@/models/comment";
 import { useUi } from "@/composables/common/useUi";
 import { useMe } from "@/composables/user/useMe";
 import { useCommentDelete } from "@/composables/comment/useCommentDelete";
+import { useConfirm } from "@/composables/common/useConfirm";
 
 import CommentForm from "./CommentForm.vue";
 import CommentTile from "./CommentTile.vue";
@@ -54,6 +55,8 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const confirm = useConfirm();
+
     const { notImplemented } = useUi();
 
     const me = useMe();
@@ -66,13 +69,17 @@ export default defineComponent({
 
     const commentDelete = useCommentDelete();
 
-    const remove = () => {
-      commentDelete.mutate({
-        commentable_id: props.comment.commentable_id,
-        parent_uuid: props.comment.parent_uuid,
-        id: props.comment.id,
-        model: "story",
-      });
+    const remove = async () => {
+      const yes = await confirm("정말 삭제하시겠습니까?");
+
+      if (yes) {
+        commentDelete.mutate({
+          commentable_id: props.comment.commentable_id,
+          parent_uuid: props.comment.parent_uuid,
+          id: props.comment.id,
+          model: "story",
+        });
+      }
     };
 
     return {

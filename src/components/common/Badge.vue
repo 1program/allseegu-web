@@ -1,9 +1,9 @@
 <template>
-  <div class="badge" :class="{ blue, red }">{{ label ?? "-" }}</div>
+  <div class="badge" :class="[palette]">{{ label ?? "-" }}</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "AppBadge",
@@ -12,13 +12,9 @@ export default defineComponent({
       type: String,
       default: null,
     },
-    blue: {
-      type: Boolean,
-      default: false,
-    },
-    red: {
-      type: Boolean,
-      default: false,
+    palette: {
+      type: String as PropType<"default" | "primary" | "danger">,
+      default: "default",
     },
   },
 });
@@ -36,11 +32,11 @@ export default defineComponent({
   font-weight: bold;
   border-radius: (100/2/16) * 1rem;
 
-  &.blue {
+  &.primary {
     background-color: $color-blue;
   }
 
-  &.red {
+  &.danger {
     background-color: $color-red;
   }
 }

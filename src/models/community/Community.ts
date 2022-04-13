@@ -1,4 +1,6 @@
 import { Auditable, ContentType, Entity } from "../common";
+import { CommunityCafeType } from "./CommunityCafeType";
+import { CommunityType } from "./CommunityType";
 
 export interface Community extends Entity, Auditable {
   redev_id: number;
@@ -6,12 +8,12 @@ export interface Community extends Entity, Auditable {
   /**
    * 하위 분류 ID
    */
-  community_type_id: number; // TODO: Check
+  community_type_id: CommunityType;
 
   /**
    *
    */
-  cafe_type: string | null; // TODO: Check
+  cafe_type: CommunityCafeType | null;
 
   /**
    * 제목

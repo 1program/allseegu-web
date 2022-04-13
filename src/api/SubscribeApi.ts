@@ -1,14 +1,16 @@
 import { ApiResponse, PagedList } from "@/models/common";
-import { Subscribe } from "@/models/subscribe";
+import { Subscribe, SubscribeDetail } from "@/models/subscribe";
 import BaseApi from "./BaseApi";
 
 export interface SubscribeListOptions {
-  revId: number;
+  redev_id: number;
+  page?: number;
+  take?: number;
 }
 
 export interface SubscribeDetailOptions {
-  revId: number;
-  subscribeId: number;
+  redev_id: number;
+  subscribe_id: number;
 }
 
 /**
@@ -18,15 +20,18 @@ export default class SubscribeApi extends BaseApi {
   /**
    * (사업의) 구독 목록
    */
-  subscribeList = ({ revId }: SubscribeListOptions) =>
-    this.request<ApiResponse<PagedList<Subscribe>>>({ url: `/${revId}/subscribe`, method: "GET" });
+  subscribeList = ({ redev_id }: SubscribeListOptions) =>
+    this.request<ApiResponse<PagedList<Subscribe>>>({
+      url: `/${redev_id}/subscribe`,
+      method: "GET",
+    });
 
   /**
    * (사업의) 구독 상세
    */
-  subscribeDetail = ({ revId, subscribeId }: SubscribeDetailOptions) =>
-    this.request<ApiResponse<PagedList<Subscribe>>>({
-      url: `/${revId}/subscribe/${subscribeId}`,
+  subscribeDetail = ({ redev_id, subscribe_id }: SubscribeDetailOptions) =>
+    this.request<ApiResponse<SubscribeDetail>>({
+      url: `/${redev_id}/subscribe/${subscribe_id}`,
       method: "GET",
     });
 }

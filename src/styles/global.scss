@@ -228,7 +228,7 @@ textarea {
   align-items: flex-start;
 
   & > * {
-    flex: 1 1 auto;
+    flex: 1 0;
 
     &:not(:last-child) {
       margin-right: (19/2/16) * 1rem;

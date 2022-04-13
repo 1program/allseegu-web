@@ -9,7 +9,7 @@ export function useStoryCreate() {
   const api = useApi();
 
   const mutation = useMutation({
-    mutationKey: "createStory",
+    mutationKey: "STORY_CREATE",
     mutationFn: async ({ redev_id, data }: StoryCreateOptions) => {
       return api.story.create({
         redev_id,

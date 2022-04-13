@@ -1,14 +1,17 @@
 import { ApiResponse, PagedList } from "@/models/common";
+import { NoticeDetail } from "@/models/notice";
 import { Notice } from "@/models/notice/Notice";
 import BaseApi from "./BaseApi";
 
 export interface NoticeListOptions {
-  revId: number;
+  redev_id: number;
+  page?: number;
+  take?: number;
 }
 
 export interface NoticeDetailOptions {
-  revId: number;
-  noticeId: number;
+  redev_id: number;
+  notice_id: number;
 }
 
 /**
@@ -18,12 +21,15 @@ export default class NoticeApi extends BaseApi {
   /**
    * (사업의) 공지사항 목록
    */
-  noticeList = ({ revId }: NoticeListOptions) =>
-    this.request<ApiResponse<PagedList<Notice>>>({ url: `/${revId}/notice`, method: "GET" });
+  noticeList = ({ redev_id }: NoticeListOptions) =>
+    this.request<ApiResponse<PagedList<Notice>>>({ url: `/${redev_id}/notice`, method: "GET" });
 
   /**
    * (사업의) 공지사항 상세
    */
-  noticeDetail = ({ revId, noticeId }: NoticeDetailOptions) =>
-    this.request<ApiResponse<Notice>>({ url: `/${revId}/notice/${noticeId}`, method: "GET" });
+  noticeDetail = ({ redev_id, notice_id }: NoticeDetailOptions) =>
+    this.request<ApiResponse<NoticeDetail>>({
+      url: `/${redev_id}/notice/${notice_id}`,
+      method: "GET",
+    });
 }
