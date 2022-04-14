@@ -12,7 +12,7 @@ export interface NewsListOptions {
 /**
  * 뉴스 API
  */
-export class NewsApi extends BaseApi {
+export default class NewsApi extends BaseApi {
   /**
    * 뉴스 타입 목록
    */

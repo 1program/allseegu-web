@@ -1,16 +1,19 @@
+import { computed, inject, provide, reactive, Ref } from "vue";
+
+import { API_URL } from "@/lib/config";
+
 import AuthApi from "@/api/AuthApi";
 import CommentApi from "@/api/CommentApi";
-import { CommunityApi } from "@/api/CommunityApi";
+import CommunityApi from "@/api/CommunityApi";
+import FavorApi from "@/api/FavorApi";
 import FileApi from "@/api/FileApi";
-import { NewsApi } from "@/api/NewsApi";
+import NewsApi from "@/api/NewsApi";
 import NoticeApi from "@/api/NoticeApi";
 import RedevApi from "@/api/RedevApi";
 import StoryApi from "@/api/StoryApi";
 import SubscribeApi from "@/api/SubscribeApi";
 import UserApi from "@/api/UserApi";
 import VideoApi from "@/api/VideoApi";
-import { API_URL } from "@/lib/config";
-import { computed, inject, provide, reactive, Ref } from "vue";
 
 export const API_CONTEXT_SYMBOL = Symbol("API_CONTEXT_SYMBOL");
 
@@ -30,6 +33,7 @@ export interface ApiContext {
   video: VideoApi;
   community: CommunityApi;
   news: NewsApi;
+  favor: FavorApi;
 }
 
 export interface ApiProviderOptions {
@@ -64,6 +68,8 @@ export function provideApi({ accessToken }: ApiProviderOptions) {
 
   const news = computed(() => new NewsApi(options.value));
 
+  const favor = computed(() => new FavorApi(options.value));
+
   const context = reactive({
     auth,
     redev,
@@ -76,6 +82,7 @@ export function provideApi({ accessToken }: ApiProviderOptions) {
     video,
     community,
     news,
+    favor,
   });
 
   provide(API_CONTEXT_SYMBOL, context);

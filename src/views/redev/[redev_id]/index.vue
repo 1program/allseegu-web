@@ -19,7 +19,11 @@
           <!-- 사업조건 섹션 -->
           <ConditionSection v-if="content.model == 'condition'" :condition="content.data" />
           <!-- 사업개요 섹션 -->
-          <OutlineSection v-else-if="content.model == 'outline'" :outline="content.data" />
+          <OutlineSection
+            v-else-if="content.model == 'outline'"
+            :redev_id="redev_id"
+            :outline="content.data"
+          />
           <!-- 전문가 의견 섹션 -->
           <SubscribeSection
             v-else-if="content.model == 'subscribe'"

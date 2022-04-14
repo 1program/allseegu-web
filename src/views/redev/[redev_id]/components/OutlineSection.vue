@@ -10,7 +10,9 @@
     </div>
     <!-- TODO: 관심구역 설정하기 -->
     <div class="section-footer">
-      <AppBalloon :message="checked ? undefined : '관심 구역을 설정해 새로운 소식을 확인하세요!'">
+      <AppBalloon
+        :message="favor == null ? undefined : '관심 구역을 설정해 새로운 소식을 확인하세요!'"
+      >
         <AppButton full palette="gray-blue" @click="toggle">
           <img class="star-icon" :src="starIcon" alt="관심구역 아이콘" />
           관심 구역 설정하기
@@ -21,9 +23,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref } from "vue";
+import { computed, defineComponent, PropType } from "vue";
 
 import { RedevOutline } from "@/models/redev";
+
+import { useFavorToggle } from "@/composables/favor/useFavorToggle";
 
 import InfoTable from "@/components/common/InfoTable.vue";
 import AppBalloon from "@/components/common/AppBalloon.vue";
@@ -36,29 +40,33 @@ export default defineComponent({
   name: "RedevDetailOutlineSection",
   components: { InfoTable, AppBalloon, AppButton },
   props: {
+    redev_id: {
+      type: Number,
+      required: true,
+    },
     outline: {
       type: Object as PropType<RedevOutline>,
       required: true,
     },
   },
   setup(props) {
-    const checked = ref(false);
-
-    const toggle = () => {
-      checked.value = !checked.value;
-    };
-
-    const starIcon = computed(() => (checked.value ? starFilled : starOutlined));
-
     const items = computed(() =>
       Object.entries(props.outline.outline_table).map(([key, value]) => ({ label: key, value }))
     );
 
+    const { favor, toggle } = useFavorToggle(computed(() => props.redev_id));
+
+    const starIcon = computed(() => (favor.value != null ? starFilled : starOutlined));
+
+    // const toggle = () => {
+    //   checked.value = !checked.value;
+    // };
+
     return {
-      checked,
-      toggle,
       starIcon,
       items,
+      favor,
+      toggle,
     };
   },
 });

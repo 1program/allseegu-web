@@ -13,7 +13,7 @@ export interface CommunityListOptions {
 /**
  * 커뮤니티 API
  */
-export class CommunityApi extends BaseApi {
+export default class CommunityApi extends BaseApi {
   /**
    * 커뮤니티 타입 목록
    */
