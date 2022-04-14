@@ -9,7 +9,7 @@ export function useRedevHotIssueList() {
     useQuery({
       queryKey: ["REDEV_HOT_ISSUES"],
       queryFn: () => api.redev.hotIssueList().then((result) => result.data.slice(0, 10)),
-      initialData: [],
+      placeholderData: [],
     })
   );
 }

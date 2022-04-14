@@ -6,6 +6,15 @@ export interface FavorOptions {
   id: number;
 }
 
+export interface FavorCreateOptions {
+  data: FavorInput;
+}
+
+export interface FavorUpdateOptions {
+  id: number;
+  data: FavorInput;
+}
+
 export interface FavorDeleteOptions {
   id: number;
 }
@@ -32,21 +41,21 @@ export default class FavorApi extends BaseApi {
   /**
    * 관심구역 등록
    */
-  createFavor = (options: FavorInput) =>
+  createFavor = (options: FavorCreateOptions) =>
     this.request<ApiResponse<Favor>>({
       method: "POST",
       url: `/favor`,
-      data: options,
+      data: options.data,
     });
 
   /**
    * 관심구역 수정
    */
-  updateFavor = (options: FavorInput) =>
+  updateFavor = (options: FavorUpdateOptions) =>
     this.request<ApiResponse<Favor>>({
       method: "PATCH",
-      url: `/favor`,
-      data: options,
+      url: `/favor/${options.id}`,
+      data: options.data,
     });
 
   /**

@@ -1,4 +1,5 @@
 import { computed, Ref } from "vue";
+import { watchLog } from "../common/watchLog";
 
 import { useFavorCreate } from "./useFavorCreate";
 import { useFavorDelete } from "./useFavorDelete";
@@ -20,16 +21,18 @@ export function useFavorToggle(redev_id: Ref<number>) {
       });
     } else {
       create.mutate({
-        redev_id: redev_id.value,
-        subscribe_alim: 1,
-        video_alim: 1,
-        community_alim: 1,
-        news_alim: 1,
-        notice_alim: 1,
-        story_alim: 1,
+        data: {
+          redev_id: redev_id.value,
+          subscribe_alim: 1,
+          video_alim: 1,
+          community_alim: 1,
+          news_alim: 1,
+          notice_alim: 1,
+          story_alim: 1,
+        },
       });
     }
   };
 
-  return { favor, toggle };
+  return { favor, toggle, toggling: computed(() => remove.isLoading || create.isLoading) };
 }

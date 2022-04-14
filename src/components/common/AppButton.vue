@@ -1,5 +1,10 @@
 <template>
-  <component :is="is" class="app-button" :class="[full && 'full', palette]" :to="to">
+  <component
+    :is="is"
+    class="app-button"
+    :class="[full && 'full', palette, loading && 'loading']"
+    :to="to"
+  >
     <div class="icon" v-if="$slots.icon != null">
       <slot name="icon" />
     </div>
@@ -27,6 +32,11 @@ export default defineComponent({
       description: "버튼의 색상 팔레트",
       default: "blue",
     },
+    loading: {
+      type: Boolean,
+      description: "로딩중인가?",
+      default: false,
+    },
     full: {
       type: Boolean,
       description: "화면을 꽉 채울 것인가?",
@@ -41,7 +51,6 @@ export default defineComponent({
   setup(props) {
     // component type
     const is = computed(() => (props.to != null ? "router-link" : "button"));
-
     return {
       is,
     };
@@ -77,6 +86,12 @@ export default defineComponent({
   &:active,
   &.active {
     opacity: 0.5;
+  }
+
+  /* 로딩중일 때에는 투명도를 주고, 중복 클릭 방지를 위하여 마우스 클릭을 막는다. */
+  &.loading {
+    opacity: 0.5;
+    pointer-events: none;
   }
 
   /* Is full? */
@@ -122,6 +137,10 @@ export default defineComponent({
     background-color: #fae100;
     color: #2c1618;
   }
+}
+
+.loading-dots {
+  height: 1.3em;
 }
 
 .icon {

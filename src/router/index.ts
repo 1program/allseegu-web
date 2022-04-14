@@ -178,8 +178,8 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/my/customer/qna/write.vue"),
   },
   {
-    path: "/my/likes",
-    component: () => import("@/views/my/likes.vue"),
+    path: "/my/favors",
+    component: () => import("@/views/my/favors.vue"),
   },
   {
     path: "/my/posts",

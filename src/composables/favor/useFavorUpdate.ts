@@ -1,12 +1,11 @@
-import { FavorCreateOptions } from "@/api/FavorApi";
-import { FavorInput } from "@/models/favor";
+import { FavorUpdateOptions } from "@/api/FavorApi";
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
 import { useAlert } from "../common/useAlert";
 import { useApi } from "../common/useApi";
 import { useMe } from "../user/useMe";
 
-export function useFavorCreate() {
+export function useFavorUpdate() {
   const queryClient = useQueryClient();
 
   const api = useApi();
@@ -16,9 +15,9 @@ export function useFavorCreate() {
   const me = useMe();
 
   const mutation = useMutation({
-    mutationKey: "FAVOR_CREATE",
-    mutationFn: async (options: FavorCreateOptions) => {
-      return api.favor.createFavor(options);
+    mutationKey: "FAVOR_UPDATE",
+    mutationFn: async (options: FavorUpdateOptions) => {
+      return api.favor.updateFavor(options);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["FAVOR_LIST", me.data?.id]);

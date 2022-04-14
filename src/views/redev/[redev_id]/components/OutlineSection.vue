@@ -11,9 +11,9 @@
     <!-- TODO: 관심구역 설정하기 -->
     <div class="section-footer">
       <AppBalloon
-        :message="favor == null ? undefined : '관심 구역을 설정해 새로운 소식을 확인하세요!'"
+        :message="favor == null ? '관심 구역을 설정해 새로운 소식을 확인하세요!' : undefined"
       >
-        <AppButton full palette="gray-blue" @click="toggle">
+        <AppButton :loading="toggling" full palette="gray-blue" @click="toggle">
           <img class="star-icon" :src="starIcon" alt="관심구역 아이콘" />
           관심 구역 설정하기
         </AppButton>
@@ -35,6 +35,7 @@ import AppButton from "@/components/common/AppButton.vue";
 
 import starFilled from "@/images/icons/star-blue-filled.svg";
 import starOutlined from "@/images/icons/star-blue-outlined.svg";
+import { watchLog } from "@/composables/common/watchLog";
 
 export default defineComponent({
   name: "RedevDetailOutlineSection",
@@ -54,9 +55,9 @@ export default defineComponent({
       Object.entries(props.outline.outline_table).map(([key, value]) => ({ label: key, value }))
     );
 
-    const { favor, toggle } = useFavorToggle(computed(() => props.redev_id));
+    const { favor, toggle, toggling } = useFavorToggle(computed(() => props.redev_id));
 
-    const starIcon = computed(() => (favor.value != null ? starFilled : starOutlined));
+    const starIcon = computed(() => (favor.value == null ? starOutlined : starFilled));
 
     // const toggle = () => {
     //   checked.value = !checked.value;
@@ -67,6 +68,7 @@ export default defineComponent({
       items,
       favor,
       toggle,
+      toggling,
     };
   },
 });
