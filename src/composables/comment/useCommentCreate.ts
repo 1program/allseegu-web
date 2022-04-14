@@ -7,28 +7,30 @@ import { useApi } from "../common/useApi";
 
 export function useCommentCreate() {
   const queryClient = useQueryClient();
+
   const alert = useAlert();
+
   const api = useApi();
 
-  return reactive(
-    useMutation({
-      mutationKey: "COMMENT_CREATE",
-      mutationFn: (options: CommentCreateOptions) => api.comment.create(options),
-      onSuccess: (data, options) => {
-        alert(data.message);
+  const mutation = useMutation({
+    mutationKey: "COMMENT_CREATE",
+    mutationFn: (options: CommentCreateOptions) => api.comment.create(options),
+    onSuccess: (data, options) => {
+      alert(data.message);
 
-        console.log(options.model);
+      console.log(options.model);
 
-        /// 댓글 작성이 완료되면 댓글 목록에 추가한다.
-        if (options.model === "story") {
-          queryClient.setQueryData<Partial<StoryDetail>>(
-            ["STORY_DETAIL", data.data.commentable_id],
-            (previous) => ({ ...previous, comments: [data.data, ...(previous?.comments ?? [])] })
-          );
-        }
-      },
-      // TODO: any 타입 개선
-      onError: (error: any) => alert(error.message),
-    })
-  );
+      /// 댓글 작성이 완료되면 댓글 목록에 추가한다.
+      if (options.model === "story") {
+        queryClient.setQueryData<Partial<StoryDetail>>(
+          ["STORY_DETAIL", data.data.commentable_id],
+          (previous) => ({ ...previous, comments: [data.data, ...(previous?.comments ?? [])] })
+        );
+      }
+    },
+    // TODO: any 타입 개선
+    onError: (error: any) => alert(error.message),
+  });
+
+  return reactive(mutation);
 }

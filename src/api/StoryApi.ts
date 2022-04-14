@@ -1,5 +1,5 @@
 import { ApiResponse, ContentType, PagedList, PageParams } from "@/models/common";
-import { Story, StoryData, StoryDetail } from "@/models/story";
+import { Story, StoryInput, StoryDetail } from "@/models/story";
 import BaseApi, { BaseApiOptions } from "./BaseApi";
 import FileApi from "./FileApi";
 
@@ -9,7 +9,7 @@ export interface StoryListOptions extends PageParams {
 
 export interface StoryCreateOptions {
   redev_id: number;
-  data: StoryData;
+  data: StoryInput;
 }
 
 export interface StoryDetailOptions {

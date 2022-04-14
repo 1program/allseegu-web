@@ -46,7 +46,7 @@ import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
-  name: "AccountSignupTermsDetail",
+  name: "AccountRegisterTermsDetail",
   components: { AppDrawer },
   setup() {
     const router = useRouter();

@@ -31,21 +31,48 @@ import { useRouter } from "vue-router";
 import FormInput from "@/components/common/FormInput.vue";
 import * as yup from "yup";
 import { confirmEmailSchema, emailSchema } from "@/lib/schema";
-import { useSignup } from "@/composables/common/useSignup";
+import { useUserRegisterValues } from "@/composables/user/useUserRegisterValues";
+import { useApi } from "@/composables/common/useApi";
+import { AnyObject } from "yup/lib/types";
 
 export default defineComponent({
   components: { AppButton, FormGroup, Field, FormInput },
-  name: "AccountSignupEmail",
+  name: "AccountRegisterEmail",
   setup() {
+    const api = useApi();
+
     const router = useRouter();
 
-    const { values } = useSignup();
+    const { values } = useUserRegisterValues();
+
+    const testEmail: yup.TestFunction<string | undefined, AnyObject> = async function testEmail2(
+      value
+    ) {
+      if (value == null) return true;
+
+      try {
+        await api.user.duplicate({
+          field: "email",
+          value,
+        });
+
+        return true;
+      } catch (ex: any) {
+        return this.createError({
+          message: ex.message,
+          path: this.path,
+        });
+      }
+    };
 
     const { handleSubmit } = useForm({
       /// 뒤로가기 눌러서 뒤로 왔을 경우
       validateOnMount: router.options?.history.state.forward != null,
       validationSchema: yup.object({
-        email: emailSchema,
+        email: emailSchema.test({
+          name: "validator-email-duplication",
+          test: testEmail,
+        }),
         confirmEmail: confirmEmailSchema("email"),
       }),
     });

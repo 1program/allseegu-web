@@ -28,8 +28,8 @@ const routes: Array<RouteRecordRaw> = [
     meta: { public: true },
   },
   {
-    path: "/account/signup",
-    component: () => import("@/views/account/signup/index.vue"),
+    path: "/account/register",
+    component: () => import("@/views/account/register/index.vue"),
     meta: { public: true },
     children: [
       {
@@ -37,38 +37,38 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           step: 1,
         },
-        component: () => import("@/views/account/signup/terms/index.vue"),
+        component: () => import("@/views/account/register/terms/index.vue"),
         children: [
           {
             path: ":id",
             meta: { scrollToTop: false },
-            component: () => import("@/views/account/signup/terms/detail.vue"),
+            component: () => import("@/views/account/register/terms/detail.vue"),
           },
         ],
       },
       {
         path: "email",
         meta: { step: 2 },
-        component: () => import("@/views/account/signup/email.vue"),
+        component: () => import("@/views/account/register/email.vue"),
       },
       {
         path: "password",
         meta: { step: 3 },
-        component: () => import("@/views/account/signup/password.vue"),
+        component: () => import("@/views/account/register/password.vue"),
       },
       {
         path: "nickname",
         meta: { step: 4 },
-        component: () => import("@/views/account/signup/nickname.vue"),
+        component: () => import("@/views/account/register/nickname.vue"),
       },
       {
         path: "done",
         meta: { step: 5 },
-        component: () => import("@/views/account/signup/done.vue"),
+        component: () => import("@/views/account/register/done.vue"),
       },
       {
         path: "",
-        redirect: { path: "/account/signup/terms" },
+        redirect: { path: "/account/register/terms" },
       },
     ],
   },

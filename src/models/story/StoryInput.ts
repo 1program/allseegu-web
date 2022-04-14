@@ -1,6 +1,6 @@
 import { ContentType } from "../common";
 
-export interface StoryData {
+export interface StoryInput {
   title: string;
   content_type?: ContentType;
   content: string;

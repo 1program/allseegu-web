@@ -16,13 +16,13 @@
 <script lang="ts">
 import AppButton from "@/components/common/AppButton.vue";
 import { defineComponent } from "vue";
-import { useSignup } from "@/composables/common/useSignup";
+import { useUserRegisterValues } from "@/composables/user/useUserRegisterValues";
 
 export default defineComponent({
   components: { AppButton },
-  name: "AccountSignupDone",
+  name: "AccountRegisterDone",
   setup() {
-    const { values } = useSignup();
+    const { values } = useUserRegisterValues();
 
     console.log({ values });
 

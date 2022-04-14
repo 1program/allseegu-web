@@ -33,17 +33,17 @@ import NextLink from "@/components/common/NextLink.vue";
 import { useAlert } from "@/composables/common/useAlert";
 import { computed, defineComponent } from "vue";
 import { useRouter } from "vue-router";
-import { useSignup } from "@/composables/common/useSignup";
+import { useUserRegisterValues } from "@/composables/user/useUserRegisterValues";
 
 export default defineComponent({
   components: { FormCheck, NextLink, AppButton },
-  name: "AccountSignupTerms",
+  name: "AccountRegisterTerms",
   setup() {
     const alert = useAlert();
 
     const router = useRouter();
 
-    const { values } = useSignup();
+    const { values } = useUserRegisterValues();
 
     const checkAll = () => {
       values.over14 = true;

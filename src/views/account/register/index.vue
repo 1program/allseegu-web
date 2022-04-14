@@ -9,10 +9,10 @@ import AppScaffold from "@/components/common/AppScaffold.vue";
 import { computed, defineComponent } from "vue";
 import { useRoute } from "vue-router";
 import SlidingRouterView from "@/components/common/SlidingRouterView.vue";
-import { provideSignup } from "@/composables/common/useSignup";
+import { provideUserRegisterValues } from "@/composables/user/useUserRegisterValues";
 
 export default defineComponent({
-  name: "AccountSignup",
+  name: "AccountRegister",
   components: { AppScaffold, SlidingRouterView },
   setup() {
     const route = useRoute();
@@ -21,7 +21,7 @@ export default defineComponent({
 
     const progress = computed<number>(() => step.value / 5);
 
-    provideSignup();
+    provideUserRegisterValues();
 
     return {
       step,

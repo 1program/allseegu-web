@@ -13,7 +13,7 @@
         <span class="text-divider" />
         <router-link class="link" to="/account/find-password">비밀번호 찾기</router-link>
         <span class="text-divider" />
-        <router-link class="link" to="/account/signup">회원가입</router-link>
+        <router-link class="link" to="/account/register">회원가입</router-link>
       </div>
       <div class="social-button-group gap-vertical">
         <app-button class="social-button" full palette="naver" @click="prepare">
