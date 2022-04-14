@@ -30,6 +30,7 @@ import { useUserRegisterValues } from "@/composables/user/useUserRegisterValues"
 import { AnyObject } from "yup/lib/types";
 import { useApi } from "@/composables/common/useApi";
 import { useUserRegister } from "@/composables/user/useUserRegister";
+import { useAlert } from "@/composables/common/useAlert";
 
 export default defineComponent({
   components: { AppButton, FormGroup, Field, FormInput },
@@ -37,58 +38,36 @@ export default defineComponent({
   setup() {
     const api = useApi();
 
+    const alert = useAlert();
+
     const router = useRouter();
 
     const { values } = useUserRegisterValues();
-
-    const testNickname: yup.TestFunction<string | undefined, AnyObject> = async function testEmail2(
-      value
-    ) {
-      if (value == null) return true;
-
-      try {
-        await api.user.duplicate({
-          field: "nickname",
-          value,
-        });
-
-        return true;
-      } catch (ex: any) {
-        return this.createError({
-          message: ex.message,
-          path: this.path,
-        });
-      }
-    };
 
     const { handleSubmit } = useForm({
       /// 뒤로가기 눌러서 뒤로 왔을 경우
       validateOnMount: router.options?.history.state.forward != null,
       validationSchema: yup.object({
-        nickname: nicknameSchema.test({
-          name: "validator-nickname-duplication",
-          test: testNickname,
-        }),
+        nickname: nicknameSchema,
       }),
     });
 
     const register = useUserRegister();
 
-    const submit = handleSubmit(() => {
-      register.mutate(
-        {
-          email: values.email!,
-          password: values.password!,
-          name: "홍길동",
-          nickname: values.nickname!,
-          mobile: "010-1234-1234",
-          birth: "19900101",
-          gender: "male",
-        },
-        {
-          onSuccess: () => router.push("done"),
-        }
-      );
+    const submit = handleSubmit(async (newValues) => {
+      try {
+        await api.user.duplicate({
+          field: "nickname",
+          value: newValues.nickname,
+        });
+      } catch (ex: any) {
+        alert(ex.message);
+        return;
+      }
+
+      register.mutate(values, {
+        onSuccess: () => router.push("done"),
+      });
     });
 
     const submitting = computed(() => register.isLoading);

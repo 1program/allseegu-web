@@ -20,12 +20,14 @@ import { useForm } from "vee-validate";
 import * as yup from "yup";
 import { useRouter } from "vue-router";
 import { emailSchema } from "@/lib/schema";
+import { useApi } from "@/composables/common/useApi";
 
 export default defineComponent({
   components: { AppButton },
   name: "AccountFindPasswordCert",
   setup() {
     const router = useRouter();
+    const api = useApi();
 
     const { handleSubmit } = useForm({
       validationSchema: yup.object({

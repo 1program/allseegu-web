@@ -21,5 +21,5 @@
 - [ ] scrollRestoration시 깜빡임 고치기
 - [ ] section 컴포넌트화
 - [ ] eslint input label 룰 제거
-- [ ] route transition 스크롤 리스토어 깜빡임
-- [ ] import order
+- [x] route transition 스크롤 리스토어 깜빡임
+- [ ] props description field jsdoc 지원여부 확인

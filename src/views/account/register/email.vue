@@ -7,6 +7,11 @@
       </div>
       <field name="email" v-slot="{ field, errorMessage }" v-model="values.email">
         <form-group label="이메일" :error-text="errorMessage">
+          <!--
+          v-bind:field로 이벤트 바인딩 시 input event 때문에
+          네트워크 validation이 계속 trigger 된다.
+          네트워크 콜이 계속 일어나는 것을 막기 위해, change와 blur 이벤트만 바인딩한다.
+          -->
           <form-input v-bind="field" placeholder="example@example.com" />
         </form-group>
       </field>
@@ -33,7 +38,7 @@ import * as yup from "yup";
 import { confirmEmailSchema, emailSchema } from "@/lib/schema";
 import { useUserRegisterValues } from "@/composables/user/useUserRegisterValues";
 import { useApi } from "@/composables/common/useApi";
-import { AnyObject } from "yup/lib/types";
+import { useAlert } from "@/composables/common/useAlert";
 
 export default defineComponent({
   components: { AppButton, FormGroup, Field, FormInput },
@@ -41,43 +46,32 @@ export default defineComponent({
   setup() {
     const api = useApi();
 
+    const alert = useAlert();
+
     const router = useRouter();
 
     const { values } = useUserRegisterValues();
-
-    const testEmail: yup.TestFunction<string | undefined, AnyObject> = async function testEmail2(
-      value
-    ) {
-      if (value == null) return true;
-
-      try {
-        await api.user.duplicate({
-          field: "email",
-          value,
-        });
-
-        return true;
-      } catch (ex: any) {
-        return this.createError({
-          message: ex.message,
-          path: this.path,
-        });
-      }
-    };
 
     const { handleSubmit } = useForm({
       /// 뒤로가기 눌러서 뒤로 왔을 경우
       validateOnMount: router.options?.history.state.forward != null,
       validationSchema: yup.object({
-        email: emailSchema.test({
-          name: "validator-email-duplication",
-          test: testEmail,
-        }),
+        email: emailSchema,
         confirmEmail: confirmEmailSchema("email"),
       }),
     });
 
-    const submit = handleSubmit(() => {
+    const submit = handleSubmit(async (newValues) => {
+      try {
+        await api.user.duplicate({
+          field: "email",
+          value: newValues.email,
+        });
+      } catch (ex: any) {
+        alert(ex.message);
+        return;
+      }
+
       router.push("password");
     });
 

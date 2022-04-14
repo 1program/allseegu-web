@@ -1,15 +1,21 @@
+import { generateMobileNumber } from "@/utils/common/generateMobileNumber";
 import { inject, provide, reactive } from "vue";
 
 export type UserRegisterValues = {
-  over14?: boolean;
-  service?: boolean;
-  marketing?: boolean;
+  over14: boolean;
+  service: boolean;
+  marketing: boolean;
 
-  email?: string;
-  confirmEmail?: string;
-  password?: string;
-  confirmPassword?: string;
-  nickname?: string;
+  name: string;
+  mobile: string;
+  birth: string;
+  gender: string;
+
+  email: string;
+  confirmEmail: string;
+  password: string;
+  confirmPassword: string;
+  nickname: string;
 };
 
 export type UserRegisterValuesContext = {
@@ -21,7 +27,21 @@ export type UserRegisterValuesContext = {
  */
 export function provideUserRegisterValues() {
   const context = reactive<UserRegisterValuesContext>({
-    values: {},
+    values: {
+      over14: false,
+      service: false,
+      marketing: false,
+      email: "",
+      confirmEmail: "",
+      password: "",
+      confirmPassword: "",
+      nickname: "",
+      // TODO: 본인인증에서 값 받아오기
+      name: "홍길동",
+      mobile: generateMobileNumber(),
+      birth: "19900101",
+      gender: "male",
+    },
   });
 
   provide("USER_REGISTER_VALUES", context);
