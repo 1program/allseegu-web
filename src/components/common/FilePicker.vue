@@ -1,32 +1,44 @@
 <template>
   <div class="file-picker">
     <div class="images">
-      <button type="button" class="add" @click="pick" v-if="addButton">
+      <button type="button" class="add" @click="pick" v-if="showAddButton">
         <img class="plus-icon" src="@/images/icons/plus.svg" alt="추가하기" />
       </button>
-      <div class="item" v-for="image in images" :key="image.name">
+      <!-- 서버에 업로드된 이미지 -->
+      <div class="item" v-for="image in uploaded.images" :key="image.name">
         <img class="thumbnail" :src="image.url" alt="선택 이미지" />
-        <button type="button" class="close" @click="removeFile(image)">
+        <button type="button" class="close" @click="removeUploadedImage(image)">
           <img class="close-icon" src="@/images/icons/close.svg" alt="삭제" />
         </button>
       </div>
-      <div class="item" v-for="image in newImages" :key="image.name">
+      <!-- 유저가 업로드한 이미지 -->
+      <div class="item" v-for="image in images" :key="image.name">
         <img class="thumbnail" :src="URL.createObjectURL(image)" alt="선택 이미지" />
         <button type="button" class="close" @click="remove(image)">
           <img class="close-icon" src="@/images/icons/close.svg" alt="삭제" />
         </button>
       </div>
     </div>
-    <div class="attachments" v-if="newDocs.length > 0">
+    <div class="docs" v-if="uploaded.docs.length > 0 || docs.length > 0">
+      <!-- 서버에 업로드된 파일 -->
       <AttachmentTile
-        v-for="attachment in newDocs"
-        :key="attachment.name"
-        class="attachment"
-        :url="URL.createObjectURL(attachment)"
+        v-for="doc in uploaded.docs"
+        :key="doc.id"
+        :url="doc.url"
         removable
-        @remove="remove(attachment)"
+        @remove="removeUploadedDoc(doc)"
       >
-        {{ attachment.name }}
+        {{ doc.name }}
+      </AttachmentTile>
+      <!-- 유저가 선택한 파일 -->
+      <AttachmentTile
+        v-for="doc in docs"
+        :key="doc.name"
+        :url="URL.createObjectURL(doc)"
+        removable
+        @remove="remove(doc)"
+      >
+        {{ doc.name }}
       </AttachmentTile>
     </div>
   </div>
@@ -34,7 +46,10 @@
 
 <script lang="ts">
 import { defineComponent, computed, PropType } from "vue";
+
 import { FileInfo } from "@/models/file/FileInfo";
+import { Files } from "@/models/file";
+
 import { pickFile } from "@/utils/file/pickFile";
 
 import AttachmentTile from "./AttachmentTile.vue";
@@ -44,61 +59,74 @@ export default defineComponent({
   components: { AttachmentTile },
   props: {
     /**
-     * 기 업로드된 파일들
-     */
-    files: {
-      type: Array as PropType<FileInfo[]>,
-      default: () => [],
-    },
-    /**
-     * 새로 선택된 파일들
-     */
-    newFiles: {
-      type: Array as PropType<File[]>,
-      default: () => [],
-    },
-    /**
      * 허용되는 Mime Types
      */
     accept: {
       type: String,
       default: "image/*",
     },
+
     /**
      * 추가 버튼 노출 여부
      */
-    addButton: {
+    showAddButton: {
       type: Boolean,
       default: true,
     },
+
+    /**
+     * 서버에 업로드된 파일들
+     */
+    uploaded: {
+      type: Object as PropType<Files>,
+      default: () => ({
+        docs: [],
+        images: [],
+      }),
+    },
+
+    /**
+     * 새로 선택된 파일들
+     */
+    files: {
+      type: Array as PropType<File[]>,
+      default: () => [],
+    },
   },
   setup(props, context) {
-    const images = computed(() => props.files.filter((file) => file.mime.startsWith("image")));
-
-    const docs = computed(() => props.files.filter((file) => !file.mime.startsWith("image")));
-
     // 새로운 이미지 파일들
-    const newImages = computed(() =>
-      props.newFiles.filter((file) => file.type.startsWith("image"))
-    );
+    const images = computed(() => props.files.filter((file) => file.type.startsWith("image")));
 
     // 새로운 도큐먼트 파일들
-    const newDocs = computed(() => props.newFiles.filter((file) => !file.type.startsWith("image")));
+    const docs = computed(() => props.files.filter((file) => !file.type.startsWith("image")));
 
     const pick = async () => {
       const file = await pickFile(props.accept);
-      context.emit("add-file", file);
+      context.emit("change-files", [...props.files, file]);
     };
 
     const remove = (file: File) => {
-      context.emit("remove-file", file);
+      context.emit(
+        "change-files",
+        props.files.filter((item) => item.name !== file.name)
+      );
     };
 
-    const removeFile = (file: FileInfo) => {
-      context.emit("remove-file", file);
+    const removeUploadedDoc = (file: FileInfo) => {
+      context.emit("change-uploaded", {
+        ...props.uploaded,
+        docs: props.uploaded.docs.filter((doc) => doc.id !== file.id),
+      });
     };
 
-    return { images, docs, newImages, newDocs, pick, remove, URL, removeFile };
+    const removeUploadedImage = (file: FileInfo) => {
+      context.emit("change-uploaded", {
+        ...props.uploaded,
+        images: props.uploaded.images.filter((image) => image.id !== file.id),
+      });
+    };
+
+    return { images, docs, pick, remove, URL, removeUploadedDoc, removeUploadedImage };
   },
 });
 </script>
@@ -169,7 +197,7 @@ export default defineComponent({
   }
 }
 
-.attachments {
+.docs {
   margin-top: (20/2/16) * 1rem;
   display: grid;
   grid-template-columns: 1;

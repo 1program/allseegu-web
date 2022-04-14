@@ -73,7 +73,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
 
-  animation-duration: 0.3s;
+  animation-duration: 0.2s;
   animation-timing-function: ease-out;
   animation-iteration-count: 1;
 }

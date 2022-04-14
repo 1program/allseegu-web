@@ -7,11 +7,12 @@
     <!-- eslint-disable-next-line -->
     <textarea class="textarea" placeholder="댓글을 남겨보세요" v-model="content" />
     <FilePicker
-      :new-files="files"
-      @add-file="files.push($event)"
-      @remove-file="files.splice(files.indexOf($event))"
       accept="image/*"
-      :add-button="false"
+      :show-add-button="false"
+      :uploaded="uploaded"
+      @change-uploaded="uploaded = $event"
+      :files="files"
+      @change-files="files = $event"
     />
     <div class="gap-horizontal button-group">
       <AppButton class="plus" palette="outlined-blue" @click="pick">
@@ -28,9 +29,11 @@
 <script lang="ts">
 import { useCommentCreate } from "@/composables/comment/useCommentCreate";
 import { useCommentUpdate } from "@/composables/comment/useCommentUpdate";
+import { useAlert } from "@/composables/common/useAlert";
 import { useMe } from "@/composables/user/useMe";
 import { Comment } from "@/models/comment";
 import { ContentType } from "@/models/common";
+import { diffRemovedFileIds } from "@/utils/file/diffRemovedFileIds";
 import { pickFile } from "@/utils/file/pickFile";
 import { defineComponent, PropType, ref } from "vue";
 import AppButton from "../common/AppButton.vue";
@@ -88,11 +91,15 @@ export default defineComponent({
   setup(props, context) {
     const me = useMe();
 
+    const alert = useAlert();
+
     const content = ref(props.comment?.content ?? "");
 
-    const files = ref<File[]>([]);
+    // 서버에 기 업로드된 파일들
+    const uploaded = ref(props.comment?.files);
 
-    const deleteFiles = ref<number[]>([]);
+    // 기기에서 새로 선택한 파일들
+    const files = ref<File[]>([]);
 
     const pick = async () => {
       const file = await pickFile("image/*");
@@ -103,8 +110,10 @@ export default defineComponent({
 
     const update = useCommentUpdate();
 
+    // 폼을 리셋한다.
     const reset = () => {
       content.value = props.comment?.content ?? "";
+      uploaded.value = props.comment?.files;
       files.value = [];
       context.emit("ok");
     };
@@ -112,6 +121,11 @@ export default defineComponent({
     // TODO: 직관적으로 축약하기
     // TODO: SERVER: 생성 직후 담아 보낸 파일도 와야 할 듯
     const ok = () => {
+      if (content.value == null) {
+        alert("내용을 입력해 주세요.");
+        return;
+      }
+
       if (props.comment == null) {
         // 생성
         create.mutate(
@@ -142,7 +156,11 @@ export default defineComponent({
               content_type: ContentType.PLAIN,
               content: content.value,
               uploadFiles: files.value,
-              deleteFiles: deleteFiles.value,
+              // 댓글 데이터 및 변경된 데이터를 비교하여 삭제된 파일 아이디를 찾아낸다.
+              deleteFiles:
+                props.comment.files != null && uploaded.value != null
+                  ? diffRemovedFileIds(props.comment.files, uploaded.value)
+                  : [],
             },
           },
           {
@@ -157,6 +175,7 @@ export default defineComponent({
     };
 
     return {
+      uploaded,
       files,
       pick,
       ok,

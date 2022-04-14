@@ -16,12 +16,7 @@
           </FormGroup>
         </Field>
         <FormGroup label="첨부 파일">
-          <FilePicker
-            class="picker"
-            :new-files="uploadFiles"
-            @add-file="uploadFiles.push($event)"
-            @remove-file="uploadFiles.splice(uploadFiles.indexOf($event))"
-          />
+          <FilePicker class="picker" :files="uploadFiles" @change-files="uploadFiles = $event" />
         </FormGroup>
       </div>
       <div class="container page-footer">
@@ -32,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, computed } from "vue";
 import { Field, useForm } from "vee-validate";
 import * as yup from "yup";
 
@@ -53,6 +48,8 @@ export default defineComponent({
 
     const route = useRoute();
 
+    const redev_id = computed(() => parseInt(route.params.redev_id as string, 10));
+
     const uploadFiles = ref<File[]>([]);
 
     const { handleSubmit } = useForm({
@@ -68,7 +65,7 @@ export default defineComponent({
     const submit = handleSubmit((values) => {
       storyCreate.mutate(
         {
-          redev_id: parseInt(route.params.redev_id as string, 10),
+          redev_id: redev_id.value,
           data: {
             ...values,
             uploadFiles: uploadFiles.value,
@@ -76,8 +73,9 @@ export default defineComponent({
           },
         },
         {
-          onSuccess: () => {
-            router.back();
+          onSuccess: (result) => {
+            // 작성된 글로 redirect (replace)
+            router.replace(`/redev/${redev_id.value}/story/${result.data.id}`);
           },
         }
       );

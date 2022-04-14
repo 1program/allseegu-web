@@ -9,7 +9,7 @@
       <AppFallback v-if="current.data.length < 1" :message="emptyMessage" />
       <!-- 'News' 타입의 보도자료는 카드 형태 -->
       <template v-else-if="type_id === NewsType.NEWS" v-for="(row, index) in rows" :key="index">
-        <div class="grid-row">
+        <div class="row">
           <ListCard
             v-for="news in row"
             :key="news.id"
@@ -87,4 +87,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "@/styles/config";
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: (19/2/16) * 1rem;
+}
 </style>
