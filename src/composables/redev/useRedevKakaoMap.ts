@@ -26,6 +26,18 @@ export interface UseRedevKakaoMapOptions {
 }
 
 /**
+ * - 어플 도입 (위치기반 기준) : 100m
+ * - 구역 : 1km 미만
+ * - 타운 : 1km 이상
+ * - 숫자 : 10km 이상
+ */
+const levelPresets = {
+  "100m": 4,
+  "1km": 7,
+  "8km": 10,
+};
+
+/**
  * 'RedevGeometry' 객체들을 카카오맵에 표현한다.
  *
  * https://devtalk.kakao.com/t/vue-js-api/121269
@@ -48,7 +60,9 @@ export function useRedevKakaoMap({
 
   const level = ref<number>();
 
-  const levelUnder5 = computed(() => level.value && level.value < 5);
+  const under1km = computed(() => level.value != null && level.value < levelPresets["1km"]);
+
+  const under8km = computed(() => level.value != null && level.value < levelPresets["8km"]);
 
   const center = ref<kakao.maps.LatLng>();
 
@@ -58,7 +72,7 @@ export function useRedevKakaoMap({
     if (window.kakao != null && element.value != null) {
       map.value = new window.kakao.maps.Map(element.value, {
         center: new window.kakao.maps.LatLng(37.484282426045304, 126.9297012649466),
-        level: 8,
+        level: levelPresets["100m"],
       });
 
       map.value.setMaxLevel(12);
@@ -66,7 +80,7 @@ export function useRedevKakaoMap({
       clusterer.value = new window.kakao.maps.MarkerClusterer({
         map: map.value,
         gridSize: 160,
-        minLevel: 5,
+        minLevel: levelPresets["8km"],
         minClusterSize: 1,
         calculator: [50, 100, 150],
         styles: [getClustererStyle(50), getClustererStyle(100), getClustererStyle(150)],
@@ -118,7 +132,7 @@ export function useRedevKakaoMap({
           new kakao.maps.LatLng(position.value.coords.latitude, position.value.coords.longitude)
         );
 
-        map.value.setLevel(3);
+        map.value.setLevel(levelPresets["100m"]);
       }
     }
   );
@@ -128,7 +142,7 @@ export function useRedevKakaoMap({
   const polygons = shallowRef<kakao.maps.Polygon[]>([]);
 
   watch(
-    () => [map.value, clusterer.value, redevList.value, levelUnder5.value],
+    () => [map.value, clusterer.value, redevList.value, under1km.value, under8km.value],
     () => {
       if (map.value && clusterer.value) {
         polygons.value.forEach((polygon) => polygon.setMap(null));
@@ -140,6 +154,7 @@ export function useRedevKakaoMap({
             redev,
             map: map.value,
             onClick: () => onClickRedev(redev),
+            under1km: under1km.value,
           })
         );
 
@@ -147,10 +162,14 @@ export function useRedevKakaoMap({
         // 타입 정의 부재로 any 사용.
         clusterer.value.addMarkers(overlays.value as any);
 
-        if (levelUnder5.value) {
-          /// 줌 5 이하일 때에만
+        if (under8km.value) {
           polygons.value = redevList.value.map((redev) =>
-            getRedevPolygon({ redev, map: map.value, onClick: () => onClickRedev(redev) })
+            getRedevPolygon({
+              redev,
+              map: map.value,
+              onClick: () => onClickRedev(redev),
+              under1km: under1km.value,
+            })
           );
         }
       }
