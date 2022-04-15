@@ -10,7 +10,6 @@
       @ok="editing = false"
       @cancel="editing = false"
     />
-    <!-- TODO: 닉네임 필요 -->
     <CommentTile
       v-else
       :nickname="comment.nickname"

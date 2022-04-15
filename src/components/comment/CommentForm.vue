@@ -222,14 +222,15 @@ export default defineComponent({
 }
 
 .textarea {
-  padding: (4/2/16) * 1rem (19/2/16) * 1rem;
+  padding: 2px (19/2/16) * 1rem; // 폰트 사이즈는 px이기에, 이에 비례하도록 함
   border: 1px solid transparent;
   background-color: transparent;
   width: 100%;
   resize: vertical;
-  min-height: (146/2/16) * 1rem;
+  min-height: 78px; // 폰트 사이즈는 px이기에, 이에 비례하도록 함
   line-height: 1.5;
   outline: none;
+  font-size: 16px; // iOS 확대 이슈 막기 위함
 
   &:focus {
     border: 1px solid $color-blue;

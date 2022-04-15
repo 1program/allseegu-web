@@ -124,6 +124,7 @@ export default defineComponent({
   }
 
   .content {
+    white-space: pre-wrap;
     font-size: (30/2/16) * 1rem;
   }
 
