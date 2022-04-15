@@ -11,12 +11,12 @@
         </div>
         <field name="email" v-slot="{ field, errorMessage }">
           <form-group :error-text="errorMessage">
-            <form-input v-bind="field" placeholder="example@example.com" />
+            <form-input v-bind="field" placeholder="example@example.com" autocapitalize="none" />
           </form-group>
         </field>
         <field name="confirmEmail" v-slot="{ field, errorMessage }">
           <form-group :error-text="errorMessage">
-            <form-input v-bind="field" placeholder="example@example.com" />
+            <form-input v-bind="field" placeholder="example@example.com" autocapitalize="none" />
           </form-group>
         </field>
       </div>

@@ -7,7 +7,7 @@
 
       <field name="password" v-slot="{ field, errorMessage }" v-model="values.password">
         <form-group :error-text="errorMessage">
-          <form-input type="password" placeholder="비밀번호" v-bind="field" />
+          <form-input type="password" placeholder="비밀번호" v-bind="field" autocapitalize="none" />
         </form-group>
       </field>
 
@@ -17,7 +17,12 @@
         v-model="values.confirmPassword"
       >
         <form-group :error-text="errorMessage">
-          <form-input type="password" placeholder="비밀번호 확인" v-bind="field" />
+          <form-input
+            type="password"
+            placeholder="비밀번호 확인"
+            v-bind="field"
+            autocapitalize="none"
+          />
         </form-group>
       </field>
     </div>

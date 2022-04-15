@@ -9,13 +9,23 @@
 
         <field name="password" v-slot="{ field, errorMessage }">
           <form-group :error-text="errorMessage">
-            <form-input type="password" placeholder="비밀번호" v-bind="field" />
+            <form-input
+              type="password"
+              placeholder="비밀번호"
+              v-bind="field"
+              autocapitalize="none"
+            />
           </form-group>
         </field>
 
         <field name="confirmPassword" v-slot="{ field, errorMessage }">
           <form-group :error-text="errorMessage">
-            <form-input type="password" placeholder="비밀번호 확인" v-bind="field" />
+            <form-input
+              type="password"
+              placeholder="비밀번호 확인"
+              v-bind="field"
+              autocapitalize="none"
+            />
           </form-group>
         </field>
       </div>

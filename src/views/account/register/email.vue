@@ -7,12 +7,12 @@
       </div>
       <field name="email" v-slot="{ field, errorMessage }" v-model="values.email">
         <form-group label="이메일" :error-text="errorMessage">
-          <form-input v-bind="field" placeholder="example@example.com" />
+          <form-input v-bind="field" placeholder="example@example.com" autocapitalize="none" />
         </form-group>
       </field>
       <field name="confirmEmail" v-slot="{ field, errorMessage }" v-model="values.confirmEmail">
         <form-group label="이메일 확인" :error-text="errorMessage">
-          <form-input v-bind="field" placeholder="example@example.com" />
+          <form-input v-bind="field" placeholder="example@example.com" autocapitalize="none" />
         </form-group>
       </field>
     </div>

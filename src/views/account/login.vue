@@ -4,12 +4,12 @@
       <div class="container page-content-large content">
         <field name="email" v-slot="{ field, errorMessage }">
           <form-group label="이메일" :error-text="errorMessage">
-            <form-input v-bind="field" placeholder="abc@allseegu.com" />
+            <form-input v-bind="field" placeholder="abc@allseegu.com" autocapitalize="none" />
           </form-group>
         </field>
         <field name="password" v-slot="{ field, errorMessage }">
           <form-group type="password" label="비밀번호" :error-text="errorMessage">
-            <form-input type="password" v-bind="field" />
+            <form-input type="password" v-bind="field" autocapitalize="none" />
           </form-group>
         </field>
       </div>

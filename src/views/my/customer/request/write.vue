@@ -42,12 +42,16 @@
           </OptionButtonGroup>
           <field name="url" v-slot="{ field, errorMessage }">
             <form-group :error-text="errorMessage">
-              <form-input v-bind="field" placeholder="URL을 기재해 주세요." />
+              <form-input v-bind="field" placeholder="URL을 기재해 주세요." autocapitalize="none" />
             </form-group>
           </field>
           <field name="password" v-slot="{ field, errorMessage }">
             <form-group :error-text="errorMessage">
-              <form-input v-bind="field" placeholder="입장 비밀번호를 기재해 주세요." />
+              <form-input
+                v-bind="field"
+                placeholder="입장 비밀번호를 기재해 주세요."
+                autocapitalize="none"
+              />
             </form-group>
           </field>
         </form-group>
