@@ -26,31 +26,20 @@ export default defineComponent({
   max-width: 100%; // 사이즈는 한 줄을 넘을 수 없음.
   height: 1em;
   overflow: hidden;
-  background-color: #efefef;
+  background-color: currentColor;
   border-radius: (8/2/16) * 1rem;
-
-  &::after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    transform: translateX(-100%);
-    background-image: linear-gradient(
-      90deg,
-      rgba(#fff, 0) 0,
-      rgba(#fff, 0.2) 20%,
-      rgba(#fff, 0.5) 60%,
-      rgba(#fff, 0)
-    );
-    animation: shimmer 5s infinite;
-    content: "";
-  }
+  animation: blink 1s infinite;
 }
 
-@keyframes shimmer {
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.1;
+  }
   100% {
-    transform: translateX(100%);
+    opacity: 0;
   }
 }
 </style>

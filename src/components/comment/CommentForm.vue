@@ -121,7 +121,7 @@ export default defineComponent({
     // TODO: 직관적으로 축약하기
     // TODO: SERVER: 생성 직후 담아 보낸 파일도 와야 할 듯
     const ok = () => {
-      if (content.value == null) {
+      if (!content.value || content.value.trim() === "") {
         alert("내용을 입력해 주세요.");
         return;
       }
@@ -194,7 +194,6 @@ export default defineComponent({
   padding: (38/2/16) * 1rem (19/2/16) * 1rem;
   border: 1px solid #cccccc;
   font-size: (26/2/16) * 1rem;
-  background-color: #ffffff;
 }
 
 .header {

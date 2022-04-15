@@ -1,5 +1,5 @@
 <template>
-  <div class="comment-tile" :class="{ sub }">
+  <div class="comment-tile">
     <div class="header" :class="{ mine }">
       <div class="nickname">{{ nickname }}</div>
       <div class="date">{{ dateText }}</div>
@@ -13,13 +13,8 @@
       <ImageGallery :images="images" />
     </div>
     <div class="content">{{ content }}</div>
-    <div class="footer" v-if="!sub">
-      <button
-        class="reply"
-        :disabled="commentCount < 1"
-        :class="{ active: expanded }"
-        @click="expand"
-      >
+    <div class="footer" v-if="commentEnabled">
+      <button class="reply" :class="{ active: expanded }" @click="expand">
         답글{{ commentCount > 0 ? ` ${commentCount}` : "" }}
       </button>
     </div>
@@ -38,11 +33,6 @@ export default defineComponent({
   name: "CommentTile",
   components: { ImageGallery },
   props: {
-    sub: {
-      type: Boolean,
-      description: "서브 커멘트인가?",
-      default: false,
-    },
     mine: {
       type: Boolean,
       default: false,
@@ -62,6 +52,11 @@ export default defineComponent({
     images: {
       type: Array as PropType<FileInfo[]>,
       default: () => [],
+    },
+    commentEnabled: {
+      type: Boolean,
+      default: true,
+      description: "대댓글이 허용되는가?",
     },
     commentCount: {
       type: Number,

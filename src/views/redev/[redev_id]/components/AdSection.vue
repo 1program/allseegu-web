@@ -2,14 +2,14 @@
   <div class="section">
     <div class="section-title">광고</div>
     <div class="section-content content">
-      <AppFallback v-if="ads.length < 1" message="등록된 광고가 없습니다." />
+      <AppFallback v-if="adsExample.length < 1" message="등록된 광고가 없습니다." />
       <Swiper
         v-else
         class="ad-swiper"
         :modules="modules"
         :pagination="{ el: paginationEl, clickable: true }"
       >
-        <SwiperSlide v-for="ad in ads" :key="ad.id">
+        <SwiperSlide v-for="ad in adsExample" :key="ad.id">
           <a class="ad" :href="ad.link" target="_blank">
             <img :src="ad.files.images[0]?.url" :alt="ad.title" />
           </a>
@@ -27,7 +27,7 @@ import { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { defineComponent, PropType, ref } from "vue";
 
-import { Ad } from "@/models/ad";
+import { Ad, adExample1, adExample2 } from "@/models/ad";
 import AppFallback from "@/components/common/AppFallback.vue";
 
 export default defineComponent({
@@ -42,9 +42,12 @@ export default defineComponent({
   setup() {
     const paginationEl = ref<HTMLDivElement | null>(null);
 
+    const adsExample = [adExample1, adExample2];
+
     return {
       modules: [Pagination],
       paginationEl,
+      adsExample,
     };
   },
 });

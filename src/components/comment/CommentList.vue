@@ -6,19 +6,28 @@
     </div>
     <template v-for="comment in comments" :key="comment.id">
       <div class="divider light" />
-      <CommentItem class="item" :comment="comment" />
+      <CommentItem
+        class="item"
+        :depth="1"
+        :comment="comment"
+        :added="comment.id === firstAddedComment?.id"
+      />
     </template>
   </div>
 </template>
 
 <script lang="ts">
+import { defineComponent, PropType, computed } from "vue";
+
+import { useAddedItem } from "@/composables/common/useAddedItem";
 import { Comment } from "@/models/comment";
-import { defineComponent, PropType } from "vue";
+
 import CommentForm from "./CommentForm.vue";
 import CommentItem from "./CommentItem.vue";
 
 export default defineComponent({
   name: "CommentList",
+  components: { CommentForm, CommentItem },
   props: {
     count: {
       type: Number,
@@ -37,7 +46,16 @@ export default defineComponent({
       required: true,
     },
   },
-  components: { CommentForm, CommentItem },
+  setup(props) {
+    const added = useAddedItem(
+      computed(() => props.comments),
+      (comment) => comment.id.toString()
+    );
+
+    const firstAddedComment = computed(() => added.value?.[0]);
+
+    return { firstAddedComment };
+  },
 });
 </script>
 
