@@ -24,7 +24,7 @@
       <AppButton class="grow" palette="outlined-blue" v-if="showCancel" @click="cancel">
         {{ cancelLabel }}
       </AppButton>
-      <AppButton class="grow" @click="ok">{{ okLabel }}</AppButton>
+      <AppButton class="grow" @click="ok" :loading="submitting">{{ okLabel }}</AppButton>
     </div>
   </div>
 </template>
@@ -38,7 +38,7 @@ import { Comment } from "@/models/comment";
 import { ContentType } from "@/models/common";
 import { diffRemovedFileIds } from "@/utils/file/diffRemovedFileIds";
 import { pickFile } from "@/utils/file/pickFile";
-import { defineComponent, PropType, ref } from "vue";
+import { computed, defineComponent, PropType, ref } from "vue";
 import AppButton from "../common/AppButton.vue";
 import FilePicker from "../common/FilePicker.vue";
 import SkeletonBox from "../common/SkeletonBox.vue";
@@ -122,9 +122,14 @@ export default defineComponent({
       context.emit("ok");
     };
 
+    const submitting = computed(() => create.isLoading || update.isLoading);
+
     // TODO: 직관적으로 축약하기
     // TODO: SERVER: 생성 직후 담아 보낸 파일도 와야 할 듯
     const ok = () => {
+      /// 전송중이면 실행하지 않는다.
+      if (submitting.value) return;
+
       if (!content.value || content.value.trim() === "") {
         alert("내용을 입력해 주세요.");
         return;
@@ -186,6 +191,7 @@ export default defineComponent({
       cancel,
       content,
       me,
+      submitting,
     };
   },
 });
