@@ -31,7 +31,7 @@
           <CommentItem
             :depth="depth + 1"
             :comment="subComment"
-            :added="subComment.id === firstAddedSubComment.id"
+            :added="subComment.id === firstAddedSubComment?.id"
           />
         </SubItem>
       </template>

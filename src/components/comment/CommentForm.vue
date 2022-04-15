@@ -1,7 +1,10 @@
 <template>
   <div class="comment-form">
     <div class="header">
-      <div class="title">{{ me.data?.nickname ?? "-" }}</div>
+      <div class="title">
+        <SkeletonBox v-if="me.data == null" />
+        <template v-else>{{ me.data?.nickname ?? "-" }}</template>
+      </div>
       <div class="count">{{ content.length }}/3000</div>
     </div>
     <!-- eslint-disable-next-line -->
@@ -38,10 +41,11 @@ import { pickFile } from "@/utils/file/pickFile";
 import { defineComponent, PropType, ref } from "vue";
 import AppButton from "../common/AppButton.vue";
 import FilePicker from "../common/FilePicker.vue";
+import SkeletonBox from "../common/SkeletonBox.vue";
 
 export default defineComponent({
   name: "CommentForm",
-  components: { AppButton, FilePicker },
+  components: { AppButton, FilePicker, SkeletonBox },
   props: {
     /**
      * 글 uuid
