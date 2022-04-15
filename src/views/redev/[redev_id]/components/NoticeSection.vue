@@ -6,14 +6,16 @@
       <template v-else v-for="(notice, index) in notices" :key="notice.id">
         <ListDivider v-if="index > 0" />
         <ListTile
-          :badge="notice.is_notice ? '공지' : undefined"
+          :badge="notice.is_notice === 1 ? '공지' : undefined"
           :title="notice.title"
           :to="`/redev/${redev_id}/notice/${notice.id}`"
         />
       </template>
     </div>
   </div>
-  <MoreButton :to="`/redev/${redev_id}/notice`">공지사항 더보기</MoreButton>
+  <MoreButton v-if="notices.length > 0" :to="`/redev/${redev_id}/notice`">
+    공지사항 더보기
+  </MoreButton>
 </template>
 
 <script lang="ts">

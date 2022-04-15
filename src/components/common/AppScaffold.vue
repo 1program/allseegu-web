@@ -3,6 +3,7 @@
     <app-bar
       class="app-bar"
       :title="title"
+      :title-loading="titleLoading"
       :progress="progress"
       :theme="theme"
       :has-back-button="hasBackButton"
@@ -34,6 +35,11 @@ export default defineComponent({
       type: String,
       default: "",
       description: "앱 스캐폴드의 제목",
+    },
+    titleLoading: {
+      type: Boolean,
+      default: false,
+      description: "타이틀이 로딩중인가? Fallback 표시 여부 결정",
     },
     progress: {
       type: Number,

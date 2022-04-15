@@ -87,7 +87,9 @@ export default defineComponent({
 
 .content {
   width: 100%;
-  height: 100%;
+  margin-top: (111/2/16) * 1rem;
+  height: calc(100% - (111 / 2 / 16) * 1rem);
+  padding: 1rem;
 }
 
 .image {

@@ -1,5 +1,9 @@
 <template>
-  <div class="user-info">
+  <div v-if="user == null" class="user-info">
+    <h2><SkeletonBox /></h2>
+    <p><SkeletonBox :length="5" /><span class="divider">/</span><SkeletonBox /></p>
+  </div>
+  <div v-else class="user-info">
     <h2>{{ user?.name ?? "-" }}</h2>
     <p>{{ user?.email ?? "-" }}<span class="divider">/</span>{{ user?.nickname ?? "-" }}</p>
   </div>
@@ -8,6 +12,7 @@
 <script lang="ts">
 import { User } from "@/models/user";
 import { defineComponent, PropType } from "vue";
+import SkeletonBox from "../common/SkeletonBox.vue";
 
 /**
  * 제공된 회원 정보를 포현한다.
@@ -20,6 +25,7 @@ export default defineComponent({
       default: null,
     },
   },
+  components: { SkeletonBox },
 });
 </script>
 

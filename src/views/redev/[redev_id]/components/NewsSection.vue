@@ -27,7 +27,9 @@
       </template>
     </div>
   </div>
-  <MoreButton :to="`/redev/${redev_id}/news/${type_id}`">{{ current?.title }} 더보기</MoreButton>
+  <MoreButton v-if="current?.data.length > 0" :to="`/redev/${redev_id}/news/${type_id}`">
+    {{ current?.title }} 더보기
+  </MoreButton>
 </template>
 
 <script lang="ts">
@@ -71,7 +73,14 @@ export default defineComponent({
 
     const rows = computed(() => chunkArray(current.value?.data ?? [], 2));
 
-    const emptyMessage = computed(() => `등록된 ${Josa.r(current.value?.title, "가")} 없습니다.`);
+    const oddWords = ["기타"];
+
+    // '등록된 기타가 없습니다' => 이상함
+    const safeTitle = computed(() =>
+      oddWords.includes(current.value?.title ?? "") ? "데이터" : current.value?.title
+    );
+
+    const emptyMessage = computed(() => `등록된 ${Josa.r(safeTitle.value, "가")} 없습니다.`);
 
     return {
       type_id,

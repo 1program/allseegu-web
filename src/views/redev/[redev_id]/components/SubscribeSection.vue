@@ -17,7 +17,9 @@
       <SubscribeBanner />
     </div>
   </div>
-  <MoreButton :to="`/redev/${redev_id}/subscribe`">전문가 의견 더보기</MoreButton>
+  <MoreButton v-if="subscribes.length > 0" :to="`/redev/${redev_id}/subscribe`">
+    전문가 의견 더보기
+  </MoreButton>
 </template>
 
 <script lang="ts">

@@ -19,7 +19,7 @@
       </template>
     </div>
   </div>
-  <MoreButton :to="`/redev/${redev_id}/video`">영상 더보기</MoreButton>
+  <MoreButton v-if="videos.length > 0" :to="`/redev/${redev_id}/video`">영상 더보기</MoreButton>
 </template>
 
 <script lang="ts">

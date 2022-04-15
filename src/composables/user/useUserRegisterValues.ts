@@ -36,6 +36,7 @@ export function provideUserRegisterValues() {
       password: "",
       confirmPassword: "",
       nickname: "",
+
       // TODO: 본인인증에서 값 받아오기
       name: "홍길동",
       mobile: generateMobileNumber(),

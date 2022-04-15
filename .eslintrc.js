@@ -40,6 +40,7 @@ module.exports = {
     "prettier/prettier": ["error", { endOfLine: "auto" }],
     "import/prefer-default-export": "off",
     "no-undef": "off",
+    "vuejs-accessibility/heading-has-content": "off",
   },
 
   overrides: [

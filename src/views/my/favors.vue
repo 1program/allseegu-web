@@ -2,6 +2,7 @@
   <app-scaffold title="관심 구역">
     <error-fallback v-if="favors.error != null" :error="favors.error" />
     <loading-fallback v-if="favors.data == null" />
+    <app-fallback v-if="favors.data.length < 1" message="관심 구역이 없습니다." />
     <div v-else class="container page-wrapper">
       <template v-for="favor in favors.data" :key="favor.id">
         <menu-tile @click="select(favor)">
@@ -28,10 +29,18 @@ import { useFavorList } from "@/composables/favor/useFavorList";
 import LoadingFallback from "@/components/common/LoadingFallback.vue";
 import ErrorFallback from "@/components/common/ErrorFallback.vue";
 import { Favor } from "@/models/favor";
+import AppFallback from "@/components/common/AppFallback.vue";
 
 export default defineComponent({
   name: "MyFavors",
-  components: { AppScaffold, MenuTile, RedevAlimModal, LoadingFallback, ErrorFallback },
+  components: {
+    AppScaffold,
+    MenuTile,
+    RedevAlimModal,
+    LoadingFallback,
+    ErrorFallback,
+    AppFallback,
+  },
   setup() {
     // 선택된 관심구역
     const favor = ref<Favor | null>(null);

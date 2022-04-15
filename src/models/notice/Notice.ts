@@ -6,6 +6,7 @@ export interface Notice extends Entity, Auditable {
   content_type: ContentType;
   content: string;
   link: string | null;
+  is_notice: 1 | 0;
   is_visible: 1 | 0;
   hits: number;
 }

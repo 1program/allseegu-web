@@ -7,11 +7,6 @@
       </div>
       <field name="email" v-slot="{ field, errorMessage }" v-model="values.email">
         <form-group label="이메일" :error-text="errorMessage">
-          <!--
-          v-bind:field로 이벤트 바인딩 시 input event 때문에
-          네트워크 validation이 계속 trigger 된다.
-          네트워크 콜이 계속 일어나는 것을 막기 위해, change와 blur 이벤트만 바인딩한다.
-          -->
           <form-input v-bind="field" placeholder="example@example.com" />
         </form-group>
       </field>
@@ -38,7 +33,6 @@ import * as yup from "yup";
 import { confirmEmailSchema, emailSchema } from "@/lib/schema";
 import { useUserRegisterValues } from "@/composables/user/useUserRegisterValues";
 import { useApi } from "@/composables/common/useApi";
-import { useAlert } from "@/composables/common/useAlert";
 
 export default defineComponent({
   components: { AppButton, FormGroup, Field, FormInput },
@@ -46,13 +40,11 @@ export default defineComponent({
   setup() {
     const api = useApi();
 
-    const alert = useAlert();
-
     const router = useRouter();
 
     const { values } = useUserRegisterValues();
 
-    const { handleSubmit } = useForm({
+    const { handleSubmit, setFieldError } = useForm({
       /// 뒤로가기 눌러서 뒤로 왔을 경우
       validateOnMount: router.options?.history.state.forward != null,
       validationSchema: yup.object({
@@ -62,13 +54,17 @@ export default defineComponent({
     });
 
     const submit = handleSubmit(async (newValues) => {
+      /*
+      Async validation을 yup schema에 포함할 경우, 다른 인풋 값을 변경해도 지속적으로 값이 바뀌는 현상이 생깁니다.
+      submit시에 중복체크하도록 구현하였습니다.
+      */
       try {
         await api.user.duplicate({
           field: "email",
           value: newValues.email,
         });
       } catch (ex: any) {
-        alert(ex.message);
+        setFieldError("email", ex.message);
         return;
       }
 

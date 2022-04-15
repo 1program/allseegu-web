@@ -44,7 +44,7 @@ export default defineComponent({
 
     const { values } = useUserRegisterValues();
 
-    const { handleSubmit } = useForm({
+    const { handleSubmit, setFieldError } = useForm({
       /// 뒤로가기 눌러서 뒤로 왔을 경우
       validateOnMount: router.options?.history.state.forward != null,
       validationSchema: yup.object({
@@ -61,7 +61,7 @@ export default defineComponent({
           value: newValues.nickname,
         });
       } catch (ex: any) {
-        alert(ex.message);
+        setFieldError("nickname", ex.message);
         return;
       }
 

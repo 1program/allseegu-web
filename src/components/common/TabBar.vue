@@ -59,6 +59,7 @@ export default defineComponent({
 .tab-bar {
   line-height: 1;
   text-align: center;
+  padding-bottom: 0.5rem;
 
   .tab {
     position: relative;

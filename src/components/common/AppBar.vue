@@ -5,7 +5,8 @@
       <img class="back-icon" :src="icon" alt="뒤로가기" />
     </button>
     <div class="title">
-      {{ title }}
+      <SkeletonBox v-if="titleLoading" :length="4" />
+      <template v-else> {{ title }}</template>
     </div>
     <div class="actions gap-horizontal">
       <slot name="actions" />
@@ -20,6 +21,7 @@ import { useRouter } from "vue-router";
 
 import whiteIcon from "@/images/icons/nav-arrow-left-white.svg";
 import blackIcon from "@/images/icons/nav-arrow-left-black.svg";
+import SkeletonBox from "./SkeletonBox.vue";
 
 const icons = {
   default: blackIcon,
@@ -33,6 +35,11 @@ export default defineComponent({
       type: String,
       default: "",
       description: "AppBar의 제목",
+    },
+    titleLoading: {
+      type: Boolean,
+      default: false,
+      description: "타이틀이 로딩중인가? Fallback 표시 여부 결정",
     },
     progress: {
       type: Number,
@@ -51,9 +58,7 @@ export default defineComponent({
   },
   setup(props) {
     const router = useRouter();
-
     const icon = computed(() => icons[props.theme]);
-
     const goBack = () => {
       if (router.options?.history.state?.back == null) {
         /// 뒤로 갈 수 없다면 홈으로 보낸다.
@@ -63,12 +68,12 @@ export default defineComponent({
         router.back();
       }
     };
-
     return {
       icon,
       handleBack: goBack,
     };
   },
+  components: { SkeletonBox },
 });
 </script>
 

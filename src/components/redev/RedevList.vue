@@ -12,9 +12,13 @@
           </div>
           <!-- 결과 페이지별로 반복문 돌린다. -->
           <template v-for="(page, i) in searchList.data.pages" :key="page.current_page">
+            <!-- 검색 결과가 없을 때 -->
+            <template v-if="page.total < 1">
+              <AppFallback message="검색결과가 없습니다." />
+            </template>
             <!-- 결과 항목들 별로 반복문 돌린다. -->
             <template v-for="(redev, j) in page.data" :key="redev.id">
-              <div class="divider light" v-if="i !== 0 && j !== 0" />
+              <div class="divider light" v-if="i !== 0 || j !== 0" />
               <RedevTile :to="`/redev/${redev.id}`" :title="redev.title" />
             </template>
           </template>
@@ -57,6 +61,7 @@ import LoadingFallback from "../common/LoadingFallback.vue";
 import RedevTile from "./RedevTile.vue";
 import ErrorFallback from "../common/ErrorFallback.vue";
 import InView from "../common/InView.vue";
+import AppFallback from "../common/AppFallback.vue";
 
 export default defineComponent({
   name: "RedevList",
@@ -66,7 +71,7 @@ export default defineComponent({
       default: "",
     },
   },
-  components: { LoadingFallback, RedevTile, ErrorFallback, InView },
+  components: { LoadingFallback, RedevTile, ErrorFallback, InView, AppFallback },
   setup(props) {
     const loading = ref(false);
 

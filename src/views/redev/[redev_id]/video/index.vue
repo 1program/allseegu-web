@@ -10,7 +10,7 @@
           <AppFallback message="등록된 영상이 없습니다." />
         </template>
         <!-- 줄별 순회 -->
-        <template v-else v-for="(row, rowIndex) in chunkArray(page.data, 2)" :key="rowIndex">
+        <template v-else v-for="(row, index) in chunkArray(page.data, 2)" :key="index">
           <!-- 항목별 순회 -->
           <div class="row">
             <ListCard

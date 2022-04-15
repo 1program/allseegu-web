@@ -1,5 +1,5 @@
 <template>
-  <AppScaffold :title="type?.title" has-top-button>
+  <AppScaffold :title="type?.title" :title-loading="type?.title == null" has-top-button>
     <ErrorFallback v-if="newsList.error != null" :error="newsList.error" />
     <LoadingFallback v-else-if="newsList.data == null" />
     <div v-else class="container">
@@ -51,24 +51,37 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import { chunkArray } from "@/utils/common/chunkArray";
-import Josa from "josa-js";
-import AppScaffold from "@/components/common/AppScaffold.vue";
 import { useRoute } from "vue-router";
-import ListDivider from "@/components/common/ListDivider.vue";
-import { NewsType } from "@/models/news";
-import ListCard from "@/components/common/ListCard.vue";
-import NewsTile from "@/components/news/NewsTile.vue";
+import Josa from "josa-js";
 
-import ErrorFallback from "@/components/common/ErrorFallback.vue";
+import { chunkArray } from "@/utils/common/chunkArray";
+
+import { NewsType } from "@/models/news";
+
 import { useNewsTypes } from "@/composables/news/useNewsTypes";
 import { useNewsList } from "@/composables/news/useNewsList";
+
+import AppScaffold from "@/components/common/AppScaffold.vue";
+import ListDivider from "@/components/common/ListDivider.vue";
+import ListCard from "@/components/common/ListCard.vue";
+import NewsTile from "@/components/news/NewsTile.vue";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
 import AppFallback from "@/components/common/AppFallback.vue";
 import InView from "@/components/common/InView.vue";
 
 export default defineComponent({
   name: "RedevDetailNewsList",
-  components: { AppScaffold, ListDivider, ListCard, NewsTile, ErrorFallback, AppFallback, InView },
+  components: {
+    AppScaffold,
+    ListDivider,
+    ListCard,
+    NewsTile,
+    ErrorFallback,
+    LoadingFallback,
+    AppFallback,
+    InView,
+  },
   setup() {
     const route = useRoute();
 

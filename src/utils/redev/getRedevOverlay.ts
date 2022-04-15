@@ -12,7 +12,10 @@ const redevOverlayCss = css({
 });
 
 const topCss = css({
-  marginBottom: 5,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  marginBottom: 3,
 });
 
 const iconCss = css({
@@ -42,6 +45,7 @@ const iconDotCss = css({
 const contentCss = css({
   position: "relative",
   fontSize: 13,
+  lineHeight: 1,
 });
 
 const strokeCss = css({

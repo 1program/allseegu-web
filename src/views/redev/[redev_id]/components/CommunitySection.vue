@@ -21,7 +21,9 @@
       </template>
     </div>
   </div>
-  <MoreButton :to="`${redev_id}/community/${type_id}`">{{ current?.title }} 더보기</MoreButton>
+  <MoreButton v-if="current?.data.length > 0" :to="`${redev_id}/community/${type_id}`">
+    {{ current?.title }} 더보기
+  </MoreButton>
 </template>
 
 <script lang="ts">

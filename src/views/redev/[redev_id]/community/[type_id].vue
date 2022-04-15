@@ -13,6 +13,8 @@
           <template v-if="page.total < 1">
             <AppFallback :message="`등록된 ${Josa.r(type?.title ?? '데이터', '가')} 없습니다.`" />
           </template>
+
+          <!-- 각 항목 반복 -->
           <template v-else v-for="community in page.data" :key="community.id">
             <CommunityTile
               :type="community.community_type_id"

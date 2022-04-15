@@ -9,7 +9,11 @@
       <ErrorFallback v-if="storyList.error != null" :error="storyList.error" />
       <LoadingFallback v-else-if="storyList.data == null" />
       <template v-else v-for="page in storyList.data.pages" :key="page.current_page">
-        <template v-for="story in page.data" :key="story.id">
+        <!-- 데이터 없을 경우 -->
+        <AppFallback v-if="page.total < 1" message="등록된 이야기가 없습니다." />
+
+        <!-- 각 데이터 반복 -->
+        <template v-else v-for="story in page.data" :key="story.id">
           <ListTile
             :title="story.title"
             :nickname="story.nickname"
@@ -31,15 +35,18 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
+import { useRoute } from "vue-router";
+
+import { useMe } from "@/composables/user/useMe";
+import { useStoryList } from "@/composables/story/useStoryList";
+
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import ListTile from "@/components/common/ListTile.vue";
 import ListDivider from "@/components/common/ListDivider.vue";
 import AppButton from "@/components/common/AppButton.vue";
-import { useRoute } from "vue-router";
-import { useStoryList } from "@/composables/story/useStoryList";
 import ErrorFallback from "@/components/common/ErrorFallback.vue";
 import LoadingFallback from "@/components/common/LoadingFallback.vue";
-import { useMe } from "@/composables/user/useMe";
+import AppFallback from "@/components/common/AppFallback.vue";
 import InView from "@/components/common/InView.vue";
 
 export default defineComponent({
@@ -51,6 +58,7 @@ export default defineComponent({
     AppButton,
     ErrorFallback,
     LoadingFallback,
+    AppFallback,
     InView,
   },
   setup() {
