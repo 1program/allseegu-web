@@ -14,7 +14,9 @@
       </template>
     </div>
   </div>
-  <MoreButton :to="`/redev/${redev_id}/story`">우리 구역 이야기 더보기</MoreButton>
+  <MoreButton v-if="stories.length > 0" :to="`/redev/${redev_id}/story`">
+    우리 구역 이야기 더보기
+  </MoreButton>
 </template>
 
 <script lang="ts">

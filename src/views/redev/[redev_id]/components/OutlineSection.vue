@@ -35,7 +35,6 @@ import AppButton from "@/components/common/AppButton.vue";
 
 import starFilled from "@/images/icons/star-blue-filled.svg";
 import starOutlined from "@/images/icons/star-blue-outlined.svg";
-import { watchLog } from "@/composables/common/watchLog";
 
 export default defineComponent({
   name: "RedevDetailOutlineSection",
@@ -52,7 +51,7 @@ export default defineComponent({
   },
   setup(props) {
     const items = computed(() =>
-      Object.entries(props.outline.outline_table).map(([key, value]) => ({ label: key, value }))
+      props.outline.outline_table.map((row) => ({ label: row.name, value: row.val }))
     );
 
     const { favor, toggle, toggling } = useFavorToggle(computed(() => props.redev_id));
