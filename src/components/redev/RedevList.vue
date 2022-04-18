@@ -19,7 +19,7 @@
             <!-- 결과 항목들 별로 반복문 돌린다. -->
             <template v-for="(redev, j) in page.data" :key="redev.id">
               <div class="divider light" v-if="i !== 0 || j !== 0" />
-              <RedevTile :to="`/redev/${redev.id}`" :title="redev.title" />
+              <RedevTile :to="`/redev/${redev.id}`" :title="redev.title.replace('\\n', ' ')" />
             </template>
           </template>
           <!-- 다음페이지가 있는가? 화면에 들어오는 순간 데이터를 불러온다. -->
@@ -41,7 +41,7 @@
           <div class="divider light" v-if="index != 0" />
           <RedevTile
             :to="`/redev/${hot.id}`"
-            :title="hot.title"
+            :title="hot.title.replace('\\n', ' ')"
             :issue="true"
             :number="index + 1"
           />

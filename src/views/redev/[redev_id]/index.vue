@@ -1,6 +1,6 @@
 <template>
   <!-- TODO: 문의 - 중간에 광고가 들어가는 경우? -->
-  <AppScaffold :title="redev.data?.title" has-top-button theme="primary">
+  <AppScaffold :title="redev.data?.title?.replace('\\n', ' ')" has-top-button theme="primary">
     <template v-slot:actions>
       <AppBarAction to="/my">
         <img src="@/images/icons/my-icon-white.svg" width="22" alt="마이" />

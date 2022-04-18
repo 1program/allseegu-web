@@ -6,7 +6,7 @@
         <router-link class="item" v-if="hot" :key="hot.id" :to="`/redev/${hot.id}`">
           <div class="title">
             <strong>{{ index + 1 }}</strong>
-            {{ hot.title }}
+            {{ hot.title.replace("\\n", " ") }}
           </div>
         </router-link>
       </transition-group>
