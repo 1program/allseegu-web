@@ -45,7 +45,7 @@ const iconDotCss = css({
 const contentCss = css({
   position: "relative",
   fontSize: 13,
-  lineHeight: 1,
+  lineHeight: 1.4,
   wordBreak: "keep-all",
 });
 
