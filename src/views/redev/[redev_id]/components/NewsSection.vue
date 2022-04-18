@@ -9,6 +9,7 @@
       <AppFallback v-if="current.data.length < 1" :message="emptyMessage" />
       <!-- 'News' 타입의 보도자료는 카드 형태 -->
       <template v-else-if="type_id === NewsType.NEWS" v-for="(row, index) in rows" :key="index">
+        <ListDivider v-if="index > 0" />
         <div class="row">
           <ListCard
             v-for="news in row"
@@ -22,7 +23,7 @@
       </template>
       <!-- 'News' 타입 제외한 보도자료들은 목록형태 -->
       <template v-else v-for="(news, index) in current.data" :key="news.id">
-        <ListDivider v-if="index > 1" />
+        <ListDivider v-if="index > 0" />
         <NewsTile :title="news.title" :content="news.content" :href="news.link" target="_blank" />
       </template>
     </div>
