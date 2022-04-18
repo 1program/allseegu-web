@@ -32,7 +32,9 @@ export function getRedevPolygon({ redev, map, onClick, under1km = false }: Redev
     strokeWeight: 1,
   });
 
-  kakao.maps.event.addListener(polygon, "click", onClick);
+  if (redev.is_newtown !== 1) {
+    kakao.maps.event.addListener(polygon, "click", onClick);
+  }
 
   polygon.setMap(map ?? null);
 

@@ -83,7 +83,7 @@ export function getRedevOverlay({ redev, map, onClick, under1km = false }: Redev
     "div",
     {
       className: css(redevOverlayCss, { opacity }),
-      onclick: onClick,
+      onclick: redev.is_newtown === 1 ? null : onClick,
     },
     [
       h(
