@@ -1,24 +1,23 @@
-import { StoryCreateOptions } from "@/api/StoryApi";
+import { StoryDeleteOptions } from "@/api/StoryApi";
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
 import { useAlert } from "../common/useAlert";
 import { useApi } from "../common/useApi";
 
-export function useStoryCreate() {
+// TODO: 스토리 목록, 내 스토리 목록 invalidate
+export function useStoryDelete() {
   const queryClient = useQueryClient();
   const alert = useAlert();
   const api = useApi();
 
   const mutation = useMutation({
-    mutationKey: "STORY_CREATE",
-    mutationFn: async ({ redev_id, data }: StoryCreateOptions) => {
-      return api.story.create({
-        redev_id,
-        data,
-      });
+    mutationKey: "STORY_DELETE",
+    mutationFn: async (options: StoryDeleteOptions) => {
+      return api.story.delete(options);
     },
-    onSuccess: (data) => {
+    onSuccess: (data, options) => {
       queryClient.invalidateQueries(["MY_STORY_LIST"]);
+      queryClient.invalidateQueries(["STORY_DETAIL", options.story_id]);
       alert(data.message);
     },
     // TODO: 개선

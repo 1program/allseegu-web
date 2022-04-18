@@ -1,20 +1,22 @@
-import { computed, reactive, Ref } from "vue";
-import { useInfiniteQuery } from "vue-query";
-import { StoryListOptions } from "@/api/StoryApi";
 import { PagedList } from "@/models/common";
 import { Story } from "@/models/story";
+import { computed, reactive } from "vue";
+import { useInfiniteQuery } from "vue-query";
 import { useApi } from "../common/useApi";
+import { useMe } from "../user/useMe";
 
-export function useStoryList(options: Ref<StoryListOptions>) {
+// TODO: Key naming 고민
+// TODO: 글쓰면 invalidate
+export function useMyStoryList() {
+  const me = useMe();
   const api = useApi();
 
   const query = useInfiniteQuery<PagedList<Story>>({
-    queryKey: computed(() => ["STORY_LIST", options.value.redev_id]),
+    queryKey: computed(() => ["MY_STORY_LIST", me.data?.id]),
     queryFn: (context) =>
-      api.story
-        .list({
+      api.post
+        .storyList({
           take: 20,
-          ...options.value,
           page: context.pageParam,
         })
         .then((result) => result.data),

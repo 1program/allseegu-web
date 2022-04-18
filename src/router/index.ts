@@ -183,7 +183,12 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/my/posts",
-    component: () => import("@/views/my/posts.vue"),
+    component: () => import("@/views/my/posts/index.vue"),
+    children: [
+      { path: "story", component: () => import("@/views/my/posts/story.vue") },
+      { path: "comment", component: () => import("@/views/my/posts/comment.vue") },
+      { path: "", redirect: { path: "/my/posts/story" } },
+    ],
   },
   {
     path: "/alim",
@@ -227,11 +232,15 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/redev/:redev_id/story/write",
-    component: () => import("@/views/redev/[redev_id]/story/write.vue"),
+    component: () => import("@/views/redev/[redev_id]/story/form.vue"),
   },
   {
     path: "/redev/:redev_id/story/:story_id",
     component: () => import("@/views/redev/[redev_id]/story/[story_id].vue"),
+  },
+  {
+    path: "/redev/:redev_id/story/:story_id/edit",
+    component: () => import("@/views/redev/[redev_id]/story/form.vue"),
   },
   { path: "/redev", meta: { public: true }, component: () => import("@/views/redev/index.vue") },
   { path: "", redirect: { path: "/permissions" } },

@@ -15,7 +15,7 @@
 ## 사업상세 UI 작업
 
 - [ ] 컬러값 변수화
-- [ ] Drawer 관련 hook으로 변경
+- [ ] Drawer 관련 element 이벤트 처리 hook으로 변경
 - [ ] App\* prefix 고민중
 - [ ] `<param-case />` 작명으로 변경
 - [ ] scrollRestoration시 깜빡임 고치기
@@ -23,3 +23,5 @@
 - [ ] eslint input label 룰 제거
 - [x] route transition 스크롤 리스토어 깜빡임
 - [ ] props description field jsdoc 지원여부 확인
+- [ ] 404 페이지
+- [ ] route 단수 복수 처리

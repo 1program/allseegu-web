@@ -67,7 +67,6 @@ import FormGroup from "@/components/common/FormGroup.vue";
 import OptionButtonGroup from "@/components/common/OptionButtonGroup.vue";
 import OptionButton from "@/components/common/OptionButton.vue";
 import FormTextarea from "@/components/common/FormTextarea.vue";
-import AttachmentTile from "@/components/common/AttachmentTile.vue";
 import FilePicker from "@/components/common/FilePicker.vue";
 import AppButton from "@/components/common/AppButton.vue";
 import { useAlert } from "@/composables/common/useAlert";

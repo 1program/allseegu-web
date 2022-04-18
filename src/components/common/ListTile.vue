@@ -19,7 +19,7 @@
       <div class="date" v-if="dateText != null">{{ dateText }}</div>
       <div class="comments" v-if="comments != null">
         <img src="@/images/icons/comment.svg" alt="댓글" />
-        {{ comments }}
+        <span>{{ comments }}</span>
       </div>
     </div>
   </RouterLinkOrButton>
@@ -27,14 +27,14 @@
 
 <script lang="ts">
 import { formatDate } from "@/lib/formatters";
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import RouterLinkOrButton from "./RouterLinkOrButton.vue";
 
 export default defineComponent({
   name: "ListTile",
   props: {
     category: {
-      type: String,
+      type: String as PropType<string | null>,
       default: null,
     },
     badge: {
@@ -165,9 +165,13 @@ export default defineComponent({
     align-items: center;
 
     > img {
+      margin-top: 2px;
       width: (28/2/16) * 1rem;
       margin-right: (10/2/16) * 1rem;
-      margin-top: 1px;
+    }
+
+    > span {
+      line-height: 1;
     }
   }
 }

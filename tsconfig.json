@@ -12,7 +12,7 @@
     "useDefineForClassFields": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": ["webpack-env", "jest", "kakao.maps.d.ts"],
+    "types": ["webpack-env", "jest", "kakao.maps.d.ts", "@types/navermaps"],
     "paths": {
       "@/*": ["src/*"]
     },

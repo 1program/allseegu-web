@@ -17,7 +17,7 @@
       </div>
       <div class="content">
         <!-- TODO: Implement content parser by content_type -->
-        {{ content }}
+        <ContentRenderer :content="content" />
       </div>
     </div>
   </div>
@@ -34,6 +34,7 @@ import ImageGallery from "@/components/common/ImageGallery.vue";
 import LinkTile from "@/components/common/LinkTile.vue";
 
 import PostMeta from "./PostMeta.vue";
+import ContentRenderer from "../common/ContentRenderer.vue";
 
 /**
  * 글 상세 컴포넌트
@@ -45,7 +46,7 @@ import PostMeta from "./PostMeta.vue";
  */
 export default defineComponent({
   name: "PostView",
-  components: { PostMeta, AttachmentTile, ImageGallery, LinkTile },
+  components: { PostMeta, AttachmentTile, ImageGallery, LinkTile, ContentRenderer },
   props: {
     is_notice: {
       type: Boolean,
