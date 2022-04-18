@@ -46,10 +46,12 @@ const contentCss = css({
   position: "relative",
   fontSize: 13,
   lineHeight: 1,
+  wordBreak: "keep-all",
 });
 
 const strokeCss = css({
   WebkitTextStroke: "4px white",
+  whiteSpace: "pre-line",
 });
 
 const textCss = css({
@@ -58,6 +60,7 @@ const textCss = css({
   bottom: 0,
   left: 0,
   right: 0,
+  whiteSpace: "pre-line",
 });
 
 export interface RedevOverlayOptions {
@@ -96,8 +99,16 @@ export function getRedevOverlay({ redev, map, onClick, under1km = false }: Redev
         ])
       ),
       h("div", { className: contentCss }, [
-        h("div", { className: css(strokeCss, { fontSize }) }, redev.title),
-        h("div", { className: css(textCss, { fontSize, color }) }, redev.title),
+        h(
+          "div",
+          { className: css(strokeCss, { fontSize }) },
+          { innerHTML: redev.title.replace("\\n", "\n") }
+        ),
+        h(
+          "div",
+          { className: css(textCss, { fontSize, color }) },
+          { innerHTML: redev.title.replace("\\n", "\n") }
+        ),
       ]),
     ]
   );
