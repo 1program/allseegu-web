@@ -26,29 +26,31 @@
           자동 로그인
           <app-toggle class="auto-login-toggle" v-model:checked="autoLogin" />
         </div>
-        <app-button full>로그인</app-button>
+        <app-button full :loading="login.isLoading">로그인</app-button>
       </div>
     </form>
   </app-scaffold>
 </template>
 
 <script lang="ts">
+import { defineComponent, ref } from "vue";
+import { Field, useForm } from "vee-validate";
+import * as yup from "yup";
+import { useRouter } from "vue-router";
+
+import { emailSchema, passwordSchema } from "@/lib/schema";
+import { TEST_ACCOUNT } from "@/lib/config";
+import { getErrorMessage } from "@/lib/functions";
+
+import { useToast } from "@/composables/common/useToast";
+import { useLogin } from "@/composables/auth/useLogin";
+
 import AppButton from "@/components/common/AppButton.vue";
 import AppToggle from "@/components/common/AppToggle.vue";
 import FormGroup from "@/components/common/FormGroup.vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
-import { defineComponent, ref } from "vue";
-import { Field, useForm } from "vee-validate";
 import FormInput from "@/components/common/FormInput.vue";
-import * as yup from "yup";
-import { useRouter } from "vue-router";
-import { PASSWORD_REGEXP } from "@/lib/regexp";
 import FormErrorMessage from "@/components/common/FormErrorMessage.vue";
-import { useApi } from "@/composables/common/useApi";
-import { useToast } from "@/composables/common/useToast";
-import { TEST_ACCOUNT } from "@/lib/config";
-import { getErrorMessage } from "@/lib/functions";
-import { useAuth } from "@/composables/auth/useAuth";
 
 export default defineComponent({
   name: "AccountLoginPage",
@@ -57,50 +59,44 @@ export default defineComponent({
     const router = useRouter();
     const toast = useToast();
     const autoLogin = ref(false);
-    const api = useApi();
-    const auth = useAuth();
 
     const errorMessage = ref<string | null>(null);
 
     const { handleSubmit } = useForm({
       initialValues: process.env.NODE_ENV === "development" ? TEST_ACCOUNT : undefined,
       validationSchema: yup.object({
-        email: yup
-          .string()
-          .required("이메일을 입력해 주세요.")
-          .email("올바르지 않은 이메일 주소입니다."),
-        password: yup
-          .string()
-          .required("비밀번호를 입력해 주세요.")
-          .matches(PASSWORD_REGEXP, "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."),
+        email: emailSchema,
+        password: passwordSchema,
       }),
     });
 
-    const submit = handleSubmit(async (values) => {
+    const login = useLogin();
+
+    const submit = handleSubmit(async (data) => {
       errorMessage.value = null;
 
-      try {
-        const result = await api.auth.login({
-          data: {
-            email: values.email ?? "",
-            password: values.password ?? "",
+      login.mutate(
+        {
+          autoLogin: autoLogin.value,
+          data,
+        },
+        {
+          onSuccess: (result) => {
+            toast(result.message);
+            router.push("/redev");
           },
-        });
-
-        auth.login(result.data.api_token, autoLogin.value);
-
-        toast(result.message);
-
-        router.push("/redev");
-      } catch (error) {
-        errorMessage.value = getErrorMessage(error);
-      }
+          onError: (error) => {
+            errorMessage.value = getErrorMessage(error);
+          },
+        }
+      );
     });
 
     return {
       autoLogin,
       errorMessage,
       submit,
+      login,
     };
   },
 });
