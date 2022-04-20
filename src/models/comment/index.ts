@@ -1,2 +1,2 @@
 export * from "./Comment";
-export * from "./CommentData";
+export * from "./CommentInput";

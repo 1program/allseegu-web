@@ -6,24 +6,48 @@
     </div>
     <template v-for="comment in comments" :key="comment.id">
       <div class="divider light" />
-      <CommentItem
-        class="item"
-        :depth="1"
-        :comment="comment"
-        :added="comment.id === firstAddedComment?.id"
-      />
+      <CommentItem class="item" :depth="1" :comment="comment" />
     </template>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from "vue";
+import { defineComponent, PropType, computed, watch, ref, provide, Ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
-import { useAddedItem } from "@/composables/common/useAddedItem";
+import { diffNewComments } from "@/utils/comment/diffNewComments";
+
 import { Comment } from "@/models/comment";
 
 import CommentForm from "./CommentForm.vue";
 import CommentItem from "./CommentItem.vue";
+
+/**
+ * CommentList에서 트리간 공유되는 공용 데이터를 식별할 Symbol.
+ */
+export const COMMENT_LIST_SYMBOL = Symbol("COMMENT_LIST_CONTEXT");
+
+/**
+ * CommentList에서 트리간 공유되는 공용 데이터
+ */
+export interface CommentListContext {
+  /**
+   * 초점 맞추어진 댓글 id
+   * (해당 댓글로 스크롤 된다.)
+   */
+  comment_id: Ref<number | null>;
+
+  /**
+   * 수정되고 있는 댓글 id
+   * (해당 댓글로 스크롤 된다.)
+   */
+  editing_comment_id: Ref<number | null>;
+
+  /**
+   * 댓글 수정 (한번에 한 댓글만 수정되도록 한다.)
+   */
+  edit: (id: number | null) => void;
+}
 
 export default defineComponent({
   name: "CommentList",
@@ -47,14 +71,59 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const added = useAddedItem(
-      computed(() => props.comments),
-      (comment) => comment.id.toString()
+    const router = useRouter();
+    const route = useRoute();
+
+    // 초점 맞출 comment id
+    const comment_id = computed({
+      get: () => parseInt(route.query.comment_id as string, 10) || null,
+      set: (id: number | null) =>
+        router.replace({
+          query: {
+            comment_id: id,
+          },
+          state: {
+            scrollToTop: false,
+          },
+        }),
+    });
+
+    // 편집중인 comment id
+    const editing_comment_id = computed({
+      get: () => parseInt(route.query.editing_comment_id as string, 10) || null,
+      set: (id: number | null) => {
+        router.replace({
+          query: {
+            editing_comment_id: id ?? undefined,
+          },
+          state: {
+            scrollToTop: false,
+          },
+        });
+      },
+    });
+
+    const edit = (id: number | null) => {
+      editing_comment_id.value = id;
+    };
+
+    // 새로 추가된 댓글 감지 -> 새로운 댓글을 현재 댓글로 설정 (초점 맞춤)
+    watch(
+      () => props.comments,
+      (current, prev) => {
+        const newComments = diffNewComments(prev, current);
+        comment_id.value = newComments[0]?.id;
+      }
     );
 
-    const firstAddedComment = computed(() => added.value?.[0]);
+    // 자식 트리에 필요한 정보를 공급한다.
+    provide(COMMENT_LIST_SYMBOL, {
+      comment_id,
+      editing_comment_id,
+      edit,
+    } as CommentListContext);
 
-    return { firstAddedComment };
+    return {};
   },
 });
 </script>

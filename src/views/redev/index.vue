@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, computed, watchEffect } from "vue";
 import RedevMap from "@/components/redev/RedevMap.vue";
 import RedevAppBar from "@/components/redev/RedevAppBar.vue";
 import RedevHotBar from "@/components/redev/RedevHotBar.vue";

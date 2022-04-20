@@ -1,7 +1,7 @@
 import { Auditable, ContentType, Entity } from "../common";
 import { Files } from "../file";
 
-export interface Comment extends Entity, Auditable {
+export interface Comment<Parent = null> extends Entity, Auditable {
   /**
    * 부모 댓글 id
    */
@@ -47,6 +47,11 @@ export interface Comment extends Entity, Auditable {
    * 파일
    */
   files?: Files;
+
+  /**
+   * 부모 데이터, 타입을 지정해 주세요.
+   */
+  parent: Parent;
 }
 
 export const mockComment: Comment = {
@@ -62,6 +67,7 @@ export const mockComment: Comment = {
   updated_at: "2022-03-22T17:55:13.000000Z",
   created_at: "2022-03-22T17:55:13.000000Z",
   id: 14,
+  parent: null,
 };
 
 export function parseCommentableType(type: string) {

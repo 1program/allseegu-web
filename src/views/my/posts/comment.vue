@@ -1,61 +1,73 @@
 <template>
-  <ListTile
-    category="신림 1구역 재개발 사업"
-    title="조합이 바르게 운영되지 못하고 와해되는 이유"
-    :show-footer="false"
-    :show-tools="false"
-    to="/redev/1/story/1"
-  >
-    <CommentSimpleTile content="새로운 실거래 6.95억은 세끼고 인가요?" @remove="removeComment(0)" />
-  </ListTile>
-  <ListDivider />
-  <ListTile
-    category="광명 7구역 신동아 아파트 리모델링 사업"
-    title="조합이 바르게 운영되지 못하고 와해되는 이유"
-    :show-footer="false"
-    :show-tools="false"
-    to="/redev/1/story/1"
-  >
-    <CommentSimpleTile
-      content="새로운 실거래 6.95억은 세끼고 인가요? 새로운 실거래 6.95억은 세끼고 인가요?"
-      @remove="removeComment(1)"
-    />
-  </ListTile>
-  <ListDivider />
-  <ListTile
-    category="세곡 6지구 재건축 사업"
-    title="조합이 바르게 운영되지 못하고 와해되는 이유"
-    :show-footer="false"
-    :show-tools="false"
-    to="/redev/1/story/1"
-  >
-    <CommentSimpleTile
-      content="새로운 실거래 6.95억은 세끼고 인가요?새로운 실거래 6.95억은 세끼고 인가요?새로운 실거래 6.95억은 세끼고 인가요?"
-      @remove="removeComment(2)"
-    />
-  </ListTile>
+  <ErrorFallback v-if="commentList.error != null" :error="commentList.error" />
+  <LoadingFallback v-else-if="commentList.data == null" />
+  <template v-else v-for="page in commentList.data.pages" :key="page.current_page">
+    <!-- 데이터 없을 경우 -->
+    <AppFallback v-if="page.total < 1" message="등록된 이야기가 없습니다." />
+
+    <!-- 각 데이터 반복 -->
+    <template v-else v-for="(comment, index) in page.data" :key="comment.id">
+      <ListDivider v-if="index > 0" />
+      <ListTile
+        :category="comment.parent.redev_title?.replace('\\n', ' ')"
+        :title="comment.parent.title"
+        :show-tools="false"
+        :show-footer="false"
+        :to="`/redev/${comment.parent.redev_id}`"
+      />
+      <CommentSimpleTile
+        :content="comment.content"
+        @edit="editComment(comment)"
+        @remove="removeComment(comment)"
+        :to="`/redev/${comment.parent.redev_id}/story/${comment.parent.id}?comment_id=${comment.id}`"
+      />
+    </template>
+  </template>
 </template>
 
 <script lang="ts">
 import { useConfirm } from "@/composables/common/useConfirm";
-import { useUi } from "@/composables/common/useUi";
 import { defineComponent } from "vue";
 import ListTile from "@/components/common/ListTile.vue";
 import CommentSimpleTile from "@/components/comment/CommentSimpleTile.vue";
 import ListDivider from "@/components/common/ListDivider.vue";
+import { useCommentDelete } from "@/composables/comment/useCommentDelete";
+import { useMyCommentList } from "@/composables/comment/useMyCommentList";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
+import { Story } from "@/models/story";
+import { Comment } from "@/models/comment";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "MyPostsComment",
+  components: { ListTile, CommentSimpleTile, ListDivider, ErrorFallback, LoadingFallback },
   setup() {
+    const router = useRouter();
     const confirm = useConfirm();
-    const { notImplemented } = useUi();
-    const removeComment = async (id: number) => {
+
+    const commentList = useMyCommentList();
+
+    const removeMutation = useCommentDelete();
+
+    const removeComment = async (comment: Comment<Story>) => {
       if (await confirm("정말 삭제하시겠습니까?", { okLabel: "삭제" })) {
-        notImplemented();
+        removeMutation.mutate({
+          id: comment.id,
+          parent_uuid: comment.parent_uuid,
+          model: "story",
+          commentable_id: comment.commentable_id,
+        });
       }
     };
-    return { removeComment };
+
+    const editComment = (comment: Comment<Story>) => {
+      router.push(
+        `/redev/${comment.parent.redev_id}/story/${comment.parent.id}?editing_comment_id=${comment.id}`
+      );
+    };
+
+    return { commentList, removeComment, editComment };
   },
-  components: { ListTile, CommentSimpleTile, ListDivider },
 });
 </script>

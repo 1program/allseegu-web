@@ -1,5 +1,5 @@
 import { ApiResponse } from "@/models/common";
-import { Comment, CommentData } from "@/models/comment";
+import { Comment, CommentInput } from "@/models/comment";
 
 import BaseApi, { BaseApiOptions } from "./BaseApi";
 import FileApi from "./FileApi";
@@ -8,7 +8,7 @@ export interface CommentCreateOptions {
   parent_uuid: string;
   comment_id: number | null;
   model: "story";
-  data: CommentData;
+  data: CommentInput;
 }
 
 export interface CommentUpdateOptions {
@@ -16,7 +16,7 @@ export interface CommentUpdateOptions {
   parent_uuid: string;
   comment_id: number | null;
   model: "story";
-  data: CommentData;
+  data: CommentInput;
 }
 
 export interface CommentDeleteOptions {

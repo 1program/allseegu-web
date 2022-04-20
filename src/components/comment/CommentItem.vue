@@ -1,5 +1,5 @@
 <template>
-  <div ref="element" class="comment-item" :class="{ added }">
+  <div ref="element" class="comment-item" :class="{ focused }">
     <CommentForm
       v-if="editing"
       :parent_uuid="comment.parent_uuid"
@@ -27,11 +27,7 @@
       <template v-for="subComment in comment.child ?? []" :key="subComment.id">
         <div class="divider light darker margin" />
         <SubItem>
-          <CommentItem
-            :depth="depth + 1"
-            :comment="subComment"
-            :added="subComment.id === firstAddedSubComment?.id"
-          />
+          <CommentItem :depth="depth + 1" :comment="subComment" />
         </SubItem>
       </template>
       <div class="divider light darker margin" />
@@ -48,17 +44,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, computed, watch } from "vue";
+import { defineComponent, PropType, ref, computed, watch, inject, watchEffect } from "vue";
 import { Comment, parseCommentableType } from "@/models/comment";
 import { useUi } from "@/composables/common/useUi";
 import { useMe } from "@/composables/user/useMe";
 import { useCommentDelete } from "@/composables/comment/useCommentDelete";
 import { useConfirm } from "@/composables/common/useConfirm";
-import { useAddedItem } from "@/composables/common/useAddedItem";
+import { watchLog } from "@/composables/common/watchLog";
 
 import CommentForm from "./CommentForm.vue";
 import CommentTile from "./CommentTile.vue";
 import SubItem from "../common/SubItem.vue";
+import { CommentListContext, COMMENT_LIST_SYMBOL } from "./CommentList.vue";
 
 export default defineComponent({
   name: "CommentItem",
@@ -72,21 +69,22 @@ export default defineComponent({
       type: Object as PropType<Comment>,
       required: true,
     },
-    added: {
-      type: Boolean,
-      default: false,
-    },
   },
   setup(props) {
     const confirm = useConfirm();
 
     const { notImplemented } = useUi();
 
+    const commentListContext = inject<CommentListContext>(COMMENT_LIST_SYMBOL);
+
     const element = ref<HTMLDivElement>();
 
     const me = useMe();
 
-    const editing = ref(false);
+    const editing = computed({
+      get: () => commentListContext?.editing_comment_id.value === props.comment.id,
+      set: (enabled: boolean) => commentListContext?.edit(enabled ? props.comment.id : null),
+    });
 
     const expanded = ref(false);
 
@@ -107,28 +105,25 @@ export default defineComponent({
       }
     };
 
-    const addedSubComments = useAddedItem(
-      computed(() => props.comment?.child ?? []),
-      (comment) => comment.id.toString()
+    const focused = computed(
+      () =>
+        commentListContext?.comment_id.value === props.comment.id ||
+        commentListContext?.editing_comment_id.value === props.comment.id
     );
 
-    const firstAddedSubComment = computed(() => addedSubComments.value?.[0]);
-
-    watch(
-      () => ({ isAdded: props.added, elem: element.value }),
-      ({ isAdded, elem }) => {
-        // 새로 추가된 댓글에게 초점을 맞춘다.
-        if (isAdded && elem) {
-          elem.scrollIntoView({
+    watchEffect(() => {
+      setTimeout(() => {
+        if (focused.value && element.value) {
+          element.value.scrollIntoView({
             behavior: "smooth",
             block: "center",
           });
         }
-      },
-      { immediate: true }
-    );
+      });
+    });
 
     return {
+      focused,
       element,
       editing,
       expanded,
@@ -136,8 +131,6 @@ export default defineComponent({
       commentable_type,
       me,
       remove,
-      addedSubComments,
-      firstAddedSubComment,
     };
   },
 });
@@ -147,15 +140,15 @@ export default defineComponent({
 @import "@/styles/config";
 
 .comment-item {
-  &.added {
-    animation-name: added;
+  &.focused {
+    animation-name: focused;
     animation-iteration-count: 1;
     animation-timing-function: ease-out;
     animation-duration: 0.5s;
   }
 }
 
-@keyframes added {
+@keyframes focused {
   from {
     opacity: 0;
   }

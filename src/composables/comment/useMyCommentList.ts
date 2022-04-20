@@ -1,5 +1,6 @@
 import { Comment } from "@/models/comment";
 import { PagedList } from "@/models/common";
+import { Story } from "@/models/story";
 import { computed, reactive } from "vue";
 import { useInfiniteQuery } from "vue-query";
 import { useApi } from "../common/useApi";
@@ -12,7 +13,7 @@ export function useMyCommentList() {
 
   const api = useApi();
 
-  const query = useInfiniteQuery<PagedList<Comment>>({
+  const query = useInfiniteQuery<PagedList<Comment<Story>>>({
     queryKey: computed(() => ["MY_COMMENT_LIST", me.data?.id]),
     queryFn: (context) =>
       api.post

@@ -1,5 +1,5 @@
 <template>
-  <div class="comment-simple-tile">
+  <RouterLinkOrButton class="comment-simple-tile">
     <div class="comment" v-if="content != null">{{ content }}</div>
     <div class="footer">
       <div class="date" v-if="dateText != null">{{ dateText }}</div>
@@ -9,15 +9,17 @@
         <button @click.prevent="remove">삭제</button>
       </div>
     </div>
-  </div>
+  </RouterLinkOrButton>
 </template>
 
 <script lang="ts">
 import { formatDate } from "@/lib/formatters";
 import { defineComponent } from "vue";
+import RouterLinkOrButton from "../common/RouterLinkOrButton.vue";
 
 export default defineComponent({
   name: "CommentSimpleTile",
+  components: { RouterLinkOrButton },
   props: {
     content: {
       type: String,
@@ -44,10 +46,12 @@ export default defineComponent({
 .comment-simple-tile {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   border-radius: (10/2/16) * 1rem;
   background-color: #f8f8f8;
   padding: (24/2/16) * 1rem (32/2/16) * 1rem;
   margin-top: (24/2/16) * 1rem;
+  font-size: (26/2/16) * 1rem;
 }
 
 .comment {

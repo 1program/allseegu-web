@@ -242,7 +242,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/redev/:redev_id/story/:story_id/edit",
     component: () => import("@/views/redev/[redev_id]/story/form.vue"),
   },
-  { path: "/redev", meta: { public: true }, component: () => import("@/views/redev/index.vue") },
+  {
+    path: "/redev",
+    meta: { public: true },
+    component: () => import("@/views/redev/index.vue"),
+  },
   { path: "", redirect: { path: "/permissions" } },
 ];
 
@@ -259,7 +263,7 @@ const router = createRouter({
       return savedPosition;
     }
 
-    if (to.meta.scrollToTop !== false) {
+    if (to.meta.scrollToTop !== false && window.history.state.scrollToTop !== false) {
       return { top: 0, left: 0 };
     }
 

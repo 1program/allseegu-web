@@ -12,7 +12,7 @@ export default class PostApi extends BaseApi {
     });
 
   commentList = (options: PageParams) =>
-    this.request<ApiResponse<PagedList<Comment>>>({
+    this.request<ApiResponse<PagedList<Comment<Story>>>>({
       method: "GET",
       url: "/post/comment",
       params: options,

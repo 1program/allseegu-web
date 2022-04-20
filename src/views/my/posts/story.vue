@@ -50,6 +50,8 @@ export default defineComponent({
     const confirm = useConfirm();
     const remove = useStoryDelete();
 
+    const storyList = useMyStoryList();
+
     const removeStory = async (redev_id: number, story_id: number) => {
       if (await confirm("정말 삭제하시겠습니까?", { okLabel: "삭제" })) {
         remove.mutate({
@@ -62,8 +64,6 @@ export default defineComponent({
     const editStory = (redev_id: number, story_id: number) => {
       router.push(`/redev/${redev_id}/story/${story_id}/edit`);
     };
-
-    const storyList = useMyStoryList();
 
     return { storyList, removeStory, editStory };
   },

@@ -1,6 +1,6 @@
 import { ContentType } from "../common";
 
-export interface CommentData {
+export interface CommentInput {
   content_type: ContentType;
   content: string;
   uploadFiles: File[];
