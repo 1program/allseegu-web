@@ -1,6 +1,8 @@
-import { FavorUpdateOptions } from "@/api/FavorApi";
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
+
+import { FavorUpdateOptions } from "@/api/FavorApi";
+
 import { useAlert } from "../common/useAlert";
 import { useApi } from "../common/useApi";
 import { useMe } from "../user/useMe";

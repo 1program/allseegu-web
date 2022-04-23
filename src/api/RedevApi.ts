@@ -1,5 +1,6 @@
 import { ApiResponse, PagedList } from "@/models/common";
 import { Redev, RedevDetail, RedevGeometry } from "@/models/redev";
+
 import BaseApi from "./BaseApi";
 
 export interface RedevListOptions {
@@ -33,8 +34,8 @@ export default class RedevApi extends BaseApi {
    */
   geoSearch = (options: RedevGeoSearchOptions) =>
     this.request<ApiResponse<RedevGeometry[]>>({
-      url: "/redev/geo-search",
       method: "POST",
+      url: "/redev/geo-search",
       params: options,
     });
 
@@ -43,8 +44,8 @@ export default class RedevApi extends BaseApi {
    */
   search = ({ query, page, take = 5 }: RedevSearchOptions) =>
     this.request<ApiResponse<PagedList<Redev>>>({
-      url: "/redev/search",
       method: "POST",
+      url: "/redev/search",
       params: { query, page, take },
     });
 
@@ -53,8 +54,8 @@ export default class RedevApi extends BaseApi {
    */
   hotIssueList = () =>
     this.request<ApiResponse<Redev[]>>({
-      url: "/redev/hotissue",
       method: "GET",
+      url: "/redev/hotissue",
     });
 
   /**
@@ -62,8 +63,8 @@ export default class RedevApi extends BaseApi {
    */
   list = ({ page, take }: RedevListOptions) =>
     this.request<ApiResponse<PagedList<Redev>>>({
-      url: "/redev",
       method: "GET",
+      url: "/redev",
       params: { page, take },
     });
 
@@ -72,7 +73,7 @@ export default class RedevApi extends BaseApi {
    */
   detail = ({ redev_id }: RedevDetailOptions) =>
     this.request<ApiResponse<RedevDetail>>({
-      url: `/redev/${redev_id}`,
       method: "GET",
+      url: `/redev/${redev_id}`,
     });
 }

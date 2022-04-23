@@ -1,6 +1,6 @@
 import { computed, Ref } from "vue";
-import { watchLog } from "../common/watchLog";
 
+import { watchLog } from "../common/watchLog";
 import { useFavorCreate } from "./useFavorCreate";
 import { useFavorDelete } from "./useFavorDelete";
 import { useFavorList } from "./useFavorList";

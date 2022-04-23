@@ -41,9 +41,10 @@
 </template>
 
 <script lang="ts">
-import AppDrawer from "@/components/common/AppDrawer.vue";
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
+
+import AppDrawer from "@/components/common/AppDrawer.vue";
 
 export default defineComponent({
   name: "AccountRegisterTermsDetail",

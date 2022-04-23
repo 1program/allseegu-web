@@ -15,9 +15,8 @@
 import { defineComponent, PropType, computed, watch, ref, provide, Ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
-import { diffNewComments } from "@/utils/comment/diffNewComments";
-
 import { Comment } from "@/models/comment";
+import { diffNewComments } from "@/utils/comment/diffNewComments";
 
 import CommentForm from "./CommentForm.vue";
 import CommentItem from "./CommentItem.vue";

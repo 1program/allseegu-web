@@ -3,92 +3,110 @@
     <div class="container">
       <div class="faq-header">
         <InputGroup place-holder="찾으시는 내용을 검색해 보세요">
+          <input class="input" placeholder="내용을 입력해 주세요." v-model="query" />
           <button class="search-button">
             <img src="@/images/icons/search.svg" alt="검색" />
           </button>
         </InputGroup>
         <TabBar
           class="tab-bar"
-          :current-tab="type_id"
+          :current-tab="query ? undefined : type_id"
           @change-tab="type_id = $event"
-          :tabs="[
-            { id: 1, title: '이용법' },
-            { id: 2, title: '부동산' },
-            { id: 3, title: '구독' },
-            { id: 4, title: '정보' },
-            { id: 5, title: '광고/제휴' },
-            { id: 6, title: '기타' },
-          ]"
+          :loading="types.isLoading"
+          :tabs="types.data ?? []"
+          :disabled="!!query"
         />
       </div>
       <div class="divider light" />
-      <template v-for="faq of faqList" :key="faq.id">
-        <QnaTile
-          class="qna-tile"
-          @click="changeIndex(faq.id)"
-          :active="activeIndex === faq.id"
-          :question="faq.question"
-          :answer="faq.answer"
-        />
-        <div class="divider light" />
+      <ErrorFallback v-if="currentFaqList.error != null" :error="currentFaqList.error" />
+      <LoadingFallback v-else-if="currentFaqList.data == null" />
+      <template v-else>
+        <!-- 페이지별 반복 -->
+        <template v-for="page in currentFaqList.data.pages" :key="page.current_page">
+          <!-- 페이지 데이터가 없을 시 -->
+          <AppFallback v-if="page.total < 1" message="데이터가 없습니다." />
+
+          <!-- 항목별 반복 -->
+          <template v-else v-for="faq in page.data" :key="faq.id">
+            <QnaTile
+              class="qna-tile"
+              @click="selectFaq(faq.id)"
+              :active="faq_id === faq.id"
+              :question="faq.title"
+              :answer="faq.content"
+            />
+            <div class="divider light" />
+          </template>
+        </template>
+
+        <!-- 다음 페이지 불러오기 -->
+        <InView v-if="currentFaqList.hasNextPage" @in-view="currentFaqList.fetchNextPage()">
+          <LoadingFallback />
+        </InView>
       </template>
     </div>
   </AppScaffold>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watchEffect, computed } from "vue";
+
+import AppFallback from "@/components/common/AppFallback.vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
-import TabBar from "@/components/common/TabBar.vue";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
+import InView from "@/components/common/InView.vue";
 import InputGroup from "@/components/common/InputGroup.vue";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
 import QnaTile from "@/components/common/QnaTile.vue";
+import TabBar from "@/components/common/TabBar.vue";
+import { useFaqList } from "@/composables/faq/useFaqList";
+import { useFaqSearch } from "@/composables/faq/useFaqSearch";
+import { useFaqTypes } from "@/composables/faq/useFaqTypes";
 
 export default defineComponent({
   name: "MyCustomerFaq",
-  components: { AppScaffold, TabBar, InputGroup, QnaTile },
+  components: {
+    AppScaffold,
+    TabBar,
+    InputGroup,
+    QnaTile,
+    LoadingFallback,
+    ErrorFallback,
+    AppFallback,
+    InView,
+  },
   setup() {
-    const type_id = ref(1);
+    const types = useFaqTypes();
 
-    const activeIndex = ref(1);
+    const type_id = ref<number>();
 
-    const faqList = [
-      {
-        id: 1,
-        question: "어플리케이션 업데이트 하는 방법",
-        answer: "벡스넷 네비게이션 우측에 위치한 마이페이지를 클릭하시어 업데이트가 가능합니다.",
-      },
-      {
-        id: 2,
-        question: "어플리케이션 업데이트 하는 방법",
-        answer: "벡스넷 네비게이션 우측에 위치한 마이페이지를 클릭하시어 업데이트가 가능합니다.",
-      },
-      {
-        id: 3,
-        question: "어플리케이션 업데이트 하는 방법",
-        answer: "벡스넷 네비게이션 우측에 위치한 마이페이지를 클릭하시어 업데이트가 가능합니다.",
-      },
-      {
-        id: 4,
-        question: "어플리케이션 업데이트 하는 방법",
-        answer: "벡스넷 네비게이션 우측에 위치한 마이페이지를 클릭하시어 업데이트가 가능합니다.",
-      },
-      {
-        id: 5,
-        question: "어플리케이션 업데이트 하는 방법",
-        answer: "벡스넷 네비게이션 우측에 위치한 마이페이지를 클릭하시어 업데이트가 가능합니다.",
-      },
-      {
-        id: 6,
-        question: "어플리케이션 업데이트 하는 방법",
-        answer: "벡스넷 네비게이션 우측에 위치한 마이페이지를 클릭하시어 업데이트가 가능합니다.",
-      },
-    ];
+    const query = ref<string>("");
 
-    const changeIndex = (id: number) => {
-      activeIndex.value = id;
+    watchEffect(() => {
+      // 타입 데이터 로딩이 완료되면 첫번째 id를 기본값으로 선택한다.
+      type_id.value = types.data?.[0].id;
+    });
+
+    const faq_id = ref<number>();
+
+    const selectFaq = (id: number) => {
+      faq_id.value = id;
     };
 
-    return { type_id, activeIndex, faqList, changeIndex };
+    const faqList = useFaqList(
+      computed(() => ({ type_id: type_id.value! })),
+      computed(() => type_id.value != null)
+    );
+
+    const searchList = useFaqSearch(
+      computed(() => ({ query: query.value! })),
+      computed(() => !!query.value)
+    );
+
+    // 검색중일때는 검색 리스트, 아닐 시에는 일반 리스트
+    const currentFaqList = computed(() => (query.value ? searchList : faqList));
+
+    return { types, type_id, query, currentFaqList, faq_id, selectFaq };
   },
 });
 </script>

@@ -1,5 +1,6 @@
 import { reactive } from "vue";
 import { useQuery } from "vue-query";
+
 import { useApi } from "../common/useApi";
 
 export function useCommunityTypes() {

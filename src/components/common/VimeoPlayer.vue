@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from "vue";
+
 import Vimeo from "@vimeo/player";
 
 export default defineComponent({

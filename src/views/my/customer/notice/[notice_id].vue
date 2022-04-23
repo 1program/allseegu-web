@@ -1,65 +1,45 @@
 <template>
   <AppScaffold title="올씨구 공지사항" has-top-button>
-    <div class="container">
-      <div class="meta">
-        <PostMeta
-          badge="공지"
-          title="조합이 바르게 운영되지 못하고 와해되는 이유는 바로 이것 때문입니다."
-          :date="date"
-          :hits="256"
-        >
-          <Badge label="공지" blue class="badge" />
-        </PostMeta>
-      </div>
-      <div class="divider light" />
-      <div class="page-content-medium">
-        <AttachmentTile
-          class="attachment"
-          url="http://view3.synology.me:5050/d/s/672812605452106783/bzE8Aohz0mThrDs-cYk8IV1JdsyHGgzM-vb5gT7NPVgk_"
-        >
-          첨부 파일.hwp
-        </AttachmentTile>
-        <AttachmentTile
-          class="attachment"
-          url="http://view3.synology.me:5050/d/s/672812605452106783/bzE8Aohz0mThrDs-cYk8IV1JdsyHGgzM-vb5gT7NPVgk_"
-        >
-          첨부 파일.hwp
-        </AttachmentTile>
-        <LinkTile
-          class="link"
-          url="http://view3.synology.me:5050/d/s/672812605452106783/bzE8Aohz0mThrDs-cYk8IV1JdsyHGgzM-vb5gT7NPVgk_"
-        />
-        <div class="gallery">
-          <ImageGallery :images="[]" />
-        </div>
-        <div class="content">
-          조합이 바르게 운영되지 못하고 와해되는 이유는 바로 이것 때문입니다. 조합이 바르게 운영되지
-          못하고 와해되는 이유는 바로 이것 때문입니다.<br /><br />
-          조합이 바르게 운영되지 못하고 와해되는 이유는 바로 이것 때문입니다.
-        </div>
-      </div>
+    <ErrorFallback v-if="detail.error" :error="detail.error" />
+    <LoadingFallback v-else-if="detail.data == null" />
+    <div v-else class="container">
+      <PostView
+        :is_notice="true"
+        :title="detail.data.title"
+        :created_at="new Date(detail.data.created_at)"
+        :hits="detail.data.hits"
+        :files="detail.data.files"
+        :link="detail.data.link"
+        :content_type="detail.data.content_type"
+        :content="detail.data.content"
+      />
     </div>
   </AppScaffold>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import AppScaffold from "@/components/common/AppScaffold.vue";
-import AttachmentTile from "@/components/common/AttachmentTile.vue";
-import LinkTile from "@/components/common/LinkTile.vue";
-import ImageGallery from "@/components/common/ImageGallery.vue";
-import PostMeta from "@/components/post/PostMeta.vue";
+import { computed, defineComponent } from "vue";
+import { useRoute } from "vue-router";
 
-import redevImage from "@/images/mocks/redev-image.png";
-import Badge from "@/components/common/Badge.vue";
+import AppScaffold from "@/components/common/AppScaffold.vue";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
+import PostView from "@/components/post/PostView.vue";
+import { useMyNoticeDetail } from "@/composables/notice/useMyNoticeDetail";
 
 export default defineComponent({
   name: "MyCustomerNoticeDetail",
-  components: { AppScaffold, PostMeta, AttachmentTile, LinkTile, ImageGallery, Badge },
+  components: { AppScaffold, PostView, ErrorFallback },
   setup() {
+    const route = useRoute();
+
+    const options = computed(() => ({
+      notice_id: parseInt(route.params.notice_id as string, 10),
+    }));
+
+    const detail = useMyNoticeDetail(options);
+
     return {
-      images: [redevImage, redevImage, redevImage],
-      date: new Date(),
+      detail,
     };
   },
 });

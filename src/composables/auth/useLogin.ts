@@ -1,6 +1,8 @@
-import { LoginRequest } from "@/models/auth";
 import { reactive } from "vue";
 import { useMutation } from "vue-query";
+
+import { LoginRequest } from "@/models/auth";
+
 import { useApi } from "../common/useApi";
 import { useAuth } from "./useAuth";
 

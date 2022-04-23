@@ -45,17 +45,18 @@
 
 <script lang="ts">
 import { defineComponent, PropType, ref, computed, watch, inject, watchEffect } from "vue";
-import { Comment, parseCommentableType } from "@/models/comment";
-import { useUi } from "@/composables/common/useUi";
-import { useMe } from "@/composables/user/useMe";
+
 import { useCommentDelete } from "@/composables/comment/useCommentDelete";
 import { useConfirm } from "@/composables/common/useConfirm";
+import { useUi } from "@/composables/common/useUi";
 import { watchLog } from "@/composables/common/watchLog";
+import { useMe } from "@/composables/user/useMe";
+import { Comment, parseCommentableType } from "@/models/comment";
 
-import CommentForm from "./CommentForm.vue";
-import CommentTile from "./CommentTile.vue";
 import SubItem from "../common/SubItem.vue";
+import CommentForm from "./CommentForm.vue";
 import { CommentListContext, COMMENT_LIST_SYMBOL } from "./CommentList.vue";
+import CommentTile from "./CommentTile.vue";
 
 export default defineComponent({
   name: "CommentItem",

@@ -62,8 +62,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import AppScaffold from "@/components/common/AppScaffold.vue";
+
 import AppButton from "@/components/common/AppButton.vue";
+import AppScaffold from "@/components/common/AppScaffold.vue";
 
 export default defineComponent({
   name: "AppPermissions",

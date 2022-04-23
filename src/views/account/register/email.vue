@@ -23,16 +23,17 @@
 </template>
 
 <script lang="ts">
-import AppButton from "@/components/common/AppButton.vue";
-import FormGroup from "@/components/common/FormGroup.vue";
 import { Field, useForm } from "vee-validate";
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
-import FormInput from "@/components/common/FormInput.vue";
 import * as yup from "yup";
-import { confirmEmailSchema, emailSchema } from "@/lib/schema";
-import { useUserRegisterValues } from "@/composables/user/useUserRegisterValues";
+
+import AppButton from "@/components/common/AppButton.vue";
+import FormGroup from "@/components/common/FormGroup.vue";
+import FormInput from "@/components/common/FormInput.vue";
 import { useApi } from "@/composables/common/useApi";
+import { useUserRegisterValues } from "@/composables/user/useUserRegisterValues";
+import { confirmEmailSchema, emailSchema } from "@/lib/schema";
 
 export default defineComponent({
   components: { AppButton, FormGroup, Field, FormInput },

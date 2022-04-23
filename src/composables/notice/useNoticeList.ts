@@ -1,8 +1,10 @@
+import { computed, reactive, Ref } from "vue";
+import { useInfiniteQuery } from "vue-query";
+
 import { NoticeListOptions } from "@/api/NoticeApi";
 import { PagedList } from "@/models/common";
 import { Notice } from "@/models/notice";
-import { computed, reactive, Ref } from "vue";
-import { useInfiniteQuery } from "vue-query";
+
 import { useApi } from "../common/useApi";
 
 export function useNoticeList(options: Ref<NoticeListOptions>) {

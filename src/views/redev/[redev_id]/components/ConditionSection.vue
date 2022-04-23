@@ -14,6 +14,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+
 import InfoTable from "@/components/common/InfoTable.vue";
 import { RedevCondition } from "@/models/redev";
 

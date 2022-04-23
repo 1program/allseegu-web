@@ -1,4 +1,5 @@
 import VaporInstance from "laravel-vapor";
+
 import BaseApi from "./BaseApi";
 
 export default class FileApi extends BaseApi {

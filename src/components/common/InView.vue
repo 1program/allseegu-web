@@ -3,8 +3,9 @@
 </template>
 
 <script lang="ts">
-import { useInView } from "@/composables/common/useInView";
 import { defineComponent, ref } from "vue";
+
+import { useInView } from "@/composables/common/useInView";
 
 export default defineComponent({
   name: "InView",

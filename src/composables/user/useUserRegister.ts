@@ -1,6 +1,8 @@
-import { UserRegisterInput } from "@/models/user";
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
+
+import { UserRegisterInput } from "@/models/user";
+
 import { useAuth } from "../auth/useAuth";
 import { useAlert } from "../common/useAlert";
 import { useApi } from "../common/useApi";

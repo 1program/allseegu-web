@@ -1,6 +1,7 @@
 import { LoginResponse } from "@/models/auth";
 import { ApiResponse } from "@/models/common";
 import { User, UserRegisterInput, UserUpdateInput } from "@/models/user";
+
 import BaseApi from "./BaseApi";
 
 export interface UserUpdateOptions {

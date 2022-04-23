@@ -1,6 +1,7 @@
 import { Comment } from "@/models/comment";
 import { ApiResponse, PagedList, PageParams } from "@/models/common";
 import { Story } from "@/models/story";
+
 import BaseApi from "./BaseApi";
 
 export default class PostApi extends BaseApi {

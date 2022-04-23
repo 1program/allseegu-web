@@ -84,11 +84,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import AppScaffold from "@/components/common/AppScaffold.vue";
+
 import AppButton from "@/components/common/AppButton.vue";
+import AppScaffold from "@/components/common/AppScaffold.vue";
+import ListDivider from "@/components/common/ListDivider.vue";
 import ListTile from "@/components/common/ListTile.vue";
 import StatusLabel from "@/components/common/StatusLabel.vue";
-import ListDivider from "@/components/common/ListDivider.vue";
 
 export default defineComponent({
   name: "MyCustomerRequestList",

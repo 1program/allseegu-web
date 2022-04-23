@@ -60,16 +60,14 @@
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from "vue";
 
-import { Favor } from "@/models/favor";
-
-import { useFavorDelete } from "@/composables/favor/useFavorDelete";
-import { useToast } from "@/composables/common/useToast";
-import { useFavorUpdate } from "@/composables/favor/useFavorUpdate";
-
-import AppDialog from "@/components/common/AppDialog.vue";
 import AppButton from "@/components/common/AppButton.vue";
-import MenuTile from "@/components/common/MenuTile.vue";
+import AppDialog from "@/components/common/AppDialog.vue";
 import AppToggle from "@/components/common/AppToggle.vue";
+import MenuTile from "@/components/common/MenuTile.vue";
+import { useToast } from "@/composables/common/useToast";
+import { useFavorDelete } from "@/composables/favor/useFavorDelete";
+import { useFavorUpdate } from "@/composables/favor/useFavorUpdate";
+import { Favor } from "@/models/favor";
 
 export default defineComponent({
   name: "RedevAlimModal",

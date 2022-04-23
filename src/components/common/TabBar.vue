@@ -1,5 +1,12 @@
 <template>
-  <div class="tab-bar">
+  <div class="tab-bar" :class="{ disabled }">
+    <template v-if="loading">
+      <button class="tab"><SkeletonBox /></button>
+      <div class="divider" />
+      <button class="tab"><SkeletonBox /></button>
+      <div class="divider" />
+      <button class="tab"><SkeletonBox /></button>
+    </template>
     <template v-for="(tab, index) in tabs" :key="tab.id">
       <div class="divider" v-if="index != 0" />
       <RouterLinkOrButton
@@ -17,24 +24,33 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import RouterLinkOrButton from "./RouterLinkOrButton.vue";
 
+import RouterLinkOrButton from "./RouterLinkOrButton.vue";
+import SkeletonBox from "./SkeletonBox.vue";
+
+export interface TabBarItem {
+  id: string | number;
+  title: string;
+  to?: string;
+}
 export default defineComponent({
   name: "TabBar",
-  components: { RouterLinkOrButton },
+  components: { RouterLinkOrButton, SkeletonBox },
   props: {
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
     currentTab: {
       type: [String, Number],
       default: null,
     },
     tabs: {
-      type: Array as PropType<
-        {
-          id: string | number;
-          title: string;
-          to?: string;
-        }[]
-      >,
+      type: Array as PropType<TabBarItem[]>,
       default: () => [
         {
           id: 0,
@@ -60,6 +76,10 @@ export default defineComponent({
   line-height: 1;
   text-align: center;
   padding-bottom: 0.5rem;
+
+  &.disabled {
+    pointer-events: none;
+  }
 
   .tab {
     position: relative;

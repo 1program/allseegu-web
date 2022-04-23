@@ -27,12 +27,13 @@
 </template>
 
 <script lang="ts">
+import { computed, defineComponent } from "vue";
+import { useRouter } from "vue-router";
+
 import AppButton from "@/components/common/AppButton.vue";
 import FormCheck from "@/components/common/FormCheck.vue";
 import NextLink from "@/components/common/NextLink.vue";
 import { useAlert } from "@/composables/common/useAlert";
-import { computed, defineComponent } from "vue";
-import { useRouter } from "vue-router";
 import { useUserRegisterValues } from "@/composables/user/useUserRegisterValues";
 
 export default defineComponent({

@@ -30,14 +30,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import AppButton from "@/components/common/AppButton.vue";
-import { useRouter } from "vue-router";
-import InfoBox from "@/components/common/InfoBox.vue";
-import * as yup from "yup";
 import { useForm, Field } from "vee-validate";
+import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
+import * as yup from "yup";
+
+import AppButton from "@/components/common/AppButton.vue";
 import FormGroup from "@/components/common/FormGroup.vue";
 import FormInput from "@/components/common/FormInput.vue";
+import InfoBox from "@/components/common/InfoBox.vue";
 import { confirmPasswordSchema, passwordSchema } from "@/lib/schema";
 
 export default defineComponent({

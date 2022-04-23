@@ -12,10 +12,12 @@
 </template>
 
 <script lang="ts">
-import { useAlerts } from "@/composables/common/useAlert";
 import { defineComponent } from "vue";
-import AppDialog from "./AppDialog.vue";
+
+import { useAlerts } from "@/composables/common/useAlert";
+
 import AppButton from "./AppButton.vue";
+import AppDialog from "./AppDialog.vue";
 
 export default defineComponent({
   name: "AlertRenderer",

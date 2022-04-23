@@ -1,8 +1,10 @@
+import { computed, reactive, Ref } from "vue";
+import { useInfiniteQuery } from "vue-query";
+
 import { NewsListOptions } from "@/api/NewsApi";
 import { PagedList } from "@/models/common";
 import { News } from "@/models/news";
-import { computed, reactive, Ref } from "vue";
-import { useInfiniteQuery } from "vue-query";
+
 import { useApi } from "../common/useApi";
 
 export function useNewsList(options: Ref<NewsListOptions>) {

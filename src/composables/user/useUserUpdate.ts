@@ -1,6 +1,8 @@
-import { UserUpdateOptions } from "@/api/UserApi";
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
+
+import { UserUpdateOptions } from "@/api/UserApi";
+
 import { useAlert } from "../common/useAlert";
 import { useApi } from "../common/useApi";
 

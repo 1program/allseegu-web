@@ -18,19 +18,20 @@
 </template>
 
 <script lang="ts">
-import AppButton from "@/components/common/AppButton.vue";
-import FormGroup from "@/components/common/FormGroup.vue";
 import { Field, useForm } from "vee-validate";
 import { defineComponent, computed } from "vue";
 import { useRouter } from "vue-router";
-import FormInput from "@/components/common/FormInput.vue";
-import { nicknameSchema } from "@/lib/schema";
 import * as yup from "yup";
-import { useUserRegisterValues } from "@/composables/user/useUserRegisterValues";
 import { AnyObject } from "yup/lib/types";
+
+import AppButton from "@/components/common/AppButton.vue";
+import FormGroup from "@/components/common/FormGroup.vue";
+import FormInput from "@/components/common/FormInput.vue";
+import { useAlert } from "@/composables/common/useAlert";
 import { useApi } from "@/composables/common/useApi";
 import { useUserRegister } from "@/composables/user/useUserRegister";
-import { useAlert } from "@/composables/common/useAlert";
+import { useUserRegisterValues } from "@/composables/user/useUserRegisterValues";
+import { nicknameSchema } from "@/lib/schema";
 
 export default defineComponent({
   components: { AppButton, FormGroup, Field, FormInput },

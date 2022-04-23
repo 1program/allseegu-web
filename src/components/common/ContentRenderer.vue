@@ -8,8 +8,9 @@
 </template>
 
 <script lang="ts">
-import { ContentType } from "@/models/common";
 import { defineComponent, PropType, computed } from "vue";
+
+import { ContentType } from "@/models/common";
 
 // TODO: content_type에 따라 다른 컨텐트 타입 지원하기
 export default defineComponent({

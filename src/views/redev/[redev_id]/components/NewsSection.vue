@@ -34,19 +34,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, PropType } from "vue";
 import Josa from "josa-js";
+import { defineComponent, ref, computed, PropType } from "vue";
 
-import { RedevContentChild } from "@/models/redev";
-import { News, NewsType } from "@/models/news";
-
-import ListDivider from "@/components/common/ListDivider.vue";
+import AppFallback from "@/components/common/AppFallback.vue";
 import ListCard from "@/components/common/ListCard.vue";
+import ListDivider from "@/components/common/ListDivider.vue";
 import MoreButton from "@/components/common/MoreButton.vue";
 import TabBar from "@/components/common/TabBar.vue";
 import NewsTile from "@/components/news/NewsTile.vue";
-
-import AppFallback from "@/components/common/AppFallback.vue";
+import { News, NewsType } from "@/models/news";
+import { RedevContentChild } from "@/models/redev";
 import { chunkArray } from "@/utils/common/chunkArray";
 
 export default defineComponent({

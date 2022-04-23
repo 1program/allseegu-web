@@ -7,8 +7,10 @@
 </template>
 
 <script lang="ts">
-import { useToasts } from "@/composables/common/useToast";
 import { defineComponent } from "vue";
+
+import { useToasts } from "@/composables/common/useToast";
+
 import AppToast from "./AppToast.vue";
 
 export default defineComponent({

@@ -18,9 +18,11 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, computed } from "vue";
+
 import { useInterval } from "@/composables/common/useInterval";
 import { useRedevHotIssueList } from "@/composables/redev/useRedevHotIssueList";
-import { defineComponent, computed } from "vue";
+
 import RedevHotIcon from "./RedevHotIcon.vue";
 
 export default defineComponent({

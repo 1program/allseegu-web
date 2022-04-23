@@ -37,16 +37,17 @@
 </template>
 
 <script lang="ts">
-import AppButton from "@/components/common/AppButton.vue";
-import FormGroup from "@/components/common/FormGroup.vue";
 import { Field, useForm } from "vee-validate";
 import { defineComponent } from "vue";
-import FormInput from "@/components/common/FormInput.vue";
-import * as yup from "yup";
-import { confirmPasswordSchema, passwordSchema } from "@/lib/schema";
-import AppScaffold from "@/components/common/AppScaffold.vue";
-import { useAlert } from "@/composables/common/useAlert";
 import { useRouter } from "vue-router";
+import * as yup from "yup";
+
+import AppButton from "@/components/common/AppButton.vue";
+import AppScaffold from "@/components/common/AppScaffold.vue";
+import FormGroup from "@/components/common/FormGroup.vue";
+import FormInput from "@/components/common/FormInput.vue";
+import { useAlert } from "@/composables/common/useAlert";
+import { confirmPasswordSchema, passwordSchema } from "@/lib/schema";
 
 export default defineComponent({
   components: { AppButton, FormGroup, Field, FormInput, AppScaffold },

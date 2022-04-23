@@ -1,5 +1,6 @@
-import ApiError from "@/api/ApiError";
 import { inject, provide } from "vue";
+
+import ApiError from "@/api/ApiError";
 
 export const UI_CONTEXT_SYMBOL = Symbol("UI_CONTEXT");
 

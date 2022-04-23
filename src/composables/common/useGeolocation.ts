@@ -1,5 +1,6 @@
-import { geolocationErrorMessage } from "@/utils/common/geolocationErrorMessage";
 import { ref } from "vue";
+
+import { geolocationErrorMessage } from "@/utils/common/geolocationErrorMessage";
 
 export interface UseGeolocationOptions {
   onMessage: (message: string) => void;

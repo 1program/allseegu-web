@@ -1,5 +1,6 @@
 import { ApiResponse } from "@/models/common";
 import { Favor, FavorInput } from "@/models/favor";
+
 import BaseApi from "./BaseApi";
 
 export interface FavorOptions {

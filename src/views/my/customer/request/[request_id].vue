@@ -54,10 +54,9 @@
 import { defineComponent } from "vue";
 import { useRoute } from "vue-router";
 
+import AnswerCard from "@/components/common/AnswerCard.vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import Badge from "@/components/common/Badge.vue";
-import AnswerCard from "@/components/common/AnswerCard.vue";
-
 import PostMeta from "@/components/post/PostMeta.vue";
 
 export default defineComponent({

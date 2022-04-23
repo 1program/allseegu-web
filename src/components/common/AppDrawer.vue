@@ -24,8 +24,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted, ref } from "vue";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+import { defineComponent, onBeforeUnmount, onMounted, ref } from "vue";
 
 export default defineComponent({
   name: "AppDrawer",

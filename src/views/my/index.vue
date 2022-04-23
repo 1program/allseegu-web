@@ -38,11 +38,12 @@
 </template>
 
 <script lang="ts">
-import AppScaffold from "@/components/common/AppScaffold.vue";
 import { defineComponent } from "vue";
-import UserInfo from "@/components/user/UserInfo.vue";
+
 import AppBarAction from "@/components/common/AppBarAction.vue";
+import AppScaffold from "@/components/common/AppScaffold.vue";
 import MenuButton from "@/components/common/MenuButton.vue";
+import UserInfo from "@/components/user/UserInfo.vue";
 import { useUi } from "@/composables/common/useUi";
 import { useMe } from "@/composables/user/useMe";
 

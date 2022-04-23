@@ -19,10 +19,11 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import ContactTile from "@/components/common/ContactTile.vue";
-import ContactButton from "@/components/common/ContactButton.vue";
-import { Estate } from "@/models/estate";
+
 import AppFallback from "@/components/common/AppFallback.vue";
+import ContactButton from "@/components/common/ContactButton.vue";
+import ContactTile from "@/components/common/ContactTile.vue";
+import { Estate } from "@/models/estate";
 
 export default defineComponent({
   name: "RedevDetailEstateSection",

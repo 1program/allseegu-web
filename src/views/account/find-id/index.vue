@@ -5,8 +5,9 @@
 </template>
 
 <script lang="ts">
-import AppScaffold from "@/components/common/AppScaffold.vue";
 import { defineComponent } from "vue";
+
+import AppScaffold from "@/components/common/AppScaffold.vue";
 import SlidingRouterView from "@/components/common/SlidingRouterView.vue";
 
 export default defineComponent({

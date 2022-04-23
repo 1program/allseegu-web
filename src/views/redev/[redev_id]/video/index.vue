@@ -37,17 +37,17 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
+import { useRoute } from "vue-router";
+
+import AppFallback from "@/components/common/AppFallback.vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
+import InView from "@/components/common/InView.vue";
 import ListCard from "@/components/common/ListCard.vue";
 import ListDivider from "@/components/common/ListDivider.vue";
-import { chunkArray } from "@/utils/common/chunkArray";
-
-import { useRoute } from "vue-router";
-import { useVideoList } from "@/composables/video/useVideoList";
-import ErrorFallback from "@/components/common/ErrorFallback.vue";
-import AppFallback from "@/components/common/AppFallback.vue";
-import InView from "@/components/common/InView.vue";
 import LoadingFallback from "@/components/common/LoadingFallback.vue";
+import { useVideoList } from "@/composables/video/useVideoList";
+import { chunkArray } from "@/utils/common/chunkArray";
 
 export default defineComponent({
   name: "RedevDetailVideoList",

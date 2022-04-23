@@ -1,7 +1,9 @@
-import { NoticeDetailOptions } from "@/api/NoticeApi";
-import { NoticeDetail } from "@/models/notice";
 import { computed, reactive, Ref } from "vue";
 import { useQuery } from "vue-query";
+
+import { NoticeDetailOptions } from "@/api/NoticeApi";
+import { NoticeDetail } from "@/models/notice";
+
 import { useApi } from "../common/useApi";
 
 export function useNoticeDetail(options: Ref<NoticeDetailOptions>) {

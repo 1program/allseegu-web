@@ -61,17 +61,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import AppScaffold from "@/components/common/AppScaffold.vue";
-import FormGroup from "@/components/common/FormGroup.vue";
-import OptionButtonGroup from "@/components/common/OptionButtonGroup.vue";
-import OptionButton from "@/components/common/OptionButton.vue";
-import FormTextarea from "@/components/common/FormTextarea.vue";
-import FilePicker from "@/components/common/FilePicker.vue";
-import AppButton from "@/components/common/AppButton.vue";
-import { useAlert } from "@/composables/common/useAlert";
 import { Field, useForm } from "vee-validate";
+import { defineComponent, ref } from "vue";
 import * as yup from "yup";
+
+import AppButton from "@/components/common/AppButton.vue";
+import AppScaffold from "@/components/common/AppScaffold.vue";
+import FilePicker from "@/components/common/FilePicker.vue";
+import FormGroup from "@/components/common/FormGroup.vue";
+import FormTextarea from "@/components/common/FormTextarea.vue";
+import OptionButton from "@/components/common/OptionButton.vue";
+import OptionButtonGroup from "@/components/common/OptionButtonGroup.vue";
+import { useAlert } from "@/composables/common/useAlert";
 
 export default defineComponent({
   name: "MyCustomerWriteInquiry",

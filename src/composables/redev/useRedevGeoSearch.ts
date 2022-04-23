@@ -1,5 +1,4 @@
 import { computed, reactive, Ref } from "vue";
-
 import { useQuery } from "vue-query";
 
 import { RedevGeoSearchOptions } from "@/api/RedevApi";

@@ -27,8 +27,8 @@ import { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { defineComponent, PropType, ref } from "vue";
 
-import { Ad, adExample1, adExample2 } from "@/models/ad";
 import AppFallback from "@/components/common/AppFallback.vue";
+import { Ad, adExample1, adExample2 } from "@/models/ad";
 
 export default defineComponent({
   name: "RedevDetailAdSection",

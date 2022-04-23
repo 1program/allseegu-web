@@ -33,24 +33,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
 import { Field, useForm } from "vee-validate";
-import * as yup from "yup";
+import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
-
-import { emailSchema, passwordSchema } from "@/lib/schema";
-import { TEST_ACCOUNT } from "@/lib/config";
-import { getErrorMessage } from "@/lib/functions";
-
-import { useToast } from "@/composables/common/useToast";
-import { useLogin } from "@/composables/auth/useLogin";
+import * as yup from "yup";
 
 import AppButton from "@/components/common/AppButton.vue";
-import AppToggle from "@/components/common/AppToggle.vue";
-import FormGroup from "@/components/common/FormGroup.vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
-import FormInput from "@/components/common/FormInput.vue";
+import AppToggle from "@/components/common/AppToggle.vue";
 import FormErrorMessage from "@/components/common/FormErrorMessage.vue";
+import FormGroup from "@/components/common/FormGroup.vue";
+import FormInput from "@/components/common/FormInput.vue";
+import { useLogin } from "@/composables/auth/useLogin";
+import { useToast } from "@/composables/common/useToast";
+import { TEST_ACCOUNT } from "@/lib/config";
+import { getErrorMessage } from "@/lib/functions";
+import { emailSchema, passwordSchema } from "@/lib/schema";
 
 export default defineComponent({
   name: "AccountLoginPage",

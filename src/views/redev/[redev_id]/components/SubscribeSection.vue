@@ -25,13 +25,12 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 
-import { Subscribe } from "@/models/subscribe";
-
-import ListTile from "@/components/common/ListTile.vue";
-import ListDivider from "@/components/common/ListDivider.vue";
-import SubscribeBanner from "@/components/subscribe/SubscribeBanner.vue";
-import MoreButton from "@/components/common/MoreButton.vue";
 import AppFallback from "@/components/common/AppFallback.vue";
+import ListDivider from "@/components/common/ListDivider.vue";
+import ListTile from "@/components/common/ListTile.vue";
+import MoreButton from "@/components/common/MoreButton.vue";
+import SubscribeBanner from "@/components/subscribe/SubscribeBanner.vue";
+import { Subscribe } from "@/models/subscribe";
 
 export default defineComponent({
   name: "RedevDetailSubscribeSection",

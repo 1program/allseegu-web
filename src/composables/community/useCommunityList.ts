@@ -1,8 +1,10 @@
+import { computed, reactive, Ref } from "vue";
+import { useInfiniteQuery } from "vue-query";
+
 import { CommunityListOptions } from "@/api/CommunityApi";
 import { PagedList } from "@/models/common";
 import { Community } from "@/models/community";
-import { computed, reactive, Ref } from "vue";
-import { useInfiniteQuery } from "vue-query";
+
 import { useApi } from "../common/useApi";
 
 export function useCommunityList(options: Ref<CommunityListOptions>) {

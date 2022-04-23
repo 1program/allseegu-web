@@ -1,5 +1,6 @@
 import { ApiResponse, PagedList } from "@/models/common";
 import { Subscribe, SubscribeDetail } from "@/models/subscribe";
+
 import BaseApi from "./BaseApi";
 
 export interface SubscribeListOptions {
@@ -22,8 +23,8 @@ export default class SubscribeApi extends BaseApi {
    */
   subscribeList = ({ redev_id }: SubscribeListOptions) =>
     this.request<ApiResponse<PagedList<Subscribe>>>({
-      url: `/${redev_id}/subscribe`,
       method: "GET",
+      url: `/${redev_id}/subscribe`,
     });
 
   /**
@@ -31,7 +32,7 @@ export default class SubscribeApi extends BaseApi {
    */
   subscribeDetail = ({ redev_id, subscribe_id }: SubscribeDetailOptions) =>
     this.request<ApiResponse<SubscribeDetail>>({
-      url: `/${redev_id}/subscribe/${subscribe_id}`,
       method: "GET",
+      url: `/${redev_id}/subscribe/${subscribe_id}`,
     });
 }

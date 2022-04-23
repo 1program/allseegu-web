@@ -2,6 +2,7 @@ import { computed, reactive, Ref } from "vue";
 import { useQuery } from "vue-query";
 
 import { StoryDetailOptions } from "@/api/StoryApi";
+
 import { useApi } from "../common/useApi";
 
 export function useStoryDetail(options: Ref<StoryDetailOptions | null>) {

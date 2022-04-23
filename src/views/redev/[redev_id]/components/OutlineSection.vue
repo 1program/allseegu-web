@@ -25,16 +25,13 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
 
-import { RedevOutline } from "@/models/redev";
-
-import { useFavorToggle } from "@/composables/favor/useFavorToggle";
-
-import InfoTable from "@/components/common/InfoTable.vue";
 import AppBalloon from "@/components/common/AppBalloon.vue";
 import AppButton from "@/components/common/AppButton.vue";
-
+import InfoTable from "@/components/common/InfoTable.vue";
+import { useFavorToggle } from "@/composables/favor/useFavorToggle";
 import starFilled from "@/images/icons/star-blue-filled.svg";
 import starOutlined from "@/images/icons/star-blue-outlined.svg";
+import { RedevOutline } from "@/models/redev";
 
 export default defineComponent({
   name: "RedevDetailOutlineSection",

@@ -18,8 +18,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import AppDialog from "@/components/common/AppDialog.vue";
+
 import AppButton from "@/components/common/AppButton.vue";
+import AppDialog from "@/components/common/AppDialog.vue";
 
 export default defineComponent({
   name: "UserLeaveModal",

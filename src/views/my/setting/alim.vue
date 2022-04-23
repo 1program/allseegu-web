@@ -50,11 +50,12 @@
 </template>
 
 <script lang="ts">
-import AppScaffold from "@/components/common/AppScaffold.vue";
 import { defineComponent, reactive, ref } from "vue";
-import UserLeaveModal from "@/components/user/UserLeaveModal.vue";
-import MenuButton from "@/components/common/MenuButton.vue";
+
+import AppScaffold from "@/components/common/AppScaffold.vue";
 import AppToggle from "@/components/common/AppToggle.vue";
+import MenuButton from "@/components/common/MenuButton.vue";
+import UserLeaveModal from "@/components/user/UserLeaveModal.vue";
 
 export default defineComponent({
   name: "MySettingAlim",

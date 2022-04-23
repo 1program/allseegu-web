@@ -26,8 +26,10 @@
 </template>
 
 <script lang="ts">
-import { formatDate } from "@/lib/formatters";
 import { defineComponent, PropType } from "vue";
+
+import { formatDate } from "@/lib/formatters";
+
 import RouterLinkOrButton from "./RouterLinkOrButton.vue";
 
 export default defineComponent({

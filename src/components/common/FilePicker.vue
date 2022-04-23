@@ -47,9 +47,8 @@
 <script lang="ts">
 import { defineComponent, computed, PropType } from "vue";
 
-import { FileInfo } from "@/models/file/FileInfo";
 import { Files } from "@/models/file";
-
+import { FileInfo } from "@/models/file/FileInfo";
 import { pickFile } from "@/utils/file/pickFile";
 
 import AttachmentTile from "./AttachmentTile.vue";

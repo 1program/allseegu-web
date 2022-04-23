@@ -1,8 +1,10 @@
+import { computed, reactive, Ref } from "vue";
+import { useInfiniteQuery } from "vue-query";
+
 import { VideoListOptions } from "@/api/VideoApi";
 import { PagedList } from "@/models/common/PagedList";
 import { Video } from "@/models/video";
-import { computed, reactive, Ref } from "vue";
-import { useInfiniteQuery } from "vue-query";
+
 import { useApi } from "../common/useApi";
 
 export function useVideoList(options: Ref<VideoListOptions>) {

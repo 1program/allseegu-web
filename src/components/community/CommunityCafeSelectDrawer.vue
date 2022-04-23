@@ -12,6 +12,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+
 import AppDrawer from "@/components/common/AppDrawer.vue";
 import OptionTile from "@/components/common/OptionTile.vue";
 import { CommunityCafeType } from "@/models/community";

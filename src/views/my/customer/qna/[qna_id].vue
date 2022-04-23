@@ -53,15 +53,14 @@
 import { defineComponent } from "vue";
 import { useRoute } from "vue-router";
 
-import AppScaffold from "@/components/common/AppScaffold.vue";
-import PostMeta from "@/components/post/PostMeta.vue";
-import AttachmentTile from "@/components/common/AttachmentTile.vue";
-import ImageGallery from "@/components/common/ImageGallery.vue";
-import Badge from "@/components/common/Badge.vue";
-import { useConfirm } from "@/composables/common/useConfirm";
-
-import redevImage from "@/images/mocks/redev-image.png";
 import CommentList from "@/components/comment/CommentList.vue";
+import AppScaffold from "@/components/common/AppScaffold.vue";
+import AttachmentTile from "@/components/common/AttachmentTile.vue";
+import Badge from "@/components/common/Badge.vue";
+import ImageGallery from "@/components/common/ImageGallery.vue";
+import PostMeta from "@/components/post/PostMeta.vue";
+import { useConfirm } from "@/composables/common/useConfirm";
+import redevImage from "@/images/mocks/redev-image.png";
 
 export default defineComponent({
   name: "MyCustomerInquiryDetail",

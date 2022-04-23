@@ -1,5 +1,6 @@
 import { ApiResponse, PagedList } from "@/models/common";
 import { Community, CommunityCafeType, CommunityType, CommunityTypeInfo } from "@/models/community";
+
 import BaseApi from "./BaseApi";
 
 export interface CommunityListOptions {
@@ -28,8 +29,8 @@ export default class CommunityApi extends BaseApi {
    */
   communityList = ({ redev_id, ...params }: CommunityListOptions) =>
     this.request<ApiResponse<PagedList<Community>>>({
-      url: `/${redev_id}/community`,
       method: "GET",
+      url: `/${redev_id}/community`,
       params,
     });
 }

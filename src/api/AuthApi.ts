@@ -1,5 +1,6 @@
 import { LoginRequest, LoginResponse } from "@/models/auth";
 import { ApiResponse } from "@/models/common";
+
 import BaseApi from "./BaseApi";
 
 export interface LoginOptions {
@@ -8,7 +9,7 @@ export interface LoginOptions {
 
 export default class AuthApi extends BaseApi {
   login = ({ data }: LoginOptions) =>
-    this.request<ApiResponse<LoginResponse>>({ url: "/login", method: "POST", data });
+    this.request<ApiResponse<LoginResponse>>({ method: "POST", url: "/login", data });
 
-  logout = () => this.request<ApiResponse>({ url: "/logout", method: "GET" });
+  logout = () => this.request<ApiResponse>({ method: "GET", url: "/logout" });
 }

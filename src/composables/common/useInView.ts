@@ -36,8 +36,6 @@ export function useInView({ trigger, onInView, onOutView }: UseInViewOptions) {
         handleIntersect(entries[0]);
       });
 
-      console.log(trigger.value);
-
       observer.observe(trigger.value);
 
       cleanup(() => {

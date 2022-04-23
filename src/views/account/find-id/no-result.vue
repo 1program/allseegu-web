@@ -12,6 +12,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 import AppButton from "@/components/common/AppButton.vue";
 
 export default defineComponent({

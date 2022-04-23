@@ -23,9 +23,11 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, PropType } from "vue";
+
 import { formatDate } from "@/lib/formatters";
 import { FileInfo } from "@/models/file";
-import { defineComponent, PropType } from "vue";
+
 import ImageGallery from "../common/ImageGallery.vue";
 
 // TODO: 바인딩 완료 후 prop 축약

@@ -1,3 +1,6 @@
+import { fromEvent, map, merge, share, startWith, switchMap } from "rxjs";
+import { ref, Ref, watch } from "vue";
+
 import {
   getClientSize,
   getResize$,
@@ -5,8 +8,6 @@ import {
   getScrollSize,
   isScrollReached,
 } from "@/lib/dom-helpers";
-import { fromEvent, map, merge, share, startWith, switchMap } from "rxjs";
-import { ref, Ref, watch } from "vue";
 
 export default function useScrollReached(element: Ref<HTMLElement | null>) {
   const reached = ref({

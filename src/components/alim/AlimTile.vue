@@ -10,6 +10,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 import RouterLinkOrButton from "@/components/common/RouterLinkOrButton.vue";
 
 export default defineComponent({

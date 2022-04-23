@@ -25,16 +25,13 @@
 <script lang="ts">
 import { defineComponent, PropType, computed } from "vue";
 
-import { chunkArray } from "@/utils/common/chunkArray";
-
-import { Video } from "@/models/video";
-
-import MoreButton from "@/components/common/MoreButton.vue";
+import AppFallback from "@/components/common/AppFallback.vue";
 import ListCard from "@/components/common/ListCard.vue";
 import ListDivider from "@/components/common/ListDivider.vue";
-
+import MoreButton from "@/components/common/MoreButton.vue";
 import videoThumbnail from "@/images/mocks/video-thumbnail.png";
-import AppFallback from "@/components/common/AppFallback.vue";
+import { Video } from "@/models/video";
+import { chunkArray } from "@/utils/common/chunkArray";
 
 export default defineComponent({
   name: "RedevDetailVideoSection",

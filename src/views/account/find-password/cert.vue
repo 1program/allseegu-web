@@ -14,13 +14,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import AppButton from "@/components/common/AppButton.vue";
 import { useForm } from "vee-validate";
-import * as yup from "yup";
+import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
-import { emailSchema } from "@/lib/schema";
+import * as yup from "yup";
+
+import AppButton from "@/components/common/AppButton.vue";
 import { useApi } from "@/composables/common/useApi";
+import { emailSchema } from "@/lib/schema";
 
 export default defineComponent({
   components: { AppButton },

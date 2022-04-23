@@ -1,5 +1,6 @@
-import { generateMobileNumber } from "@/utils/common/generateMobileNumber";
 import { inject, provide, reactive } from "vue";
+
+import { generateMobileNumber } from "@/utils/common/generateMobileNumber";
 
 export type UserRegisterValues = {
   over14: boolean;

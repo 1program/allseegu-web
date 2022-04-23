@@ -13,15 +13,14 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
 
+import daumCafeIcon from "@/images/icons/community-daum-cafe.svg";
+import kakaoIcon from "@/images/icons/community-kakao-openchat.svg";
+import naverBlogIcon from "@/images/icons/community-naver-blog.svg";
+import naverCafeIcon from "@/images/icons/community-naver-cafe.svg";
 import { CommunityCafeType, CommunityType } from "@/models/community";
 
-import kakaoIcon from "@/images/icons/community-kakao-openchat.svg";
-import naverCafeIcon from "@/images/icons/community-naver-cafe.svg";
-import daumCafeIcon from "@/images/icons/community-daum-cafe.svg";
-import naverBlogIcon from "@/images/icons/community-naver-blog.svg";
-
-import ContactTile from "../common/ContactTile.vue";
 import ContactButton from "../common/ContactButton.vue";
+import ContactTile from "../common/ContactTile.vue";
 import RouterLinkOrButton from "../common/RouterLinkOrButton.vue";
 
 export default defineComponent({

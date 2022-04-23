@@ -21,13 +21,11 @@
 import { computed, defineComponent } from "vue";
 import { useRoute } from "vue-router";
 
-import { useNoticeDetail } from "@/composables/notice/useNoticeDetail";
-
 import AppScaffold from "@/components/common/AppScaffold.vue";
-import PostView from "@/components/post/PostView.vue";
 import ErrorFallback from "@/components/common/ErrorFallback.vue";
 import LoadingFallback from "@/components/common/LoadingFallback.vue";
-import { watchLog } from "@/composables/common/watchLog";
+import PostView from "@/components/post/PostView.vue";
+import { useNoticeDetail } from "@/composables/notice/useNoticeDetail";
 
 export default defineComponent({
   name: "RedevDetailNoticeDetail",

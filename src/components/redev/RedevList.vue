@@ -57,11 +57,11 @@ import { defineComponent, ref, watch, computed } from "vue";
 import { useRedevHotIssueList } from "@/composables/redev/useRedevHotIssueList";
 import { useRedevSearch } from "@/composables/redev/useRedevSearch";
 
-import LoadingFallback from "../common/LoadingFallback.vue";
-import RedevTile from "./RedevTile.vue";
+import AppFallback from "../common/AppFallback.vue";
 import ErrorFallback from "../common/ErrorFallback.vue";
 import InView from "../common/InView.vue";
-import AppFallback from "../common/AppFallback.vue";
+import LoadingFallback from "../common/LoadingFallback.vue";
+import RedevTile from "./RedevTile.vue";
 
 export default defineComponent({
   name: "RedevList",

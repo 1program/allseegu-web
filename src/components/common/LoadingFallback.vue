@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 import LoadingDots from "./LoadingDots.vue";
 
 export default defineComponent({

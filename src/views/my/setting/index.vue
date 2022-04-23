@@ -23,15 +23,16 @@
 </template>
 
 <script lang="ts">
-import AppScaffold from "@/components/common/AppScaffold.vue";
 import { defineComponent, ref } from "vue";
-import UserLeaveModal from "@/components/user/UserLeaveModal.vue";
-import MenuButton from "@/components/common/MenuButton.vue";
-import { useAuth } from "@/composables/auth/useAuth";
-import { useToast } from "@/composables/common/useToast";
-import { useApi } from "@/composables/common/useApi";
-import { useUi } from "@/composables/common/useUi";
 import { useRouter } from "vue-router";
+
+import AppScaffold from "@/components/common/AppScaffold.vue";
+import MenuButton from "@/components/common/MenuButton.vue";
+import UserLeaveModal from "@/components/user/UserLeaveModal.vue";
+import { useAuth } from "@/composables/auth/useAuth";
+import { useApi } from "@/composables/common/useApi";
+import { useToast } from "@/composables/common/useToast";
+import { useUi } from "@/composables/common/useUi";
 
 export default defineComponent({
   name: "MySetting",

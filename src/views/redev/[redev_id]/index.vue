@@ -80,26 +80,25 @@
 import { computed, defineComponent } from "vue";
 import { useRoute } from "vue-router";
 
+import AppBarAction from "@/components/common/AppBarAction.vue";
+// 글로벌 컴포넌트 임포트
+import AppScaffold from "@/components/common/AppScaffold.vue";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
+import RedevSwiper from "@/components/redev/RedevSwiper.vue";
 // Business logic hooks
 import { useRedevDetail } from "@/composables/redev/useRedevDetail";
 
-// 글로벌 컴포넌트 임포트
-import AppScaffold from "@/components/common/AppScaffold.vue";
-import RedevSwiper from "@/components/redev/RedevSwiper.vue";
-import AppBarAction from "@/components/common/AppBarAction.vue";
-import LoadingFallback from "@/components/common/LoadingFallback.vue";
-
-// 페이지용 지역 컴포넌트 임포트
-import NewsSection from "./components/NewsSection.vue";
-import EstateSection from "./components/EstateSection.vue";
-import VideoSection from "./components/VideoSection.vue";
-import SubscribeSection from "./components/SubscribeSection.vue";
-import OutlineSection from "./components/OutlineSection.vue";
-import NoticeSection from "./components/NoticeSection.vue";
-import StorySection from "./components/StorySection.vue";
-import ConditionSection from "./components/ConditionSection.vue";
 import AdSection from "./components/AdSection.vue";
 import CommunitySection from "./components/CommunitySection.vue";
+import ConditionSection from "./components/ConditionSection.vue";
+import EstateSection from "./components/EstateSection.vue";
+// 페이지용 지역 컴포넌트 임포트
+import NewsSection from "./components/NewsSection.vue";
+import NoticeSection from "./components/NoticeSection.vue";
+import OutlineSection from "./components/OutlineSection.vue";
+import StorySection from "./components/StorySection.vue";
+import SubscribeSection from "./components/SubscribeSection.vue";
+import VideoSection from "./components/VideoSection.vue";
 
 export default defineComponent({
   name: "RedevDetailPage",

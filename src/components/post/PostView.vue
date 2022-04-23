@@ -26,15 +26,14 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 
-import { Files } from "@/models/file";
-import { ContentType } from "@/models/common";
-
 import AttachmentTile from "@/components/common/AttachmentTile.vue";
 import ImageGallery from "@/components/common/ImageGallery.vue";
 import LinkTile from "@/components/common/LinkTile.vue";
+import { ContentType } from "@/models/common";
+import { Files } from "@/models/file";
 
-import PostMeta from "./PostMeta.vue";
 import ContentRenderer from "../common/ContentRenderer.vue";
+import PostMeta from "./PostMeta.vue";
 
 /**
  * 글 상세 컴포넌트

@@ -47,22 +47,22 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
 import Josa from "josa-js";
-
-import AppScaffold from "@/components/common/AppScaffold.vue";
+import { computed, defineComponent, ref } from "vue";
 import { useRoute } from "vue-router";
-import CommunityTile from "@/components/community/CommunityTile.vue";
-import ListDivider from "@/components/common/ListDivider.vue";
-import CommunityCafeSelectDrawer from "@/components/community/CommunityCafeSelectDrawer.vue";
-import SelectButton from "@/components/common/SelectButton.vue";
-import { useCommunityTypes } from "@/composables/community/useCommunityTypes";
-import LoadingFallback from "@/components/common/LoadingFallback.vue";
-import ErrorFallback from "@/components/common/ErrorFallback.vue";
-import { useCommunityList } from "@/composables/community/useCommunityList";
+
 import AppFallback from "@/components/common/AppFallback.vue";
-import { CommunityCafeType, communityCafeTypeNames } from "@/models/community/CommunityCafeType";
+import AppScaffold from "@/components/common/AppScaffold.vue";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
 import InView from "@/components/common/InView.vue";
+import ListDivider from "@/components/common/ListDivider.vue";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
+import SelectButton from "@/components/common/SelectButton.vue";
+import CommunityCafeSelectDrawer from "@/components/community/CommunityCafeSelectDrawer.vue";
+import CommunityTile from "@/components/community/CommunityTile.vue";
+import { useCommunityList } from "@/composables/community/useCommunityList";
+import { useCommunityTypes } from "@/composables/community/useCommunityTypes";
+import { CommunityCafeType, communityCafeTypeNames } from "@/models/community/CommunityCafeType";
 
 export default defineComponent({
   name: "RedevDetailCommunityList",

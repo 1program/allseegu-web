@@ -1,8 +1,10 @@
+import { computed, reactive } from "vue";
+import { useInfiniteQuery } from "vue-query";
+
 import { Comment } from "@/models/comment";
 import { PagedList } from "@/models/common";
 import { Story } from "@/models/story";
-import { computed, reactive } from "vue";
-import { useInfiniteQuery } from "vue-query";
+
 import { useApi } from "../common/useApi";
 import { useMe } from "../user/useMe";
 

@@ -28,13 +28,14 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from "vue";
-import TabBar from "@/components/common/TabBar.vue";
+
+import AppFallback from "@/components/common/AppFallback.vue";
 import ListDivider from "@/components/common/ListDivider.vue";
-import CommunityTile from "@/components/community/CommunityTile.vue";
 import MoreButton from "@/components/common/MoreButton.vue";
+import TabBar from "@/components/common/TabBar.vue";
+import CommunityTile from "@/components/community/CommunityTile.vue";
 import { Community, CommunityType } from "@/models/community";
 import { RedevContentChild } from "@/models/redev";
-import AppFallback from "@/components/common/AppFallback.vue";
 
 export default defineComponent({
   name: "RedevDetailCommunitySection",

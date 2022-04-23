@@ -32,15 +32,15 @@
 import { defineComponent, computed } from "vue";
 import { useRoute } from "vue-router";
 
+import AppFallback from "@/components/common/AppFallback.vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import ErrorFallback from "@/components/common/ErrorFallback.vue";
-import SubscribeBanner from "@/components/subscribe/SubscribeBanner.vue";
-import ListTile from "@/components/common/ListTile.vue";
-import ListDivider from "@/components/common/ListDivider.vue";
-import { useSubscribeList } from "@/composables/subscribe/useSubscribeList";
-import LoadingFallback from "@/components/common/LoadingFallback.vue";
 import InView from "@/components/common/InView.vue";
-import AppFallback from "@/components/common/AppFallback.vue";
+import ListDivider from "@/components/common/ListDivider.vue";
+import ListTile from "@/components/common/ListTile.vue";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
+import SubscribeBanner from "@/components/subscribe/SubscribeBanner.vue";
+import { useSubscribeList } from "@/composables/subscribe/useSubscribeList";
 
 export default defineComponent({
   name: "RedevDetailSubscribe",

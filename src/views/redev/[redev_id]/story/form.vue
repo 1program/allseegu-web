@@ -33,18 +33,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, watch } from "vue";
 import { Field, useForm } from "vee-validate";
+import { defineComponent, ref, computed, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import * as yup from "yup";
 
-import AppScaffold from "@/components/common/AppScaffold.vue";
 import AppButton from "@/components/common/AppButton.vue";
+import AppScaffold from "@/components/common/AppScaffold.vue";
+import FilePicker from "@/components/common/FilePicker.vue";
 import FormGroup from "@/components/common/FormGroup.vue";
 import FormInput from "@/components/common/FormInput.vue";
 import FormTextarea from "@/components/common/FormTextarea.vue";
-import FilePicker from "@/components/common/FilePicker.vue";
 import { useStoryCreate } from "@/composables/story/useStoryCreate";
-import { useRoute, useRouter } from "vue-router";
 import { useStoryDetail } from "@/composables/story/useStoryDetail";
 import { useStoryUpdate } from "@/composables/story/useStoryUpdate";
 import { Files } from "@/models/file";

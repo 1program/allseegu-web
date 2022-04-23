@@ -5,9 +5,10 @@
 </template>
 
 <script lang="ts">
-import AppScaffold from "@/components/common/AppScaffold.vue";
 import { computed, defineComponent } from "vue";
 import { useRoute } from "vue-router";
+
+import AppScaffold from "@/components/common/AppScaffold.vue";
 import SlidingRouterView from "@/components/common/SlidingRouterView.vue";
 import { provideUserRegisterValues } from "@/composables/user/useUserRegisterValues";
 

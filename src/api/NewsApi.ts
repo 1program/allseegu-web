@@ -1,5 +1,6 @@
 import { ApiResponse, PagedList } from "@/models/common";
 import { News, NewsType, NewsTypeInfo } from "@/models/news";
+
 import BaseApi from "./BaseApi";
 
 export interface NewsListOptions {

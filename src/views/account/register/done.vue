@@ -14,8 +14,9 @@
 </template>
 
 <script lang="ts">
-import AppButton from "@/components/common/AppButton.vue";
 import { defineComponent } from "vue";
+
+import AppButton from "@/components/common/AppButton.vue";
 import { useUserRegisterValues } from "@/composables/user/useUserRegisterValues";
 
 export default defineComponent({

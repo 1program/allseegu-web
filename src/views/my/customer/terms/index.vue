@@ -112,6 +112,7 @@
 <script lang="ts">
 import { defineComponent, computed, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
+
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import TabBar from "@/components/common/TabBar.vue";
 

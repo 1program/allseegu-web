@@ -17,10 +17,12 @@
 </template>
 
 <script lang="ts">
-import { useConfirms } from "@/composables/common/useConfirm";
 import { defineComponent } from "vue";
-import AppDialog from "./AppDialog.vue";
+
+import { useConfirms } from "@/composables/common/useConfirm";
+
 import AppButton from "./AppButton.vue";
+import AppDialog from "./AppDialog.vue";
 
 export default defineComponent({
   name: "AlertRenderer",

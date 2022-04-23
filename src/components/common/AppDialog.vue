@@ -17,6 +17,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 import AppModal from "./AppModal.vue";
 
 export default defineComponent({

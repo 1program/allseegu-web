@@ -1,5 +1,5 @@
-import { inject, provide, Ref, ref } from "vue";
 import shortid from "shortid";
+import { inject, provide, Ref, ref } from "vue";
 
 export interface ToastMessage {
   id: string;

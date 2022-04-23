@@ -50,25 +50,22 @@
 </template>
 
 <script lang="ts">
+import Josa from "josa-js";
 import { computed, defineComponent } from "vue";
 import { useRoute } from "vue-router";
-import Josa from "josa-js";
 
-import { chunkArray } from "@/utils/common/chunkArray";
-
-import { NewsType } from "@/models/news";
-
-import { useNewsTypes } from "@/composables/news/useNewsTypes";
-import { useNewsList } from "@/composables/news/useNewsList";
-
-import AppScaffold from "@/components/common/AppScaffold.vue";
-import ListDivider from "@/components/common/ListDivider.vue";
-import ListCard from "@/components/common/ListCard.vue";
-import NewsTile from "@/components/news/NewsTile.vue";
-import ErrorFallback from "@/components/common/ErrorFallback.vue";
-import LoadingFallback from "@/components/common/LoadingFallback.vue";
 import AppFallback from "@/components/common/AppFallback.vue";
+import AppScaffold from "@/components/common/AppScaffold.vue";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
 import InView from "@/components/common/InView.vue";
+import ListCard from "@/components/common/ListCard.vue";
+import ListDivider from "@/components/common/ListDivider.vue";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
+import NewsTile from "@/components/news/NewsTile.vue";
+import { useNewsList } from "@/composables/news/useNewsList";
+import { useNewsTypes } from "@/composables/news/useNewsTypes";
+import { NewsType } from "@/models/news";
+import { chunkArray } from "@/utils/common/chunkArray";
 
 export default defineComponent({
   name: "RedevDetailNewsList",

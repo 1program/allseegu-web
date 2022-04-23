@@ -26,18 +26,19 @@
 </template>
 
 <script lang="ts">
-import { useConfirm } from "@/composables/common/useConfirm";
 import { defineComponent } from "vue";
-import ListTile from "@/components/common/ListTile.vue";
+import { useRouter } from "vue-router";
+
 import CommentSimpleTile from "@/components/comment/CommentSimpleTile.vue";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
 import ListDivider from "@/components/common/ListDivider.vue";
+import ListTile from "@/components/common/ListTile.vue";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
 import { useCommentDelete } from "@/composables/comment/useCommentDelete";
 import { useMyCommentList } from "@/composables/comment/useMyCommentList";
-import ErrorFallback from "@/components/common/ErrorFallback.vue";
-import LoadingFallback from "@/components/common/LoadingFallback.vue";
-import { Story } from "@/models/story";
+import { useConfirm } from "@/composables/common/useConfirm";
 import { Comment } from "@/models/comment";
-import { useRouter } from "vue-router";
+import { Story } from "@/models/story";
 
 export default defineComponent({
   name: "MyPostsComment",

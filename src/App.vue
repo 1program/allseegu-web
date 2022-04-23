@@ -11,16 +11,16 @@
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
 
-import SlidingRouterView from "./components/common/SlidingRouterView.vue";
-import { provideAlerts } from "./composables/common/useAlert";
-import { provideToasts } from "./composables/common/useToast";
 import AlertRenderer from "./components/common/AlertRenderer.vue";
-import ToastRenderer from "./components/common/ToastRenderer.vue";
-import { provideApi } from "./composables/common/useApi";
-import { provideUi } from "./composables/common/useUi";
-import { provideAuth } from "./composables/auth/useAuth";
-import { provideConfirm } from "./composables/common/useConfirm";
 import ConfirmRenderer from "./components/common/ConfirmRenderer.vue";
+import SlidingRouterView from "./components/common/SlidingRouterView.vue";
+import ToastRenderer from "./components/common/ToastRenderer.vue";
+import { provideAuth } from "./composables/auth/useAuth";
+import { provideAlerts } from "./composables/common/useAlert";
+import { provideApi } from "./composables/common/useApi";
+import { provideConfirm } from "./composables/common/useConfirm";
+import { provideToasts } from "./composables/common/useToast";
+import { provideUi } from "./composables/common/useUi";
 
 export default defineComponent({
   name: "App",

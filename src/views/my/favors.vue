@@ -22,14 +22,15 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+
+import AppFallback from "@/components/common/AppFallback.vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
 import MenuTile from "@/components/common/MenuTile.vue";
 import RedevAlimModal from "@/components/redev/RedevAlimModal.vue";
 import { useFavorList } from "@/composables/favor/useFavorList";
-import LoadingFallback from "@/components/common/LoadingFallback.vue";
-import ErrorFallback from "@/components/common/ErrorFallback.vue";
 import { Favor } from "@/models/favor";
-import AppFallback from "@/components/common/AppFallback.vue";
 
 export default defineComponent({
   name: "MyFavors",

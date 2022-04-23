@@ -34,16 +34,16 @@
 </template>
 
 <script lang="ts">
+import { Field, useForm } from "vee-validate";
+import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
+import * as yup from "yup";
+
 import AppButton from "@/components/common/AppButton.vue";
 import FormGroup from "@/components/common/FormGroup.vue";
-import { defineComponent } from "vue";
-import { Field, useForm } from "vee-validate";
-import { useRouter } from "vue-router";
 import FormInput from "@/components/common/FormInput.vue";
-import * as yup from "yup";
-import { confirmPasswordSchema, passwordSchema } from "@/lib/schema";
-
 import { useUserRegisterValues } from "@/composables/user/useUserRegisterValues";
+import { confirmPasswordSchema, passwordSchema } from "@/lib/schema";
 
 export default defineComponent({
   components: { AppButton, FormGroup, FormInput, Field },

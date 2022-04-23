@@ -25,7 +25,6 @@ import AppScaffold from "@/components/common/AppScaffold.vue";
 import ErrorFallback from "@/components/common/ErrorFallback.vue";
 import LoadingFallback from "@/components/common/LoadingFallback.vue";
 import PostView from "@/components/post/PostView.vue";
-
 import { useSubscribeDetail } from "@/composables/subscribe/useSubscribeDetail";
 
 export default defineComponent({

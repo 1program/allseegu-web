@@ -1,7 +1,7 @@
 import { ref, Ref, watch } from "vue";
 
 import { RedevGeoSearchOptions } from "@/api/RedevApi";
-import { checkContainsBounds } from "@/utils/common/checkContainsBounds";
+import { checkContainsBounds } from "@/utils/naver-maps/checkContainsBounds";
 
 /**
  * kakao LatLngBounds를 활용하여,

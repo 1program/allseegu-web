@@ -2,7 +2,7 @@
 
 ## 프로젝트 초기화
 
-- [ ] prettier plugin sort-imports
+- [x] prettier plugin sort-imports
 - [x] NotoSansKR 설정
 - [x] normalize.css 설정
 - [x] scss 컬러값 변수화
@@ -20,7 +20,7 @@
 - [ ] `<param-case />` 작명으로 변경
 - [ ] scrollRestoration시 깜빡임 고치기
 - [ ] section 컴포넌트화
-- [ ] eslint input label 룰 제거
+- [x] eslint input label 룰 제거
 - [x] route transition 스크롤 리스토어 깜빡임
 - [ ] props description field jsdoc 지원여부 확인
 - [ ] 404 페이지

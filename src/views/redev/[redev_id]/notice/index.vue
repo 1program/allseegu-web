@@ -27,15 +27,16 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import AppScaffold from "@/components/common/AppScaffold.vue";
-import ListTile from "@/components/common/ListTile.vue";
-import ListDivider from "@/components/common/ListDivider.vue";
 import { useRoute } from "vue-router";
-import { useNoticeList } from "@/composables/notice/useNoticeList";
-import ErrorFallback from "@/components/common/ErrorFallback.vue";
-import LoadingFallback from "@/components/common/LoadingFallback.vue";
+
 import AppFallback from "@/components/common/AppFallback.vue";
+import AppScaffold from "@/components/common/AppScaffold.vue";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
 import InView from "@/components/common/InView.vue";
+import ListDivider from "@/components/common/ListDivider.vue";
+import ListTile from "@/components/common/ListTile.vue";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
+import { useNoticeList } from "@/composables/notice/useNoticeList";
 
 export default defineComponent({
   name: "RedevDetailNotice",

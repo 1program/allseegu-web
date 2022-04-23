@@ -7,8 +7,10 @@
 </template>
 
 <script lang="ts">
-import { useUi } from "@/composables/common/useUi";
 import { defineComponent } from "vue";
+
+import { useUi } from "@/composables/common/useUi";
+
 import AppButton from "../common/AppButton.vue";
 
 export default defineComponent({

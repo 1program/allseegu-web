@@ -9,8 +9,9 @@
 </template>
 
 <script lang="ts">
-import { formatDate } from "@/lib/formatters";
 import { defineComponent } from "vue";
+
+import { formatDate } from "@/lib/formatters";
 
 export default defineComponent({
   name: "AnswerCard",

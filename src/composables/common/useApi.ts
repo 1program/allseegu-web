@@ -1,20 +1,20 @@
 import { computed, inject, provide, reactive, Ref } from "vue";
 
-import { API_URL } from "@/lib/config";
-
 import AuthApi from "@/api/AuthApi";
 import CommentApi from "@/api/CommentApi";
 import CommunityApi from "@/api/CommunityApi";
+import { FaqApi } from "@/api/FaqApi";
 import FavorApi from "@/api/FavorApi";
 import FileApi from "@/api/FileApi";
 import NewsApi from "@/api/NewsApi";
 import NoticeApi from "@/api/NoticeApi";
+import PostApi from "@/api/PostApi";
 import RedevApi from "@/api/RedevApi";
 import StoryApi from "@/api/StoryApi";
 import SubscribeApi from "@/api/SubscribeApi";
 import UserApi from "@/api/UserApi";
 import VideoApi from "@/api/VideoApi";
-import PostApi from "@/api/PostApi";
+import { API_URL } from "@/lib/config";
 
 export const API_CONTEXT_SYMBOL = Symbol("API_CONTEXT_SYMBOL");
 
@@ -36,6 +36,7 @@ export interface ApiContext {
   news: NewsApi;
   favor: FavorApi;
   post: PostApi;
+  faq: FaqApi;
 }
 
 export interface ApiProviderOptions {
@@ -74,6 +75,8 @@ export function provideApi({ accessToken }: ApiProviderOptions) {
 
   const post = computed(() => new PostApi(options.value));
 
+  const faq = computed(() => new FaqApi(options.value));
+
   const context = reactive({
     auth,
     redev,
@@ -88,6 +91,7 @@ export function provideApi({ accessToken }: ApiProviderOptions) {
     news,
     favor,
     post,
+    faq,
   });
 
   provide(API_CONTEXT_SYMBOL, context);

@@ -1,14 +1,14 @@
+// 스타일 Normalize
+import "normalize.css";
 import { createApp } from "vue";
 import { VueQueryPlugin } from "vue-query";
+
+import "@/styles/global.scss";
 
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import { realVh } from "./utils/common/vh";
-
-// 스타일 Normalize
-import "normalize.css";
-import "@/styles/global.scss";
 
 realVh();
 

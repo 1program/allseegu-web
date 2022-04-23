@@ -8,7 +8,15 @@
       v-model:keyword="keyword"
     />
     <div class="map" :class="{ hidden: searching }">
-      <redev-map :relayout-key="keyword" :position="initialPosition" />
+      <!-- <redev-map :relayout-key="keyword" :position="initialPosition" /> -->
+      <redev-naver-map
+        class="map-component"
+        :relayout-key="keyword"
+        :position="initialPosition"
+        :redevs="redevList.data"
+        @bounds-change="requestBounds = $event"
+        @click-redev="goRedev($event)"
+      />
       <div class="bottom">
         <redev-hot-bar @open="open" />
       </div>
@@ -22,19 +30,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, watchEffect } from "vue";
-import RedevMap from "@/components/redev/RedevMap.vue";
+import { defineComponent, ref, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
+
+import LoadingDots from "@/components/common/LoadingDots.vue";
 import RedevAppBar from "@/components/redev/RedevAppBar.vue";
 import RedevHotBar from "@/components/redev/RedevHotBar.vue";
 import RedevList from "@/components/redev/RedevList.vue";
-import { useRoute, useRouter } from "vue-router";
-import { useGeolocation } from "@/composables/common/useGeolocation";
-import LoadingDots from "@/components/common/LoadingDots.vue";
+import RedevNaverMap from "@/components/redev/RedevNaverMap.vue";
 import { useAlert } from "@/composables/common/useAlert";
+import { useGeolocation } from "@/composables/common/useGeolocation";
+import { useRedevGeoSearch } from "@/composables/redev/useRedevGeoSearch";
+import { useRedevGeoSearchOptions } from "@/composables/redev/useRedevGeoSearchOptions";
 
 export default defineComponent({
   name: "IndexPage",
-  components: { RedevMap, RedevAppBar, RedevHotBar, RedevList, LoadingDots },
+  components: { RedevAppBar, RedevHotBar, RedevList, LoadingDots, RedevNaverMap },
   setup() {
     const alert = useAlert();
 
@@ -70,7 +81,37 @@ export default defineComponent({
       }
     };
 
-    return { input, searching, open, keyword, start, positionLoading, initialPosition };
+    const requestBounds = ref<naver.maps.Bounds>();
+
+    const options = computed(() =>
+      requestBounds.value == null
+        ? null
+        : {
+            sw_lng: requestBounds.value?.minX(),
+            sw_lat: requestBounds.value?.minY(),
+            ne_lng: requestBounds.value?.maxX(),
+            ne_lat: requestBounds.value?.maxY(),
+          }
+    );
+
+    const redevList = useRedevGeoSearch(options);
+
+    const goRedev = (redev_id: number) => {
+      router.push(`/redev/${redev_id}`);
+    };
+
+    return {
+      input,
+      searching,
+      open,
+      keyword,
+      start,
+      positionLoading,
+      initialPosition,
+      requestBounds,
+      redevList,
+      goRedev,
+    };
   },
 });
 </script>
@@ -103,6 +144,14 @@ export default defineComponent({
     top: -99999px;
     visibility: hidden;
   }
+}
+
+.map-component {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #9dbad1;
 }
 
 .content {

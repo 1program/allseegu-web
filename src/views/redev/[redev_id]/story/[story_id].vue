@@ -23,14 +23,12 @@
 import { computed, defineComponent } from "vue";
 import { useRoute } from "vue-router";
 
-import { useStoryDetail } from "@/composables/story/useStoryDetail";
-
-import AppScaffold from "@/components/common/AppScaffold.vue";
-
-import LoadingFallback from "@/components/common/LoadingFallback.vue";
-import ErrorFallback from "@/components/common/ErrorFallback.vue";
-import PostView from "@/components/post/PostView.vue";
 import CommentList from "@/components/comment/CommentList.vue";
+import AppScaffold from "@/components/common/AppScaffold.vue";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
+import PostView from "@/components/post/PostView.vue";
+import { useStoryDetail } from "@/composables/story/useStoryDetail";
 
 export default defineComponent({
   name: "RedevDetailStoryDetail",

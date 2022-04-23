@@ -15,6 +15,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import TabBar from "@/components/common/TabBar.vue";
 

@@ -24,8 +24,9 @@
 </template>
 
 <script lang="ts">
-import AppBar from "@/components/common/AppBar.vue";
 import { defineComponent, PropType } from "vue";
+
+import AppBar from "@/components/common/AppBar.vue";
 
 export default defineComponent({
   name: "AppScaffold",

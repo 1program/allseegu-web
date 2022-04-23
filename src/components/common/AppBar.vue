@@ -19,8 +19,9 @@
 import { defineComponent, PropType, computed } from "vue";
 import { useRouter } from "vue-router";
 
-import whiteIcon from "@/images/icons/nav-arrow-left-white.svg";
 import blackIcon from "@/images/icons/nav-arrow-left-black.svg";
+import whiteIcon from "@/images/icons/nav-arrow-left-white.svg";
+
 import SkeletonBox from "./SkeletonBox.vue";
 
 const icons = {

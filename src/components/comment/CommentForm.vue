@@ -30,6 +30,8 @@
 </template>
 
 <script lang="ts">
+import { computed, defineComponent, PropType, ref } from "vue";
+
 import { useCommentCreate } from "@/composables/comment/useCommentCreate";
 import { useCommentUpdate } from "@/composables/comment/useCommentUpdate";
 import { useAlert } from "@/composables/common/useAlert";
@@ -38,7 +40,7 @@ import { Comment } from "@/models/comment";
 import { ContentType } from "@/models/common";
 import { diffRemovedFileIds } from "@/utils/file/diffRemovedFileIds";
 import { pickFile } from "@/utils/file/pickFile";
-import { computed, defineComponent, PropType, ref } from "vue";
+
 import AppButton from "../common/AppButton.vue";
 import FilePicker from "../common/FilePicker.vue";
 import SkeletonBox from "../common/SkeletonBox.vue";

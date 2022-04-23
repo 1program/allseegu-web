@@ -21,16 +21,16 @@
 
 <script lang="ts">
 import { Pagination } from "swiper";
+// eslint-disable-next-line
+import "swiper/css";
+// eslint-disable-next-line
+import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { defineComponent } from "vue";
 
 import redev1 from "@/images/mocks/redev1.jpg";
 import redev2 from "@/images/mocks/redev2.jpg";
 
-// eslint-disable-next-line
-import "swiper/css";
-// eslint-disable-next-line
-import "swiper/css/pagination";
 import VimeoPlayer from "../common/VimeoPlayer.vue";
 
 type Slide =

@@ -1,5 +1,6 @@
 import { ApiResponse, PagedList } from "@/models/common";
 import { Video } from "@/models/video";
+
 import BaseApi from "./BaseApi";
 
 export interface VideoListOptions {
@@ -17,7 +18,7 @@ export default class VideoApi extends BaseApi {
    */
   videoList = ({ redev_id }: VideoListOptions) =>
     this.request<ApiResponse<PagedList<Video>>>({
-      url: `/${redev_id}/video`,
       method: "GET",
+      url: `/${redev_id}/video`,
     });
 }

@@ -10,8 +10,10 @@
 </template>
 
 <script lang="ts">
-import { User } from "@/models/user";
 import { defineComponent, PropType } from "vue";
+
+import { User } from "@/models/user";
+
 import SkeletonBox from "../common/SkeletonBox.vue";
 
 /**

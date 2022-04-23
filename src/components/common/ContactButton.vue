@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 import RouterLinkOrButton from "./RouterLinkOrButton.vue";
 
 export default defineComponent({

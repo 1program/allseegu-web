@@ -23,9 +23,10 @@
 
 <script lang="ts">
 import { defineComponent, PropType, computed, ref } from "vue";
+
+import useScrollReached from "@/composables/common/useScrollReached";
 import moreGray from "@/images/icons/more-gray.svg";
 import moreWhite from "@/images/icons/more-white.svg";
-import useScrollReached from "@/composables/common/useScrollReached";
 
 export default defineComponent({
   name: "InfoTable",

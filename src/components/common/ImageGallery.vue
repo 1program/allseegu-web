@@ -23,8 +23,10 @@
 </template>
 
 <script lang="ts">
-import { FileInfo } from "@/models/file";
 import { defineComponent, PropType, ref } from "vue";
+
+import { FileInfo } from "@/models/file";
+
 import ImageDetailOverlay from "./ImageDetailOverlay.vue";
 
 export default defineComponent({

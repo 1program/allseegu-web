@@ -7,8 +7,9 @@
 </template>
 
 <script lang="ts">
-import { formatDate } from "@/lib/formatters";
 import { defineComponent } from "vue";
+
+import { formatDate } from "@/lib/formatters";
 
 /**
  * 글 정보 헤더 컴포넌트.

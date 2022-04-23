@@ -19,11 +19,12 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+
+import AppFallback from "@/components/common/AppFallback.vue";
 import ListDivider from "@/components/common/ListDivider.vue";
 import ListTile from "@/components/common/ListTile.vue";
 import MoreButton from "@/components/common/MoreButton.vue";
 import { Story } from "@/models/story";
-import AppFallback from "@/components/common/AppFallback.vue";
 
 export default defineComponent({
   name: "RedevDetailStorySection",

@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 import AppButton from "@/components/common/AppButton.vue";
 import InfoBox from "@/components/common/InfoBox.vue";
 

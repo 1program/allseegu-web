@@ -109,12 +109,13 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
-import AppScaffold from "@/components/common/AppScaffold.vue";
-import AlimGroup from "@/components/alim/AlimGroup.vue";
-import AppBarAction from "@/components/common/AppBarAction.vue";
-import AlimDivider from "@/components/alim/AlimDivider.vue";
-import AlimTile from "@/components/alim/AlimTile.vue";
+
 import AlimCategorySelectDrawer from "@/components/alim/AlimCategorySelectDrawer.vue";
+import AlimDivider from "@/components/alim/AlimDivider.vue";
+import AlimGroup from "@/components/alim/AlimGroup.vue";
+import AlimTile from "@/components/alim/AlimTile.vue";
+import AppBarAction from "@/components/common/AppBarAction.vue";
+import AppScaffold from "@/components/common/AppScaffold.vue";
 
 export default defineComponent({
   name: "AlimList",
