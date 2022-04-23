@@ -9,6 +9,7 @@ import FileApi from "@/api/FileApi";
 import NewsApi from "@/api/NewsApi";
 import NoticeApi from "@/api/NoticeApi";
 import PostApi from "@/api/PostApi";
+import { QnaApi } from "@/api/QnaApi";
 import RedevApi from "@/api/RedevApi";
 import StoryApi from "@/api/StoryApi";
 import SubscribeApi from "@/api/SubscribeApi";
@@ -37,6 +38,7 @@ export interface ApiContext {
   favor: FavorApi;
   post: PostApi;
   faq: FaqApi;
+  qna: QnaApi;
 }
 
 export interface ApiProviderOptions {
@@ -77,6 +79,8 @@ export function provideApi({ accessToken }: ApiProviderOptions) {
 
   const faq = computed(() => new FaqApi(options.value));
 
+  const qna = computed(() => new QnaApi(options.value));
+
   const context = reactive({
     auth,
     redev,
@@ -92,6 +96,7 @@ export function provideApi({ accessToken }: ApiProviderOptions) {
     favor,
     post,
     faq,
+    qna,
   });
 
   provide(API_CONTEXT_SYMBOL, context);

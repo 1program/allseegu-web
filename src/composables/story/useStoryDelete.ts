@@ -18,6 +18,7 @@ export function useStoryDelete() {
       return api.story.delete(options);
     },
     onSuccess: (data, options) => {
+      queryClient.invalidateQueries(["STORY_LIST"]);
       queryClient.invalidateQueries(["MY_STORY_LIST"]);
       queryClient.invalidateQueries(["STORY_DETAIL", options.story_id]);
       alert(data.message);

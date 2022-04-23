@@ -4,33 +4,20 @@
       <div class="container page-content-medium">
         <FormGroup label="유형 선택" class="form-group">
           <OptionButtonGroup class="option-button-group">
+            <template v-if="types.isLoading == true">
+              <OptionButton v-for="index of 4" :key="index" :active="index === 1" label-center>
+                <SkeletonBox />
+              </OptionButton>
+            </template>
             <OptionButton
-              :active="inquiryType === 'NORMAL'"
-              @click="inquiryType = 'NORMAL'"
+              v-else
+              v-for="type in types.data"
+              :key="type.id"
+              :active="type_id == type.id"
+              @click="type_id = type.id"
               label-center
             >
-              일반 문의
-            </OptionButton>
-            <OptionButton
-              :active="inquiryType === 'ESTATE'"
-              @click="inquiryType = 'ESTATE'"
-              label-center
-            >
-              부동산 문의
-            </OptionButton>
-            <OptionButton
-              :active="inquiryType === 'ADVERTISE'"
-              @click="inquiryType = 'ADVERTISE'"
-              label-center
-            >
-              광고 및 제휴 문의
-            </OptionButton>
-            <OptionButton
-              :active="inquiryType === 'REST'"
-              @click="inquiryType = 'REST'"
-              label-center
-            >
-              기타 문의
+              {{ type.title }}
             </OptionButton>
           </OptionButtonGroup>
         </FormGroup>
@@ -62,7 +49,7 @@
 
 <script lang="ts">
 import { Field, useForm } from "vee-validate";
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watchEffect } from "vue";
 import * as yup from "yup";
 
 import AppButton from "@/components/common/AppButton.vue";
@@ -72,7 +59,9 @@ import FormGroup from "@/components/common/FormGroup.vue";
 import FormTextarea from "@/components/common/FormTextarea.vue";
 import OptionButton from "@/components/common/OptionButton.vue";
 import OptionButtonGroup from "@/components/common/OptionButtonGroup.vue";
+import SkeletonBox from "@/components/common/SkeletonBox.vue";
 import { useAlert } from "@/composables/common/useAlert";
+import { useQnaTypes } from "@/composables/qna/useQnaTypes";
 
 export default defineComponent({
   name: "MyCustomerWriteInquiry",
@@ -85,6 +74,7 @@ export default defineComponent({
     FilePicker,
     Field,
     AppButton,
+    SkeletonBox,
   },
   setup() {
     const alert = useAlert();
@@ -101,7 +91,15 @@ export default defineComponent({
 
     const files = ref([]);
 
-    return { inquiryType, submit, files };
+    const types = useQnaTypes();
+
+    const type_id = ref<number>();
+
+    watchEffect(() => {
+      type_id.value = types.data?.[0].id;
+    });
+
+    return { inquiryType, submit, files, types, type_id };
   },
 });
 </script>

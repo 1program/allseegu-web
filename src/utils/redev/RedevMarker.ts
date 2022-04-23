@@ -27,7 +27,7 @@ const styles = {
   }),
   description: css({
     whiteSpace: "nowrap",
-    color: "#86b1ff",
+    color: redevMapColors.lighterBlue,
     fontSize: 11,
   }),
   tail: css({

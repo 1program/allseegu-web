@@ -83,16 +83,7 @@ export default defineComponent({
 
     const requestBounds = ref<naver.maps.Bounds>();
 
-    const options = computed(() =>
-      requestBounds.value == null
-        ? null
-        : {
-            sw_lng: requestBounds.value?.minX(),
-            sw_lat: requestBounds.value?.minY(),
-            ne_lng: requestBounds.value?.maxX(),
-            ne_lat: requestBounds.value?.maxY(),
-          }
-    );
+    const options = useRedevGeoSearchOptions({ bounds: requestBounds });
 
     const redevList = useRedevGeoSearch(options);
 

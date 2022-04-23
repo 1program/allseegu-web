@@ -1,25 +1,23 @@
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
 
-import { StoryUpdateOptions } from "@/api/StoryApi";
+import { QnaCreateOptions } from "@/api/QnaApi";
 
 import { useAlert } from "../common/useAlert";
 import { useApi } from "../common/useApi";
 
-export function useStoryUpdate() {
+export function useQnaCreate() {
   const queryClient = useQueryClient();
   const alert = useAlert();
   const api = useApi();
 
   const mutation = useMutation({
-    mutationKey: "STORY_UPDATE",
-    mutationFn: async (options: StoryUpdateOptions) => {
-      return api.story.update(options);
+    mutationKey: "QNA_CREATE",
+    mutationFn: async (options: QnaCreateOptions) => {
+      return api.qna.create(options);
     },
-    onSuccess: (data, options) => {
-      queryClient.invalidateQueries(["STORY_LIST"]);
-      queryClient.invalidateQueries(["MY_STORY_LIST"]);
-      queryClient.invalidateQueries(["STORY_DETAIL", options.story_id]);
+    onSuccess: (data) => {
+      queryClient.invalidateQueries(["MY_QNA_LIST"]);
       alert(data.message);
     },
     // TODO: 개선

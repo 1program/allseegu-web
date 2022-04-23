@@ -1,7 +1,6 @@
 import { ref, Ref, watch } from "vue";
 
 import { RedevGeoSearchOptions } from "@/api/RedevApi";
-import { checkContainsBounds } from "@/utils/naver-maps/checkContainsBounds";
 
 /**
  * kakao LatLngBounds를 활용하여,
@@ -10,7 +9,7 @@ import { checkContainsBounds } from "@/utils/naver-maps/checkContainsBounds";
 export function useRedevGeoSearchOptions({
   bounds,
 }: {
-  bounds: Ref<kakao.maps.LatLngBounds | undefined>;
+  bounds: Ref<naver.maps.Bounds | undefined>;
 }) {
   const options = ref<RedevGeoSearchOptions | null>(null);
 
@@ -18,20 +17,17 @@ export function useRedevGeoSearchOptions({
   watch(
     () => bounds.value,
     (newBounds, oldBounds) => {
-      // 새로운 영역이 기존영역에 포함되지 않을 때에만 요청하도록 한다.
-      // 새로운 영역이 기존영역에 포함되면 요청하지 않는다.
-      if (newBounds && oldBounds && checkContainsBounds(oldBounds, newBounds)) {
+      // 새로운 영역이 기존영역에 포함되지 않을 때에만 (축소) 요청하도록 한다.
+      // 새로운 영역이 기존영역에 포함되면 (확대) 요청하지 않는다.
+      if (oldBounds && newBounds && oldBounds.hasBounds(newBounds)) {
         return;
       }
 
-      const sw = newBounds?.getSouthWest();
-      const ne = newBounds?.getNorthEast();
-
       options.value = {
-        sw_lng: sw?.getLng() ?? 0.0,
-        sw_lat: sw?.getLat() ?? 0.0,
-        ne_lng: ne?.getLng() ?? 0.0,
-        ne_lat: ne?.getLat() ?? 0.0,
+        sw_lng: bounds.value?.minX() ?? 0.0,
+        sw_lat: bounds.value?.minY() ?? 0.0,
+        ne_lng: bounds.value?.maxX() ?? 0.0,
+        ne_lat: bounds.value?.maxY() ?? 0.0,
       };
     }
   );
