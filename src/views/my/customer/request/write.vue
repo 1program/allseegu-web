@@ -73,6 +73,7 @@ import OptionButtonGroup from "@/components/common/OptionButtonGroup.vue";
 import { useRequestCreate } from "@/composables/request/useRequestCreate";
 import iconDaumCafe from "@/images/icons/community-daum-cafe.svg";
 import iconKakao from "@/images/icons/community-kakao-openchat.svg";
+import iconNaverBand from "@/images/icons/community-naver-band.svg";
 import iconNaverBlog from "@/images/icons/community-naver-blog.svg";
 import iconNaverCafe from "@/images/icons/community-naver-cafe.svg";
 import { RequestType } from "@/models/request";
@@ -82,6 +83,7 @@ const requestTypeIcons = {
   [RequestType.DAUM_CAFE]: iconDaumCafe,
   [RequestType.NAVER_CAFE]: iconNaverCafe,
   [RequestType.NAVER_BLOG]: iconNaverBlog,
+  [RequestType.NAVER_BAND]: iconNaverBand,
 };
 
 export default defineComponent({

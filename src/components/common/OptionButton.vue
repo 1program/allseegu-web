@@ -37,6 +37,7 @@ export default defineComponent({
   border-right: 1px solid $color-light;
   border-bottom: 1px solid $color-light;
   transition: background-color 0.15s ease;
+  background-color: $color-lightest;
 
   display: inline-flex;
   align-items: center;

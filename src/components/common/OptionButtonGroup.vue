@@ -19,7 +19,6 @@ export default defineComponent({
   border: 1px solid $color-light;
   border-right: 0;
   border-bottom: 0;
-  background-color: $color-lightest;
   display: flex;
   align-items: center;
   flex-wrap: wrap;

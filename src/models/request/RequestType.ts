@@ -3,4 +3,5 @@ export enum RequestType {
   DAUM_CAFE = "다음 카페",
   NAVER_CAFE = "네이버 카페",
   NAVER_BLOG = "네이버 블로그",
+  NAVER_BAND = "네이버 밴드",
 }

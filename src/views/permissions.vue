@@ -10,7 +10,7 @@
             </div>
             <div class="tile-main">
               <div class="label">저장공간</div>
-              <div class="info">사용자 식별정보 등 앱 사용관련 정보</div>
+              <div class="info">데이터 캐싱 및 앱 업데이트 시 필요</div>
             </div>
           </div>
         </div>
@@ -23,7 +23,7 @@
             </div>
             <div class="tile-main">
               <div class="label">위치정보</div>
-              <div class="info">사용자 위치 확인</div>
+              <div class="info">지도 내 사용자 위치 확인</div>
             </div>
           </div>
           <div class="tile">
@@ -32,7 +32,7 @@
             </div>
             <div class="tile-main">
               <div class="label">사진/카메라/파일</div>
-              <div class="info">촬영, 앨범사진, 기타 파일 확인</div>
+              <div class="info">우리구역 이야기, 일대일 문의 등 글 작성 시 필요</div>
             </div>
           </div>
           <div class="info">
