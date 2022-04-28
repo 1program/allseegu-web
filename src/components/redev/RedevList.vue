@@ -32,7 +32,7 @@
 
       <!-- 핫이슈 목록 -->
       <LoadingFallback v-if="hotList.data == null" />
-      <div class="section" v-else>
+      <div v-else class="section">
         <div class="header">
           핫이슈
           <div class="count">{{ hotList.data.length ?? 0 }}</div>

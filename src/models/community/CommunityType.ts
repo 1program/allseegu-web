@@ -16,4 +16,9 @@ export enum CommunityType {
    * 블로그
    */
   BLOG = 3,
+
+  /**
+   * 밴드
+   */
+  BAND = 4,
 }

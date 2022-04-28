@@ -15,6 +15,7 @@ import { computed, defineComponent, PropType } from "vue";
 
 import daumCafeIcon from "@/images/icons/community-daum-cafe.svg";
 import kakaoIcon from "@/images/icons/community-kakao-openchat.svg";
+import naverBandIcon from "@/images/icons/community-naver-band.svg";
 import naverBlogIcon from "@/images/icons/community-naver-blog.svg";
 import naverCafeIcon from "@/images/icons/community-naver-cafe.svg";
 import { CommunityCafeType, CommunityType } from "@/models/community";
@@ -64,6 +65,8 @@ export default defineComponent({
             default:
               return "";
           }
+        case CommunityType.BAND:
+          return "#00C73C";
         default:
           return "";
       }
@@ -84,6 +87,8 @@ export default defineComponent({
             default:
               return "";
           }
+        case CommunityType.BAND:
+          return naverBandIcon;
         default:
           return "";
       }

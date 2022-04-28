@@ -5,8 +5,8 @@
       <TabBar :current-tab="type_id ?? undefined" @change-tab="type_id = $event" :tabs="tabs" />
     </div>
     <div class="section-content">
-      <AppFallback v-if="current.data.length < 1" message="등록된 커뮤니티가 없습니다." />
-      <template v-else v-for="(community, index) in current.data" :key="community.id">
+      <AppFallback v-if="current?.data.length < 1" message="등록된 커뮤니티가 없습니다." />
+      <template v-else v-for="(community, index) in current?.data" :key="community.id">
         <ListDivider v-if="index > 0" />
         <!-- TODO: 모델을 prop으로 사용하도록 변경 -->
         <CommunityTile

@@ -5,7 +5,7 @@
     :pagination="{ clickable: true }"
     :slides-per-view="1"
     :space-between="0"
-    autoplay
+    :autoplay="{ delay: 3000 }"
   >
     <swiper-slide v-for="slide in slides" :key="slide.id" v-slot="{ isActive }">
       <img v-if="slide.type === 'image'" :src="slide.value" alt="이미지" />
@@ -20,9 +20,11 @@
 </template>
 
 <script lang="ts">
-import { Pagination } from "swiper";
+import { Pagination, Autoplay } from "swiper";
 // eslint-disable-next-line
 import "swiper/css";
+// eslint-disable-next-line
+import "swiper/css/autoplay";
 // eslint-disable-next-line
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -48,7 +50,7 @@ export default defineComponent({
     ];
 
     return {
-      modules: [Pagination],
+      modules: [Pagination, Autoplay],
       slides,
     };
   },
