@@ -5,10 +5,12 @@
     <app-fallback v-if="favors.data.length < 1" message="관심 구역이 없습니다." />
     <div v-else class="container page-wrapper">
       <template v-for="favor in favors.data" :key="favor.id">
-        <menu-tile @click="select(favor)">
+        <menu-tile :to="`/redev/${favor.redev_id}`">
           {{ favor.redev_title }}
           <template v-slot:trailing>
-            <img class="star" src="@/images/icons/star.svg" alt="좋아요" />
+            <button @click.prevent="select(favor)">
+              <img class="star" src="@/images/icons/star.svg" alt="좋아요" />
+            </button>
           </template>
         </menu-tile>
         <div class="divider" />

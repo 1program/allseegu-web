@@ -20,7 +20,7 @@ export default defineComponent({
   border-right: 0;
   border-bottom: 0;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   flex-wrap: wrap;
 }
 </style>

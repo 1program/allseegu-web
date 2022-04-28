@@ -118,6 +118,7 @@ export default defineComponent({
   right: 0;
 
   padding: 0 (40/2/16) * 1rem;
+  width: 100%;
   height: 100%;
   background-color: transparent;
   border: 0;

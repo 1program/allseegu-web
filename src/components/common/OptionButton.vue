@@ -64,6 +64,8 @@ export default defineComponent({
   flex: 1 1 auto;
   text-align: left;
 
+  @include ellipsis;
+
   &.center {
     text-align: center;
   }
