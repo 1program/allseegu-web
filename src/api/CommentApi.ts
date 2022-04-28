@@ -7,7 +7,7 @@ import FileApi from "./FileApi";
 export interface CommentCreateOptions {
   parent_uuid: string;
   comment_id: number | null;
-  model: "story";
+  model: "story" | "qna";
   data: CommentInput;
 }
 
@@ -15,14 +15,14 @@ export interface CommentUpdateOptions {
   id: number;
   parent_uuid: string;
   comment_id: number | null;
-  model: "story";
+  model: "story" | "qna";
   data: CommentInput;
 }
 
 export interface CommentDeleteOptions {
   id: number;
   parent_uuid: string;
-  model: "story"; // Cache Update를 위해 필요한 필드
+  model: "story" | "qna"; // Cache Update를 위해 필요한 필드
   commentable_id: number; // Cache Update를 위해 필요한 필드
 }
 

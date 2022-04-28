@@ -20,7 +20,6 @@ import { useRouter } from "vue-router";
 import * as yup from "yup";
 
 import AppButton from "@/components/common/AppButton.vue";
-import { useApi } from "@/composables/common/useApi";
 import { emailSchema } from "@/lib/schema";
 
 export default defineComponent({
@@ -28,7 +27,6 @@ export default defineComponent({
   name: "AccountFindPasswordCert",
   setup() {
     const router = useRouter();
-    const api = useApi();
 
     const { handleSubmit } = useForm({
       validationSchema: yup.object({

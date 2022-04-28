@@ -3,12 +3,13 @@ import { Qna, QnaDetail } from "@/models/qna";
 import { QnaInput } from "@/models/qna/QnaInput";
 import { QnaType } from "@/models/qna/QnaType";
 
-import BaseApi from "./BaseApi";
+import BaseApi, { BaseApiOptions } from "./BaseApi";
+import FileApi from "./FileApi";
 
 export interface QnaListOptions {
   take?: number;
   page?: number;
-  type_id: number;
+  type_id?: number;
 }
 
 export interface QnaDetailOptions {
@@ -29,6 +30,10 @@ export interface QnaUpdateOptions {
 }
 
 export class QnaApi extends BaseApi {
+  constructor(options: BaseApiOptions, private readonly fileApi: FileApi) {
+    super(options);
+  }
+
   /**
    * QNA 타입 목록
    */
@@ -73,7 +78,10 @@ export class QnaApi extends BaseApi {
     this.request<ApiResponse<Qna>>({
       method: "POST",
       url: `/qna`,
-      data: options.input,
+      data: {
+        ...options.input,
+        uploadFiles: await this.fileApi.upload(options.input.uploadFiles),
+      },
     });
 
   /**

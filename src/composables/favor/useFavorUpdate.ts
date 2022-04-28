@@ -1,8 +1,6 @@
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
 
-import { FavorUpdateOptions } from "@/api/FavorApi";
-
 import { useAlert } from "../common/useAlert";
 import { useApi } from "../common/useApi";
 import { useMe } from "../user/useMe";
@@ -18,12 +16,11 @@ export function useFavorUpdate() {
 
   const mutation = useMutation({
     mutationKey: "FAVOR_UPDATE",
-    mutationFn: async (options: FavorUpdateOptions) => {
-      return api.favor.updateFavor(options);
-    },
+    mutationFn: api.favor.updateFavor,
     onSuccess: () => {
       queryClient.invalidateQueries(["FAVOR_LIST", me.data?.id]);
     },
+    // eslint-disable-next-line
     onError: (error: any) => alert(error.message),
   });
 

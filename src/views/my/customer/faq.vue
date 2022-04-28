@@ -2,8 +2,8 @@
   <AppScaffold title="FAQ" has-top-button>
     <div class="container">
       <div class="faq-header">
-        <InputGroup place-holder="찾으시는 내용을 검색해 보세요">
-          <input class="input" placeholder="내용을 입력해 주세요." v-model="query" />
+        <InputGroup as="form" place-holder="찾으시는 내용을 검색해 보세요" @submit.prevent="submit">
+          <input class="input" placeholder="내용을 입력해 주세요." v-model="keyword" />
           <button class="search-button">
             <img src="@/images/icons/search.svg" alt="검색" />
           </button>
@@ -59,6 +59,7 @@ import InputGroup from "@/components/common/InputGroup.vue";
 import LoadingFallback from "@/components/common/LoadingFallback.vue";
 import QnaTile from "@/components/common/QnaTile.vue";
 import TabBar from "@/components/common/TabBar.vue";
+import { useRouteQueryValue } from "@/composables/common/useRouteQuery";
 import { useFaqList } from "@/composables/faq/useFaqList";
 import { useFaqSearch } from "@/composables/faq/useFaqSearch";
 import { useFaqTypes } from "@/composables/faq/useFaqTypes";
@@ -80,7 +81,13 @@ export default defineComponent({
 
     const type_id = ref<number>();
 
-    const query = ref<string>("");
+    const keyword = ref<string>("");
+
+    const query = useRouteQueryValue("query", (value) => value, true);
+
+    const submit = () => {
+      query.value = keyword.value;
+    };
 
     watchEffect(() => {
       // 타입 데이터 로딩이 완료되면 첫번째 id를 기본값으로 선택한다.
@@ -94,11 +101,15 @@ export default defineComponent({
     };
 
     const faqList = useFaqList(
+      // TODO: Non-null assertion 개선
+      // eslint-disable-next-line
       computed(() => ({ type_id: type_id.value! })),
       computed(() => type_id.value != null)
     );
 
     const searchList = useFaqSearch(
+      // TODO: Non-null assertion 개선
+      // eslint-disable-next-line
       computed(() => ({ query: query.value! })),
       computed(() => !!query.value)
     );
@@ -106,7 +117,7 @@ export default defineComponent({
     // 검색중일때는 검색 리스트, 아닐 시에는 일반 리스트
     const currentFaqList = computed(() => (query.value ? searchList : faqList));
 
-    return { types, type_id, query, currentFaqList, faq_id, selectFaq };
+    return { keyword, submit, types, type_id, query, currentFaqList, faq_id, selectFaq };
   },
 });
 </script>

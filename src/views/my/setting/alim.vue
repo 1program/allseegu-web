@@ -5,19 +5,19 @@
         <menu-button>
           <template v-slot>공지사항</template>
           <template v-slot:trailing>
-            <app-toggle v-model:checked="settings.notice" />
+            <app-toggle v-bind="field('notice_alim')" />
           </template>
         </menu-button>
         <menu-button>
           <template v-slot>1:1 문의</template>
           <template v-slot:trailing>
-            <app-toggle v-model:checked="settings.qna" />
+            <app-toggle v-bind="field('qna_alim')" />
           </template>
         </menu-button>
         <menu-button>
           <template v-slot>올려주세요</template>
           <template v-slot:trailing>
-            <app-toggle v-model:checked="settings.request" />
+            <app-toggle v-bind="field('request_alim')" />
           </template>
         </menu-button>
       </div>
@@ -44,35 +44,46 @@
       </div> -->
     </div>
   </app-scaffold>
-  <transition>
-    <user-leave-modal v-if="showingLeaveAlert" @close="showingLeaveAlert = false" />
-  </transition>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import AppToggle from "@/components/common/AppToggle.vue";
 import MenuButton from "@/components/common/MenuButton.vue";
-import UserLeaveModal from "@/components/user/UserLeaveModal.vue";
+import { useAlimSetting } from "@/composables/alim-setting/useAlimSetting";
+import { useAlimSettingUpdate } from "@/composables/alim-setting/useAlimSettingUpdate";
+import { AlimSettingInput, defaultAlimSettingInput } from "@/models/alim-setting";
 
 export default defineComponent({
   name: "MySettingAlim",
-  components: { AppScaffold, UserLeaveModal, MenuButton, AppToggle },
+  components: { AppScaffold, MenuButton, AppToggle },
   setup() {
-    const showingLeaveAlert = ref(false);
+    const alimSetting = useAlimSetting();
 
-    const settings = reactive({
-      notice: true,
-      qna: true,
-      request: true,
-      marketing: false,
-      email: false,
-      sms: false,
+    const values = ref(defaultAlimSettingInput);
+
+    // 원격 데이터를 받아와서 valus에 반영한다. 데이터가 없다면 기본값으로 채운다.
+    watch(
+      () => alimSetting.data,
+      () => {
+        values.value = alimSetting.data ?? defaultAlimSettingInput;
+      }
+    );
+
+    const mutation = useAlimSettingUpdate();
+
+    const field = (key: keyof AlimSettingInput) => ({
+      checked: values.value[key] === 1,
+      "onUpdate:checked": (value: boolean) => {
+        values.value[key] = value ? 1 : 0;
+        // 내용 변경시 동기화
+        mutation.mutate(values.value);
+      },
     });
 
-    return { showingLeaveAlert, settings };
+    return { values, field };
   },
 });
 </script>

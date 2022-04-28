@@ -28,7 +28,8 @@ import AppButton from "@/components/common/AppButton.vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import FormGroup from "@/components/common/FormGroup.vue";
 import FormInput from "@/components/common/FormInput.vue";
-import { useAlert } from "@/composables/common/useAlert";
+import { useMe } from "@/composables/user/useMe";
+import { useUserUpdate } from "@/composables/user/useUserUpdate";
 import { nicknameSchema } from "@/lib/schema";
 
 export default defineComponent({
@@ -36,7 +37,6 @@ export default defineComponent({
   name: "AccountSignupNickname",
   setup() {
     const router = useRouter();
-    const alert = useAlert();
 
     const { handleSubmit } = useForm({
       validationSchema: yup.object({
@@ -44,9 +44,22 @@ export default defineComponent({
       }),
     });
 
-    const submit = handleSubmit(() => {
-      alert("별명이 변경되었습니다.");
-      router.back();
+    const me = useMe();
+
+    const update = useUserUpdate();
+
+    const submit = handleSubmit((values) => {
+      if (me.data != null) {
+        update.mutate(
+          {
+            id: me.data.id,
+            input: {
+              nickname: values.nickname,
+            },
+          },
+          { onSuccess: router.back }
+        );
+      }
     });
 
     return {

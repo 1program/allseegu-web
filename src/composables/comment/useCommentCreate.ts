@@ -1,7 +1,7 @@
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
 
-import { CommentCreateOptions } from "@/api/CommentApi";
+import { QnaDetail } from "@/models/qna";
 import { StoryDetail } from "@/models/story";
 import { addComment } from "@/utils/comment/addComment";
 
@@ -17,7 +17,7 @@ export function useCommentCreate() {
 
   const mutation = useMutation({
     mutationKey: "COMMENT_CREATE",
-    mutationFn: (options: CommentCreateOptions) => api.comment.create(options),
+    mutationFn: api.comment.create,
     onSuccess: (data, options) => {
       /// 댓글 작성이 완료되면 댓글 목록에 추가한다.
       if (options.model === "story") {
@@ -28,9 +28,18 @@ export function useCommentCreate() {
             comments: addComment(previous?.comments ?? [], data.data),
           })
         );
+      } else if (options.model === "qna") {
+        queryClient.setQueryData<Partial<QnaDetail>>(
+          ["QNA_DETAIL", data.data.commentable_id],
+          (previous) => ({
+            ...previous,
+            comments: addComment(previous?.comments ?? [], data.data),
+          })
+        );
       }
     },
-    // TODO: any 타입 개선
+    // TODO: any 개선
+    // eslint-disable-next-line
     onError: (error: any) => alert(error.message),
   });
 

@@ -1,8 +1,6 @@
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
 
-import { StoryCreateOptions } from "@/api/StoryApi";
-
 import { useAlert } from "../common/useAlert";
 import { useApi } from "../common/useApi";
 
@@ -13,17 +11,13 @@ export function useStoryCreate() {
 
   const mutation = useMutation({
     mutationKey: "STORY_CREATE",
-    mutationFn: async ({ redev_id, data }: StoryCreateOptions) => {
-      return api.story.create({
-        redev_id,
-        data,
-      });
-    },
+    mutationFn: api.story.create,
     onSuccess: (data) => {
       queryClient.invalidateQueries(["MY_STORY_LIST"]);
       alert(data.message);
     },
     // TODO: 개선
+    // eslint-disable-next-line
     onError: (error: any) => alert(error.message),
   });
 

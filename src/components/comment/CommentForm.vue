@@ -61,7 +61,7 @@ export default defineComponent({
      * 모델
      */
     model: {
-      type: String as PropType<"story">,
+      type: String as PropType<"story" | "qna">,
       required: true,
     },
 

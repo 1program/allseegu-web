@@ -1,67 +1,46 @@
 <template>
   <AppScaffold title="올려주세요">
-    <div class="page-wrapper container">
-      <div class="meta">
-        <PostMeta
-          title="올려주세요 타이틀 제목입니다.올려주세요 타이틀 제목입니다.올려주세요 타이틀 제목입니다."
-          :date="date"
-        >
-          <Badge
-            class="badge"
-            :label="isWaiting ? '미승인' : isAccepted ? '승인' : '반려'"
-            :blue="isAccepted"
-            :red="isDenied"
-          />
-        </PostMeta>
-      </div>
-      <div class="divider light" />
-      <div class="page-content-medium content">
-        <div class="field-group">
-          <div class="field">
-            <div class="label">소통방 URL</div>
-            <div class="info">카톡 오픈채팅 <br />http://view3.net</div>
-          </div>
-          <div class="field">
-            <div class="label">비밀번호</div>
-            <div class="info">123456789</div>
-          </div>
-          <div class="field">
-            <div class="label">구역</div>
-            <div class="info">
-              구역 문구입니다. 구역 문구입니다. 구역 문구입니다. 구역 문구입니다. 구역 문구입니다.
-            </div>
-          </div>
-        </div>
-        소개 문구입니다. 소개 문구입니다. 소개 문구입니다. 소개 문구입니다. 소개 문구입니다. 소개
-        문구입니다.
-      </div>
+    <ErrorFallback v-if="detail.error" :error="detail.error" />
+    <LoadingFallback v-else-if="detail.data == null" />
+    <div v-else class="page-wrapper container">
+      <PostView
+        :badge="detail.data.status"
+        :badge-color="requestStatusColor[detail.data.status]"
+        :title="detail.data.title"
+        :created_at="new Date(detail.data.created_at)"
+        :files="detail.data.files"
+        :link="null"
+        :content_type="detail.data.content_type"
+        :content="detail.data.content"
+        :info="info"
+      />
       <AnswerCard
         class="page-content answer"
-        v-if="isAccepted || isDenied"
-        :label="isAccepted ? '승인' : '반려사유'"
-        :date="date"
-        :answer="
-          isAccepted
-            ? undefined
-            : '반려 사유 문구입니다. 반려 사유 문구입니다. 반려 사유 문구입니다. 반려 사유 문구입니다. 반려 사유 문구입니다. 반려 사유 문구입니다. 반려 사유 문구입니다.'
-        "
+        v-if="detail.data.status != '미승인'"
+        :label="detail.data.status"
+        :date="new Date(detail.data.updated_at)"
+        :answer="detail.data.rejection_message"
       />
     </div>
   </AppScaffold>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import { useRoute } from "vue-router";
 
 import AnswerCard from "@/components/common/AnswerCard.vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
-import Badge from "@/components/common/Badge.vue";
-import PostMeta from "@/components/post/PostMeta.vue";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
+import PostView from "@/components/post/PostView.vue";
+import { useRouteParam } from "@/composables/common/useRouteParam";
+import { useRequestDetail } from "@/composables/request/useRequestDetail";
+import { requestStatusColor } from "@/models/request";
 
 export default defineComponent({
   name: "MyCustomerRequestDetail",
-  components: { PostMeta, AppScaffold, Badge, AnswerCard },
+  components: { AppScaffold, AnswerCard, ErrorFallback, LoadingFallback, PostView },
   setup() {
     const route = useRoute();
 
@@ -69,7 +48,30 @@ export default defineComponent({
     const isAccepted = parseInt(route.params.request_id as string, 10) === 2;
     const isDenied = parseInt(route.params.request_id as string, 10) === 3;
 
-    return { isWaiting, isAccepted, isDenied, date: new Date() };
+    const request_id = useRouteParam("request_id", parseInt);
+
+    const options = computed(() => ({
+      // TODO: Non-null assertion 개선
+      // eslint-disable-next-line
+      request_id: request_id.value!,
+    }));
+
+    const detail = useRequestDetail(options);
+
+    const info = computed(() => {
+      const list = [];
+
+      if (detail.data != null) {
+        if (detail.data.link != null) list.push({ label: "소통방 URL", value: detail.data.link });
+        if (detail.data.password != null)
+          list.push({ label: "비밀번호", value: detail.data.password });
+        list.push({ label: "구역", value: detail.data.redev_name });
+      }
+
+      return list;
+    });
+
+    return { isWaiting, isAccepted, isDenied, date: new Date(), detail, requestStatusColor, info };
   },
 });
 </script>

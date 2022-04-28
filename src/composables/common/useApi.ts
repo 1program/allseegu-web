@@ -1,5 +1,6 @@
 import { computed, inject, provide, reactive, Ref } from "vue";
 
+import { AlimSettingApi } from "@/api/AlimSettingApi";
 import AuthApi from "@/api/AuthApi";
 import CommentApi from "@/api/CommentApi";
 import CommunityApi from "@/api/CommunityApi";
@@ -11,6 +12,7 @@ import NoticeApi from "@/api/NoticeApi";
 import PostApi from "@/api/PostApi";
 import { QnaApi } from "@/api/QnaApi";
 import RedevApi from "@/api/RedevApi";
+import { RequestApi } from "@/api/RequestApi";
 import StoryApi from "@/api/StoryApi";
 import SubscribeApi from "@/api/SubscribeApi";
 import UserApi from "@/api/UserApi";
@@ -39,6 +41,8 @@ export interface ApiContext {
   post: PostApi;
   faq: FaqApi;
   qna: QnaApi;
+  request: RequestApi;
+  alimSetting: AlimSettingApi;
 }
 
 export interface ApiProviderOptions {
@@ -79,7 +83,11 @@ export function provideApi({ accessToken }: ApiProviderOptions) {
 
   const faq = computed(() => new FaqApi(options.value));
 
-  const qna = computed(() => new QnaApi(options.value));
+  const qna = computed(() => new QnaApi(options.value, file.value));
+
+  const request = computed(() => new RequestApi(options.value));
+
+  const alimSetting = computed(() => new AlimSettingApi(options.value));
 
   const context = reactive({
     auth,
@@ -97,6 +105,8 @@ export function provideApi({ accessToken }: ApiProviderOptions) {
     post,
     faq,
     qna,
+    request,
+    alimSetting,
   });
 
   provide(API_CONTEXT_SYMBOL, context);

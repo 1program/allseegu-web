@@ -39,6 +39,7 @@ export class RedevClustering extends MarkerClustering {
   }
 
   static stylingFunction(marker: naver.maps.Marker, count: number) {
+    // eslint-disable-next-line
     const element = (marker as any).getElement();
     element.innerHTML = RedevClustering.getHtml(count);
   }

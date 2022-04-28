@@ -1,8 +1,6 @@
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
 
-import { QnaUpdateOptions } from "@/api/QnaApi";
-
 import { useAlert } from "../common/useAlert";
 import { useApi } from "../common/useApi";
 
@@ -13,9 +11,7 @@ export function useQnaUpdate() {
 
   const mutation = useMutation({
     mutationKey: "QNA_UPDATE",
-    mutationFn: async (options: QnaUpdateOptions) => {
-      return api.qna.update(options);
-    },
+    mutationFn: api.qna.update,
     onSuccess: (data) => {
       queryClient.invalidateQueries(["QNA_LIST"]);
       queryClient.invalidateQueries(["QNA_DETAIL"]);

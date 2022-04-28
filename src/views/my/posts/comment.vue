@@ -3,23 +3,23 @@
   <LoadingFallback v-else-if="commentList.data == null" />
   <template v-else v-for="page in commentList.data.pages" :key="page.current_page">
     <!-- 데이터 없을 경우 -->
-    <AppFallback v-if="page.total < 1" message="등록된 이야기가 없습니다." />
+    <AppFallback v-if="page.total < 1" message="등록된 댓글이 없습니다." />
 
     <!-- 각 데이터 반복 -->
     <template v-else v-for="(comment, index) in page.data" :key="comment.id">
       <ListDivider v-if="index > 0" />
       <ListTile
-        :category="comment.parent.redev_title?.replace('\\n', ' ')"
+        :category="comment.parent.redev_title?.replace('\\n', ' ') ?? '1:1문의'"
         :title="comment.parent.title"
         :show-tools="false"
         :show-footer="false"
-        :to="`/redev/${comment.parent.redev_id}`"
+        :to="getParentLink(comment)"
       />
       <CommentSimpleTile
         :content="comment.content"
         @edit="editComment(comment)"
         @remove="removeComment(comment)"
-        :to="`/redev/${comment.parent.redev_id}/story/${comment.parent.id}?comment_id=${comment.id}`"
+        :to="getLink(comment)"
       />
     </template>
   </template>
@@ -37,7 +37,8 @@ import LoadingFallback from "@/components/common/LoadingFallback.vue";
 import { useCommentDelete } from "@/composables/comment/useCommentDelete";
 import { useMyCommentList } from "@/composables/comment/useMyCommentList";
 import { useConfirm } from "@/composables/common/useConfirm";
-import { Comment } from "@/models/comment";
+import { Comment, parseCommentableType } from "@/models/comment";
+import { Qna } from "@/models/qna";
 import { Story } from "@/models/story";
 
 export default defineComponent({
@@ -51,24 +52,42 @@ export default defineComponent({
 
     const removeMutation = useCommentDelete();
 
+    const getParentLink = (comment: Comment) => {
+      switch (comment.commentable_type) {
+        case "App\\Models\\Story": {
+          const storyComment = comment as Comment<Story>;
+          return `/redev/${storyComment.parent.redev_id}/story/${storyComment.commentable_id}`;
+        }
+        case "App\\Models\\Qna": {
+          const qnaComment = comment as Comment<Qna>;
+          return `/my/customer/qna/${qnaComment.parent.id}`;
+        }
+        default:
+          return "";
+      }
+    };
+
+    const getLink = (comment: Comment) => {
+      return `${getParentLink(comment)}?comment_id=${comment.id}`;
+    };
+
     const removeComment = async (comment: Comment<Story>) => {
       if (await confirm("정말 삭제하시겠습니까?", { okLabel: "삭제" })) {
         removeMutation.mutate({
           id: comment.id,
           parent_uuid: comment.parent_uuid,
-          model: "story",
+          model: parseCommentableType(comment.commentable_type),
           commentable_id: comment.commentable_id,
         });
       }
     };
 
-    const editComment = (comment: Comment<Story>) => {
-      router.push(
-        `/redev/${comment.parent.redev_id}/story/${comment.parent.id}?editing_comment_id=${comment.id}`
-      );
+    // TODO: 타입 추론 개선
+    const editComment = (comment: Comment) => {
+      router.push(`${getParentLink(comment)}?editing_comment_id=${comment.id}`);
     };
 
-    return { commentList, removeComment, editComment };
+    return { commentList, removeComment, editComment, getParentLink, getLink };
   },
 });
 </script>

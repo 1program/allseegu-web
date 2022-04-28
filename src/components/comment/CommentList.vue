@@ -6,15 +6,16 @@
     </div>
     <template v-for="comment in comments" :key="comment.id">
       <div class="divider light" />
-      <CommentItem class="item" :depth="1" :comment="comment" />
+      <CommentItem class="item" :model="model" :depth="1" :comment="comment" />
     </template>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed, watch, ref, provide, Ref } from "vue";
+import { defineComponent, PropType, computed, watch, provide, Ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
+import { useRouteQueryValue } from "@/composables/common/useRouteQuery";
 import { Comment } from "@/models/comment";
 import { diffNewComments } from "@/utils/comment/diffNewComments";
 
@@ -61,7 +62,7 @@ export default defineComponent({
       required: true,
     },
     model: {
-      type: String as PropType<"story">,
+      type: String as PropType<"story" | "qna">,
       required: true,
     },
     comments: {
@@ -74,18 +75,7 @@ export default defineComponent({
     const route = useRoute();
 
     // 초점 맞출 comment id
-    const comment_id = computed({
-      get: () => parseInt(route.query.comment_id as string, 10) || null,
-      set: (id: number | null) =>
-        router.replace({
-          query: {
-            comment_id: id,
-          },
-          state: {
-            scrollToTop: false,
-          },
-        }),
-    });
+    const comment_id = useRouteQueryValue("comment_id", parseInt, true, { scrollToTop: false });
 
     // 편집중인 comment id
     const editing_comment_id = computed({

@@ -44,7 +44,7 @@ export function useAlerts() {
 }
 
 export function useAlert() {
-  const { alerts, open } = useAlerts();
+  const { open } = useAlerts();
 
   return open;
 }

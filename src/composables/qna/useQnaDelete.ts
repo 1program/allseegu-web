@@ -1,8 +1,6 @@
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
 
-import { QnaDeleteOptions } from "@/api/QnaApi";
-
 import { useAlert } from "../common/useAlert";
 import { useApi } from "../common/useApi";
 
@@ -13,9 +11,7 @@ export function useQnaDelete() {
 
   const mutation = useMutation({
     mutationKey: "QNA_DELETE",
-    mutationFn: async (options: QnaDeleteOptions) => {
-      return api.qna.delete(options);
-    },
+    mutationFn: api.qna.delete,
     onSuccess: (data, options) => {
       queryClient.invalidateQueries(["QNA_LIST"]);
       queryClient.invalidateQueries(["QNA_DETAIL", options.qna_id]);

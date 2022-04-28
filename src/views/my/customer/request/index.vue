@@ -10,73 +10,28 @@
         <app-button class="header-button" full to="/my/customer/request/write">신청하기</app-button>
       </div>
       <div class="divider thick" />
-      <div class="page-content-medium">
-        <ListTile title="함께 만드는 성공" to="/my/customer/request/1">
-          <template v-slot:status-label>
-            <StatusLabel label="미승인" />
+
+      <ErrorFallback v-if="requestList.error != null" :error="requestList.error" />
+      <LoadingFallback v-else-if="requestList.data == null" />
+      <div v-else class="page-content-medium">
+        <!-- 페이지별 반복 -->
+        <template v-for="page in requestList.data.pages" :key="page.current_page">
+          <!-- 페이지별 데이터 없을 경우 -->
+          <AppFallback v-if="page.total < 1" message="등록된 데이터가 없습니다." />
+
+          <!-- 각 데이터 반복 -->
+          <template v-else v-for="request in page.data" :key="request.id">
+            <ListTile :title="request.title" :to="`/my/customer/request/${request.id}`">
+              <template v-slot:status-label>
+                <StatusLabel
+                  :label="request.status"
+                  :palette="requestStatusColor[request.status]"
+                />
+              </template>
+            </ListTile>
+            <ListDivider />
           </template>
-        </ListTile>
-        <ListDivider />
-        <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
-          <template v-slot:status-label>
-            <StatusLabel label="반려" red />
-          </template>
-        </ListTile>
-        <ListDivider />
-        <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
-          <template v-slot:status-label>
-            <StatusLabel label="반려" red />
-          </template>
-        </ListTile>
-        <ListDivider />
-        <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
-          <template v-slot:status-label>
-            <StatusLabel label="반려" red />
-          </template>
-        </ListTile>
-        <ListDivider />
-        <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
-          <template v-slot:status-label>
-            <StatusLabel label="반려" red />
-          </template>
-        </ListTile>
-        <ListDivider />
-        <ListTile title="함께 만드는 성공" to="/my/customer/request/2">
-          <template v-slot:status-label>
-            <StatusLabel label="승인" blue />
-          </template>
-        </ListTile>
-        <ListDivider />
-        <ListTile title="함께 만드는 성공" to="/my/customer/request/2">
-          <template v-slot:status-label>
-            <StatusLabel label="승인" blue />
-          </template>
-        </ListTile>
-        <ListDivider />
-        <ListTile title="함께 만드는 성공" to="/my/customer/request/1">
-          <template v-slot:status-label>
-            <StatusLabel label="미승인" />
-          </template>
-        </ListTile>
-        <ListDivider />
-        <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
-          <template v-slot:status-label>
-            <StatusLabel label="반려" red />
-          </template>
-        </ListTile>
-        <ListDivider />
-        <ListTile title="함께 만드는 성공" to="/my/customer/request/2">
-          <template v-slot:status-label>
-            <StatusLabel label="승인" blue />
-          </template>
-        </ListTile>
-        <ListDivider />
-        <ListTile title="함께 만드는 성공" to="/my/customer/request/3">
-          <template v-slot:status-label>
-            <StatusLabel label="반려" red />
-          </template>
-        </ListTile>
-        <ListDivider />
+        </template>
       </div>
     </div>
   </AppScaffold>
@@ -86,14 +41,36 @@
 import { defineComponent } from "vue";
 
 import AppButton from "@/components/common/AppButton.vue";
+import AppFallback from "@/components/common/AppFallback.vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
 import ListDivider from "@/components/common/ListDivider.vue";
 import ListTile from "@/components/common/ListTile.vue";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
 import StatusLabel from "@/components/common/StatusLabel.vue";
+import { useRequestList } from "@/composables/request/useRequestList";
+import { requestStatusColor } from "@/models/request";
 
 export default defineComponent({
   name: "MyCustomerRequestList",
-  components: { AppScaffold, AppButton, ListTile, StatusLabel, ListDivider },
+  components: {
+    AppScaffold,
+    AppButton,
+    ListTile,
+    StatusLabel,
+    ListDivider,
+    ErrorFallback,
+    LoadingFallback,
+    AppFallback,
+  },
+  setup() {
+    const requestList = useRequestList();
+
+    return {
+      requestList,
+      requestStatusColor,
+    };
+  },
 });
 </script>
 

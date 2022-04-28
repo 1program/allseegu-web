@@ -1,7 +1,8 @@
 import { Auditable, ContentType, Entity } from "../common";
 import { Files } from "../file";
 
-export interface Comment<Parent = null> extends Entity, Auditable {
+// eslint-disable-next-line
+export interface Comment<Parent = any> extends Entity, Auditable {
   /**
    * 부모 댓글 id
    */
@@ -41,7 +42,7 @@ export interface Comment<Parent = null> extends Entity, Auditable {
   /**
    * 대댓글
    */
-  child?: Comment[];
+  child?: Comment<Parent>[];
 
   /**
    * 파일
@@ -49,7 +50,7 @@ export interface Comment<Parent = null> extends Entity, Auditable {
   files?: Files;
 
   /**
-   * 부모 데이터, 타입을 지정해 주세요.
+   * 부모 데이터, Generic 타입을 지정해 주세요.
    */
   parent: Parent;
 }
@@ -73,5 +74,5 @@ export const mockComment: Comment = {
 export function parseCommentableType(type: string) {
   const last = type.split("\\").reverse()[0].toLowerCase();
 
-  return last as "story";
+  return last as "story" | "qna";
 }

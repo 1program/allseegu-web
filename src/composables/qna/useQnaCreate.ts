@@ -1,8 +1,6 @@
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
 
-import { QnaCreateOptions } from "@/api/QnaApi";
-
 import { useAlert } from "../common/useAlert";
 import { useApi } from "../common/useApi";
 
@@ -13,14 +11,13 @@ export function useQnaCreate() {
 
   const mutation = useMutation({
     mutationKey: "QNA_CREATE",
-    mutationFn: async (options: QnaCreateOptions) => {
-      return api.qna.create(options);
-    },
+    mutationFn: api.qna.create,
     onSuccess: (data) => {
       queryClient.invalidateQueries(["MY_QNA_LIST"]);
       alert(data.message);
     },
     // TODO: 개선
+    // eslint-disable-next-line
     onError: (error: any) => alert(error.message),
   });
 

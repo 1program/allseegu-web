@@ -21,6 +21,11 @@
             </OptionButton>
           </OptionButtonGroup>
         </FormGroup>
+        <Field name="title" v-slot="{ field, errorMessage }">
+          <FormGroup class="form-group" label="제목" :error-text="errorMessage">
+            <FormInput v-bind="field" />
+          </FormGroup>
+        </Field>
         <field name="content" v-slot="{ field, errorMessage }">
           <FormGroup label="문의 내용" :error-text="errorMessage">
             <FormTextarea
@@ -50,18 +55,22 @@
 <script lang="ts">
 import { Field, useForm } from "vee-validate";
 import { defineComponent, ref, watchEffect } from "vue";
+import { useRouter } from "vue-router";
 import * as yup from "yup";
 
 import AppButton from "@/components/common/AppButton.vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import FilePicker from "@/components/common/FilePicker.vue";
 import FormGroup from "@/components/common/FormGroup.vue";
+import FormInput from "@/components/common/FormInput.vue";
 import FormTextarea from "@/components/common/FormTextarea.vue";
 import OptionButton from "@/components/common/OptionButton.vue";
 import OptionButtonGroup from "@/components/common/OptionButtonGroup.vue";
 import SkeletonBox from "@/components/common/SkeletonBox.vue";
 import { useAlert } from "@/composables/common/useAlert";
+import { useQnaCreate } from "@/composables/qna/useQnaCreate";
 import { useQnaTypes } from "@/composables/qna/useQnaTypes";
+import { ContentType } from "@/models/common";
 
 export default defineComponent({
   name: "MyCustomerWriteInquiry",
@@ -75,31 +84,54 @@ export default defineComponent({
     Field,
     AppButton,
     SkeletonBox,
+    FormInput,
   },
   setup() {
+    const router = useRouter();
+
     const alert = useAlert();
 
     const { handleSubmit } = useForm({
       validationSchema: yup.object({
-        content: yup.string().required("문의 내용을 입력해 주세요."),
+        title: yup.string().default("").required("제목을 입력해 주세요."),
+        content: yup.string().default("").required("문의 내용을 입력해 주세요."),
       }),
     });
-
-    const inquiryType = ref("NORMAL");
-
-    const submit = handleSubmit(() => alert("문의가 등록 되었습니다."));
-
-    const files = ref([]);
 
     const types = useQnaTypes();
 
     const type_id = ref<number>();
 
+    const files = ref([]);
+
+    const create = useQnaCreate();
+
+    const submit = handleSubmit((values) => {
+      if (type_id.value == null) return alert("문의 유형을 선택해 주세요.");
+
+      return create.mutate(
+        {
+          input: {
+            ...values,
+            is_visible: 1,
+            qna_type_id: type_id.value,
+            content_type: ContentType.PLAIN,
+            uploadFiles: files.value,
+            deleteFiles: [],
+          },
+        },
+        {
+          onSuccess: () => router.back(),
+        }
+      );
+    });
+
+    // 문의하기 타입 데이터가 로드되면 그 중 첫번째를 선택한다.
     watchEffect(() => {
       type_id.value = types.data?.[0].id;
     });
 
-    return { inquiryType, submit, files, types, type_id };
+    return { submit, files, types, type_id };
   },
 });
 </script>

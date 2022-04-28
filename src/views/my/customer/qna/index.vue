@@ -15,48 +15,75 @@
         </div>
       </div>
       <div class="divider thick" />
-      <div class="page-content-medium">
-        <ListTile title="함께 만드는 성공" to="/my/customer/qna/1">
-          <template v-slot:status-label>
-            <StatusLabel label="답변완료" palette="primary" />
+
+      <ErrorFallback v-if="qnaList.error != null" :error="qnaList.error" />
+      <LoadingFallback v-else-if="qnaList.data == null" />
+      <div v-else class="page-content-medium">
+        <!-- 페이지별 반복 -->
+        <template v-for="page in qnaList.data.pages" :key="page.current_page">
+          <!-- 페이지 데이터 없을 경우 -->
+          <AppFallback v-if="page.total < 1" message="등록된 문의사항이 없습니다." />
+
+          <!-- 각 데이터 반복 -->
+          <template v-else v-for="qna in page.data" :key="qna.id">
+            <ListTile
+              :title="qna.title"
+              :date="new Date(qna.created_at)"
+              :to="`/my/customer/qna/${qna.id}`"
+            >
+              <template v-slot:status-label>
+                <StatusLabel :label="qna.status" :palette="qnaStatusColor[qna.status]" />
+              </template>
+            </ListTile>
+            <ListDivider />
           </template>
-        </ListTile>
-        <ListDivider />
-        <ListTile title="함께 만드는 성공" to="/my/customer/qna/2">
-          <template v-slot:status-label>
-            <StatusLabel label="미답변" />
-          </template>
-        </ListTile>
-        <ListDivider />
-        <ListTile title="함께 만드는 성공" to="/my/customer/qna/1">
-          <template v-slot:status-label>
-            <StatusLabel label="답변완료" palette="primary" />
-          </template>
-        </ListTile>
-        <ListDivider />
-        <ListTile title="함께 만드는 성공" to="/my/customer/qna/1">
-          <template v-slot:status-label>
-            <StatusLabel label="답변완료" palette="primary" />
-          </template>
-        </ListTile>
-        <ListDivider />
+        </template>
+
+        <!-- 다음 페이지 불러오기 -->
+        <InView v-if="qnaList.hasNextPage" @in-view="qnaList.fetchNextPage()">
+          <LoadingFallback />
+        </InView>
       </div>
     </div>
   </AppScaffold>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 
 import AppButton from "@/components/common/AppButton.vue";
+import AppFallback from "@/components/common/AppFallback.vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
+import ErrorFallback from "@/components/common/ErrorFallback.vue";
+import InView from "@/components/common/InView.vue";
 import ListDivider from "@/components/common/ListDivider.vue";
 import ListTile from "@/components/common/ListTile.vue";
+import LoadingFallback from "@/components/common/LoadingFallback.vue";
 import StatusLabel from "@/components/common/StatusLabel.vue";
+import { useQnaList } from "@/composables/qna/useQnaList";
+import { qnaStatusColor } from "@/models/qna";
 
 export default defineComponent({
   name: "MyCustomerInquiryList",
-  components: { AppScaffold, AppButton, ListTile, ListDivider, StatusLabel },
+  components: {
+    AppScaffold,
+    AppButton,
+    ListTile,
+    ListDivider,
+    StatusLabel,
+    ErrorFallback,
+    LoadingFallback,
+    AppFallback,
+    InView,
+  },
+  setup() {
+    const qnaList = useQnaList(computed(() => ({})));
+
+    return {
+      qnaList,
+      qnaStatusColor,
+    };
+  },
 });
 </script>
 

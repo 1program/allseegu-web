@@ -1,8 +1,6 @@
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
 
-import { UserRegisterInput } from "@/models/user";
-
 import { useAuth } from "../auth/useAuth";
 import { useAlert } from "../common/useAlert";
 import { useApi } from "../common/useApi";
@@ -18,7 +16,7 @@ export function useUserRegister() {
 
   const mutation = useMutation({
     mutationKey: "USER_REGISTER",
-    mutationFn: (options: UserRegisterInput) => api.user.register(options),
+    mutationFn: api.user.register,
     onSuccess: (data) => {
       // 엑세스 토큰을 저장한다.
       auth.login(data.data.api_token, true);
@@ -26,6 +24,7 @@ export function useUserRegister() {
       // 내 정보를 invalidate 한다.
       queryClient.invalidateQueries(["ME"]);
     },
+    // eslint-disable-next-line
     onError: (error: any) => alert(error.message),
   });
 

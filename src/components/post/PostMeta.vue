@@ -1,15 +1,20 @@
 <template>
   <div class="post-meta">
-    <slot />
+    <Badge v-if="badge != null" class="badge" :label="badge" :palette="badgeColor" />
     <div class="title">{{ title }}</div>
-    <div class="info">{{ dateText ?? "-" }} / 조회수 {{ hits.toLocaleString() }}</div>
+    <div class="info">
+      {{ dateText ?? "-" }}
+      <template v-if="hits != null"> / 조회수 {{ hits.toLocaleString() }}</template>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
 import { formatDate } from "@/lib/formatters";
+
+import Badge from "../common/Badge.vue";
 
 /**
  * 글 정보 헤더 컴포넌트.
@@ -18,7 +23,15 @@ import { formatDate } from "@/lib/formatters";
  */
 export default defineComponent({
   name: "PostMeta",
+  components: { Badge },
   props: {
+    badge: {
+      type: String,
+    },
+    badgeColor: {
+      type: String as PropType<"default" | "primary" | "danger">,
+      default: "primary",
+    },
     title: {
       type: String,
       required: true,
@@ -29,7 +42,7 @@ export default defineComponent({
     },
     hits: {
       type: Number,
-      required: true,
+      required: false,
     },
   },
   setup(props) {
@@ -45,6 +58,10 @@ export default defineComponent({
 
 .post-meta {
   text-align: center;
+
+  .badge {
+    margin-bottom: (20/2/16) * 1rem;
+  }
 
   .title {
     font-size: (34/2/16) * 1rem;

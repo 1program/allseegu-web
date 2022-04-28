@@ -95,6 +95,7 @@ export default defineComponent({
       set: (newValue) => {
         values.value = Object.fromEntries(
           Object.entries(values.value).map(([key]) => [key, newValue])
+          // eslint-disable-next-line
         ) as any;
       },
     });

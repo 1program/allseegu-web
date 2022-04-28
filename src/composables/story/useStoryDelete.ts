@@ -1,8 +1,6 @@
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
 
-import { StoryDeleteOptions } from "@/api/StoryApi";
-
 import { useAlert } from "../common/useAlert";
 import { useApi } from "../common/useApi";
 
@@ -14,9 +12,7 @@ export function useStoryDelete() {
 
   const mutation = useMutation({
     mutationKey: "STORY_DELETE",
-    mutationFn: async (options: StoryDeleteOptions) => {
-      return api.story.delete(options);
-    },
+    mutationFn: api.story.delete,
     onSuccess: (data, options) => {
       queryClient.invalidateQueries(["STORY_LIST"]);
       queryClient.invalidateQueries(["MY_STORY_LIST"]);
@@ -24,6 +20,7 @@ export function useStoryDelete() {
       alert(data.message);
     },
     // TODO: 개선
+    // eslint-disable-next-line
     onError: (error: any) => alert(error.message),
   });
 

@@ -64,6 +64,8 @@ export default defineComponent({
           field: "email",
           value: newValues.email,
         });
+        // TODO: Error type 개선
+        // eslint-disable-next-line
       } catch (ex: any) {
         setFieldError("email", ex.message);
         return;

@@ -1,8 +1,6 @@
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
 
-import { StoryUpdateOptions } from "@/api/StoryApi";
-
 import { useAlert } from "../common/useAlert";
 import { useApi } from "../common/useApi";
 
@@ -13,9 +11,7 @@ export function useStoryUpdate() {
 
   const mutation = useMutation({
     mutationKey: "STORY_UPDATE",
-    mutationFn: async (options: StoryUpdateOptions) => {
-      return api.story.update(options);
-    },
+    mutationFn: api.story.update,
     onSuccess: (data, options) => {
       queryClient.invalidateQueries(["STORY_LIST"]);
       queryClient.invalidateQueries(["MY_STORY_LIST"]);
@@ -23,6 +19,7 @@ export function useStoryUpdate() {
       alert(data.message);
     },
     // TODO: 개선
+    // eslint-disable-next-line
     onError: (error: any) => alert(error.message),
   });
 

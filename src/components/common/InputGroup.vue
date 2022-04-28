@@ -1,7 +1,7 @@
 <template>
-  <div class="input-group">
+  <component :is="as" class="input-group">
     <slot />
-  </div>
+  </component>
 </template>
 
 <script lang="ts">
@@ -10,9 +10,9 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "InputGroup",
   props: {
-    placeHolder: {
+    as: {
       type: String,
-      default: null,
+      default: "div",
     },
   },
 });

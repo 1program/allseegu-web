@@ -1,6 +1,9 @@
 <template>
   <div class="app-fallback">
     {{ message }}
+    <div class="bottom" v-if="$slots.default != null">
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -25,6 +28,7 @@ export default defineComponent({
   flex: 1 1 auto;
 
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 
@@ -33,5 +37,9 @@ export default defineComponent({
   color: #666;
   min-height: 10rem;
   font-size: (30/2/16) * 1rem;
+}
+
+.bottom {
+  margin-top: 1rem;
 }
 </style>

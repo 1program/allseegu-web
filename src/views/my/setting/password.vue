@@ -32,8 +32,8 @@
       <div class="container page-footer gap-vertical">
         <app-button full>변경하기</app-button>
       </div>
-    </form></app-scaffold
-  >
+    </form>
+  </app-scaffold>
 </template>
 
 <script lang="ts">
@@ -46,7 +46,8 @@ import AppButton from "@/components/common/AppButton.vue";
 import AppScaffold from "@/components/common/AppScaffold.vue";
 import FormGroup from "@/components/common/FormGroup.vue";
 import FormInput from "@/components/common/FormInput.vue";
-import { useAlert } from "@/composables/common/useAlert";
+import { useMe } from "@/composables/user/useMe";
+import { useUserUpdate } from "@/composables/user/useUserUpdate";
 import { confirmPasswordSchema, passwordSchema } from "@/lib/schema";
 
 export default defineComponent({
@@ -54,7 +55,6 @@ export default defineComponent({
   name: "MySettingPassword",
   setup() {
     const router = useRouter();
-    const alert = useAlert();
 
     const { handleSubmit } = useForm({
       validationSchema: yup.object({
@@ -63,9 +63,22 @@ export default defineComponent({
       }),
     });
 
-    const submit = handleSubmit(() => {
-      alert("비밀번호가 변경되었습니다.");
-      router.back();
+    const me = useMe();
+
+    const update = useUserUpdate();
+
+    const submit = handleSubmit((values) => {
+      if (me.data != null) {
+        update.mutate(
+          {
+            id: me.data.id,
+            input: {
+              password: values.password,
+            },
+          },
+          { onSuccess: router.back }
+        );
+      }
     });
 
     return {

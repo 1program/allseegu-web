@@ -4,7 +4,7 @@
     <LoadingFallback v-else-if="detail.data == null" />
     <div v-else class="container">
       <PostView
-        :is_notice="detail.data.is_notice === 1"
+        :badge="detail.data.is_notice == 1 ? '공지' : undefined"
         :title="detail.data.title"
         :created_at="new Date(detail.data.created_at)"
         :hits="detail.data.hits"

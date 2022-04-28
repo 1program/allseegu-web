@@ -33,7 +33,9 @@ export default defineComponent({
     },
   },
   emits: {
+    // eslint-disable-next-line
     "click-redev": (id: number) => true,
+    // eslint-disable-next-line
     "bounds-change": (bounds: naver.maps.Bounds) => true,
   },
   setup(props, context) {
@@ -128,12 +130,15 @@ export default defineComponent({
           props.redevs.forEach((redev) => {
             if (redev.is_newtown === 1) {
               newMarkers.push(new NewtownMarker(redev));
+              // eslint-disable-next-line
               newPolygons.push(new NewtownPolygon(redev, map.value!));
             } else {
               newMarkers.push(new RedevMarker(redev, () => context.emit("click-redev", redev.id)));
+              // eslint-disable-next-line
               newPolygons.push(new RedevPolygon(redev, map.value!));
             }
           });
+          // eslint-disable-next-line
           (clustering.value as any).setMarkers(newMarkers);
           polygons.value = newPolygons;
         }

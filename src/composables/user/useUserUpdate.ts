@@ -1,8 +1,6 @@
 import { reactive } from "vue";
 import { useMutation, useQueryClient } from "vue-query";
 
-import { UserUpdateOptions } from "@/api/UserApi";
-
 import { useAlert } from "../common/useAlert";
 import { useApi } from "../common/useApi";
 
@@ -15,10 +13,12 @@ export function useUserUpdate() {
 
   const mutation = useMutation({
     mutationKey: "USER_UPDATE",
-    mutationFn: (options: UserUpdateOptions) => api.user.update(options),
-    onSuccess: () => {
+    mutationFn: api.user.update,
+    onSuccess: (data) => {
       queryClient.invalidateQueries(["ME"]);
+      alert(data.message);
     },
+    // eslint-disable-next-line
     onError: (error: any) => alert(error.message),
   });
 

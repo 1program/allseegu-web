@@ -13,7 +13,11 @@
 
         <!-- 페이지 항목별 순회 -->
         <template v-else v-for="notice in page.data" :key="notice.id">
-          <ListTile badge="공지" :title="notice.title" :to="`/my/customer/notice/${notice.id}`" />
+          <ListTile
+            :badge="notice.is_notice == 1 ? '공지' : undefined"
+            :title="notice.title"
+            :to="`/my/customer/notice/${notice.id}`"
+          />
           <ListDivider />
         </template>
       </template>

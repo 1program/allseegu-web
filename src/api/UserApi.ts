@@ -6,7 +6,7 @@ import BaseApi from "./BaseApi";
 
 export interface UserUpdateOptions {
   id: number;
-  data: UserUpdateInput;
+  input: UserUpdateInput;
 }
 
 export interface UserDeleteOptions {
@@ -36,7 +36,7 @@ export default class UserApi extends BaseApi {
     this.request<ApiResponse<User>>({
       method: "PATCH",
       url: `/user/${options.id}`,
-      data: options.data,
+      data: options.input,
     });
 
   delete = (options: UserDeleteOptions) =>

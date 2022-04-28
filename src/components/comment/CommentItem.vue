@@ -27,7 +27,7 @@
       <template v-for="subComment in comment.child ?? []" :key="subComment.id">
         <div class="divider light darker margin" />
         <SubItem>
-          <CommentItem :depth="depth + 1" :comment="subComment" />
+          <CommentItem :model="model" :depth="depth + 1" :comment="subComment" />
         </SubItem>
       </template>
       <div class="divider light darker margin" />
@@ -44,12 +44,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, computed, watch, inject, watchEffect } from "vue";
+import { defineComponent, PropType, ref, computed, inject, watchEffect } from "vue";
 
 import { useCommentDelete } from "@/composables/comment/useCommentDelete";
 import { useConfirm } from "@/composables/common/useConfirm";
 import { useUi } from "@/composables/common/useUi";
-import { watchLog } from "@/composables/common/watchLog";
 import { useMe } from "@/composables/user/useMe";
 import { Comment, parseCommentableType } from "@/models/comment";
 
@@ -62,6 +61,10 @@ export default defineComponent({
   name: "CommentItem",
   components: { CommentForm, CommentTile, SubItem },
   props: {
+    model: {
+      type: String as PropType<"story" | "qna">,
+      required: true,
+    },
     depth: {
       type: Number,
       required: true,
@@ -101,7 +104,7 @@ export default defineComponent({
           commentable_id: props.comment.commentable_id,
           parent_uuid: props.comment.parent_uuid,
           id: props.comment.id,
-          model: "story",
+          model: props.model,
         });
       }
     };

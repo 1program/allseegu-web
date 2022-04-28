@@ -22,12 +22,10 @@ import { Field, useForm } from "vee-validate";
 import { defineComponent, computed } from "vue";
 import { useRouter } from "vue-router";
 import * as yup from "yup";
-import { AnyObject } from "yup/lib/types";
 
 import AppButton from "@/components/common/AppButton.vue";
 import FormGroup from "@/components/common/FormGroup.vue";
 import FormInput from "@/components/common/FormInput.vue";
-import { useAlert } from "@/composables/common/useAlert";
 import { useApi } from "@/composables/common/useApi";
 import { useUserRegister } from "@/composables/user/useUserRegister";
 import { useUserRegisterValues } from "@/composables/user/useUserRegisterValues";
@@ -38,8 +36,6 @@ export default defineComponent({
   name: "AccountRegisterNickname",
   setup() {
     const api = useApi();
-
-    const alert = useAlert();
 
     const router = useRouter();
 
@@ -61,6 +57,7 @@ export default defineComponent({
           field: "nickname",
           value: newValues.nickname,
         });
+        // eslint-disable-next-line
       } catch (ex: any) {
         setFieldError("nickname", ex.message);
         return;

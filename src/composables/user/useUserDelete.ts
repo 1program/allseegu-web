@@ -15,7 +15,7 @@ export function useUserDelete() {
 
   const mutation = useMutation({
     mutationKey: "USER_DELETE",
-    mutationFn: (options: UserDeleteOptions) => api.user.delete(options),
+    mutationFn: api.user.delete,
     onSuccess: () => {
       queryClient.invalidateQueries(["ME"]);
     },

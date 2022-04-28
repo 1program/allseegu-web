@@ -1,3 +1,4 @@
+import { Comment } from "../comment";
 import { Files } from "../file";
 import { Qna } from "./Qna";
 

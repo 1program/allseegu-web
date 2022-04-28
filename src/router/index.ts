@@ -248,6 +248,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/redev/index.vue"),
   },
   { path: "", redirect: { path: "/permissions" } },
+  { path: "/:pathMatch(.*)*", component: () => import("@/views/not-found.vue") },
 ];
 
 // https://dev.to/uwutrinket/fix-scroll-jump---vue-router-45ja
