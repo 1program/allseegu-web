@@ -8,6 +8,7 @@
         class="ad-swiper"
         :modules="modules"
         :pagination="{ el: paginationEl, clickable: true }"
+        :autoplay="{ delay: 3000, disableOnInteraction: false }"
       >
         <SwiperSlide v-for="ad in adsExample" :key="ad.id">
           <a class="ad" :href="ad.link" target="_blank">
@@ -23,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { Pagination } from "swiper";
+import { Pagination, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { defineComponent, PropType, ref } from "vue";
 
@@ -45,7 +46,7 @@ export default defineComponent({
     const adsExample = [adExample1, adExample2];
 
     return {
-      modules: [Pagination],
+      modules: [Pagination, Autoplay],
       paginationEl,
       adsExample,
     };
