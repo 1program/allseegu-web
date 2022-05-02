@@ -5,7 +5,7 @@
     :pagination="{ clickable: true }"
     :slides-per-view="1"
     :space-between="0"
-    :autoplay="{ delay: 3000 }"
+    :autoplay="{ delay: 3000, disableOnInteraction: false }"
   >
     <swiper-slide v-for="slide in slides" :key="slide.id" v-slot="{ isActive }">
       <img v-if="slide.type === 'image'" :src="slide.value" alt="이미지" />
@@ -96,6 +96,16 @@ export default defineComponent({
 
   pointer-events: none;
   width: 100%;
-  aspect-ratio: 1.77; // 16:9
+
+  // aspect-ratio fallback
+  padding-top: 56.49%; // 16:9
+
+  :deep(iframe) {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-50%);
+  }
 }
 </style>

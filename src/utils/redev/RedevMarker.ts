@@ -7,7 +7,7 @@ import { zoomPresets } from "./zoomPresets";
 const styles = {
   box: css({
     cursor: "pointer",
-    position: "relative",
+    position: "absolute", // For shrinking on AOS Chrome
     userSelect: "none",
     backgroundColor: redevMapColors.blue,
     border: `1px solid ${redevMapColors.darkerBlue}`,
@@ -61,7 +61,7 @@ export class RedevMarker extends naver.maps.OverlayView {
     this.redev = redev;
     this.element = document.createElement("div");
     this.element.style.position = "absolute";
-    this.element.innerHTML = RedevMarker.getHtml(redev);
+    // this.element.innerHTML = RedevMarker.getHtml(redev);
     this.position = new naver.maps.LatLng(parseFloat(redev.center_y), parseFloat(redev.center_x));
     this.element.addEventListener("click", onClick);
   }
@@ -70,6 +70,8 @@ export class RedevMarker extends naver.maps.OverlayView {
     const { overlayLayer } = this.getPanes();
 
     overlayLayer.appendChild(this.element);
+
+    this.element.innerHTML = RedevMarker.getHtml(this.redev);
   }
 
   draw() {
@@ -90,7 +92,9 @@ export class RedevMarker extends naver.maps.OverlayView {
   }
 
   onRemove() {
-    this.element.remove();
+    const { overlayLayer } = this.getPanes();
+
+    overlayLayer.removeChild(this.element);
   }
 
   getPosition() {
